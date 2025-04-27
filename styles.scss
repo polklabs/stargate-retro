@@ -1,0 +1,571 @@
+$max-viewport: 1000;
+
+@function vmin-clamp($vmin, $max-viewport, $min-px: null) {
+    // $vmin = how many vmin you want (ex: vmin-clamp(5, $max-viewport))
+    // $max-viewport = maximum viewport size in pixels (ex: 1200)
+    // $min-px = optional minimum pixel size (defaults to 0 if not provided)
+
+    $vmin-px-at-max: calc($vmin / 100) * $max-viewport; // calculate how big vmin gets at max viewport
+
+    @if $min-px == null {
+        @return clamp(-100px, #{$vmin}vmin, #{$vmin-px-at-max}px);
+    } @else {
+        @return clamp(#{$min-px}px, #{$vmin}vmin, #{$vmin-px-at-max}px);
+    }
+}
+
+:root {
+    --color: #51feff;
+    --color-danger: #c70036;
+    --color-good: #07ff0b;
+    --color-alt: white;
+    --background-color: #031a42;
+    --glyph-color: #fffea5;
+    --border: solid clamp(0px, 0.5vmin, 5px) var(--color);
+    --border-thin: solid clamp(0px, 0.3vmin, 3px) var(--color);
+}
+
+.genos-font {
+    font-family: "Genos", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: vmin-clamp(3.5, $max-viewport);
+
+    // SCSS Cannot calculate values in :root {}, so calculate them here and manually place them in the vars
+    // height: vmin-clamp(0.5, $max-viewport);
+    // height: vmin-clamp(0.3, $max-viewport);
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--color);
+    margin: 0;
+    height: 100vh;
+    display: flex;
+}
+
+.border {
+    border: var(--border);
+    border-radius: vmin-clamp(6, $max-viewport);
+    width: calc(vmin-clamp(100, $max-viewport) - vmin-clamp(2, $max-viewport));
+    height: calc(vmin-clamp(100, $max-viewport) - vmin-clamp(2, $max-viewport));
+    margin: auto;
+    overflow: hidden;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.header {
+    display: flex;
+    gap: vmin-clamp(1, $max-viewport);
+    margin-left: vmin-clamp(4.2, $max-viewport);
+    margin-right: vmin-clamp(8.5, $max-viewport);
+    margin-top: vmin-clamp(0.8, $max-viewport);
+    position: relative;
+
+    div:nth-child(2) {
+        color: var(--color-alt);
+        font-size: vmin-clamp(3.2, $max-viewport);
+        line-height: vmin-clamp(4.1, $max-viewport);
+        align-content: end;
+    }
+    div:nth-child(3) {
+        color: var(--color-alt);
+        font-size: vmin-clamp(2.9, $max-viewport);
+        line-height: vmin-clamp(3.9, $max-viewport);
+        align-content: end;
+    }
+
+    .header-border {
+        border-top: var(--border);
+        position: absolute;
+        width: 100%;
+        bottom: vmin-clamp(0.6, $max-viewport);
+    }
+}
+
+.address-book-glyph {
+    position: relative;
+    float: left;
+    max-width: vmin-clamp(6, $max-viewport);
+    /* #EDF1EB */
+    filter: invert(100%) sepia(21%) saturate(5367%) hue-rotate(312deg)
+        brightness(111%) contrast(103%);
+}
+
+section {
+    margin: 0 vmin-clamp(1, $max-viewport);
+    position: relative;
+
+    header {
+        display: flex; /* aligns all child elements (flex items) in a row */
+        margin-bottom: vmin-clamp(3, $max-viewport);
+        line-height: vmin-clamp(3.5, $max-viewport);
+        .col {
+            width: vmin-clamp(7.52, $max-viewport);
+            text-align: center;
+            border-bottom: var(--border);
+        }
+        .col:nth-child(1) {
+            width: vmin-clamp(3.2, $max-viewport);
+            border-bottom: unset;
+        }
+        .col:nth-child(2) {
+            border-image: linear-gradient(
+                    to left,
+                    var(--color) 50%,
+                    transparent 50%
+                )
+                100% 1;
+        }
+        .col:nth-child(9) {
+            flex: 1;
+            text-align: start;
+        }
+    }
+
+    .rows {
+        max-height: vmin-clamp(71, $max-viewport);
+        min-height: vmin-clamp(71, $max-viewport);
+        overflow: scroll;
+        scrollbar-color: var(--color);
+        // scrollbar-color: #00000000 #00000000;
+        scrollbar-width: auto;
+        position: relative;
+    }
+    .row {
+        display: flex; /* aligns all child elements (flex items) in a row */
+        position: relative;
+        margin-bottom: vmin-clamp(1, $max-viewport);
+        margin-right: vmin-clamp(1.5, $max-viewport);
+        line-height: vmin-clamp(3.5, $max-viewport);
+        max-height: vmin-clamp(9.6, $max-viewport);
+        overflow: hidden;
+        cursor: pointer;
+
+        &.danger {
+            * {
+                border-color: var(--color-danger) !important;
+            }
+            .small-box {
+                background-color: var(--color-danger) !important;
+            }
+            .address-book-glyph {
+                filter: invert(16%) sepia(84%) saturate(3541%)
+                    hue-rotate(331deg) brightness(81%) contrast(117%) !important;
+            }
+        }
+
+        &.fan {
+            .info-name {
+                color: var(--color-alt) !important;
+            }
+        }
+
+        &.offline {
+            .status {
+                span:nth-child(1) {
+                    color: var(--color-danger) !important;
+                }
+            }
+        }
+
+        .col {
+            width: vmin-clamp(7.4, $max-viewport);
+            text-align: center;
+            border-bottom: var(--border);
+
+            &.box {
+                flex: 0;
+                align-content: end;
+                padding-right: vmin-clamp(0.2, $max-viewport);
+                border: unset;
+                div {
+                    width: vmin-clamp(3, $max-viewport);
+                    line-height: vmin-clamp(2, $max-viewport);
+                    text-align: center;
+                    background-color: var(--color);
+                    color: var(--background-color);
+                    padding-bottom: vmin-clamp(1.5, $max-viewport);
+                }
+            }
+
+            &.glyph {
+                border: var(--border);
+                border-right: unset;
+                flex: 0;
+                min-width: vmin-clamp(7, $max-viewport);
+                font-size: vmin-clamp(1.8, $max-viewport);
+                white-space: nowrap;
+                color: var(--glyph-color);
+                display: flex;
+                flex-direction: column;
+                img {
+                    margin: auto;
+                }
+                span {
+                    text-align: center;
+                    border-top: var(--border);
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    line-height: vmin-clamp(2.3, $max-viewport);
+                }
+            }
+
+            &.info {
+                flex: 1;
+                text-align: start;
+                border-bottom: unset;
+                border-top: var(--border);
+                border-left: var(--border);
+                font-size: vmin-clamp(2.75, $max-viewport);
+                padding-left: vmin-clamp(0.5, $max-viewport);
+                line-height: vmin-clamp(2.1, $max-viewport);
+
+                .info-title {
+                    display: flex;
+                    gap: vmin-clamp(1, $max-viewport);
+                    .info-name {
+                      white-space: nowrap;
+                      text-overflow: ellipsis;
+                      overflow: hidden;
+                    }
+                }
+                .info-body {
+                    display: flex;
+                    gap: vmin-clamp(2, $max-viewport);
+                    .info-a {
+                        flex: 1;
+                        font-size: vmin-clamp(2, $max-viewport);
+                        line-height: vmin-clamp(1.6, $max-viewport);
+                        margin-top: vmin-clamp(0.4, $max-viewport);
+                        margin-left: vmin-clamp(1, $max-viewport);
+                    }
+                    .info-b {
+                        flex: 1;
+                        font-size: vmin-clamp(2, $max-viewport);
+                        line-height: vmin-clamp(1.6, $max-viewport);
+                        > div {
+                            display: flex;
+                            gap: vmin-clamp(0.69, $max-viewport);
+                        }
+                        span:nth-child(1) {
+                            color: var(--glyph-color);
+                        }
+                        span:nth-child(2) {
+                            color: var(--color-alt);
+                        }
+                    }
+                }
+            }
+        }
+
+        &:hover {
+            &::after {
+                content: "▼";
+                width: calc(100% - vmin-clamp(1.5, $max-viewport));
+                height: calc(100% - vmin-clamp(0.7, $max-viewport));
+                border: var(--border);
+                border-color: var(--color-good);
+                color: var(--color-good);
+                position: absolute;
+                font-size: vmin-clamp(2.25, $max-viewport);
+                line-height: vmin-clamp(2.25, $max-viewport);
+                padding-left: vmin-clamp(0.2, $max-viewport);
+            }
+        }
+    }
+}
+
+#scrollingDiv {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: vmin-clamp(1, $max-viewport);
+    height: 50px;
+    border: var(--border-thin);
+    color: var(--color-alt);
+    text-align: center;
+    line-height: 50px; /* Center text vertically */
+}
+.scrollbar-wrapper {
+    border: var(--border-thin);
+    position: absolute;
+    width: vmin-clamp(1, $max-viewport);
+    height: calc(100% - vmin-clamp(4.7, $max-viewport));
+    right: vmin-clamp(0, $max-viewport);
+    top: vmin-clamp(4, $max-viewport);
+    font-size: vmin-clamp(2, $max-viewport);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    span {
+        margin-left: vmin-clamp(-0.5, $max-viewport);
+    }
+}
+
+.table-footer {
+    border: var(--border);
+    border-left: unset;
+    border-right: unset;
+    color: var(--color-alt);
+    font-size: vmin-clamp(2.5, $max-viewport);
+    padding-left: vmin-clamp(0.5, $max-viewport);
+    line-height: vmin-clamp(2.5, $max-viewport);
+}
+
+.footer {
+    display: flex;
+    border-bottom: var(--border);
+    .footer-left {
+        flex: 1 0 auto;
+        max-width: vmin-clamp(72, $max-viewport);
+        min-width: vmin-clamp(72, $max-viewport);
+        > div:nth-child(2) {
+            border: var(--border);
+            border-left: unset;
+            border-bottom: unset;
+            margin-right: vmin-clamp(0.5, $max-viewport);
+            font-size: vmin-clamp(2, $max-viewport);
+            line-height: vmin-clamp(1.6, $max-viewport);
+            padding-left: vmin-clamp(0.5, $max-viewport);
+        }
+    }
+    .footer-right {
+        flex: 1 1 auto;
+        font-size: vmin-clamp(1.6, $max-viewport);
+        color: var(--glyph-color);
+        max-height: vmin-clamp(7, $max-viewport);
+    }
+}
+
+.footer-buttons {
+    display: flex;
+    font-size: vmin-clamp(2.5, $max-viewport);
+    text-align: center;
+    margin: vmin-clamp(0.5, $max-viewport);
+    gap: vmin-clamp(0.5, $max-viewport);
+    a {
+        flex: 1;
+        border: var(--border);
+        border-radius: vmin-clamp(0.5, $max-viewport);
+        line-height: vmin-clamp(2.5, $max-viewport);
+        cursor: pointer;
+        color: var(--color);
+        text-decoration: unset !important;
+        &:hover {
+            color: var(--color-alt) !important;
+        }
+        &:nth-child(2) {
+          color: var(--glyph-color) !important;
+      }
+    }
+}
+
+marquee {
+    border: var(--border-thin);
+    margin: vmin-clamp(0.5, $max-viewport) vmin-clamp(5, $max-viewport);
+    font-size: vmin-clamp(2, $max-viewport);
+    line-height: vmin-clamp(1.2, $max-viewport);
+    height: vmin-clamp(1.8, $max-viewport);
+    display: block;
+}
+
+/* CRT CSS CODE: https://aleclownes.com/2017/02/01/crt-display.html */
+@keyframes flicker {
+    0% {
+        opacity: 0.27861;
+    }
+    5% {
+        opacity: 0.34769;
+    }
+    10% {
+        opacity: 0.23604;
+    }
+    15% {
+        opacity: 0.90626;
+    }
+    20% {
+        opacity: 0.18128;
+    }
+    25% {
+        opacity: 0.83891;
+    }
+    30% {
+        opacity: 0.65583;
+    }
+    35% {
+        opacity: 0.67807;
+    }
+    40% {
+        opacity: 0.26559;
+    }
+    45% {
+        opacity: 0.84693;
+    }
+    50% {
+        opacity: 0.96019;
+    }
+    55% {
+        opacity: 0.08594;
+    }
+    60% {
+        opacity: 0.20313;
+    }
+    65% {
+        opacity: 0.71988;
+    }
+    70% {
+        opacity: 0.53455;
+    }
+    75% {
+        opacity: 0.37288;
+    }
+    80% {
+        opacity: 0.71428;
+    }
+    85% {
+        opacity: 0.70419;
+    }
+    90% {
+        opacity: 0.7003;
+    }
+    95% {
+        opacity: 0.36108;
+    }
+    100% {
+        opacity: 0.24387;
+    }
+}
+@keyframes textShadow {
+    0% {
+        text-shadow: 0.4389924193300864px 0 1px rgba(0, 30, 255, 0.5),
+            -0.4389924193300864px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+    }
+    5% {
+        text-shadow: 2.7928974010788217px 0 1px rgba(0, 30, 255, 0.5),
+            -2.7928974010788217px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+    }
+    10% {
+        text-shadow: 0.02956275843481219px 0 1px rgba(0, 30, 255, 0.5),
+            -0.02956275843481219px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+    }
+    15% {
+        text-shadow: 0.40218538552878136px 0 1px rgba(0, 30, 255, 0.5),
+            -0.40218538552878136px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+    }
+    20% {
+        text-shadow: 3.4794037899852017px 0 1px rgba(0, 30, 255, 0.5),
+            -3.4794037899852017px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+    }
+    25% {
+        text-shadow: 1.6125630401149584px 0 1px rgba(0, 30, 255, 0.5),
+            -1.6125630401149584px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+    }
+    30% {
+        text-shadow: 0.7015590085143956px 0 1px rgba(0, 30, 255, 0.5),
+            -0.7015590085143956px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+    }
+    35% {
+        text-shadow: 3.896914047650351px 0 1px rgba(0, 30, 255, 0.5),
+            -3.896914047650351px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+    }
+    40% {
+        text-shadow: 3.870905614848819px 0 1px rgba(0, 30, 255, 0.5),
+            -3.870905614848819px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+    }
+    45% {
+        text-shadow: 2.231056963361899px 0 1px rgba(0, 30, 255, 0.5),
+            -2.231056963361899px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+    }
+    50% {
+        text-shadow: 0.08084290417898504px 0 1px rgba(0, 30, 255, 0.5),
+            -0.08084290417898504px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+    }
+    55% {
+        text-shadow: 2.3758461067427543px 0 1px rgba(0, 30, 255, 0.5),
+            -2.3758461067427543px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+    }
+    60% {
+        text-shadow: 2.202193051050636px 0 1px rgba(0, 30, 255, 0.5),
+            -2.202193051050636px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+    }
+    65% {
+        text-shadow: 2.8638780614874975px 0 1px rgba(0, 30, 255, 0.5),
+            -2.8638780614874975px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+    }
+    70% {
+        text-shadow: 0.48874025155497314px 0 1px rgba(0, 30, 255, 0.5),
+            -0.48874025155497314px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+    }
+    75% {
+        text-shadow: 1.8948491305757957px 0 1px rgba(0, 30, 255, 0.5),
+            -1.8948491305757957px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+    }
+    80% {
+        text-shadow: 0.0833037308038857px 0 1px rgba(0, 30, 255, 0.5),
+            -0.0833037308038857px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+    }
+    85% {
+        text-shadow: 0.09769827255241735px 0 1px rgba(0, 30, 255, 0.5),
+            -0.09769827255241735px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+    }
+    90% {
+        text-shadow: 3.443339761481782px 0 1px rgba(0, 30, 255, 0.5),
+            -3.443339761481782px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+    }
+    95% {
+        text-shadow: 2.1841838852799786px 0 1px rgba(0, 30, 255, 0.5),
+            -2.1841838852799786px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+    }
+    100% {
+        text-shadow: 2.6208764473832513px 0 1px rgba(0, 30, 255, 0.5),
+            -2.6208764473832513px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+    }
+}
+.crt::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(18, 16, 16, 0.1);
+    opacity: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+.crt::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(
+            rgba(18, 16, 16, 0) 50%,
+            rgba(0, 0, 0, 0.25) 50%
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 0, 0, 0.06),
+            rgba(0, 255, 0, 0.02),
+            rgba(0, 0, 255, 0.06)
+        );
+    z-index: 2;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+}
+.crt {
+    animation: textShadow 3.5s infinite;
+    filter: blur(0.1px) contrast(1.5) brightness(1.1);
+}
+
+.crt.flicker::after {
+    animation: flicker 0.15s infinite;
+}
