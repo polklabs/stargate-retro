@@ -15,7 +15,7 @@ for (let i = 0; i < 7; i++) {
         body.appendChild(newGlyph);
 
         setTimeout(() => {
-            triggerAnimation(i+1);
+            triggerAnimation(i + 1);
             // const cl = document.querySelector(`.cl${i + 1}`);
             // cl.classList.add("locked");
 
@@ -48,10 +48,16 @@ function triggerAnimation(index) {
 
         // Move both stops together
         stopStart.setAttribute("offset", progress + "%");
-        stopEnd.setAttribute("offset", Math.min(progress + 5, 100) + "%");
+        stopEnd.setAttribute("offset", Math.min(progress + 1, 100) + "%");
 
-        if (progress < 150) {
+        if (progress > 1) {
+            stopStart.setAttribute("stop-color", "var(--color-danger)");
+        }
+
+        if (progress < 100) {
             requestAnimationFrame(animate);
+        } else {
+            stopEnd.setAttribute("stop-color", "var(--color-danger)");
         }
     }
 
