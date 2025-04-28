@@ -1,23 +1,6 @@
-const elem = document.body;
 const scrollingDiv = document.getElementById("scrollingDiv");
 const tableRowTemplate = document.getElementById("tableRow");
 const tableBody = document.getElementById("tableBody");
-
-function toggleFlicker() {
-    const shouldFlicker = Math.random() > 0.7; // 30% chance to flicker
-    if (shouldFlicker) {
-        elem.classList.add("flicker");
-        setTimeout(() => {
-            elem.classList.remove("flicker");
-            toggleFlicker();
-        }, 1000); // flicker for 200ms
-    } else {
-        setTimeout(toggleFlicker, 300); // check every 300ms
-    }
-}
-
-// Run it every random interval
-// setTimeout(toggleFlicker, 300); // check every 300ms
 
 // Listen for the scroll event
 // calculateScrollbar();

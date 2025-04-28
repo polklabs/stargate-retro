@@ -1,0 +1,37 @@
+$max-viewport: 1000;
+
+@function vmin-clamp($vmin) {
+    // $vmin = how many vmin you want (ex: vmin-clamp(5, $max-viewport))
+    // $max-viewport = maximum viewport size in pixels (ex: 1200)
+
+    $vmin-px-at-max: calc($vmin / 100) * $max-viewport; // calculate how big vmin gets at max viewport
+
+    @return clamp(-100px, #{$vmin}vmin, #{$vmin-px-at-max}px);
+}
+
+:root {
+    --color: #51feff;
+    --color-danger: #c70036;
+    --color-good: #07ff0b;
+    --color-alt: white;
+    --background-color: #031a42;
+    --glyph-color: #fffea5;
+    --border: solid clamp(0px, 0.5vmin, 5px) var(--color);
+    --border-thin: solid clamp(0px, 0.3vmin, 3px) var(--color);
+}
+
+.genos-font {
+    font-family: "Genos", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: vmin-clamp(3.5);
+
+    // SCSS Cannot calculate values in :root {}, so calculate them here and manually place them in the vars
+    // height: vmin-clamp(0.5);
+    // height: vmin-clamp(0.3);
+}
+
+.hidden {
+    display: none !important;
+}

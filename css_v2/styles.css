@@ -1,0 +1,24 @@
+:root {
+  --color: #51feff;
+  --color-danger: #c70036;
+  --color-good: #07ff0b;
+  --color-alt: white;
+  --background-color: #031a42;
+  --glyph-color: #fffea5;
+  --border: solid clamp(0px, 0.5vmin, 5px) var(--color);
+  --border-thin: solid clamp(0px, 0.3vmin, 3px) var(--color);
+}
+
+.genos-font {
+  font-family: "Genos", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: clamp(-100px, 3.5vmin, 35px);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/*# sourceMappingURL=styles.css.map */
