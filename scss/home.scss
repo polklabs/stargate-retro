@@ -136,8 +136,8 @@ img.glyph {
         }
     }
     &.blur {
-        filter: blur(1vmin) invert(100%) sepia(21%) saturate(5367%) hue-rotate(312deg)
-        brightness(111%) contrast(103%);
+        filter: blur(1vmin) invert(100%) sepia(21%) saturate(5367%)
+            hue-rotate(312deg) brightness(111%) contrast(103%);
     }
 }
 
@@ -147,6 +147,11 @@ img.chevron-link {
     height: 73vmin;
     filter: invert(91%) sepia(9%) saturate(5141%) hue-rotate(153deg)
         brightness(105%) contrast(110%);
+}
+div.chevron-link {
+    position: absolute;
+    left: 0vmin;
+    height: 73vmin;
 }
 img.gate {
     position: absolute;

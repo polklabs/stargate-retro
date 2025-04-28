@@ -164,6 +164,12 @@ img.chevron-link {
   filter: invert(91%) sepia(9%) saturate(5141%) hue-rotate(153deg) brightness(105%) contrast(110%);
 }
 
+div.chevron-link {
+  position: absolute;
+  left: 0vmin;
+  height: 73vmin;
+}
+
 img.gate {
   position: absolute;
   left: 25.9vmin;
