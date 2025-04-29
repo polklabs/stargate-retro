@@ -214,7 +214,7 @@ function buildKeyboard() {
   keyboard.appendChild(img);
 }
 
-const distancePerPoint = 1.5;
+const distancePerPoint = 0.75;
 function startDrawingPath(index) {
   const svgBase = document.querySelector(`.cl${index}`);
   const svg = svgBase.cloneNode(true);

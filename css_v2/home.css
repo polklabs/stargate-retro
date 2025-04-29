@@ -70,6 +70,7 @@ body {
   position: absolute;
   border-radius: 1.5vmin 0 0;
   overflow: hidden;
+  text-shadow: unset !important;
 }
 .chevron-box.b1 {
   top: 11vmin;
@@ -315,7 +316,7 @@ div.clip-1 {
 div.clip-2 {
   border-color: var(--color-danger);
   clip-path: inset(0 0 0 100%); /* Hidden initially (right side at 100%) */
-  transition: all 0.8s linear;
+  transition: clip-path 0.8s linear;
 }
 
 div.locked {
@@ -327,12 +328,15 @@ div:not(.active) .ring-1 circle {
 }
 
 img.glyph {
+  text-shadow: unset;
   filter: invert(100%) sepia(21%) saturate(5367%) hue-rotate(312deg) brightness(111%) contrast(103%);
   top: 19vmin;
   left: 34vmin;
   height: 30vmin;
   position: absolute;
-  transition: all 2s ease;
+  transition-property: top, left, height;
+  transition-duration: 2s;
+  transition-timing-function: ease;
   animation: revealAnimation 0.5s forwards ease;
 }
 img.glyph.locked {
