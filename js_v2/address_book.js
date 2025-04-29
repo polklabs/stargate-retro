@@ -67,7 +67,7 @@ async function fetchData() {
             address["gate_address"].forEach((glyph, i) => {
                 const symbol = symbols.find((x) => x["index"] === glyph);
 
-                if (symbol["keyboard_mapping"] === false) {
+                if (!symbol || symbol["keyboard_mapping"] === false) {
                     keyboardAddress += "?";
                     hasUnknownGlyph = true;
                 } else {
@@ -76,11 +76,11 @@ async function fetchData() {
 
                 if (i < 7) {
                     newRow.querySelector(`.glyph-name-${i + 1}`).textContent =
-                        symbol["name"];
+                        symbol?.["name"] ?? 'Unknown';
 
                     const imgElement = newRow.querySelector(`.glyph-${i + 1}`);
                     imgElement.src = ""; // Empty it temporarily
-                    imgElement.src = symbol["imageSrc"].substr(1); // Set it again to force a reload
+                    imgElement.src = symbol?.["imageSrc"].substr(1); // Set it again to force a reload
                 }
             });
 
