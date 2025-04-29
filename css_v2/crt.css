@@ -216,7 +216,7 @@
     width: 100%;
     height: 2vmin; /* Small strip for tearing effect */
     background: rgba(255, 255, 255, 0.1); /* Very faint */
-    backdrop-filter: blur(1px);
+    /* backdrop-filter: blur(1px); */
     filter: blur(1vmin);
     pointer-events: none;
     z-index: 100;

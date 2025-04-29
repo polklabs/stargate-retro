@@ -110,7 +110,7 @@ section header .col:nth-child(9) {
 section .rows {
   max-height: clamp(-100px, 71vmin, 710px);
   min-height: clamp(-100px, 71vmin, 710px);
-  overflow: scroll;
+  overflow-y: scroll;
   scrollbar-color: var(--color);
   scrollbar-width: auto;
   position: relative;

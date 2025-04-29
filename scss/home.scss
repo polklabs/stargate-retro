@@ -138,18 +138,20 @@ body {
 }
 
 .info-box {
+  color: var(--color-danger);
+  font-weight: bold;
   position: absolute;
   bottom: 4.5vmin;
   left: 20.9vmin;
   border: var(--border);
-  width: 51.9vmin;
+  width: 52.6vmin;
   height: 7vmin;
   text-align: center;
   font-size: 9vmin;
   line-height: 6vmin;
   word-spacing: 14vmin;
   letter-spacing: 2.4vmin;
-  padding-left: 2vmin;
+  padding-left: 1.3vmin;
 }
 
 .sidebar {
@@ -249,7 +251,7 @@ body {
 }
 
 .dial-append {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
 }
@@ -277,6 +279,7 @@ div.shield-buddy {
   width: 8vmin;
   height: 8vmin;
   border-bottom: var(--border);
+  text-shadow: unset !important;
 }
 
 div.clip-1 {
@@ -310,7 +313,7 @@ img.glyph {
   height: 30vmin;
   position: absolute;
   transition-property: top, left, height;
-  transition-duration: 2s;
+  transition-duration: 0.8s;
   transition-timing-function: ease;
   animation: revealAnimation 0.5s forwards ease;
   &.locked {
@@ -350,6 +353,8 @@ div.chevron-link {
   left: 0vmin;
   height: 73vmin;
   pointer-events: none;
+  text-shadow: unset !important;
+  animation: none;
 }
 img.gate,
 div.gate {
@@ -357,6 +362,10 @@ div.gate {
   left: 25.9vmin;
   top: 12.5vmin;
   height: 45.5vmin;
+}
+
+.ring-3 {
+  transition: rotate 0.6s linear;
 }
 
 @keyframes revealAnimation {
