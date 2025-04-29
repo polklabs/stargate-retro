@@ -8,9 +8,13 @@ const infoText = document.querySelector('.info-box');
 const border = document.querySelector('.border');
 const keyboard = document.querySelector('.keyboard');
 
+let gateStatus = {};
+
 let buffer = [];
 let bufferIndex = 0;
 let dialing = false;
+
+let bufferGlyphs = {};
 
 let locked_chevrons_outgoing = 0;
 
@@ -36,47 +40,56 @@ async function speedDial() {
   }
 }
 
-async function watch_dialing_status() {
+async function watch_dialing_status(singleCall = false) {
   try {
   const responseStatus = await fetch(
     'http://192.168.1.95:8080/get/dialing_status',
   );
-  const status = await responseStatus.json();
+    gateStatus = await responseStatus.json();
 
-  let bufferChange = status['address_buffer_outgoing'].length - buffer.length;
+    let bufferChange =
+      gateStatus.address_buffer_outgoing.length - buffer.length;
   if (bufferChange > 0) {
-    buffer = status['address_buffer_outgoing'];
+      buffer = gateStatus.address_buffer_outgoing;
+      disableBufferKeys();
     if (!dialing) {
       dial();
     }
   } else if (bufferChange < 0) {
     resetGate();
+      dialing = false;
     buffer = [];
     bufferIndex = 0;
+      bufferGlyphs = {};
     locked_chevrons_outgoing = 0;
   }
 
-  while (locked_chevrons_outgoing < status['locked_chevrons_outgoing']) {
+    while (locked_chevrons_outgoing < gateStatus.locked_chevrons_outgoing) {
     lock(locked_chevrons_outgoing);
     locked_chevrons_outgoing += 1;
+      if (!dialing) {
+        dial();
+      }
   }
   if (locked_chevrons_outgoing > buffer.length) {
     resetGate();
   }
 
-    updateState(status['wormhole_active'], status['black_hole_connected']);
-    updateTimer(status['wormhole_time_till_close']);
+    updateState();
+    updateTimer(gateStatus.wormhole_time_till_close);
 
-    updateText(gateName, status['gate_name']);
-    updateText(destination, status['connected_planet']);
+    updateText(gateName, gateStatus.gate_name);
+    updateText(destination, gateStatus.connected_planet);
   } catch (err) {
     console.error(err);
   }
 
+  if (!singleCall) {
   if (buffer.length > 0) {
     setTimeout(watch_dialing_status, 500);
   } else {
     setTimeout(watch_dialing_status, 5000);
+    }
   }
 }
 
@@ -91,7 +104,15 @@ async function dhd_press(symbol, key) {
     body: JSON.stringify({symbol}),
     mode: 'no-cors',
   });
-  setTimeout(watch_dialing_status, 100);
+  setTimeout(() => watch_dialing_status(true), 100);
+}
+
+async function clear_buffer() {
+  await fetch('http://192.168.1.95:8080/do/clear_outgoing_buffer', {
+    method: 'POST',
+    mode: 'no-cors',
+  });
+  setTimeout(() => watch_dialing_status(true), 100);
 }
 
 function dial() {
@@ -101,44 +122,54 @@ function dial() {
     return;
   }
 
-  if (bufferIndex >= buffer.length) {
+  if (bufferIndex >= locked_chevrons_outgoing) {
+    if (buffer.length > bufferIndex) {
+      displayGlyph(bufferIndex);
+    }
     dialing = false;
     return;
   }
 
   dialing = true;
-  const g = buffer[bufferIndex];
+
+  if (bufferIndex < 7) {
+    const [newGlyph, newGlyph2] = displayGlyph(bufferIndex);
+    newGlyph.classList.add('locked');
+    newGlyph2.classList.add('locked');
+  }
   bufferIndex += 1;
 
-  if (bufferIndex <= 7) {
-    const symbol = symbols.find(x => x['index'] === g);
+  if (gateStatus.wormhole_active) {
+    setTimeout(dial, 300);
+  } else {
+    setTimeout(dial, 1300);
+  }
+}
+
+function displayGlyph(index) {
+  if (bufferGlyphs[index] !== undefined) {
+    return bufferGlyphs[index];
+  }
+  const glyphIndex = buffer[index];
+  const symbol = symbols.find(x => x['index'] === glyphIndex);
 
     const newGlyph = glyph.cloneNode(true);
     newGlyph.classList.remove('hidden');
     newGlyph.src = '';
     newGlyph.src = symbol['imageSrc'].substr(1);
 
-    newGlyph.classList.add(`g${bufferIndex}`);
+  newGlyph.classList.add(`g${index + 1}`);
     const newGlyph2 = newGlyph.cloneNode(true);
     newGlyph2.classList.add('blur');
     appendTarget.append(newGlyph2);
     appendTarget.append(newGlyph);
 
-    setTimeout(() => {
-      newGlyph.classList.add('locked');
-    }, 500);
-    setTimeout(() => {
-      newGlyph2.classList.add('locked');
-    }, 550);
-
-    const key = document.querySelector(`.keyboard .symbol-${g}`);
-    key.classList.add('disabled');
-  }
-
-  setTimeout(dial, 1300);
+  bufferGlyphs[index] = [newGlyph, newGlyph2];
+  return [newGlyph, newGlyph2];
 }
 
 function lock(i) {
+  // Only allow locking 7 chevrons
   if (i >= 7) {
     return;
   }
@@ -172,23 +203,31 @@ function resetGate() {
   keys.forEach(k => k.classList.remove('disabled'));
 }
 
-function updateState(engaged, blackHole) {
-  if (engaged) {
+function disableBufferKeys() {
+  buffer.forEach(k => disableKey(k));
+}
+function disableKey(glyphIndex) {
+  const key = document.querySelector(`.keyboard .symbol-${glyphIndex}`);
+  key.classList.add('disabled');
+}
+
+function updateState() {
+  if (gateStatus.wormhole_active) {
     setTimeout(() => {
       updateText(infoText, 'ENGAGED');
       border.classList.add('active');
 
-      if (blackHole) {
+      if (gateStatus.black_hole_connected) {
         ring1.setAttribute('fill', 'url(#radialGradientDanger)');
       } else {
         ring1.setAttribute('fill', 'url(#radialGradient)');
       }
     }, 500);
-  } else if (buffer.length === 1 || locked_chevrons_outgoing > 0) {
+  } else if (buffer.length > 0) {
     updateText(infoText, 'DIALING');
     border.classList.remove('active');
   } else {
-    updateText(infoText, '');
+    updateText(infoText, 'IDLE');
     border.classList.remove('active');
   }
 }
