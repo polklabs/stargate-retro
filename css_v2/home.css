@@ -1,5 +1,6 @@
 :root {
-  --color: #51feff;
+  --color: #37BFDE;
+  --color-dark: #4A7297;
   --color-danger: #c70036;
   --color-good: #07ff0b;
   --color-alt: white;
@@ -40,7 +41,7 @@ body {
 
 .border {
   border: var(--border);
-  border-radius: clamp(-100px, 6vmin, 60px);
+  border-radius: clamp(-100px, 3vmin, 30px);
   width: calc(clamp(-100px, 100vmin, 1000px) - clamp(-100px, 2vmin, 20px));
   height: calc(clamp(-100px, 100vmin, 1000px) - clamp(-100px, 28vmin, 280px));
   margin: auto;
@@ -86,37 +87,182 @@ body {
   top: 59vmin;
 }
 
+.chevron-box-labels {
+  position: absolute;
+  top: 14.1vmin;
+  right: 17vmin;
+  display: flex;
+  flex-direction: column;
+  gap: 3.9vmin;
+  color: var(--color-alt);
+}
+
+.lst-code-1,
+.lst-code-2 {
+  position: absolute;
+  bottom: 15.8vmin;
+  color: var(--color-alt);
+  font-size: 1.8vmin;
+}
+.lst-code-1 span,
+.lst-code-2 span {
+  font-size: 2.5vmin;
+}
+
+.lst-code-1 {
+  left: 19.6vmin;
+}
+
+.lst-code-2 {
+  left: 67.6vmin;
+}
+
+.auth-code-label {
+  position: absolute;
+  bottom: 0.2vmin;
+  left: 17.7vmin;
+  color: var(--color-alt);
+  font-size: 2vmin;
+}
+
+.auth-code {
+  position: absolute;
+  bottom: 0.4vmin;
+  left: 37vmin;
+  color: var(--color-alt);
+  font-size: 2.3vmin;
+  display: flex;
+}
+.auth-code div {
+  width: 2.1vmin;
+  text-align: center;
+  border-bottom: var(--border-thin);
+  border-right: var(--border-thin);
+  border-color: var(--color-dark);
+}
+.auth-code div:nth-child(1) {
+  padding-left: 4vmin;
+}
+.auth-code div:nth-child(7) {
+  padding: 0 1vmin;
+}
+.auth-code div:nth-child(15) {
+  padding-right: 0.7vmin;
+}
+
+.system {
+  position: absolute;
+  bottom: 1vmin;
+  left: 79.8vmin;
+  color: var(--color-alt);
+  font-size: 1.1vmin;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-box {
+  position: absolute;
+  bottom: 4.5vmin;
+  left: 20.9vmin;
+  border: var(--border);
+  width: 51.9vmin;
+  height: 7vmin;
+  text-align: center;
+  font-size: 9vmin;
+  line-height: 6vmin;
+  word-spacing: 14vmin;
+  letter-spacing: 2.4vmin;
+  padding-left: 2vmin;
+}
+
+.sidebar {
+  border: var(--border);
+  border-left: unset;
+  border-radius: 0 2vmin 2vmin 0;
+  position: absolute;
+  top: 10.8vmin;
+  left: 0vmin;
+  width: 17.9vmin;
+  height: 56.1vmin;
+}
+.sidebar .keyboard {
+  width: 16vmin;
+  height: 39vmin;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  align-content: start;
+  margin: auto;
+}
+.sidebar .keyboard img {
+  width: 3.3vmin;
+  height: 3.3vmin;
+  filter: invert(100%) sepia(21%) saturate(5367%) hue-rotate(312deg) brightness(111%) contrast(103%);
+  cursor: pointer;
+  border: var(--border-thin);
+  border-color: rgba(0, 0, 0, 0);
+  border-radius: 1vmin;
+}
+.sidebar .keyboard img:hover {
+  border-color: var(--color-good);
+}
+.sidebar .keyboard img.disabled {
+  opacity: 0.4;
+}
+.sidebar .status {
+  color: var(--color-alt);
+  font-size: 1.1vmin;
+  padding-left: 1.5vmin;
+}
+
+.dial-append {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 div.shield {
   position: absolute;
-  top: 2vmin;
-  left: 2vmin;
+  top: 1.5vmin;
+  left: 1.5vmin;
   width: 8vmin;
   height: 8vmin;
   background-image: url("../images/shield.gif");
   background-size: contain;
   background-blend-mode: overlay;
   filter: brightness(2) contrast(0.5);
+  border: var(--border);
+  border-right: unset;
+  border-radius: 2vmin 0 0 1vmin;
 }
 
-img.chevron.locked,
-img.chevron-link.locked {
-  filter: invert(12%) sepia(100%) saturate(5450%) hue-rotate(338deg) brightness(77%) contrast(105%) !important;
+div.shield-buddy {
+  position: absolute;
+  top: 1.9vmin;
+  left: 9.9vmin;
+  width: 8vmin;
+  height: 8vmin;
+  border-bottom: var(--border);
 }
 
 div.clip-1 {
   border-color: var(--color-danger);
   clip-path: inset(0 100% 0 0); /* Hidden initially (right side at 100%) */
-  transition: clip-path 0.3s linear;
+  transition: clip-path 0.8s linear;
 }
 
 div.clip-2 {
   border-color: var(--color-danger);
   clip-path: inset(0 0 0 100%); /* Hidden initially (right side at 100%) */
-  transition: all 0.3s linear;
+  transition: all 0.8s linear;
 }
 
 div.locked {
   clip-path: inset(0 0 0 0);
+}
+
+div.active .ring-1 circle {
+  fill: var(--color) !important;
 }
 
 img.glyph {
@@ -157,20 +303,15 @@ img.glyph.blur {
   filter: blur(1vmin) invert(100%) sepia(21%) saturate(5367%) hue-rotate(312deg) brightness(111%) contrast(103%);
 }
 
-img.chevron-link {
-  position: absolute;
-  left: 0vmin;
-  height: 73vmin;
-  filter: invert(91%) sepia(9%) saturate(5141%) hue-rotate(153deg) brightness(105%) contrast(110%);
-}
-
 div.chevron-link {
   position: absolute;
   left: 0vmin;
   height: 73vmin;
+  pointer-events: none;
 }
 
-img.gate {
+img.gate,
+div.gate {
   position: absolute;
   left: 25.9vmin;
   top: 12.5vmin;

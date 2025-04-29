@@ -14,7 +14,7 @@ function toggleFlicker() {
 }
 
 // Run it every random interval
-setTimeout(toggleFlicker, 300); // check every 300ms
+setTimeout(toggleFlicker, 300);
 
 const distortion = document.querySelector('.crt-distortion');
 let $rand = 0;
