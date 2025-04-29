@@ -233,6 +233,7 @@ body {
   line-height: 3vmin;
   overflow: hidden;
   text-overflow: ellipsis;
+  animation: pulsingTime 3s linear infinite;
 }
 
 .gate-name {
@@ -384,6 +385,23 @@ div.gate {
   }
   to {
     transform: scale(1);
+  }
+}
+@keyframes pulsingTime {
+  0% {
+    color: rgb(from var(--color) r g b/100%);
+  }
+  50% {
+    color: rgb(from var(--color) r g b/100%);
+  }
+  80% {
+    color: rgb(from var(--color) r g b/10%);
+  }
+  95% {
+    color: rgb(from var(--color) r g b/50%);
+  }
+  100% {
+    color: rgb(from var(--color) r g b/100%);
   }
 }
 
