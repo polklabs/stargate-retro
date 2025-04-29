@@ -29,7 +29,7 @@ body {
 
 .crosshair {
   position: absolute;
-  top: 31.5vmin;
+  top: 32.5vmin;
   left: 48.2vmin;
   color: var(--glyph-color);
 }
@@ -193,6 +193,59 @@ body {
   }
 }
 
+.timer {
+  position: absolute;
+  bottom: 0.7vmin;
+  left: 1.4vmin;
+  font-size: 4vmin;
+  border: var(--border-thin);
+  width: 15vmin;
+  height: 3.2vmin;
+  text-align: center;
+  line-height: 3vmin;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gate-name {
+  position: absolute;
+  top: 1.7vmin;
+  left: 10.9vmin;
+  font-size: 3.5vmin;
+  border: var(--border-thin);
+  border-color: var(--color-dark);
+  width: 48vmin;
+  height: 4.5vmin;
+  line-height: 4vmin;
+  padding-left: 0.6vmin;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.destination-box {
+  position: absolute;
+  top: 1.7vmin;
+  right: 1.1vmin;
+  font-size: 1.9vmin;
+  border: var(--border-thin);
+  border-color: var(--color-dark);
+  width: 36vmin;
+  height: 4.5vmin;
+  line-height: 7.1vmin;
+  text-align: center;
+  color: white;
+}
+.destination {
+  position: absolute;
+  top: 1.7vmin;
+  right: 11.4vmin;
+  font-size: 3.5vmin;
+  width: 15vmin;
+  height: 3.2vmin;
+  line-height: 3vmin;
+  text-align: center;
+}
+
 .dial-append {
   position: absolute;
   top: 0;
@@ -238,10 +291,10 @@ div.locked {
   clip-path: inset(0 0 0 0);
 }
 
-div.active {
+div:not(.active) {
   .ring-1 {
     circle {
-      fill: var(--color) !important;
+      fill: none !important;
     }
   }
 }

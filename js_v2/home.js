@@ -1,6 +1,12 @@
-let glyphNum = 1;
 const glyph = document.querySelector('.glyph');
 const appendTarget = document.querySelector('.dial-append');
+const timer = document.querySelector('.timer');
+const gateName = document.querySelector('.gate-name');
+const destination = document.querySelector('.destination');
+const ring1 = document.querySelector('.ring-1 circle');
+const infoText = document.querySelector('.info-box');
+const border = document.querySelector('.border');
+const keyboard = document.querySelector('.keyboard');
 
 let buffer = [];
 let bufferIndex = 0;
@@ -14,11 +20,24 @@ async function initialize_computer() {
     'http://192.168.1.95:8080/get/symbols_all',
   );
   symbols = await responseSymbols.json();
+  buildKeyboard();
   setTimeout(watch_dialing_status, 500);
 }
 initialize_computer();
 
+let address = [27, 7, 15, 32, 12, 30, 1];
+async function speedDial() {
+  if (address.length > 0) {
+    const a = address.splice(0, 1);
+    dhd_press(`${a}`);
+    setTimeout(speedDial, 500);
+  } else {
+    setTimeout(() => dhd_press('0'), 500);
+  }
+}
+
 async function watch_dialing_status() {
+  try {
   const responseStatus = await fetch(
     'http://192.168.1.95:8080/get/dialing_status',
   );
@@ -45,7 +64,14 @@ async function watch_dialing_status() {
     resetGate();
   }
 
-  updateState(status['wormhole_active']);
+    updateState(status['wormhole_active'], status['black_hole_connected']);
+    updateTimer(status['wormhole_time_till_close']);
+
+    updateText(gateName, status['gate_name']);
+    updateText(destination, status['connected_planet']);
+  } catch (err) {
+    console.error(err);
+  }
 
   if (buffer.length > 0) {
     setTimeout(watch_dialing_status, 500);
@@ -54,18 +80,18 @@ async function watch_dialing_status() {
   }
 }
 
-async function dhd_press(symbol) {
+async function dhd_press(symbol, key) {
   if (buffer.find(x => `${x}` === symbol)) {
     return;
   }
 
-  key.classList.add('disabled');
+  key?.classList.add('disabled');
   await fetch('http://192.168.1.95:8080/do/dhd_press', {
     method: 'POST',
     body: JSON.stringify({symbol}),
     mode: 'no-cors',
   });
-  watch_dialing_status();
+  setTimeout(watch_dialing_status, 100);
 }
 
 function dial() {
@@ -109,7 +135,7 @@ function dial() {
     key.classList.add('disabled');
   }
 
-  setTimeout(dial, 1500);
+  setTimeout(dial, 1300);
 }
 
 function lock(i) {
@@ -146,24 +172,34 @@ function resetGate() {
   keys.forEach(k => k.classList.remove('disabled'));
 }
 
-function updateState(engaged) {
-  const infoText = document.querySelector('.info-box');
+function updateState(engaged, blackHole) {
   if (engaged) {
     setTimeout(() => {
-      infoText.textContent = 'ENGAGED';
-      document.querySelector('.border').classList.add('active');
+      updateText(infoText, 'ENGAGED');
+      border.classList.add('active');
+
+      if (blackHole) {
+        ring1.setAttribute('fill', 'url(#radialGradientDanger)');
+      } else {
+        ring1.setAttribute('fill', 'url(#radialGradient)');
+      }
     }, 500);
-  } else if (buffer.length > 0) {
-    infoText.textContent = 'DIALING';
-    document.querySelector('.border').classList.remove('active');
+  } else if (buffer.length === 1 || locked_chevrons_outgoing > 0) {
+    updateText(infoText, 'DIALING');
+    border.classList.remove('active');
   } else {
-    infoText.textContent = '';
-    document.querySelector('.border').classList.remove('active');
+    updateText(infoText, '');
+    border.classList.remove('active');
   }
 }
 
+function updateTimer(secondsLeft) {
+  const mins = Math.max(0, Math.floor(secondsLeft / 60));
+  const secs = Math.max(0, secondsLeft % 60);
+  timer.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
 function buildKeyboard() {
-  const keyboard = document.querySelector('.keyboard');
   for (let i = 1; i < 40; i++) {
     const img = document.createElement('img');
     img.src = `chevrons/milkyway/${pad(i, 3)}.svg`;
@@ -171,10 +207,14 @@ function buildKeyboard() {
     img.classList.add(`symbol-${i}`);
     keyboard.appendChild(img);
   }
+  const img = document.createElement('img');
+  img.src = `gate/dhd.svg`;
+  img.onclick = () => dhd_press(`0`, img);
+  img.classList.add(`symbol-0`);
+  keyboard.appendChild(img);
 }
-buildKeyboard();
 
-const distancePerPoint = 0.75;
+const distancePerPoint = 1.5;
 function startDrawingPath(index) {
   const svgBase = document.querySelector(`.cl${index}`);
   const svg = svgBase.cloneNode(true);
@@ -202,4 +242,10 @@ function pad(n, width, z) {
   z = z || '0';
   n = n + '';
   return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+}
+
+function updateText(elem, text) {
+  if (elem.textContent !== text) {
+    elem.textContent = text;
+  }
 }

@@ -9,6 +9,12 @@
   --glyph-color: #fffea5;
   --border: solid clamp(0px, 0.5vmin, 5px) var(--color);
   --border-thin: solid clamp(0px, 0.3vmin, 3px) var(--color);
+  --color-wormhole-danger-1: yellow;
+  --color-wormhole-danger-2: orange;
+  --color-wormhole-danger-3: red;
+  --color-wormhole-1: royalblue;
+  --color-wormhole-2: cyan;
+  --color-wormhole-3: cornflowerblue;
 }
 
 .genos-font {

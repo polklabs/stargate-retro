@@ -20,6 +20,11 @@
       <div class="shield"></div>
       <div class="shield-buddy"></div>
 
+      <div class="gate-name"></div>
+
+      <div class="destination-box">DESTINATION</div>
+      <div class="destination"></div>
+
       <!-- CHEVRON LINKS -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
       <div class="chevron-link cl1">
         <!-- prettier-ignore -->
@@ -53,7 +58,26 @@
       <!-- GATE RINGS ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
       <div class="gate ring-1">
         <!-- prettier-ignore -->
-        <svg preserveAspectRatio="xMidYMid" width="auto" height="100%" viewBox="0 0 674 670"><circle cx="337" cy="335" r="237" stroke="var(--color)" fill="transparent" stroke-width="4.96px"/></svg>
+        <svg preserveAspectRatio="xMidYMid" width="auto" height="100%" viewBox="0 0 674 670">
+          <defs>
+            <radialGradient id="radialGradient"
+                            cx="50%" cy="50%" r="50%"
+                            fx="50%" fy="50%">
+              <stop offset="0%" stop-color="var(--color-wormhole-1)" />
+              <stop offset="50%" stop-color="var(--color-wormhole-2)" />
+              <stop offset="100%" stop-color="var(--color-wormhole-3)" />
+            </radialGradient>
+          </defs>
+          <defs>
+            <radialGradient id="radialGradientDanger"
+                            cx="50%" cy="50%" r="50%"
+                            fx="50%" fy="50%">
+              <stop offset="0%" stop-color="var(--color-wormhole-danger-1)" />
+              <stop offset="50%" stop-color="var(--color-wormhole-danger-2)" />
+              <stop offset="100%" stop-color="var(--color-wormhole-danger-3)" />
+            </radialGradient>
+          </defs>
+        <circle cx="337" cy="335" r="237" stroke="var(--color)" fill="url(#radialGradient)" stroke-width="4.96px"/></svg>
       </div>
       <div class="gate ring-2">
         <!-- prettier-ignore -->
@@ -170,6 +194,8 @@
         <div class="keyboard"></div>
         <div class="status">STATUS: ACTIVE</div>
       </div>
+
+      <div class="timer"></div>
 
       <img class="glyph hidden" src="chevrons/milkyway/002.svg" />
       <div class="dial-append"></div>
