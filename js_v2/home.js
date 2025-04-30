@@ -8,6 +8,8 @@ const infoText = document.querySelector('.info-box');
 const border = document.querySelector('.border');
 const keyboard = document.querySelector('.keyboard');
 
+let address = [];
+
 let gateStatus = {};
 
 let buffer = [];
@@ -20,31 +22,52 @@ let locked_chevrons_outgoing = 0;
 
 let symbols = [];
 async function initialize_computer() {
-  const responseSymbols = await fetch(
-    'http://192.168.1.95:8080/get/symbols_all',
-  );
+  const responseSymbols = await fetch('/stargate/get/symbols_all');
   symbols = await responseSymbols.json();
   buildKeyboard();
   setTimeout(watch_dialing_status, 500);
+
+  // Check for speed dial
+  const parts = window.location.search.substring(1).split('&');
+  const query = {};
+  parts.forEach(part => {
+    const temp = part.split('=');
+    query[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
+  });
+
+  if (query.address) {
+    address = [...query.address.split(',').map(Number), 1, 0];
+    await clear_buffer();
+    speedDial();
+  }
 }
 initialize_computer();
 
-let address = [27, 7, 15, 32, 12, 30, 1];
+const charfield = document.body;
+charfield.onkeydown = function (e) {
+  const charCode = typeof e.which == 'number' ? e.which : e.keyCode;
+  if (charCode > 0) {
+    const code = String.fromCharCode(charCode);
+    const symbol = symbols.find(x => x.keyboard_mapping === code);
+    if (symbol) {
+      dhd_press(`${symbol.index}`);
+    } else if (code === ' ' || code === '\r') {
+      dhd_press('0');
+    }
+  }
+};
+
 async function speedDial() {
   if (address.length > 0) {
     const a = address.splice(0, 1);
     dhd_press(`${a}`);
-    setTimeout(speedDial, 500);
-  } else {
-    setTimeout(() => dhd_press('0'), 500);
+    setTimeout(speedDial, 1000);
   }
 }
 
 async function watch_dialing_status(singleCall = false) {
   try {
-  const responseStatus = await fetch(
-    'http://192.168.1.95:8080/get/dialing_status',
-  );
+    const responseStatus = await fetch('/stargate/get/dialing_status');
     gateStatus = await responseStatus.json();
 
     let bufferChange =
@@ -99,7 +122,7 @@ async function dhd_press(symbol, key) {
   }
 
   key?.classList.add('disabled');
-  await fetch('http://192.168.1.95:8080/do/dhd_press', {
+  await fetch('/stargate/do/dhd_press', {
     method: 'POST',
     body: JSON.stringify({symbol}),
     mode: 'no-cors',
@@ -108,7 +131,7 @@ async function dhd_press(symbol, key) {
 }
 
 async function clear_buffer() {
-  await fetch('http://192.168.1.95:8080/do/clear_outgoing_buffer', {
+  await fetch('/stargate/do/clear_outgoing_buffer', {
     method: 'POST',
     mode: 'no-cors',
   });
@@ -233,19 +256,27 @@ function updateState() {
 }
 
 function updateTimer(secondsLeft) {
+  if (gateStatus.black_hole_connected) {
+    secondsLeft =
+      38 * 60 -
+      (gateStatus.wormhole_max_time - gateStatus.wormhole_time_till_close);
+  }
+
   const mins = Math.max(0, Math.floor(secondsLeft / 60));
   const secs = Math.max(0, secondsLeft % 60);
-  timer.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+  updateText(timer, `${mins}:${secs.toString().padStart(2, '0')}`);
 }
 
 function buildKeyboard() {
-  for (let i = 1; i < 40; i++) {
+  symbols.forEach(symbol => {
+    if (symbol.keyboard_mapping) {
     const img = document.createElement('img');
-    img.src = `chevrons/milkyway/${pad(i, 3)}.svg`;
-    img.onclick = () => dhd_press(`${i}`, img);
-    img.classList.add(`symbol-${i}`);
+      img.src = symbol.imageSrc.substr(1);
+      img.onclick = () => dhd_press(`${symbol.index}`, img);
+      img.classList.add(`symbol-${symbol.index}`);
     keyboard.appendChild(img);
   }
+  });
   const img = document.createElement('img');
   img.src = `gate/dhd.svg`;
   img.onclick = () => dhd_press(`0`, img);

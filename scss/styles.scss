@@ -1,46 +1,62 @@
+@use 'sass:math';
 $max-viewport: 1000;
 
 @function vmin-clamp($vmin) {
-    // $vmin = how many vmin you want (ex: vmin-clamp(5, $max-viewport))
-    // $max-viewport = maximum viewport size in pixels (ex: 1200)
+  // $vmin = how many vmin you want (ex: vmin-clamp(5, $max-viewport))
+  // $max-viewport = maximum viewport size in pixels (ex: 1200)
 
-    $vmin-px-at-max: calc($vmin / 100) * $max-viewport; // calculate how big vmin gets at max viewport
+  $vmin-px-at-max: math.div(
+    $vmin * $max-viewport,
+    100
+  ); // calculate how big vmin gets at max viewport
 
-    @return clamp(-100px, #{$vmin}vmin, #{$vmin-px-at-max}px);
+  @return clamp(-100px, #{$vmin}vmin, #{$vmin-px-at-max}px);
 }
 
 :root {
-    --color: #37BFDE; //#51feff;
-    --color-dark: #4A7297;
-    --color-danger: #c70036;
-    --color-good: #07ff0b;
-    --color-alt: white;
-    --background-color: #020f25;
-    --glyph-color: #fffea5;
-    --border: solid clamp(0px, 0.5vmin, 5px) var(--color);
-    --border-thin: solid clamp(0px, 0.3vmin, 3px) var(--color);
+  --color: #37bfde; //#51feff;
+  --color-dark: #4a7297;
+  --color-danger: #c70036;
+  --color-good: #07ff0b;
+  --color-alt: white;
+  --background-color: #020f25;
+  --glyph-color: #fffea5;
+  --border: solid clamp(0px, 0.5vmin, 5px) var(--color);
+  --border-thin: solid clamp(0px, 0.3vmin, 3px) var(--color);
 
-    --color-wormhole-danger-1: yellow;
-    --color-wormhole-danger-2: orange;
-    --color-wormhole-danger-3: red;
+  --color-wormhole-danger-1: yellow;
+  --color-wormhole-danger-2: orange;
+  --color-wormhole-danger-3: red;
 
-    --color-wormhole-1: royalblue;
-    --color-wormhole-2: cyan;
-    --color-wormhole-3: cornflowerblue;
+  --color-wormhole-1: royalblue;
+  --color-wormhole-2: cyan;
+  --color-wormhole-3: cornflowerblue;
 }
 
 .genos-font {
-    font-family: "Genos", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-size: vmin-clamp(3.5);
+  font-family: 'Genos', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: vmin-clamp(3.5);
 
-    // SCSS Cannot calculate values in :root {}, so calculate them here and manually place them in the vars
-    // height: vmin-clamp(0.5);
-    // height: vmin-clamp(0.3);
+  // SCSS Cannot calculate values in :root {}, so calculate them here and manually place them in the vars
+  // height: vmin-clamp(0.5);
+  // height: vmin-clamp(0.3);
 }
 
 .hidden {
-    display: none !important;
+  display: none !important;
+}
+
+a:link {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
+
+a:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
 }

@@ -2,27 +2,6 @@ const scrollingDiv = document.getElementById("scrollingDiv");
 const tableRowTemplate = document.getElementById("tableRow");
 const tableBody = document.getElementById("tableBody");
 
-// Listen for the scroll event
-// calculateScrollbar();
-// tableBody.addEventListener("scroll", () => {
-//     calculateScrollbar();
-// });
-// function calculateScrollbar() {
-//     const scrollBorder = scrollingDiv.offsetHeight - scrollingDiv.clientHeight;
-//     const barHeight = Math.floor(
-//         tableBody.offsetHeight *
-//             (tableBody.offsetHeight / tableBody.scrollTopMax)
-//     );
-
-//     const scrollArea = tableBody.offsetHeight - (scrollBorder + barHeight + 12);
-//     const scrollPercent = tableBody.scrollTop / tableBody.scrollTopMax;
-//     const scrollPosition = scrollArea * scrollPercent + tableBody.scrollTop;
-
-//     // Move the div according to the scroll position
-//     scrollingDiv.style.height = `${barHeight}px`;
-//     scrollingDiv.style.top = `${scrollPosition}px`;
-// }
-
 function updateIp(ip) {
     const parts = ip.split(".").map(Number);
 
@@ -57,7 +36,11 @@ async function fetchData() {
         const symbols = await responseSymbols.json();
 
         Object.values(data["address_book"]).forEach((address) => {
+            const aTag = document.createElement('a');
+            aTag.setAttribute('href', `/home_v2.html?address=${address.gate_address}`)
+            
             const newRow = tableRowTemplate.cloneNode(true);
+            aTag.appendChild(newRow);
             newRow.removeAttribute("id");
             newRow.classList.remove("hidden");
 
@@ -90,7 +73,7 @@ async function fetchData() {
 
             newRow.querySelector(
                 `.info-name`
-            ).textContent = `${address["name"]} # ${keyboardAddress}`;
+            ).textContent = `${address["name"]} # ${keyboardAddress}8`;
 
             if (
                 address["is_black_hole"] ||
@@ -147,9 +130,8 @@ async function fetchData() {
             newRow.querySelector(".info-a").innerHTML =
                 document.getElementById(`info-${randomInfo}`).innerHTML;
 
-            tableBody.appendChild(newRow);
+            tableBody.appendChild(aTag);
         });
-        // calculateScrollbar();
     } catch (error) {
         console.error("Error fetching data:", error);
     }

@@ -1,6 +1,6 @@
 :root {
-  --color: #37BFDE;
-  --color-dark: #4A7297;
+  --color: #37bfde;
+  --color-dark: #4a7297;
   --color-danger: #c70036;
   --color-good: #07ff0b;
   --color-alt: white;
@@ -26,6 +26,18 @@
 
 .hidden {
   display: none !important;
+}
+
+a:link {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: auto;
+}
+
+a:visited {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: auto;
 }
 
 /*# sourceMappingURL=styles.css.map */
