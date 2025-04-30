@@ -9,41 +9,49 @@ const infoText = document.querySelector('.info-box');
 const border = document.querySelector('.border');
 const keyboard = document.querySelector('.keyboard');
 
-let address = [];
+let statusInterval;
+
+const STATE_ACTIVE = 'active';
+const STATE_IDLE = 'idle';
+const STATE_DIAL_OUT = 'dialing_out';
+const STATE_DIAL_IN = 'dialing_in';
+
+let speedDialAddress = [];
+
+let encoding = false;
+let state = STATE_IDLE;
 
 let gateStatus = {};
 
 let buffer = [];
 let bufferIndex = 0;
-let dialing = false;
 
-let bufferGlyphs = {};
+// For animating glyph ring
+let lastRingPos = -1;
+let gateMoving = false;
 
-let locked_chevrons_outgoing = 0;
+let lockedGlyphs = {};
+let locked_chevrons = 0;
 
 let symbols = [];
+
+// INITIALIZE --------------------------------------------------------------------------
 async function initialize_computer() {
   const responseSymbols = await fetch('/stargate/get/symbols_all');
   symbols = await responseSymbols.json();
   buildKeyboard();
-  setTimeout(watch_dialing_status, 500);
-
-  // Check for speed dial
-  const parts = window.location.search.substring(1).split('&');
-  const query = {};
-  parts.forEach(part => {
-    const temp = part.split('=');
-    query[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
-  });
-
-  if (query.address) {
-    address = [...query.address.split(',').map(Number), 1, 0];
-    await clear_buffer();
-    speedDial();
-  }
+  updateStatusFrequency(5000);
+  speedDialStart();
 }
 initialize_computer();
 
+function updateStatusFrequency(ms) {
+  clearInterval(statusInterval);
+  statusInterval = setInterval(watch_dialing_status, ms);
+  watch_dialing_status();
+}
+
+// KEYBOARD DIALING ----------------------------------------------------------------------
 const charfield = document.body;
 charfield.onkeydown = function (e) {
   const charCode = typeof e.which == 'number' ? e.which : e.keyCode;
@@ -58,69 +66,201 @@ charfield.onkeydown = function (e) {
   }
 };
 
+// SPEED DIALING --------------------------------------------------------------------------
+async function speedDialStart() {
+  const parts = window.location.search.substring(1).split('&');
+  const query = {};
+  parts.forEach(part => {
+    const temp = part.split('=');
+    query[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
+  });
+
+  if (query.address) {
+    speedDialAddress = [...query.address.split(',').map(Number), 1, 0];
+    await clear_buffer();
+    speedDial();
+  }
+}
+
 async function speedDial() {
-  if (address.length > 0) {
-    const a = address.splice(0, 1);
+  if (speedDialAddress.length > 0) {
+    const a = speedDialAddress.splice(0, 1);
     dhd_press(`${a}`);
     setTimeout(speedDial, 1000);
   }
 }
 
-async function watch_dialing_status(singleCall = false) {
+// STATUS UPDATES --------------------------------------------------------------------------
+async function watch_dialing_status() {
   try {
     const responseStatus = await fetch('/stargate/get/dialing_status');
     gateStatus = await responseStatus.json();
 
-    let bufferChange =
-      gateStatus.address_buffer_outgoing.length - buffer.length;
-    if (bufferChange > 0) {
+    let new_locked_chevrons = 0;
+    const initialState = state;
+
+    if (
+      state === STATE_ACTIVE &&
+      !gateStatus.wormhole_active &&
+      gateStatus.address_buffer_incoming.length === 0 &&
+      gateStatus.address_buffer_outgoing.length === 0
+    ) {
+      resetGate();
+      updateStatusFrequency(5000);
+      return;
+    } else if (state !== STATE_ACTIVE && gateStatus.wormhole_active) {
+      // Active Incoming
+      if (gateStatus.address_buffer_incoming.length > 0) {
+        buffer = gateStatus.address_buffer_incoming;
+        new_locked_chevrons = gateStatus.locked_chevrons_incoming;
+        if (state === STATE_DIAL_OUT) {
+          resetGate();
+        }
+      }
+      // Active Outgoing
+      if (gateStatus.address_buffer_outgoing.length > 0) {
+        buffer = gateStatus.address_buffer_outgoing;
+        new_locked_chevrons = gateStatus.locked_chevrons_outgoing;
+        if (state === STATE_DIAL_IN) {
+          resetGate();
+        }
+      }
+
+      state = STATE_ACTIVE;
+      dial();
+    }
+
+    if (
+      state === STATE_DIAL_OUT &&
+      gateStatus.address_buffer_outgoing.length === 0
+    ) {
+      resetGate();
+    } else if (
+      state !== STATE_DIAL_OUT &&
+      state !== STATE_ACTIVE &&
+      gateStatus.address_buffer_outgoing.length > 0
+    ) {
+      resetGate();
+      state = STATE_DIAL_OUT;
+    }
+
+    if (
+      state === STATE_DIAL_IN &&
+      gateStatus.address_buffer_incoming.length === 0
+    ) {
+      resetGate();
+    } else if (
+      state !== STATE_DIAL_IN &&
+      state !== STATE_ACTIVE &&
+      gateStatus.address_buffer_incoming.length > 0
+    ) {
+      resetGate();
+      state = STATE_DIAL_IN;
+    }
+
+    // Dialing Out
+    if (state === STATE_DIAL_OUT) {
+      let bufferChange =
+        gateStatus.address_buffer_outgoing.length - buffer.length;
       buffer = gateStatus.address_buffer_outgoing;
-      disableBufferKeys();
-      if (!dialing) {
-        dial();
+      if (bufferChange > 0) {
+        disableBufferOutKeys();
+        if (!encoding) {
+          dial();
+        }
       }
-    } else if (bufferChange < 0) {
-      resetGate();
-      dialing = false;
-      buffer = [];
-      bufferIndex = 0;
-      bufferGlyphs = {};
-      locked_chevrons_outgoing = 0;
+      new_locked_chevrons = gateStatus.locked_chevrons_outgoing;
     }
 
-    while (locked_chevrons_outgoing < gateStatus.locked_chevrons_outgoing) {
-      lock(locked_chevrons_outgoing);
-      locked_chevrons_outgoing += 1;
-      if (!dialing) {
+    // Dialing In
+    if (state === STATE_DIAL_IN) {
+      let bufferChange =
+        gateStatus.address_buffer_incoming.length - buffer.length;
+      buffer = gateStatus.address_buffer_incoming;
+      if (bufferChange > 0) {
+        if (!encoding) {
+          dial();
+        }
+      }
+      new_locked_chevrons = gateStatus.locked_chevrons_incoming;
+    }
+
+    while (locked_chevrons < new_locked_chevrons) {
+      lock(locked_chevrons);
+      locked_chevrons += 1;
+      if (!encoding) {
         dial();
       }
     }
-    if (locked_chevrons_outgoing > buffer.length) {
-      resetGate();
-    }
 
-    // ring3.style.rotate = `${(360/1216)*gateStatus.ring_position}deg`;
+    if (lastRingPos === -1) {
+      lastRingPos = gateStatus.ring_position;
+    } else if (lastRingPos !== gateStatus.ring_position) {
+      lastRingPos = gateStatus.ring_position;
+      ring3.classList.add('rotating');
+      ring3.classList.remove('slow-rotate');
+      gateMoving = true;
+    } else if (gateMoving) {
+      gateMoving = false;
+      stopSpinning(ring3);
+    }
 
     updateState();
     updateTimer(gateStatus.wormhole_time_till_close);
 
     updateText(gateName, gateStatus.gate_name);
     updateText(destination, gateStatus.connected_planet);
+
+    if (initialState !== state) {
+      if (state === STATE_IDLE) {
+        updateStatusFrequency(5000);
+      } else {
+        updateStatusFrequency(500);
+      }
+    }
   } catch (err) {
     console.error(err);
   }
+}
 
-  if (!singleCall) {
-    if (buffer.length > 0) {
-      setTimeout(watch_dialing_status, 500);
-    } else {
-      setTimeout(watch_dialing_status, 5000);
-    }
-  }
+function stopSpinning(el) {
+  // Step 1: Capture current computed transform (rotation)
+  const computedStyle = window.getComputedStyle(el);
+  const matrix = new DOMMatrixReadOnly(computedStyle.transform);
+
+  // Calculate current rotation angle in degrees
+  let angle = Math.atan2(matrix.b, matrix.a) * (180 / Math.PI);
+  if (angle < 0) angle += 360;
+
+  // Step 2: Remove animation
+  el.classList.remove('rotating');
+
+  // Step 3: Apply current rotation as a static transform
+  el.style.transform = `rotate(${angle}deg)`;
+
+  // Force reflow to flush style changes
+  void el.offsetWidth;
+
+  // Step 4: Add transition and apply a final slow rotation
+  el.classList.add('slow-rotate');
+
+  // Rotate 10° more over 1s (simulate deceleration)
+  el.style.transform = `rotate(${angle + 10}deg)`;
+
+  // Optional cleanup after transition
+  el.addEventListener(
+    'transitionend',
+    () => {
+      el.classList.remove('slow-rotate');
+      el.style.rotate = `${(angle + 10) % 360}deg`;
+      el.style.transform = '';
+    },
+    {once: true},
+  );
 }
 
 async function dhd_press(symbol, key) {
-  if (buffer.find(x => `${x}` === symbol)) {
+  if (state === STATE_DIAL_OUT && buffer.find(x => `${x}` === symbol)) {
     return;
   }
 
@@ -130,7 +270,7 @@ async function dhd_press(symbol, key) {
     body: JSON.stringify({symbol}),
     mode: 'no-cors',
   });
-  setTimeout(() => watch_dialing_status(true), 100);
+  setTimeout(() => watch_dialing_status(), 300);
 }
 
 async function clear_buffer() {
@@ -138,28 +278,28 @@ async function clear_buffer() {
     method: 'POST',
     mode: 'no-cors',
   });
-  setTimeout(() => watch_dialing_status(true), 100);
+  setTimeout(() => watch_dialing_status(), 300);
 }
 
 function dial() {
   if (buffer.length === 0) {
-    dialing = false;
+    encoding = false;
     bufferIndex = 0;
     return;
   }
 
-  if (bufferIndex >= locked_chevrons_outgoing) {
+  if (bufferIndex >= locked_chevrons) {
     if (buffer.length > bufferIndex) {
-      displayGlyph(bufferIndex);
+      displayGlyph();
     }
-    dialing = false;
+    encoding = false;
     return;
   }
 
-  dialing = true;
+  encoding = true;
 
   if (bufferIndex < 7) {
-    const [newGlyph, newGlyph2] = displayGlyph(bufferIndex);
+    const [newGlyph, newGlyph2] = displayGlyph();
     newGlyph.classList.add('locked');
     newGlyph2.classList.add('locked');
   }
@@ -172,25 +312,25 @@ function dial() {
   }
 }
 
-function displayGlyph(index) {
-  if (bufferGlyphs[index] !== undefined) {
-    return bufferGlyphs[index];
+function displayGlyph() {
+  if (lockedGlyphs[bufferIndex] !== undefined) {
+    return lockedGlyphs[bufferIndex];
   }
-  const glyphIndex = buffer[index];
+  const glyphIndex = buffer[bufferIndex];
   const symbol = symbols.find(x => x['index'] === glyphIndex);
 
   const newGlyph = glyph.cloneNode(true);
   newGlyph.classList.remove('hidden');
   newGlyph.src = '';
-  newGlyph.src = '..'+symbol['imageSrc'];
+  newGlyph.src = '..' + symbol['imageSrc'];
 
-  newGlyph.classList.add(`g${index + 1}`);
+  newGlyph.classList.add(`g${bufferIndex + 1}`);
   const newGlyph2 = newGlyph.cloneNode(true);
   newGlyph2.classList.add('blur');
   appendTarget.append(newGlyph2);
   appendTarget.append(newGlyph);
 
-  bufferGlyphs[index] = [newGlyph, newGlyph2];
+  lockedGlyphs[bufferIndex] = [newGlyph, newGlyph2];
   return [newGlyph, newGlyph2];
 }
 
@@ -216,20 +356,21 @@ function resetGate() {
   const chevrons = document.querySelectorAll('.gate.chevron.locked');
   chevrons.forEach(c => c.classList.remove('locked'));
 
-  const glyphs = document.querySelectorAll('.glyph.locked');
-  glyphs.forEach(g => g.remove());
-
-  const chevronLinks = document.querySelectorAll('.chevron-link.locked');
-  chevronLinks.forEach(cl => cl.remove());
-
-  const chevronBoxes = document.querySelectorAll('.chevron-box.locked');
-  chevronBoxes.forEach(cb => cb.remove());
+  const toRemove = document.querySelectorAll('.dial-append > *');
+  toRemove.forEach(g => g.remove());
 
   const keys = document.querySelectorAll('.keyboard img');
   keys.forEach(k => k.classList.remove('disabled'));
+
+  state = STATE_IDLE;
+  encoding = false;
+  buffer = [];
+  bufferIndex = 0;
+  lockedGlyphs = {};
+  locked_chevrons = 0;
 }
 
-function disableBufferKeys() {
+function disableBufferOutKeys() {
   buffer.forEach(k => disableKey(k));
 }
 function disableKey(glyphIndex) {
@@ -238,7 +379,7 @@ function disableKey(glyphIndex) {
 }
 
 function updateState() {
-  if (gateStatus.wormhole_active) {
+  if (state === STATE_ACTIVE) {
     setTimeout(() => {
       updateText(infoText, 'ENGAGED');
       border.classList.add('active');
@@ -249,8 +390,11 @@ function updateState() {
         ring1.setAttribute('fill', 'url(#radialGradient)');
       }
     }, 500);
-  } else if (buffer.length > 0) {
+  } else if (state === STATE_DIAL_OUT) {
     updateText(infoText, 'DIALING');
+    border.classList.remove('active');
+  } else if (state === STATE_DIAL_IN) {
+    updateText(infoText, 'INCOMING');
     border.classList.remove('active');
   } else {
     updateText(infoText, 'IDLE');
@@ -274,7 +418,7 @@ function buildKeyboard() {
   symbols.forEach(symbol => {
     if (symbol.keyboard_mapping) {
       const img = document.createElement('img');
-      img.src = '..'+symbol.imageSrc;
+      img.src = '..' + symbol.imageSrc;
       img.onclick = () => dhd_press(`${symbol.index}`, img);
       img.classList.add(`symbol-${symbol.index}`);
       keyboard.appendChild(img);

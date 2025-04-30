@@ -24,6 +24,8 @@ def proxy_to_api(subpath):
 @app.route('/<path:filename>', methods=['GET'])
 def serve_file(filename):
     try:
+        if filename.endswith(".svg"):
+            return send_from_directory(FILES_DIR, filename, mimetype='image/svg+xml')
         return send_from_directory(FILES_DIR, filename)
     except FileNotFoundError:
         return {"error": "File not found"}, 404

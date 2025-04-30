@@ -66,7 +66,15 @@
                             fx="50%" fy="50%">
               <stop offset="0%" stop-color="var(--color-wormhole-1)" />
               <stop offset="50%" stop-color="var(--color-wormhole-2)" />
-              <stop offset="100%" stop-color="var(--color-wormhole-3)" />
+              <stop offset="100%" stop-color="var(--color-wormhole-3)" stop-opacity="1">
+                <animate attributeName="stop-opacity"
+                  values="1;0.2;1"
+                  dur="3s"
+                  repeatCount="indefinite"
+                  calcMode="spline"
+                  keyTimes="0;0.5;1"
+                  keySplines=".42,0,1,1;0,0,.58,1" />
+              </stop>
             </radialGradient>
           </defs>
           <defs>
@@ -75,7 +83,15 @@
                             fx="50%" fy="50%">
               <stop offset="0%" stop-color="var(--color-wormhole-danger-1)" />
               <stop offset="50%" stop-color="var(--color-wormhole-danger-2)" />
-              <stop offset="100%" stop-color="var(--color-wormhole-danger-3)" />
+              <stop offset="100%" stop-color="var(--color-wormhole-danger-3)" stop-opacity="1">
+                <animate attributeName="stop-opacity"
+                  values="1;0.2;1"
+                  dur="3s"
+                  repeatCount="indefinite"
+                  calcMode="spline"
+                  keyTimes="0;0.5;1"
+                  keySplines=".42,0,1,1;0,0,.58,1" />
+              </stop>
             </radialGradient>
           </defs>
         <circle cx="337" cy="335" r="237" stroke="var(--color)" fill="url(#radialGradient)" stroke-width="4.96px"/></svg>

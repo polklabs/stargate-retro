@@ -200,7 +200,7 @@
 }
 
 .crt.flicker::after {
-  animation: flicker 0.15s infinite;
+  /* animation: flicker 0.15s infinite; */
 }
 
 @keyframes crt-scanline {

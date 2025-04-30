@@ -194,8 +194,9 @@ body {
   font-size: clamp(-100px, 9vmin, 90px);
   line-height: clamp(-100px, 6vmin, 60px);
   word-spacing: clamp(-100px, 14vmin, 140px);
-  letter-spacing: clamp(-100px, 2.4vmin, 24px);
+  letter-spacing: clamp(-100px, 1.5vmin, 15px);
   padding-left: clamp(-100px, 1.3vmin, 13px);
+  animation: pulsingTextDanger 3.4s linear infinite;
 }
 
 .sidebar {
@@ -250,7 +251,7 @@ body {
   line-height: clamp(-100px, 3vmin, 30px);
   overflow: hidden;
   text-overflow: ellipsis;
-  animation: pulsingTime 3s linear infinite;
+  animation: pulsingText 3s linear infinite;
 }
 
 .gate-name {
@@ -356,7 +357,7 @@ img.glyph {
   transition-property: top, left, height;
   transition-duration: 0.8s;
   transition-timing-function: ease;
-  animation: revealAnimation 0.5s forwards ease;
+  animation: revealAnimation 0.8s forwards ease;
 }
 img.glyph.locked {
   left: clamp(-100px, 83.5vmin, 835px);
@@ -404,10 +405,6 @@ div.gate {
   height: clamp(-100px, 45.5vmin, 455px);
 }
 
-.ring-3 {
-  transition: rotate 0.6s linear;
-}
-
 @keyframes revealAnimation {
   from {
     transform: scale(0.1);
@@ -416,7 +413,7 @@ div.gate {
     transform: scale(1);
   }
 }
-@keyframes pulsingTime {
+@keyframes pulsingText {
   0% {
     color: rgb(from var(--color) r g b/100%);
   }
@@ -424,14 +421,46 @@ div.gate {
     color: rgb(from var(--color) r g b/100%);
   }
   80% {
-    color: rgb(from var(--color) r g b/10%);
+    color: rgb(from var(--color) r g b/40%);
   }
   95% {
-    color: rgb(from var(--color) r g b/50%);
+    color: rgb(from var(--color) r g b/60%);
   }
   100% {
     color: rgb(from var(--color) r g b/100%);
   }
+}
+@keyframes pulsingTextDanger {
+  0% {
+    color: rgb(from var(--color-danger) r g b/100%);
+  }
+  50% {
+    color: rgb(from var(--color-danger) r g b/100%);
+  }
+  80% {
+    color: rgb(from var(--color-danger) r g b/60%);
+  }
+  95% {
+    color: rgb(from var(--color-danger) r g b/80%);
+  }
+  100% {
+    color: rgb(from var(--color-danger) r g b/100%);
+  }
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.rotating {
+  animation: spin 8s ease-in infinite;
+}
+
+.slow-rotate {
+  transition: transform 1s ease-out;
 }
 
 /*# sourceMappingURL=dial.css.map */
