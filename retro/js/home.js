@@ -4,6 +4,7 @@ const timer = document.querySelector('.timer');
 const gateName = document.querySelector('.gate-name');
 const destination = document.querySelector('.destination');
 const ring1 = document.querySelector('.ring-1 circle');
+const ring3 = document.querySelector('.ring-3');
 const infoText = document.querySelector('.info-box');
 const border = document.querySelector('.border');
 const keyboard = document.querySelector('.keyboard');
@@ -72,31 +73,33 @@ async function watch_dialing_status(singleCall = false) {
 
     let bufferChange =
       gateStatus.address_buffer_outgoing.length - buffer.length;
-  if (bufferChange > 0) {
+    if (bufferChange > 0) {
       buffer = gateStatus.address_buffer_outgoing;
       disableBufferKeys();
-    if (!dialing) {
-      dial();
-    }
-  } else if (bufferChange < 0) {
-    resetGate();
-      dialing = false;
-    buffer = [];
-    bufferIndex = 0;
-      bufferGlyphs = {};
-    locked_chevrons_outgoing = 0;
-  }
-
-    while (locked_chevrons_outgoing < gateStatus.locked_chevrons_outgoing) {
-    lock(locked_chevrons_outgoing);
-    locked_chevrons_outgoing += 1;
       if (!dialing) {
         dial();
       }
-  }
-  if (locked_chevrons_outgoing > buffer.length) {
-    resetGate();
-  }
+    } else if (bufferChange < 0) {
+      resetGate();
+      dialing = false;
+      buffer = [];
+      bufferIndex = 0;
+      bufferGlyphs = {};
+      locked_chevrons_outgoing = 0;
+    }
+
+    while (locked_chevrons_outgoing < gateStatus.locked_chevrons_outgoing) {
+      lock(locked_chevrons_outgoing);
+      locked_chevrons_outgoing += 1;
+      if (!dialing) {
+        dial();
+      }
+    }
+    if (locked_chevrons_outgoing > buffer.length) {
+      resetGate();
+    }
+
+    // ring3.style.rotate = `${(360/1216)*gateStatus.ring_position}deg`;
 
     updateState();
     updateTimer(gateStatus.wormhole_time_till_close);
@@ -108,10 +111,10 @@ async function watch_dialing_status(singleCall = false) {
   }
 
   if (!singleCall) {
-  if (buffer.length > 0) {
-    setTimeout(watch_dialing_status, 500);
-  } else {
-    setTimeout(watch_dialing_status, 5000);
+    if (buffer.length > 0) {
+      setTimeout(watch_dialing_status, 500);
+    } else {
+      setTimeout(watch_dialing_status, 5000);
     }
   }
 }
@@ -176,16 +179,16 @@ function displayGlyph(index) {
   const glyphIndex = buffer[index];
   const symbol = symbols.find(x => x['index'] === glyphIndex);
 
-    const newGlyph = glyph.cloneNode(true);
-    newGlyph.classList.remove('hidden');
-    newGlyph.src = '';
-    newGlyph.src = symbol['imageSrc'].substr(1);
+  const newGlyph = glyph.cloneNode(true);
+  newGlyph.classList.remove('hidden');
+  newGlyph.src = '';
+  newGlyph.src = '..'+symbol['imageSrc'];
 
   newGlyph.classList.add(`g${index + 1}`);
-    const newGlyph2 = newGlyph.cloneNode(true);
-    newGlyph2.classList.add('blur');
-    appendTarget.append(newGlyph2);
-    appendTarget.append(newGlyph);
+  const newGlyph2 = newGlyph.cloneNode(true);
+  newGlyph2.classList.add('blur');
+  appendTarget.append(newGlyph2);
+  appendTarget.append(newGlyph);
 
   bufferGlyphs[index] = [newGlyph, newGlyph2];
   return [newGlyph, newGlyph2];
@@ -270,15 +273,15 @@ function updateTimer(secondsLeft) {
 function buildKeyboard() {
   symbols.forEach(symbol => {
     if (symbol.keyboard_mapping) {
-    const img = document.createElement('img');
-      img.src = symbol.imageSrc.substr(1);
+      const img = document.createElement('img');
+      img.src = '..'+symbol.imageSrc;
       img.onclick = () => dhd_press(`${symbol.index}`, img);
       img.classList.add(`symbol-${symbol.index}`);
-    keyboard.appendChild(img);
-  }
+      keyboard.appendChild(img);
+    }
   });
   const img = document.createElement('img');
-  img.src = `gate/dhd.svg`;
+  img.src = `images/dhd.svg`;
   img.onclick = () => dhd_press(`0`, img);
   img.classList.add(`symbol-0`);
   keyboard.appendChild(img);
