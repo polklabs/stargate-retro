@@ -418,8 +418,8 @@ function lock(i) {
 
   startDrawingPath(i + 1);
 
-  const chevron = document.querySelector(`.chevron-${i + 1}`);
-  chevron.classList.add('locked');
+  const chevrons = document.querySelectorAll(`.chevron-${i + 1},.chevron-state-${i + 1}`);
+  chevrons.forEach(c => c.classList.add('locked'));
 
   const b = document.querySelector(`.b${i + 1}`);
   const newB = b.cloneNode(true);
@@ -430,7 +430,7 @@ function lock(i) {
 
 // Clear all animations and get gate back into initial state
 function resetGate() {
-  const chevrons = document.querySelectorAll('.gate.chevron.locked');
+  const chevrons = document.querySelectorAll('.gate.chevron.locked,.chevron-states>tr.locked');
   chevrons.forEach(c => c.classList.remove('locked'));
 
   const toRemove = document.querySelectorAll('.dial-append > *');
@@ -503,8 +503,6 @@ function initialize_text() {
 
 function handleOffline() {
   updateText(infoText, TEXT_OFFLINE);
-  updateText(statusEl, 'STATUS: ' + TEXT_OFFLINE);
-  updateText(systemEl.children.item(1), 'SYS: ' + TEXT_OFFLINE);
   setKeysDisabled([...symbols.map(x => x.index), 0, -1]);
 }
 

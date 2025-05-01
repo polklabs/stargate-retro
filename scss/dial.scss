@@ -254,6 +254,49 @@ body {
   overflow: hidden;
 }
 
+.chevron-states {
+  font-size: 1.6vmin;
+  line-height: 1.6vmin;
+
+  .chevron-open > div,
+  .chevron-locked > div {
+    border: 0.2vmin solid var(--color-dark);
+    width: 3.5vmin;
+    height: 0.5vmin;
+    background-color: #00000000;
+    transition: background-color 0.5s ease;
+  }
+
+  .chevron-open > div {
+    background-color: var(--color-danger);
+  }
+
+  .chevron-number {
+    color: var(--color-alt);
+  }
+  .chevron-state {
+    color: var(--color-good);
+    font-size: 1.2vmin;
+    visibility: hidden;
+  }
+
+  td {
+    padding-left: 1vmin;
+  }
+
+  tr.locked {
+    .chevron-open > div {
+      background-color: #00000000;
+    }
+    .chevron-locked > div {
+      background-color: var(--color-good);
+    }
+    .chevron-state {
+      visibility: visible;
+    }
+  }
+}
+
 .dial-append {
   position: relative;
   top: 0;

@@ -45,7 +45,7 @@ a:visited {
 }
 
 .reference {
-  background-image: url("../references/gate-ref.jpg");
+  background-image: url("../../references/hq720.jpg");
   width: 100%;
   height: 100%;
   position: absolute;
@@ -298,6 +298,42 @@ body {
   text-align: center;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.chevron-states {
+  font-size: 1.6vmin;
+  line-height: 1.6vmin;
+}
+.chevron-states .chevron-open > div,
+.chevron-states .chevron-locked > div {
+  border: 0.2vmin solid var(--color-dark);
+  width: 3.5vmin;
+  height: 0.5vmin;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.5s ease;
+}
+.chevron-states .chevron-open > div {
+  background-color: var(--color-danger);
+}
+.chevron-states .chevron-number {
+  color: var(--color-alt);
+}
+.chevron-states .chevron-state {
+  color: var(--color-good);
+  font-size: 1.2vmin;
+  visibility: hidden;
+}
+.chevron-states td {
+  padding-left: 1vmin;
+}
+.chevron-states tr.locked .chevron-open > div {
+  background-color: rgba(0, 0, 0, 0);
+}
+.chevron-states tr.locked .chevron-locked > div {
+  background-color: var(--color-good);
+}
+.chevron-states tr.locked .chevron-state {
+  visibility: visible;
 }
 
 .dial-append {
