@@ -311,19 +311,19 @@ body {
   justify-content: center;
 }
 .destination-glyphs img {
-  width: 2.5vmin;
+  width: clamp(-100px, 2.5vmin, 25px);
   filter: var(--glyph-color-svg);
 }
 
 .chevron-states {
-  font-size: 1.6vmin;
-  line-height: 1.6vmin;
+  font-size: clamp(-100px, 1.6vmin, 16px);
+  line-height: clamp(-100px, 1.6vmin, 16px);
 }
 .chevron-states .chevron-open > div,
 .chevron-states .chevron-locked > div {
-  border: 0.2vmin solid var(--color-dark);
-  width: 3.5vmin;
-  height: 0.5vmin;
+  border: clamp(-100px, 0.2vmin, 2px) solid var(--color-dark);
+  width: clamp(-100px, 3.5vmin, 35px);
+  height: clamp(-100px, 0.5vmin, 5px);
   background-color: rgba(0, 0, 0, 0);
   transition: background-color 0.5s ease;
 }
@@ -335,11 +335,11 @@ body {
 }
 .chevron-states .chevron-state {
   color: var(--color-good);
-  font-size: 1.2vmin;
+  font-size: clamp(-100px, 1.2vmin, 12px);
   visibility: hidden;
 }
 .chevron-states td {
-  padding-left: 1vmin;
+  padding-left: clamp(-100px, 1vmin, 10px);
 }
 .chevron-states tr.locked .chevron-open > div {
   background-color: rgba(0, 0, 0, 0);

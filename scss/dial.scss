@@ -263,20 +263,20 @@ body {
   display: flex;
   justify-content: center;
   img {
-    width: 2.5vmin;
+    width: vmin-clamp(2.5);
     filter: var(--glyph-color-svg);
   }
 }
 
 .chevron-states {
-  font-size: 1.6vmin;
-  line-height: 1.6vmin;
+  font-size: vmin-clamp(1.6);
+  line-height: vmin-clamp(1.6);
 
   .chevron-open > div,
   .chevron-locked > div {
-    border: 0.2vmin solid var(--color-dark);
-    width: 3.5vmin;
-    height: 0.5vmin;
+    border: vmin-clamp(0.2) solid var(--color-dark);
+    width: vmin-clamp(3.5);
+    height: vmin-clamp(0.5);
     background-color: #00000000;
     transition: background-color 0.5s ease;
   }
@@ -290,12 +290,12 @@ body {
   }
   .chevron-state {
     color: var(--color-good);
-    font-size: 1.2vmin;
+    font-size: vmin-clamp(1.2);
     visibility: hidden;
   }
 
   td {
-    padding-left: 1vmin;
+    padding-left: vmin-clamp(1);
   }
 
   tr.locked {

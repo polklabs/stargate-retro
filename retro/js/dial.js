@@ -109,6 +109,7 @@ async function speedDialStart() {
 
   if (query.address) {
     speedDialAddress = [...query.address.split(',').map(Number), 1, 0];
+    window.history.pushState({}, document.title, window.location.pathname);
     await clear_buffer();
     speedDial();
   }
@@ -199,6 +200,8 @@ function handleActiveGate(new_locked_chevrons = 0) {
     if (gateStatus.address_buffer_outgoing.length > 0) {
       buffer = gateStatus.address_buffer_outgoing;
       new_locked_chevrons = gateStatus.locked_chevrons_outgoing;
+      const toRemove = document.querySelectorAll('.destination-glyphs img');
+      toRemove.forEach(g => g.remove());
       if (state === STATE_DIAL_IN) {
         resetGate();
       }
@@ -420,7 +423,9 @@ function lock(i) {
 
   startDrawingPath(i + 1);
 
-  const chevrons = document.querySelectorAll(`.chevron-${i + 1},.chevron-state-${i + 1}`);
+  const chevrons = document.querySelectorAll(
+    `.chevron-${i + 1},.chevron-state-${i + 1}`,
+  );
   chevrons.forEach(c => c.classList.add('locked'));
 
   const b = document.querySelector(`.b${i + 1}`);
@@ -432,10 +437,14 @@ function lock(i) {
 
 // Clear all animations and get gate back into initial state
 function resetGate() {
-  const chevrons = document.querySelectorAll('.gate.chevron.locked,.chevron-states tr.locked');
+  const chevrons = document.querySelectorAll(
+    '.gate.chevron.locked,.chevron-states tr.locked',
+  );
   chevrons.forEach(c => c.classList.remove('locked'));
 
-  const toRemove = document.querySelectorAll('.dial-append > *,.destination-glyphs img');
+  const toRemove = document.querySelectorAll(
+    '.dial-append > *,.destination-glyphs img',
+  );
   toRemove.forEach(g => g.remove());
 
   const keys = document.querySelectorAll('.keyboard img');
@@ -474,12 +483,12 @@ function updateState() {
 }
 
 function updateDestination(lastXGlyphs) {
-  const toAdd = buffer.slice(buffer.length-lastXGlyphs);
+  const toAdd = buffer.slice(buffer.length - lastXGlyphs);
   toAdd.forEach(g => {
     const symbol = symbols.find(x => x['index'] === g);
     const glyph = document.createElement('img');
     glyph.src = '..' + symbol['imageSrc'];
-    destinationGlyphs.append(glyph)
+    destinationGlyphs.append(glyph);
   });
 }
 
