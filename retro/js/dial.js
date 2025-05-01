@@ -430,7 +430,7 @@ function lock(i) {
 
 // Clear all animations and get gate back into initial state
 function resetGate() {
-  const chevrons = document.querySelectorAll('.gate.chevron.locked,.chevron-states>tr.locked');
+  const chevrons = document.querySelectorAll('.gate.chevron.locked,.chevron-states tr.locked');
   chevrons.forEach(c => c.classList.remove('locked'));
 
   const toRemove = document.querySelectorAll('.dial-append > *');
