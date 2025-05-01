@@ -23,6 +23,7 @@ const appendTarget = document.querySelector('.dial-append');
 const timer = document.querySelector('.timer');
 const gateName = document.querySelector('.gate-name');
 const destination = document.querySelector('.destination');
+const destinationGlyphs = document.querySelector('.destination-glyphs');
 const ring1 = document.querySelector('.ring-1 circle');
 const ring3 = document.querySelector('.ring-3');
 const infoText = document.querySelector('.info-box');
@@ -230,6 +231,7 @@ function handleDialingOut(new_locked_chevrons) {
       gateStatus.address_buffer_outgoing.length - buffer.length;
     buffer = gateStatus.address_buffer_outgoing;
     if (bufferChange > 0) {
+      updateDestination(bufferChange);
       setKeysDisabled(buffer);
       if (!encoding) {
         dial();
@@ -433,7 +435,7 @@ function resetGate() {
   const chevrons = document.querySelectorAll('.gate.chevron.locked,.chevron-states tr.locked');
   chevrons.forEach(c => c.classList.remove('locked'));
 
-  const toRemove = document.querySelectorAll('.dial-append > *');
+  const toRemove = document.querySelectorAll('.dial-append > *,.destination-glyphs img');
   toRemove.forEach(g => g.remove());
 
   const keys = document.querySelectorAll('.keyboard img');
@@ -469,6 +471,16 @@ function updateState() {
     updateText(infoText, 'IDLE');
     border.classList.remove('active');
   }
+}
+
+function updateDestination(lastXGlyphs) {
+  const toAdd = buffer.slice(buffer.length-lastXGlyphs);
+  toAdd.forEach(g => {
+    const symbol = symbols.find(x => x['index'] === g);
+    const glyph = document.createElement('img');
+    glyph.src = '..' + symbol['imageSrc'];
+    destinationGlyphs.append(glyph)
+  });
 }
 
 function updateTimer(secondsLeft) {

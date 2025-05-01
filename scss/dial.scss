@@ -253,6 +253,20 @@ body {
   text-overflow: ellipsis;
   overflow: hidden;
 }
+.destination-glyphs {
+  position: absolute;
+  top: vmin-clamp(1.7);
+  right: vmin-clamp(1.2);
+  width: vmin-clamp(36.3);
+  height: vmin-clamp(3.2);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  img {
+    width: 2.5vmin;
+    filter: var(--glyph-color-svg);
+  }
+}
 
 .chevron-states {
   font-size: 1.6vmin;

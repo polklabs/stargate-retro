@@ -300,6 +300,21 @@ body {
   overflow: hidden;
 }
 
+.destination-glyphs {
+  position: absolute;
+  top: clamp(-100px, 1.7vmin, 17px);
+  right: clamp(-100px, 1.2vmin, 12px);
+  width: clamp(-100px, 36.3vmin, 363px);
+  height: clamp(-100px, 3.2vmin, 32px);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+.destination-glyphs img {
+  width: 2.5vmin;
+  filter: var(--glyph-color-svg);
+}
+
 .chevron-states {
   font-size: 1.6vmin;
   line-height: 1.6vmin;
