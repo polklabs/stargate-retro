@@ -23,7 +23,7 @@ sg1_v4/web/
 - [Dial](http://stargate.local/retro/dial.html) - `/retro/dial.html`
 - [Address Book](http://stargate.local/retro/address_book.html) - `/retro/address_book.html`
 
-### Customizations
+## Customizations
 
 | File | Property | Default | Description | Alt Example |
 | ---- | -------- | ------- | ----------- | ----------- |
@@ -53,10 +53,49 @@ sg1_v4/web/
 | crt.css | .crt.flicker | unset | Uncomment to add screen flicker effect |
 | crt.css | .crt -> textShadow | unset | Uncomment to add awesome subtle crt effect that will melt your computer |
 
+## Webhooks
 
----
+If you don't use [StargateProject-Software](https://github.com/jonnerd154/StargateProject-software) or your name is *Michał* you can setup this project using webhooks. I have added enough to get started - but probably won't add more features because at that point I'm basically rewriting the github project this is meant to expand on.
 
-### Developers
+To setup with webhooks:
+1. Set `USE_WEBHOOKS` to `True` in server.py
+2. Update `PROXY_BASE_URL`, this is where POST requests like `/do/dhd_press` will be sent
+    - There is an optional `pre_post_hook` method in webhooks.py where you can perform extra actions such as adding the dhd press symbol to the address_buffer_outgoing without needing to make an extra api call.
+3. Run: `python server.py`
+4. Open URL: `http://localhost:5000/retro/dial.html`
+
+The stargate state that is normally returned from StargateProject-Software is emulated in `webhooks.py`. get_data should already be setup with all the GET requests that my UI needs. You can modify `set_data` and `pre_post_hook` to add any extra functionality may be needed for your stargate.
+
+Example Webhook Dialing Process:
+```
+POST /sgc/set/dialing_status {"address_buffer_outgoing": [11]}
+...
+POST /sgc/set/dialing_status {"address_buffer_outgoing": [11,9,18]}
+...
+POST /sgc/set/dialing_status {"address_buffer_outgoing": [11,9,18,19], "locked_chevrons_outgoing": 1}
+...
+POST /sgc/set/dialing_status {"address_buffer_outgoing": [11,9,18,19, 20], "locked_chevrons_outgoing": 2}
+...
+POST /sgc/set/dialing_status {"locked_chevrons_outgoing": 4}
+...
+POST /sgc/set/dialing_status {"locked_chevrons_outgoing": 5}
+...
+POST /sgc/set/dialing_status {"address_buffer_outgoing": [11,9,18,19,20,25,1]}
+...
+POST /sgc/set/dialing_status {"locked_chevrons_outgoing": 7}
+...
+POST /sgc/set/dialing_status {"wormhole_active": true, "connected_planet": "PJ2-445"}
+...
+POST /sgc/action/close_wormhole {}
+```
+
+## Credits
+
+Stargate SG-1, Stargate Atlantis & Stargate Universe are ™ & © of Metro-Goldwyn-Mayer Studios Inc.  This project is in no way sponsored or endorsed by: SyFy or MGM. This project was created solely as a hobby project and to help other Stargate fans run their own Stargate Command Computer and to keep the passion and love for Stargate alive.
+
+TheStargateProject.com is a fan-based project and is not intended to infringe upon any copyrights or registered trademarks.
+
+# Development
 
 Instead of pixels or percentages, the css is defined in terms of vmin. This allows creating a ui at a fixed square aspect ratio that can scale. Update the vmin value in the respective scss file. The scss file has a function to generate a clamp forcing a max size for the entire UI.
 
