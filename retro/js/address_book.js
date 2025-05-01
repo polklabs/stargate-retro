@@ -25,16 +25,10 @@ const randomText = ['E<br>M', 'P<br>Q', 'G<br>X', 'T<br>V', 'I<br>X'];
 
 async function fetchData() {
   try {
-    const response = await fetch(
-      // "/stargate/get/address_book?type=all"
-      'http://192.168.1.95:8080/get/address_book?type=all',
-    );
+    const response = await fetch('/stargate/get/address_book?type=all');
     const data = await response.json();
 
-    const responseSymbols = await fetch(
-      // "/stargate/get/symbols_all"
-      'http://192.168.1.95:8080/get/symbols_all',
-    );
+    const responseSymbols = await fetch('/stargate/get/symbols_all');
     const symbols = await responseSymbols.json();
 
     Object.values(data['address_book']).forEach(address => {
