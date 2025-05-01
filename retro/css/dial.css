@@ -1,4 +1,5 @@
 :root {
+  /*! UPDATE COLORS HERE !!! -------------------------------------------------------------------------------------- */
   --color: #37bfde;
   --color-dark: #4a7297;
   --color-danger: #c70036;
@@ -6,6 +7,7 @@
   --color-alt: white;
   --background-color: #020f25;
   --glyph-color: #fffea5;
+  /*! Calculate glyph-color-svg here: https://codepen.io/sosuke/pen/Pjoqqp */
   --glyph-color-svg: invert(100%) sepia(21%) saturate(5367%) hue-rotate(312deg)
     brightness(111%) contrast(103%);
   --glyph-color-danger-svg: invert(16%) sepia(84%) saturate(3541%)
@@ -323,7 +325,7 @@ body {
 .chevron-states .chevron-locked > div {
   border: clamp(-100px, 0.2vmin, 2px) solid var(--color-dark);
   width: clamp(-100px, 3.5vmin, 35px);
-  height: clamp(-100px, 0.5vmin, 5px);
+  height: clamp(-100px, 0.6vmin, 6px);
   background-color: rgba(0, 0, 0, 0);
   transition: background-color 0.5s ease;
 }
