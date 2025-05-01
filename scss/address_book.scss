@@ -51,9 +51,7 @@ body {
     position: relative;
     float: left;
     max-width: vmin-clamp(6);
-    /* #EDF1EB */
-    filter: invert(100%) sepia(21%) saturate(5367%) hue-rotate(312deg)
-        brightness(111%) contrast(103%);
+    filter: var(--glyph-color-svg);
 }
 
 section {
@@ -114,8 +112,7 @@ section {
                 background-color: var(--color-danger) !important;
             }
             .address-book-glyph {
-                filter: invert(16%) sepia(84%) saturate(3541%)
-                    hue-rotate(331deg) brightness(81%) contrast(117%) !important;
+                filter: var(--glyph-color-danger-svg) !important;
             }
         }
 
