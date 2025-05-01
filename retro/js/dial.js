@@ -1,3 +1,14 @@
+/* USER CUSTOMIZATIONS */
+
+const RING_ANIMATION = true;
+
+const AUTHORIZATION_CODE_RANDOMIZE = true;
+const AUTHORIZATION_CODE = '77892757892387';
+
+const USER = 'SGT. W HARRIMAN';
+
+/* DO NOT EDIT BELOW THIS LINE UNLESS YOU KNOW WHAT YOU'RE DOING!!!! */
+
 const glyph = document.querySelector('.glyph');
 const appendTarget = document.querySelector('.dial-append');
 const timer = document.querySelector('.timer');
@@ -22,6 +33,7 @@ let encoding = false;
 let state = STATE_IDLE;
 
 let gateStatus = {};
+let firstStatus = true;
 
 let buffer = [];
 let bufferIndex = 0;
@@ -29,6 +41,7 @@ let bufferIndex = 0;
 // For animating glyph ring
 let lastRingPos = -1;
 let gateMoving = false;
+let lastGateRotation = 0;
 
 let lockedGlyphs = {};
 let locked_chevrons = 0;
@@ -193,17 +206,11 @@ async function watch_dialing_status() {
       }
     }
 
-    if (lastRingPos === -1) {
-      lastRingPos = gateStatus.ring_position;
-    } else if (lastRingPos !== gateStatus.ring_position) {
-      lastRingPos = gateStatus.ring_position;
-      ring3.classList.add('rotating');
-      ring3.classList.remove('slow-rotate');
-      gateMoving = true;
-    } else if (gateMoving) {
-      gateMoving = false;
-      stopSpinning(ring3);
+    if (!encoding) {
+      this.firstStatus = false;
     }
+
+    trySpinning();
 
     updateState();
     updateTimer(gateStatus.wormhole_time_till_close);
@@ -223,6 +230,25 @@ async function watch_dialing_status() {
   }
 }
 
+// That's a neat trick
+function trySpinning() {
+  if (!RING_ANIMATION) {
+    return;
+  }
+
+  if (lastRingPos === -1) {
+    lastRingPos = gateStatus.ring_position;
+  } else if (lastRingPos !== gateStatus.ring_position) {
+    lastRingPos = gateStatus.ring_position;
+    ring3.classList.add('rotating');
+    ring3.classList.remove('slow-rotate');
+    gateMoving = true;
+  } else if (gateMoving) {
+    gateMoving = false;
+    stopSpinning(ring3);
+  }
+}
+
 function stopSpinning(el) {
   // Step 1: Capture current computed transform (rotation)
   const computedStyle = window.getComputedStyle(el);
@@ -231,6 +257,7 @@ function stopSpinning(el) {
   // Calculate current rotation angle in degrees
   let angle = Math.atan2(matrix.b, matrix.a) * (180 / Math.PI);
   if (angle < 0) angle += 360;
+  angle = angle % 360;
 
   // Step 2: Remove animation
   el.classList.remove('rotating');
@@ -252,7 +279,8 @@ function stopSpinning(el) {
     'transitionend',
     () => {
       el.classList.remove('slow-rotate');
-      el.style.rotate = `${(angle + 10) % 360}deg`;
+      lastGateRotation = (angle + 10 + lastGateRotation) % 360;
+      el.style.rotate = `${lastGateRotation}deg`;
       el.style.transform = '';
     },
     {once: true},
@@ -285,6 +313,7 @@ function dial() {
   if (buffer.length === 0) {
     encoding = false;
     bufferIndex = 0;
+    firstStatus = false;
     return;
   }
 
@@ -300,14 +329,21 @@ function dial() {
 
   if (bufferIndex < 7) {
     const [newGlyph, newGlyph2] = displayGlyph();
-    newGlyph.classList.add('locked');
-    newGlyph2.classList.add('locked');
+    if (firstStatus) {
+      newGlyph.classList.add('locked');
+      newGlyph2.classList.add('locked');
+    } else {
+      setTimeout(() => newGlyph.classList.add('locked'), 1);
+      setTimeout(() => newGlyph2.classList.add('locked'), 50);
+    }
   }
   bufferIndex += 1;
 
-  if (gateStatus.wormhole_active) {
+  if (gateStatus.wormhole_active || firstStatus) {
+    // Allow quick locking for active wormholes or partially dialed gates on page load
     setTimeout(dial, 300);
   } else {
+    // Add some delay between chevrons so previous animations can finish
     setTimeout(dial, 1300);
   }
 }
@@ -352,6 +388,7 @@ function lock(i) {
   setTimeout(() => newB.classList.add('locked'), 10);
 }
 
+// Clear all animations and get gate back into initial state
 function resetGate() {
   const chevrons = document.querySelectorAll('.gate.chevron.locked');
   chevrons.forEach(c => c.classList.remove('locked'));
@@ -370,6 +407,7 @@ function resetGate() {
   locked_chevrons = 0;
 }
 
+// Locking pre-dialed keys from the keyboard
 function disableBufferOutKeys() {
   buffer.forEach(k => disableKey(k));
 }
@@ -431,6 +469,7 @@ function buildKeyboard() {
   keyboard.appendChild(img);
 }
 
+// Animate the power line from the chevron to the glyph box
 const distancePerPoint = 0.75;
 function startDrawingPath(index) {
   const svgBase = document.querySelector(`.cl${index}`);

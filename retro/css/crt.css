@@ -196,6 +196,8 @@
   /* Firefox handles it better than Chrome */
   /* Looks super dope tho. */
   /* animation: textShadow 3.5s infinite; */
+
+  
   filter: contrast(1.5) brightness(1.1) saturate(1.1);
 }
 

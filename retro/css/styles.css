@@ -6,14 +6,18 @@
   --color-alt: white;
   --background-color: #020f25;
   --glyph-color: #fffea5;
-  --border: solid clamp(0px, 0.5vmin, 5px) var(--color);
-  --border-thin: solid clamp(0px, 0.3vmin, 3px) var(--color);
+  --glyph-color-svg: invert(100%) sepia(21%) saturate(5367%) hue-rotate(312deg)
+    brightness(111%) contrast(103%);
+  --glyph-color-danger-svg: invert(16%) sepia(84%) saturate(3541%)
+    hue-rotate(331deg) brightness(81%) contrast(117%);
   --color-wormhole-danger-1: yellow;
   --color-wormhole-danger-2: orange;
   --color-wormhole-danger-3: red;
   --color-wormhole-1: royalblue;
   --color-wormhole-2: cyan;
   --color-wormhole-3: cornflowerblue;
+  --border: solid clamp(0px, 0.5vmin, 5px) var(--color);
+  --border-thin: solid clamp(0px, 0.3vmin, 3px) var(--color);
 }
 
 .genos-font {

@@ -178,8 +178,7 @@ body {
     img {
       width: vmin-clamp(3.3);
       height: vmin-clamp(3.3);
-      filter: invert(100%) sepia(21%) saturate(5367%) hue-rotate(312deg)
-        brightness(111%) contrast(103%);
+      filter: var(--glyph-color-svg);
       cursor: pointer;
       border: var(--border-thin);
       border-color: rgba(0, 0, 0, 0);
@@ -311,8 +310,7 @@ div:not(.active) {
 
 img.glyph {
   text-shadow: unset;
-  filter: invert(100%) sepia(21%) saturate(5367%) hue-rotate(312deg)
-    brightness(111%) contrast(103%);
+  filter: var(--glyph-color-svg);
   top: vmin-clamp(19);
   left: vmin-clamp(34);
   height: vmin-clamp(30);
@@ -348,8 +346,7 @@ img.glyph {
     }
   }
   &.blur {
-    filter: blur(vmin-clamp(1)) invert(100%) sepia(21%) saturate(5367%)
-      hue-rotate(312deg) brightness(111%) contrast(103%);
+    filter: blur(vmin-clamp(1)) var(--glyph-color-svg);
   }
 }
 
@@ -426,5 +423,5 @@ div.gate {
   animation: spin 8s ease-in infinite;
 }
 .slow-rotate {
-  transition: transform 1s ease-out;
+  transition: transform 0.4s ease-out;
 }

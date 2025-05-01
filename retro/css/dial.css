@@ -6,14 +6,18 @@
   --color-alt: white;
   --background-color: #020f25;
   --glyph-color: #fffea5;
-  --border: solid clamp(0px, 0.5vmin, 5px) var(--color);
-  --border-thin: solid clamp(0px, 0.3vmin, 3px) var(--color);
+  --glyph-color-svg: invert(100%) sepia(21%) saturate(5367%) hue-rotate(312deg)
+    brightness(111%) contrast(103%);
+  --glyph-color-danger-svg: invert(16%) sepia(84%) saturate(3541%)
+    hue-rotate(331deg) brightness(81%) contrast(117%);
   --color-wormhole-danger-1: yellow;
   --color-wormhole-danger-2: orange;
   --color-wormhole-danger-3: red;
   --color-wormhole-1: royalblue;
   --color-wormhole-2: cyan;
   --color-wormhole-3: cornflowerblue;
+  --border: solid clamp(0px, 0.5vmin, 5px) var(--color);
+  --border-thin: solid clamp(0px, 0.3vmin, 3px) var(--color);
 }
 
 .genos-font {
@@ -221,7 +225,7 @@ body {
 .sidebar .keyboard img {
   width: clamp(-100px, 3.3vmin, 33px);
   height: clamp(-100px, 3.3vmin, 33px);
-  filter: invert(100%) sepia(21%) saturate(5367%) hue-rotate(312deg) brightness(111%) contrast(103%);
+  filter: var(--glyph-color-svg);
   cursor: pointer;
   border: var(--border-thin);
   border-color: rgba(0, 0, 0, 0);
@@ -349,7 +353,7 @@ div:not(.active) .ring-1 circle {
 
 img.glyph {
   text-shadow: unset;
-  filter: invert(100%) sepia(21%) saturate(5367%) hue-rotate(312deg) brightness(111%) contrast(103%);
+  filter: var(--glyph-color-svg);
   top: clamp(-100px, 19vmin, 190px);
   left: clamp(-100px, 34vmin, 340px);
   height: clamp(-100px, 30vmin, 300px);
@@ -385,7 +389,7 @@ img.glyph.locked.g7 {
   top: clamp(-100px, 58.7vmin, 587px);
 }
 img.glyph.blur {
-  filter: blur(clamp(-100px, 1vmin, 10px)) invert(100%) sepia(21%) saturate(5367%) hue-rotate(312deg) brightness(111%) contrast(103%);
+  filter: blur(clamp(-100px, 1vmin, 10px)) var(--glyph-color-svg);
 }
 
 div.chevron-link {
@@ -460,7 +464,7 @@ div.gate {
 }
 
 .slow-rotate {
-  transition: transform 1s ease-out;
+  transition: transform 0.4s ease-out;
 }
 
 /*# sourceMappingURL=dial.css.map */
