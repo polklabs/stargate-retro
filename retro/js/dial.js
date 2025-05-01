@@ -7,6 +7,15 @@ const AUTHORIZATION_CODE = '77892757892387';
 
 const USER = 'SGT. W HARRIMAN';
 
+// Used when gate is offline initially
+const DEFAULT_GATE_NAME = 'STARGATE';
+
+const TEXT_OFFLINE = 'OFFLINE';
+const TEXT_IDLE = 'IDLE';
+const TEXT_DIALING = 'DIALING';
+const TEXT_INCOMING = 'INCOMING';
+const TEXT_ENGAGED = 'ENGAGED';
+
 /* DO NOT EDIT BELOW THIS LINE UNLESS YOU KNOW WHAT YOU'RE DOING!!!! */
 
 const glyph = document.querySelector('.glyph');
@@ -19,6 +28,9 @@ const ring3 = document.querySelector('.ring-3');
 const infoText = document.querySelector('.info-box');
 const border = document.querySelector('.border');
 const keyboard = document.querySelector('.keyboard');
+const systemEl = document.querySelector('.system');
+const authCode = document.querySelector('.auth-code');
+const statusEl = document.querySelector('.status');
 
 let statusInterval;
 
@@ -50,8 +62,15 @@ let symbols = [];
 
 // INITIALIZE --------------------------------------------------------------------------
 async function initialize_computer() {
+  initialize_text();
+
   const responseSymbols = await fetch('/stargate/get/symbols_all');
+  if (!responseSymbols.ok) {
+    handleOffline();
+    return;
+  }
   symbols = await responseSymbols.json();
+
   buildKeyboard();
   updateStatusFrequency(5000);
   speedDialStart();
@@ -65,8 +84,7 @@ function updateStatusFrequency(ms) {
 }
 
 // KEYBOARD DIALING ----------------------------------------------------------------------
-const charfield = document.body;
-charfield.onkeydown = function (e) {
+document.body.onkeydown = function (e) {
   const charCode = typeof e.which == 'number' ? e.which : e.keyCode;
   if (charCode > 0) {
     const code = String.fromCharCode(charCode);
@@ -107,96 +125,22 @@ async function speedDial() {
 async function watch_dialing_status() {
   try {
     const responseStatus = await fetch('/stargate/get/dialing_status');
+    if (!responseStatus.ok) {
+      handleOffline();
+      return;
+    }
     gateStatus = await responseStatus.json();
 
-    let new_locked_chevrons = 0;
     const initialState = state;
 
-    if (
-      state === STATE_ACTIVE &&
-      !gateStatus.wormhole_active &&
-      gateStatus.address_buffer_incoming.length === 0 &&
-      gateStatus.address_buffer_outgoing.length === 0
-    ) {
-      resetGate();
-      updateStatusFrequency(5000);
+    let [new_locked_chevrons, hardBreak] = handleActiveGate();
+
+    if (hardBreak) {
       return;
-    } else if (state !== STATE_ACTIVE && gateStatus.wormhole_active) {
-      // Active Incoming
-      if (gateStatus.address_buffer_incoming.length > 0) {
-        buffer = gateStatus.address_buffer_incoming;
-        new_locked_chevrons = gateStatus.locked_chevrons_incoming;
-        if (state === STATE_DIAL_OUT) {
-          resetGate();
-        }
-      }
-      // Active Outgoing
-      if (gateStatus.address_buffer_outgoing.length > 0) {
-        buffer = gateStatus.address_buffer_outgoing;
-        new_locked_chevrons = gateStatus.locked_chevrons_outgoing;
-        if (state === STATE_DIAL_IN) {
-          resetGate();
-        }
-      }
-
-      state = STATE_ACTIVE;
-      dial();
     }
 
-    if (
-      state === STATE_DIAL_OUT &&
-      gateStatus.address_buffer_outgoing.length === 0
-    ) {
-      resetGate();
-    } else if (
-      state !== STATE_DIAL_OUT &&
-      state !== STATE_ACTIVE &&
-      gateStatus.address_buffer_outgoing.length > 0
-    ) {
-      resetGate();
-      state = STATE_DIAL_OUT;
-    }
-
-    if (
-      state === STATE_DIAL_IN &&
-      gateStatus.address_buffer_incoming.length === 0
-    ) {
-      resetGate();
-    } else if (
-      state !== STATE_DIAL_IN &&
-      state !== STATE_ACTIVE &&
-      gateStatus.address_buffer_incoming.length > 0
-    ) {
-      resetGate();
-      state = STATE_DIAL_IN;
-    }
-
-    // Dialing Out
-    if (state === STATE_DIAL_OUT) {
-      let bufferChange =
-        gateStatus.address_buffer_outgoing.length - buffer.length;
-      buffer = gateStatus.address_buffer_outgoing;
-      if (bufferChange > 0) {
-        disableBufferOutKeys();
-        if (!encoding) {
-          dial();
-        }
-      }
-      new_locked_chevrons = gateStatus.locked_chevrons_outgoing;
-    }
-
-    // Dialing In
-    if (state === STATE_DIAL_IN) {
-      let bufferChange =
-        gateStatus.address_buffer_incoming.length - buffer.length;
-      buffer = gateStatus.address_buffer_incoming;
-      if (bufferChange > 0) {
-        if (!encoding) {
-          dial();
-        }
-      }
-      new_locked_chevrons = gateStatus.locked_chevrons_incoming;
-    }
+    new_locked_chevrons = handleDialingOut(new_locked_chevrons);
+    new_locked_chevrons = handleDialingIn(new_locked_chevrons);
 
     while (locked_chevrons < new_locked_chevrons) {
       lock(locked_chevrons);
@@ -227,7 +171,103 @@ async function watch_dialing_status() {
     }
   } catch (err) {
     console.error(err);
+    handleOffline();
   }
+}
+
+function handleActiveGate(new_locked_chevrons = 0) {
+  if (
+    state === STATE_ACTIVE &&
+    !gateStatus.wormhole_active &&
+    gateStatus.address_buffer_incoming.length === 0 &&
+    gateStatus.address_buffer_outgoing.length === 0
+  ) {
+    resetGate();
+    updateStatusFrequency(5000);
+    return [0, true];
+  } else if (state !== STATE_ACTIVE && gateStatus.wormhole_active) {
+    // Active Incoming
+    if (gateStatus.address_buffer_incoming.length > 0) {
+      buffer = gateStatus.address_buffer_incoming;
+      new_locked_chevrons = gateStatus.locked_chevrons_incoming;
+      if (state === STATE_DIAL_OUT) {
+        resetGate();
+      }
+    }
+    // Active Outgoing
+    if (gateStatus.address_buffer_outgoing.length > 0) {
+      buffer = gateStatus.address_buffer_outgoing;
+      new_locked_chevrons = gateStatus.locked_chevrons_outgoing;
+      if (state === STATE_DIAL_IN) {
+        resetGate();
+      }
+    }
+
+    state = STATE_ACTIVE;
+    dial();
+  }
+  return [new_locked_chevrons, false];
+}
+
+function handleDialingOut(new_locked_chevrons) {
+  if (
+    state === STATE_DIAL_OUT &&
+    gateStatus.address_buffer_outgoing.length === 0
+  ) {
+    resetGate();
+  } else if (
+    state !== STATE_DIAL_OUT &&
+    state !== STATE_ACTIVE &&
+    gateStatus.address_buffer_outgoing.length > 0
+  ) {
+    resetGate();
+    state = STATE_DIAL_OUT;
+  }
+
+  // Dialing Out
+  if (state === STATE_DIAL_OUT) {
+    let bufferChange =
+      gateStatus.address_buffer_outgoing.length - buffer.length;
+    buffer = gateStatus.address_buffer_outgoing;
+    if (bufferChange > 0) {
+      setKeysDisabled(buffer);
+      if (!encoding) {
+        dial();
+      }
+    }
+    new_locked_chevrons = gateStatus.locked_chevrons_outgoing;
+  }
+  return new_locked_chevrons;
+}
+
+function handleDialingIn(new_locked_chevrons) {
+  if (
+    state === STATE_DIAL_IN &&
+    gateStatus.address_buffer_incoming.length === 0
+  ) {
+    resetGate();
+  } else if (
+    state !== STATE_DIAL_IN &&
+    state !== STATE_ACTIVE &&
+    gateStatus.address_buffer_incoming.length > 0
+  ) {
+    resetGate();
+    state = STATE_DIAL_IN;
+  }
+
+  if (state === STATE_DIAL_IN) {
+    let bufferChange =
+      gateStatus.address_buffer_incoming.length - buffer.length;
+    buffer = gateStatus.address_buffer_incoming;
+    if (bufferChange > 0) {
+      if (!encoding) {
+        dial();
+      }
+    }
+    new_locked_chevrons = gateStatus.locked_chevrons_incoming;
+  }
+
+  return new_locked_chevrons;
 }
 
 // That's a neat trick
@@ -378,8 +418,8 @@ function lock(i) {
 
   startDrawingPath(i + 1);
 
-  const chev = document.querySelector(`.chevron-${i + 1}`);
-  chev.classList.add('locked');
+  const chevron = document.querySelector(`.chevron-${i + 1}`);
+  chevron.classList.add('locked');
 
   const b = document.querySelector(`.b${i + 1}`);
   const newB = b.cloneNode(true);
@@ -405,15 +445,6 @@ function resetGate() {
   bufferIndex = 0;
   lockedGlyphs = {};
   locked_chevrons = 0;
-}
-
-// Locking pre-dialed keys from the keyboard
-function disableBufferOutKeys() {
-  buffer.forEach(k => disableKey(k));
-}
-function disableKey(glyphIndex) {
-  const key = document.querySelector(`.keyboard .symbol-${glyphIndex}`);
-  key.classList.add('disabled');
 }
 
 function updateState() {
@@ -452,6 +483,31 @@ function updateTimer(secondsLeft) {
   updateText(timer, `${mins}:${secs.toString().padStart(2, '0')}`);
 }
 
+function initialize_text() {
+  updateText(gateName, DEFAULT_GATE_NAME);
+  updateText(systemEl.children.item(0), 'USER: ' + USER);
+
+  const codeLength = Math.max(AUTHORIZATION_CODE.length, 15);
+  for (let i = 0; i < codeLength; i++) {
+    if (i !== 6) {
+      let code = AUTHORIZATION_CODE[i];
+
+      if (AUTHORIZATION_CODE_RANDOMIZE) {
+        code = Math.floor(Math.random() * 10);
+      }
+
+      updateText(authCode.children.item(i), code);
+    }
+  }
+}
+
+function handleOffline() {
+  updateText(infoText, TEXT_OFFLINE);
+  updateText(statusEl, 'STATUS: ' + TEXT_OFFLINE);
+  updateText(systemEl.children.item(1), 'SYS: ' + TEXT_OFFLINE);
+  setKeysDisabled([...symbols.map(x => x.index), 0, -1]);
+}
+
 function buildKeyboard() {
   symbols.forEach(symbol => {
     if (symbol.keyboard_mapping) {
@@ -467,6 +523,21 @@ function buildKeyboard() {
   img.onclick = () => dhd_press(`0`, img);
   img.classList.add(`symbol-0`);
   keyboard.appendChild(img);
+}
+
+// Locking pre-dialed keys from the keyboard
+function setKeysDisabled(keys, disabled = true) {
+  keys.forEach(k => setKeyDisabled(k, disabled));
+}
+function setKeyDisabled(glyphIndex, disabled) {
+  const key = document.querySelector(`.keyboard .symbol-${glyphIndex}`);
+  if (key) {
+    if (disabled) {
+      key.classList.add('disabled');
+    } else {
+      key.classList.remove('disabled');
+    }
+  }
 }
 
 // Animate the power line from the chevron to the glyph box

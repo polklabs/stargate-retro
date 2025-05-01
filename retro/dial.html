@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <!-- <link rel="stylesheet" href="css_v2/styles.css" /> -->
+    <title>Stargate Command</title>
+
     <link rel="stylesheet" href="css/crt.css" />
     <link rel="stylesheet" href="css/dial.css" />
 
@@ -68,11 +69,11 @@
               <stop offset="50%" stop-color="var(--color-wormhole-2)" />
               <stop offset="100%" stop-color="var(--color-wormhole-3)" stop-opacity="1">
                 <animate attributeName="stop-opacity"
-                  values="1;0.2;1"
-                  dur="3s"
+                  values="1;0.5;1"
+                  dur="5s"
                   repeatCount="indefinite"
                   calcMode="spline"
-                  keyTimes="0;0.5;1"
+                  keyTimes="0;0.38;1"
                   keySplines=".42,0,1,1;0,0,.58,1" />
               </stop>
             </radialGradient>
@@ -85,11 +86,11 @@
               <stop offset="50%" stop-color="var(--color-wormhole-danger-2)" />
               <stop offset="100%" stop-color="var(--color-wormhole-danger-3)" stop-opacity="1">
                 <animate attributeName="stop-opacity"
-                  values="1;0.2;1"
-                  dur="3s"
+                  values="1;0.5;1"
+                  dur="5s"
                   repeatCount="indefinite"
                   calcMode="spline"
-                  keyTimes="0;0.5;1"
+                  keyTimes="0;0.38;1"
                   keySplines=".42,0,1,1;0,0,.58,1" />
               </stop>
             </radialGradient>
@@ -205,14 +206,14 @@
         <span>USER: SGT. W HARRIMAN</span><span>SYS: NOMINAL</span>
       </div>
 
-      <div class="info-box"></div>
+      <div class="info-box">OFFLINE</div>
 
       <div class="sidebar">
         <div class="keyboard"></div>
-        <div class="status">STATUS: ACTIVE</div>
+        <div class="status">STATUS: OFFLINE</div>
       </div>
 
-      <div class="timer"></div>
+      <div class="timer">0:00</div>
 
       <img class="glyph hidden" src="../chevrons/milkyway/002.svg" />
       <div class="dial-append"></div>
