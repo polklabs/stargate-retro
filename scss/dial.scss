@@ -1,7 +1,7 @@
 @use 'styles' as *;
 
 .reference {
-  background-image: url('../references/gate-ref.jpg');
+  background-image: url('../../references/gate-ref.jpg');
   width: 100%;
   height: 100%;
   position: absolute;
@@ -38,7 +38,7 @@ body {
   border: var(--border-thin);
   width: vmin-clamp(8.6);
   height: vmin-clamp(6);
-  left: vmin-clamp(82);
+  left: vmin-clamp(81.4);
   position: absolute;
   border-radius: vmin-clamp(1.5) 0 0;
   overflow: hidden;
@@ -69,13 +69,15 @@ body {
 
 .chevron-box-labels {
   position: absolute;
-  top: vmin-clamp(14.1);
-  right: vmin-clamp(17);
+  top: vmin-clamp(14.2);
+  right: vmin-clamp(16.7);
   display: flex;
   flex-direction: column;
   color: var(--color-alt);
   > span {
-    margin-bottom: vmin-clamp(3.7);
+    margin-bottom: vmin-clamp(3.8);
+    line-height: vmin-clamp(4.2);
+    font-size: vmin-clamp(2.6);
   }
 }
 
@@ -112,17 +114,19 @@ body {
   font-size: vmin-clamp(2.3);
   display: flex;
   div {
-    width: vmin-clamp(2.1);
+    width: vmin-clamp(2.3);
     text-align: center;
     border-bottom: var(--border-thin);
     border-right: var(--border-thin);
     border-color: var(--color-dark);
   }
   div:nth-child(1) {
-    padding-left: vmin-clamp(4);
+    padding-left: vmin-clamp(3.3);
+    width: vmin-clamp(6);
   }
   div:nth-child(7) {
     padding: 0 vmin-clamp(1);
+    width: vmin-clamp(5);
   }
   div:nth-child(15) {
     padding-right: vmin-clamp(0.7);
@@ -131,8 +135,8 @@ body {
 
 .system {
   position: absolute;
-  bottom: vmin-clamp(1);
-  left: vmin-clamp(80);
+  bottom: vmin-clamp(0.8);
+  left: vmin-clamp(78.8);
   color: var(--color-alt);
   font-size: vmin-clamp(1.1);
   display: flex;
@@ -143,11 +147,11 @@ body {
   color: var(--color-danger);
   font-weight: bold;
   position: absolute;
-  bottom: vmin-clamp(4.5);
+  bottom: vmin-clamp(4.2);
   left: vmin-clamp(20.9);
   border: var(--border);
-  width: vmin-clamp(52.6);
-  height: vmin-clamp(7);
+  width: vmin-clamp(53.7);
+  height: vmin-clamp(7.9);
   text-align: center;
   font-size: vmin-clamp(9);
   line-height: vmin-clamp(6);
@@ -176,8 +180,8 @@ body {
     align-content: start;
     margin: auto;
     img {
-      width: vmin-clamp(3.3);
-      height: vmin-clamp(3.3);
+      width: vmin-clamp(3.9);
+      height: auto;
       filter: var(--glyph-color-svg);
       cursor: pointer;
       border: var(--border-thin);
@@ -207,7 +211,7 @@ body {
   width: vmin-clamp(15);
   height: vmin-clamp(3.2);
   text-align: center;
-  line-height: vmin-clamp(3);
+  line-height: vmin-clamp(2.3);
   overflow: hidden;
   text-overflow: ellipsis;
   animation: pulsingText 3s linear infinite;
@@ -237,7 +241,7 @@ body {
   border-color: var(--color-dark);
   width: vmin-clamp(36);
   height: vmin-clamp(4.5);
-  line-height: vmin-clamp(7.1);
+  line-height: vmin-clamp(6.2);
   text-align: center;
   color: white;
 }
@@ -269,16 +273,22 @@ body {
 }
 
 .chevron-states {
-  font-size: vmin-clamp(1.6);
+  font-size: vmin-clamp(2);
   line-height: vmin-clamp(1.6);
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: vmin-clamp(18);
 
-  .chevron-open > div,
-  .chevron-locked > div {
-    border: vmin-clamp(0.2) solid var(--color-dark);
-    width: vmin-clamp(3.5);
-    height: vmin-clamp(0.6);
-    background-color: #00000000;
-    transition: background-color 0.5s ease;
+  .chevron-open,
+  .chevron-locked {
+    width: vmin-clamp(5.2);
+    > div {
+      border: vmin-clamp(0.2) solid var(--color-dark);
+      width: vmin-clamp(3.5);
+      height: vmin-clamp(1);
+      background-color: #00000000;
+      transition: background-color 0.5s ease;
+    }
   }
 
   .chevron-open > div {
@@ -287,15 +297,19 @@ body {
 
   .chevron-number {
     color: var(--color-alt);
+    width: vmin-clamp(2);
   }
   .chevron-state {
     color: var(--color-good);
-    font-size: vmin-clamp(1.2);
+    font-size: vmin-clamp(1.3);
     visibility: hidden;
   }
 
+  tr {
+    height: vmin-clamp(2.1);
+  }
   td {
-    padding-left: vmin-clamp(1);
+    padding-left: vmin-clamp(1.6);
   }
 
   tr.locked {
@@ -323,8 +337,8 @@ div.shield {
   position: absolute;
   top: vmin-clamp(1.5);
   left: vmin-clamp(1.5);
-  width: vmin-clamp(8);
-  height: vmin-clamp(8);
+  width: vmin-clamp(8.8);
+  height: vmin-clamp(8.8);
   background-image: url('../images/shield.gif');
   background-size: contain;
   background-blend-mode: overlay;
@@ -335,8 +349,8 @@ div.shield {
 }
 div.shield-buddy {
   position: absolute;
-  top: vmin-clamp(2);
-  left: vmin-clamp(9.9);
+  top: vmin-clamp(2.3);
+  left: vmin-clamp(9.5);
   width: vmin-clamp(8);
   height: vmin-clamp(8);
   border-bottom: var(--border);
@@ -377,8 +391,8 @@ img.glyph {
   transition-timing-function: ease;
   animation: revealAnimation 0.8s forwards ease;
   &.locked {
-    left: vmin-clamp(83.5);
-    height: vmin-clamp(7);
+    left: vmin-clamp(82.2);
+    height: vmin-clamp(6.6);
 
     &.g1 {
       top: vmin-clamp(10.7);
@@ -418,9 +432,9 @@ div.chevron-link {
 img.gate,
 div.gate {
   position: absolute;
-  left: vmin-clamp(25.9);
-  top: vmin-clamp(12.5);
-  height: vmin-clamp(45.5);
+  left: vmin-clamp(25.6);
+  top: vmin-clamp(12.9);
+  height: vmin-clamp(44.8);
 }
 
 @keyframes revealAnimation {

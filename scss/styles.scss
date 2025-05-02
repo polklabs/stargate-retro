@@ -41,6 +41,10 @@ $max-viewport: 1000;
   --border-thin: solid clamp(0px, 0.3vmin, 3px) var(--color);
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .genos-font {
   font-family: 'Genos', sans-serif;
   font-optical-sizing: auto;

@@ -22,6 +22,10 @@
   --border-thin: solid clamp(0px, 0.3vmin, 3px) var(--color);
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .genos-font {
   font-family: "Genos", sans-serif;
   font-optical-sizing: auto;
@@ -47,7 +51,7 @@ a:visited {
 }
 
 .reference {
-  background-image: url("../references/gate-ref.jpg");
+  background-image: url("../../references/gate-ref.jpg");
   width: 100%;
   height: 100%;
   position: absolute;
@@ -84,7 +88,7 @@ body {
   border: var(--border-thin);
   width: clamp(-100px, 8.6vmin, 86px);
   height: clamp(-100px, 6vmin, 60px);
-  left: clamp(-100px, 82vmin, 820px);
+  left: clamp(-100px, 81.4vmin, 814px);
   position: absolute;
   border-radius: clamp(-100px, 1.5vmin, 15px) 0 0;
   overflow: hidden;
@@ -114,14 +118,16 @@ body {
 
 .chevron-box-labels {
   position: absolute;
-  top: clamp(-100px, 14.1vmin, 141px);
-  right: clamp(-100px, 17vmin, 170px);
+  top: clamp(-100px, 14.2vmin, 142px);
+  right: clamp(-100px, 16.7vmin, 167px);
   display: flex;
   flex-direction: column;
   color: var(--color-alt);
 }
 .chevron-box-labels > span {
-  margin-bottom: clamp(-100px, 3.7vmin, 37px);
+  margin-bottom: clamp(-100px, 3.8vmin, 38px);
+  line-height: clamp(-100px, 4.2vmin, 42px);
+  font-size: clamp(-100px, 2.6vmin, 26px);
 }
 
 .lst-code-1,
@@ -161,17 +167,19 @@ body {
   display: flex;
 }
 .auth-code div {
-  width: clamp(-100px, 2.1vmin, 21px);
+  width: clamp(-100px, 2.3vmin, 23px);
   text-align: center;
   border-bottom: var(--border-thin);
   border-right: var(--border-thin);
   border-color: var(--color-dark);
 }
 .auth-code div:nth-child(1) {
-  padding-left: clamp(-100px, 4vmin, 40px);
+  padding-left: clamp(-100px, 3.3vmin, 33px);
+  width: clamp(-100px, 6vmin, 60px);
 }
 .auth-code div:nth-child(7) {
   padding: 0 clamp(-100px, 1vmin, 10px);
+  width: clamp(-100px, 5vmin, 50px);
 }
 .auth-code div:nth-child(15) {
   padding-right: clamp(-100px, 0.7vmin, 7px);
@@ -179,8 +187,8 @@ body {
 
 .system {
   position: absolute;
-  bottom: clamp(-100px, 1vmin, 10px);
-  left: clamp(-100px, 80vmin, 800px);
+  bottom: clamp(-100px, 0.8vmin, 8px);
+  left: clamp(-100px, 78.8vmin, 788px);
   color: var(--color-alt);
   font-size: clamp(-100px, 1.1vmin, 11px);
   display: flex;
@@ -191,11 +199,11 @@ body {
   color: var(--color-danger);
   font-weight: bold;
   position: absolute;
-  bottom: clamp(-100px, 4.5vmin, 45px);
+  bottom: clamp(-100px, 4.2vmin, 42px);
   left: clamp(-100px, 20.9vmin, 209px);
   border: var(--border);
-  width: clamp(-100px, 52.6vmin, 526px);
-  height: clamp(-100px, 7vmin, 70px);
+  width: clamp(-100px, 53.7vmin, 537px);
+  height: clamp(-100px, 7.9vmin, 79px);
   text-align: center;
   font-size: clamp(-100px, 9vmin, 90px);
   line-height: clamp(-100px, 6vmin, 60px);
@@ -225,8 +233,8 @@ body {
   margin: auto;
 }
 .sidebar .keyboard img {
-  width: clamp(-100px, 3.3vmin, 33px);
-  height: clamp(-100px, 3.3vmin, 33px);
+  width: clamp(-100px, 3.9vmin, 39px);
+  height: auto;
   filter: var(--glyph-color-svg);
   cursor: pointer;
   border: var(--border-thin);
@@ -254,7 +262,7 @@ body {
   width: clamp(-100px, 15vmin, 150px);
   height: clamp(-100px, 3.2vmin, 32px);
   text-align: center;
-  line-height: clamp(-100px, 3vmin, 30px);
+  line-height: clamp(-100px, 2.3vmin, 23px);
   overflow: hidden;
   text-overflow: ellipsis;
   animation: pulsingText 3s linear infinite;
@@ -284,7 +292,7 @@ body {
   border-color: var(--color-dark);
   width: clamp(-100px, 36vmin, 360px);
   height: clamp(-100px, 4.5vmin, 45px);
-  line-height: clamp(-100px, 7.1vmin, 71px);
+  line-height: clamp(-100px, 6.2vmin, 62px);
   text-align: center;
   color: white;
 }
@@ -318,14 +326,21 @@ body {
 }
 
 .chevron-states {
-  font-size: clamp(-100px, 1.6vmin, 16px);
+  font-size: clamp(-100px, 2vmin, 20px);
   line-height: clamp(-100px, 1.6vmin, 16px);
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: clamp(-100px, 18vmin, 180px);
+}
+.chevron-states .chevron-open,
+.chevron-states .chevron-locked {
+  width: clamp(-100px, 5.2vmin, 52px);
 }
 .chevron-states .chevron-open > div,
 .chevron-states .chevron-locked > div {
   border: clamp(-100px, 0.2vmin, 2px) solid var(--color-dark);
   width: clamp(-100px, 3.5vmin, 35px);
-  height: clamp(-100px, 0.6vmin, 6px);
+  height: clamp(-100px, 1vmin, 10px);
   background-color: rgba(0, 0, 0, 0);
   transition: background-color 0.5s ease;
 }
@@ -334,14 +349,18 @@ body {
 }
 .chevron-states .chevron-number {
   color: var(--color-alt);
+  width: clamp(-100px, 2vmin, 20px);
 }
 .chevron-states .chevron-state {
   color: var(--color-good);
-  font-size: clamp(-100px, 1.2vmin, 12px);
+  font-size: clamp(-100px, 1.3vmin, 13px);
   visibility: hidden;
 }
+.chevron-states tr {
+  height: clamp(-100px, 2.1vmin, 21px);
+}
 .chevron-states td {
-  padding-left: clamp(-100px, 1vmin, 10px);
+  padding-left: clamp(-100px, 1.6vmin, 16px);
 }
 .chevron-states tr.locked .chevron-open > div {
   background-color: rgba(0, 0, 0, 0);
@@ -363,8 +382,8 @@ div.shield {
   position: absolute;
   top: clamp(-100px, 1.5vmin, 15px);
   left: clamp(-100px, 1.5vmin, 15px);
-  width: clamp(-100px, 8vmin, 80px);
-  height: clamp(-100px, 8vmin, 80px);
+  width: clamp(-100px, 8.8vmin, 88px);
+  height: clamp(-100px, 8.8vmin, 88px);
   background-image: url("../images/shield.gif");
   background-size: contain;
   background-blend-mode: overlay;
@@ -376,8 +395,8 @@ div.shield {
 
 div.shield-buddy {
   position: absolute;
-  top: clamp(-100px, 2vmin, 20px);
-  left: clamp(-100px, 9.9vmin, 99px);
+  top: clamp(-100px, 2.3vmin, 23px);
+  left: clamp(-100px, 9.5vmin, 95px);
   width: clamp(-100px, 8vmin, 80px);
   height: clamp(-100px, 8vmin, 80px);
   border-bottom: var(--border);
@@ -417,8 +436,8 @@ img.glyph {
   animation: revealAnimation 0.8s forwards ease;
 }
 img.glyph.locked {
-  left: clamp(-100px, 83.5vmin, 835px);
-  height: clamp(-100px, 7vmin, 70px);
+  left: clamp(-100px, 82.2vmin, 822px);
+  height: clamp(-100px, 6.6vmin, 66px);
 }
 img.glyph.locked.g1 {
   top: clamp(-100px, 10.7vmin, 107px);
@@ -457,9 +476,9 @@ div.chevron-link {
 img.gate,
 div.gate {
   position: absolute;
-  left: clamp(-100px, 25.9vmin, 259px);
-  top: clamp(-100px, 12.5vmin, 125px);
-  height: clamp(-100px, 45.5vmin, 455px);
+  left: clamp(-100px, 25.6vmin, 256px);
+  top: clamp(-100px, 12.9vmin, 129px);
+  height: clamp(-100px, 44.8vmin, 448px);
 }
 
 @keyframes revealAnimation {
