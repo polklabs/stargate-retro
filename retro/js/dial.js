@@ -560,7 +560,7 @@ function setKeyDisabled(glyphIndex, disabled) {
 }
 
 // Animate the power line from the chevron to the glyph box
-const distancePerPoint = 0.75;
+const pathTime = 800; // ms
 function startDrawingPath(index) {
   const svgBase = document.querySelector(`.cl${index}`);
   const svg = svgBase.cloneNode(true);
@@ -572,16 +572,18 @@ function startDrawingPath(index) {
   path.style.strokeWidth = '6';
   appendTarget.append(svg);
 
+  const start = performance.now();
   let length = 0;
-  function animate() {
-    length += Math.floor((distancePerPoint / 100) * pathLength);
+  function animate(now) {
+    const time = now - start;
+    length = Math.floor((time / pathTime) * pathLength);
     path.style.strokeDasharray = [length, pathLength].join(' ');
 
     if (length < pathLength) {
       requestAnimationFrame(animate);
     }
   }
-  animate();
+  animate(start);
 }
 
 function pad(n, width, z) {
