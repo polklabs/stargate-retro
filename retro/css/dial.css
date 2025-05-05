@@ -80,7 +80,7 @@ body {
 .crosshair {
   position: absolute;
   top: clamp(-100px, 32.5vmin, 325px);
-  left: clamp(-100px, 48.2vmin, 482px);
+  left: clamp(-100px, 47.4vmin, 474px);
   color: var(--glyph-color);
 }
 
@@ -183,6 +183,7 @@ body {
 }
 .auth-code div:nth-child(15) {
   padding-right: clamp(-100px, 0.7vmin, 7px);
+  width: clamp(-100px, 3vmin, 30px);
 }
 
 .system {
@@ -427,7 +428,7 @@ img.glyph {
   text-shadow: unset;
   filter: var(--glyph-color-svg);
   top: clamp(-100px, 19vmin, 190px);
-  left: clamp(-100px, 34vmin, 340px);
+  left: clamp(-100px, 33.1vmin, 331px);
   height: clamp(-100px, 30vmin, 300px);
   position: absolute;
   transition-property: top, left, height;

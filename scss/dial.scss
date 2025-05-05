@@ -30,7 +30,7 @@ body {
 .crosshair {
   position: absolute;
   top: vmin-clamp(32.5);
-  left: vmin-clamp(48.2);
+  left: vmin-clamp(47.4);
   color: var(--glyph-color);
 }
 
@@ -130,6 +130,7 @@ body {
   }
   div:nth-child(15) {
     padding-right: vmin-clamp(0.7);
+    width: vmin-clamp(3);
   }
 }
 
@@ -383,7 +384,7 @@ img.glyph {
   text-shadow: unset;
   filter: var(--glyph-color-svg);
   top: vmin-clamp(19);
-  left: vmin-clamp(34);
+  left: vmin-clamp(33.1);
   height: vmin-clamp(30);
   position: absolute;
   transition-property: top, left, height;

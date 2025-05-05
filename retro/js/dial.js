@@ -1,5 +1,6 @@
 /* USER CUSTOMIZATIONS */
 
+// Spinning is so much cooler than not spinning
 const RING_ANIMATION = true;
 
 const AUTHORIZATION_CODE_RANDOMIZE = true;
@@ -47,6 +48,7 @@ let state = STATE_IDLE;
 
 let gateStatus = {};
 let firstStatus = true;
+let fetchingStatus = false;
 
 let buffer = [];
 let bufferIndex = 0;
@@ -119,13 +121,19 @@ async function speedDial() {
   if (speedDialAddress.length > 0) {
     const a = speedDialAddress.splice(0, 1);
     dhd_press(`${a}`);
-    setTimeout(speedDial, 1000);
+    setTimeout(speedDial, 1500);
   }
 }
 
 // STATUS UPDATES --------------------------------------------------------------------------
 async function watch_dialing_status() {
+  if (fetchingStatus) {
+    // Skip update until previous request finishes.
+    return;
+  }
+
   try {
+    fetchingStatus = true;
     const responseStatus = await fetch('/stargate/get/dialing_status');
     if (!responseStatus.ok) {
       handleOffline();
@@ -175,6 +183,7 @@ async function watch_dialing_status() {
     console.error(err);
     handleOffline();
   }
+  fetchingStatus = false;
 }
 
 function handleActiveGate(new_locked_chevrons = 0) {
