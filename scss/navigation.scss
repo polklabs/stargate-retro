@@ -1,0 +1,74 @@
+@use 'styles' as *;
+
+.navigation-menu-wrapper {
+  height: 0;
+  position: relative;
+  margin: vmin-clamp(0.5) auto;
+}
+
+.navigation-menu {
+  margin: auto;
+  width: vmin-clamp(100);
+  display: flex;
+  align-items: center;
+  gap: vmin-clamp(1);
+  margin-bottom: 0;
+  padding-left: vmin-clamp(4);
+  opacity: 0.1;
+  transition: opacity 0.3s linear;
+  position: absolute;
+  left: 0;
+  font-size: vmin-clamp(2);
+
+  &:hover {
+    opacity: 1;
+  }
+  
+  a {
+    color: var(--color);
+    border: var(--border-thin);
+    border-radius: vmin-clamp(1);
+    padding: 0 vmin-clamp(0.6);
+    cursor: pointer;
+    &:hover {
+      background-color: var(--color-dark);
+    }
+  }
+}
+
+.dropbtn {
+  cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: var(--color-dark);
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--background-color);
+  // min-width: 160px;
+  z-index: 9999;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: var(--color-alt);
+  padding: vmin-clamp(1);
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: var(--color-dark);
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+  display: block;
+}

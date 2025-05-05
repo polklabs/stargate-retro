@@ -1,4 +1,5 @@
 @use 'styles' as *;
+@use 'navigation';
 
 .reference {
   background-image: url('../../references/gate-ref.jpg');
@@ -15,6 +16,13 @@ body {
   margin: 0;
   height: 100vh;
   display: flex;
+}
+
+.navigation-menu-wrapper {
+  width: vmin-clamp(98);
+}
+.navigation-menu {
+  top: vmin-clamp(10);
 }
 
 .border {

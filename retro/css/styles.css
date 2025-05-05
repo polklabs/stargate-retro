@@ -26,6 +26,11 @@
   box-sizing: border-box;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 .genos-font {
   font-family: "Genos", sans-serif;
   font-optical-sizing: auto;

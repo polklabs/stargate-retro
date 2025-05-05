@@ -26,6 +26,11 @@
   box-sizing: border-box;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 .genos-font {
   font-family: "Genos", sans-serif;
   font-optical-sizing: auto;
@@ -50,6 +55,76 @@ a:visited {
   cursor: auto;
 }
 
+.navigation-menu-wrapper {
+  height: 0;
+  position: relative;
+  margin: clamp(-100px, 0.5vmin, 5px) auto;
+}
+
+.navigation-menu {
+  margin: auto;
+  width: clamp(-100px, 100vmin, 1000px);
+  display: flex;
+  align-items: center;
+  gap: clamp(-100px, 1vmin, 10px);
+  margin-bottom: 0;
+  padding-left: clamp(-100px, 4vmin, 40px);
+  opacity: 0.1;
+  transition: opacity 0.3s linear;
+  position: absolute;
+  left: 0;
+  font-size: clamp(-100px, 2vmin, 20px);
+}
+.navigation-menu:hover {
+  opacity: 1;
+}
+.navigation-menu a {
+  color: var(--color);
+  border: var(--border-thin);
+  border-radius: clamp(-100px, 1vmin, 10px);
+  padding: 0 clamp(-100px, 0.6vmin, 6px);
+  cursor: pointer;
+}
+.navigation-menu a:hover {
+  background-color: var(--color-dark);
+}
+
+.dropbtn {
+  cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: var(--color-dark);
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--background-color);
+  z-index: 9999;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: var(--color-alt);
+  padding: clamp(-100px, 1vmin, 10px);
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: var(--color-dark);
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+  display: block;
+}
+
 .reference {
   background-image: url("../../references/gate-ref.jpg");
   width: 100%;
@@ -65,6 +140,14 @@ body {
   margin: 0;
   height: 100vh;
   display: flex;
+}
+
+.navigation-menu-wrapper {
+  width: clamp(-100px, 98vmin, 980px);
+}
+
+.navigation-menu {
+  top: clamp(-100px, 10vmin, 100px);
 }
 
 .border {
