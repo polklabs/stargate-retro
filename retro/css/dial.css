@@ -146,10 +146,6 @@ body {
   width: clamp(-100px, 98vmin, 980px);
 }
 
-.navigation-menu {
-  top: clamp(-100px, 10vmin, 100px);
-}
-
 .border {
   border: var(--border);
   border-radius: clamp(-100px, 3vmin, 30px);
