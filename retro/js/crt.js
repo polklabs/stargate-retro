@@ -1,3 +1,9 @@
+/* USER CUSTOMIZATIONS */
+
+const CRT_SCREEN_FLICKER = false;
+
+/* DO NOT EDIT BELOW THIS LINE UNLESS YOU KNOW WHAT YOU'RE DOING!!!! */
+
 const elem = document.body;
 
 function toggleFlicker() {
@@ -14,7 +20,9 @@ function toggleFlicker() {
 }
 
 // Run it every random interval
-setTimeout(toggleFlicker, 300);
+if(CRT_SCREEN_FLICKER) {
+    setTimeout(toggleFlicker, 300);
+}
 
 const distortion = document.querySelector('.crt-distortion');
 let $rand = 0;

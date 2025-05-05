@@ -50,7 +50,7 @@ sg1_v4/web/
 | *.css |  --color-wormhole-1 |<span style="color:royalblue">royalblue</span> | 3 Part gradient for active wormhole |
 | *.css |  --color-wormhole-2 |<span style="color:cyan">cyan</span> | 3 Part gradient for active wormhole |
 | *.css |  --color-wormhole-3 |<span style="color:cornflowerblue">cornflowerblue</span> | 3 Part gradient for active wormhole |
-| crt.css | .crt.flicker | unset | Uncomment to add screen flicker effect |
+| crt.js | CRT_SCREEN_FLICKER | `false` | Add screen flicker effect at random intervals |
 | crt.css | .crt -> textShadow | unset | Uncomment to add awesome subtle crt effect that will melt your computer |
 
 ## Webhooks
