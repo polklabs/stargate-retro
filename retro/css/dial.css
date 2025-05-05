@@ -70,8 +70,8 @@ body {
 .border {
   border: var(--border);
   border-radius: clamp(-100px, 3vmin, 30px);
-  width: calc(clamp(-100px, 100vmin, 1000px) - clamp(-100px, 2vmin, 20px));
-  height: calc(clamp(-100px, 100vmin, 1000px) - clamp(-100px, 28vmin, 280px));
+  width: clamp(-100px, 98vmin, 980px);
+  height: clamp(-100px, 72vmin, 720px);
   margin: auto;
   overflow: hidden;
   position: relative;

@@ -11,8 +11,8 @@ body {
 .border {
     border: var(--border);
     border-radius: vmin-clamp(6);
-    width: calc(vmin-clamp(100) - vmin-clamp(2));
-    height: calc(vmin-clamp(100) - vmin-clamp(2));
+    width: vmin-clamp(98);
+    height: vmin-clamp(93);
     margin: auto;
     overflow: hidden;
     position: relative;
@@ -86,8 +86,8 @@ section {
     }
 
     .rows {
-        max-height: vmin-clamp(71);
-        min-height: vmin-clamp(71);
+        max-height: vmin-clamp(65);
+        min-height: vmin-clamp(65);
         overflow-y: scroll;
         scrollbar-color: var(--color);
         scrollbar-width: auto;
@@ -297,7 +297,8 @@ section {
         flex: 1 1 auto;
         font-size: vmin-clamp(1.6);
         color: var(--glyph-color);
-        max-height: vmin-clamp(7);
+        max-height: vmin-clamp(8);
+        overflow: hidden;
     }
 }
 

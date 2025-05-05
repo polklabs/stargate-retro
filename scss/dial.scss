@@ -20,8 +20,8 @@ body {
 .border {
   border: var(--border);
   border-radius: vmin-clamp(3);
-  width: calc(vmin-clamp(100) - vmin-clamp(2));
-  height: calc(vmin-clamp(100) - vmin-clamp(28));
+  width: vmin-clamp(98);
+  height: vmin-clamp(72);
   margin: auto;
   overflow: hidden;
   position: relative;

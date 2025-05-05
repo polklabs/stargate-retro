@@ -62,8 +62,8 @@ body {
 .border {
   border: var(--border);
   border-radius: clamp(-100px, 6vmin, 60px);
-  width: calc(clamp(-100px, 100vmin, 1000px) - clamp(-100px, 2vmin, 20px));
-  height: calc(clamp(-100px, 100vmin, 1000px) - clamp(-100px, 2vmin, 20px));
+  width: clamp(-100px, 98vmin, 980px);
+  height: clamp(-100px, 93vmin, 930px);
   margin: auto;
   overflow: hidden;
   position: relative;
@@ -129,8 +129,8 @@ section header .col.col-9 {
   text-align: start;
 }
 section .rows {
-  max-height: clamp(-100px, 71vmin, 710px);
-  min-height: clamp(-100px, 71vmin, 710px);
+  max-height: clamp(-100px, 65vmin, 650px);
+  min-height: clamp(-100px, 65vmin, 650px);
   overflow-y: scroll;
   scrollbar-color: var(--color);
   scrollbar-width: auto;
@@ -322,7 +322,8 @@ section .row:hover::after {
   flex: 1 1 auto;
   font-size: clamp(-100px, 1.6vmin, 16px);
   color: var(--glyph-color);
-  max-height: clamp(-100px, 7vmin, 70px);
+  max-height: clamp(-100px, 8vmin, 80px);
+  overflow: hidden;
 }
 
 .footer-buttons {
