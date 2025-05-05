@@ -112,7 +112,7 @@ async function fetchData() {
           .querySelectorAll('span')[0].textContent = '';
         newRow
           .querySelector('.info-coord')
-          .querySelectorAll('span')[1].textContent = '.';
+          .querySelectorAll('span')[1].textContent = '';
       }
 
       newRow

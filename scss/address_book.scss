@@ -227,19 +227,22 @@ section {
             }
         }
 
-        &:hover {
-            &::after {
-                content: "▼";
-                width: calc(100% - vmin-clamp(1));
-                height: calc(100% - vmin-clamp(0.7));
-                border: var(--border);
-                border-color: var(--color-good);
-                color: var(--color-good);
-                position: absolute;
-                font-size: vmin-clamp(2.25);
-                line-height: vmin-clamp(2.25);
-                padding-left: vmin-clamp(0.2);
-            }
+        &::after {
+            content: "▼";
+            width: calc(100% - vmin-clamp(1));
+            height: calc(100% - vmin-clamp(0.7));
+            border: var(--border);
+            border-color: var(--color-good);
+            color: var(--color-good);
+            position: absolute;
+            font-size: vmin-clamp(2.25);
+            line-height: vmin-clamp(2.25);
+            padding-left: vmin-clamp(0.2);
+            pointer-events: none;
+            opacity: 0;
+        }
+        &:hover::after {
+            opacity: 1;
         }
     }
 }

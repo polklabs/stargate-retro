@@ -603,6 +603,6 @@ function pad(n, width, z) {
 
 function updateText(elem, text) {
   if (elem.textContent !== text) {
-    elem.textContent = text;
+    elem.textContent = text ?? '';
   }
 }

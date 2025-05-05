@@ -328,7 +328,7 @@ section .row .col.info .info-body .info-b .glyph-color {
 section .row .col.info .info-body .info-b .alt-color {
   color: var(--color-alt);
 }
-section .row:hover::after {
+section .row::after {
   content: "▼";
   width: calc(100% - clamp(-100px, 1vmin, 10px));
   height: calc(100% - clamp(-100px, 0.7vmin, 7px));
@@ -339,6 +339,11 @@ section .row:hover::after {
   font-size: clamp(-100px, 2.25vmin, 22.5px);
   line-height: clamp(-100px, 2.25vmin, 22.5px);
   padding-left: clamp(-100px, 0.2vmin, 2px);
+  pointer-events: none;
+  opacity: 0;
+}
+section .row:hover::after {
+  opacity: 1;
 }
 
 #scrollingDiv {
