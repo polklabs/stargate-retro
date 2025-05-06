@@ -17,7 +17,7 @@
   <body class="crt genos-font">
     <div class="navigation-menu-wrapper">
       <div class="navigation-menu">
-        <a>Home</a>
+        <a class="active-link">Home</a>
         <a href="/retro/address_book.html">Address Book</a>
         <a href="/symbol_overview.htm">Symbols</a>
         <div class="dropdown">
@@ -26,9 +26,9 @@
             <a href="/debug.htm">Testing / Debug</a>
             <a href="/config.htm">Configuration</a>
             <a href="/info.htm">System</a>
-            <a href="#">Restart Software</a>
-            <a href="#">Reboot Raspberry Pi</a>
-            <a href="#">Shutdown Raspberry Pi</a>
+            <a onclick="restart()">Restart Software</a>
+            <a onclick="reboot()">Reboot Raspberry Pi</a>
+            <a onclick="shutdown()">Shutdown Raspberry Pi</a>
           </div>
         </div>
         <a href="/help.htm">Help</a>

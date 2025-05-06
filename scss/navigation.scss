@@ -34,6 +34,10 @@
       background-color: var(--color-dark);
     }
   }
+
+  a.active-link {
+    color: var(--glyph-color);
+  }
 }
 
 .dropbtn {

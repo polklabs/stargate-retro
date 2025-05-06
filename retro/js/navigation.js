@@ -16,3 +16,33 @@ window.onclick = function (event) {
     }
   }
 };
+
+async function restart() {
+  const response = confirm('Are you sure you want to restart the Gate software?');
+  if (response) {
+    await fetch('/stargate/do/restart', {
+      method: 'POST',
+      mode: 'no-cors',
+    });
+  }
+}
+
+async function reboot() {
+  const response = confirm('Are you sure you want to restart the Raspberry Pi?');
+  if (response) {
+    await fetch('/stargate/do/reboot', {
+      method: 'POST',
+      mode: 'no-cors',
+    });
+  }
+}
+
+async function shutdown() {
+  const response = confirm('Are you sure you want to shutdown the Raspberry Pi?');
+  if (response) {
+    await fetch('/stargate/do/shutdown', {
+      method: 'POST',
+      mode: 'no-cors',
+    });
+  }
+}
