@@ -137,6 +137,7 @@ async function watch_dialing_status() {
     const responseStatus = await fetch('/stargate/get/dialing_status');
     if (!responseStatus.ok) {
       handleOffline();
+      fetchingStatus = false;
       return;
     }
     gateStatus = await responseStatus.json();
@@ -146,6 +147,7 @@ async function watch_dialing_status() {
     let [new_locked_chevrons, hardBreak] = handleActiveGate();
 
     if (hardBreak) {
+      fetchingStatus = false;
       return;
     }
 
@@ -439,10 +441,10 @@ function lock(i) {
 
   const b = document.querySelector(`.b${i + 1}`);
   if (b) {
-  const newB = b.cloneNode(true);
-  newB.classList.add(`clip-${i < 3 ? '2' : '1'}`);
-  appendTarget.append(newB);
-  setTimeout(() => newB.classList.add('locked'), 10);
+    const newB = b.cloneNode(true);
+    newB.classList.add(`clip-${i < 3 ? '2' : '1'}`);
+    appendTarget.append(newB);
+    setTimeout(() => newB.classList.add('locked'), 10);
   }
 }
 
@@ -575,27 +577,27 @@ const pathTime = 800; // ms
 function startDrawingPath(index) {
   const svgBase = document.querySelector(`.cl${index}`);
   if (svgBase) {
-  const svg = svgBase.cloneNode(true);
-  const path = svg.querySelector('path');
-  const pathLength = path.getTotalLength();
+    const svg = svgBase.cloneNode(true);
+    const path = svg.querySelector('path');
+    const pathLength = path.getTotalLength();
 
-  svg.classList.add('locked');
-  path.style.stroke = 'var(--color-danger)';
-  path.style.strokeWidth = '6';
-  appendTarget.append(svg);
+    svg.classList.add('locked');
+    path.style.stroke = 'var(--color-danger)';
+    path.style.strokeWidth = '6';
+    appendTarget.append(svg);
 
-  const start = performance.now();
-  let length = 0;
-  function animate(now) {
-    const time = now - start;
-    length = Math.floor((time / pathTime) * pathLength);
-    path.style.strokeDasharray = [length, pathLength].join(' ');
+    const start = performance.now();
+    let length = 0;
+    function animate(now) {
+      const time = now - start;
+      length = Math.floor((time / pathTime) * pathLength);
+      path.style.strokeDasharray = [length, pathLength].join(' ');
 
-    if (length < pathLength) {
-      requestAnimationFrame(animate);
+      if (length < pathLength) {
+        requestAnimationFrame(animate);
+      }
     }
-  }
-  animate(start);
+    animate(start);
   } else {
     // No chevron link path, probably 8th/9th chevron
   }
