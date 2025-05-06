@@ -381,7 +381,7 @@ function dial() {
 
   encoding = true;
 
-  if (bufferIndex < 7) {
+  if (bufferIndex < 9) {
     const [newGlyph, newGlyph2] = displayGlyph();
     if (firstStatus) {
       newGlyph.classList.add('locked');
@@ -426,7 +426,7 @@ function displayGlyph() {
 
 function lock(i) {
   // Only allow locking 7 chevrons
-  if (i >= 7) {
+  if (i >= 9) {
     return;
   }
 
@@ -438,10 +438,12 @@ function lock(i) {
   chevrons.forEach(c => c.classList.add('locked'));
 
   const b = document.querySelector(`.b${i + 1}`);
+  if (b) {
   const newB = b.cloneNode(true);
   newB.classList.add(`clip-${i < 3 ? '2' : '1'}`);
   appendTarget.append(newB);
   setTimeout(() => newB.classList.add('locked'), 10);
+  }
 }
 
 // Clear all animations and get gate back into initial state
@@ -572,6 +574,7 @@ function setKeyDisabled(glyphIndex, disabled) {
 const pathTime = 800; // ms
 function startDrawingPath(index) {
   const svgBase = document.querySelector(`.cl${index}`);
+  if (svgBase) {
   const svg = svgBase.cloneNode(true);
   const path = svg.querySelector('path');
   const pathLength = path.getTotalLength();
@@ -593,6 +596,9 @@ function startDrawingPath(index) {
     }
   }
   animate(start);
+  } else {
+    // No chevron link path, probably 8th/9th chevron
+  }
 }
 
 function pad(n, width, z) {

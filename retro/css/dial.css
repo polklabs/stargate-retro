@@ -543,6 +543,12 @@ img.glyph.locked.g6 {
 img.glyph.locked.g7 {
   top: clamp(-100px, 58.7vmin, 587px);
 }
+img.glyph.locked.g8 {
+  top: clamp(-100px, 80vmin, 800px);
+}
+img.glyph.locked.g9 {
+  top: clamp(-100px, 80vmin, 800px);
+}
 img.glyph.blur {
   filter: blur(clamp(-100px, 1vmin, 10px)) var(--glyph-color-svg);
 }

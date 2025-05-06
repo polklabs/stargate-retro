@@ -421,6 +421,12 @@ img.glyph {
     &.g7 {
       top: vmin-clamp(58.7);
     }
+    &.g8 {
+      top: vmin-clamp(80);
+    }
+    &.g9 {
+      top: vmin-clamp(80);
+    }
   }
   &.blur {
     filter: blur(vmin-clamp(1)) var(--glyph-color-svg);
