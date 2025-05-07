@@ -422,7 +422,7 @@ section .row:hover::after {
   flex-wrap: nowrap;
   width: max-content;
   font-size: clamp(-100px, 2vmin, 20px);
-  animation: move 30s infinite linear;
+  animation: move 40s infinite linear;
 }
 
 @keyframes move {

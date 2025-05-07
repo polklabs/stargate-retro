@@ -18,7 +18,9 @@ window.onclick = function (event) {
 };
 
 async function restart() {
-  const response = confirm('Are you sure you want to restart the Gate software?');
+  const response = confirm(
+    'Are you sure you want to restart the Gate software?',
+  );
   if (response) {
     await fetch('/stargate/do/restart', {
       method: 'POST',
@@ -28,7 +30,9 @@ async function restart() {
 }
 
 async function reboot() {
-  const response = confirm('Are you sure you want to restart the Raspberry Pi?');
+  const response = confirm(
+    'Are you sure you want to restart the Raspberry Pi?',
+  );
   if (response) {
     await fetch('/stargate/do/reboot', {
       method: 'POST',
@@ -38,7 +42,9 @@ async function reboot() {
 }
 
 async function shutdown() {
-  const response = confirm('Are you sure you want to shutdown the Raspberry Pi?');
+  const response = confirm(
+    'Are you sure you want to shutdown the Raspberry Pi?',
+  );
   if (response) {
     await fetch('/stargate/do/shutdown', {
       method: 'POST',
@@ -46,3 +52,37 @@ async function shutdown() {
     });
   }
 }
+
+function isActive(href) {
+  console.log(window.location.href);
+  return `href="${href}"` + (window.location.href.includes(href) ? 'class="active-link"' : '');
+}
+
+function initializeNavBar() {
+  const div = document.createElement('div');
+  div.innerHTML = `
+  <div class="navigation-menu-wrapper">
+      <div class="navigation-menu">
+        <a ${isActive('/retro/dial.html')}>Home</a>
+        <a ${isActive('/retro/address_book.html')}>Address Book</a>
+        <a ${isActive('/symbol_overview.htm')}>Symbols</a>
+        <div class="dropdown">
+          <a onclick="openDropdown('menu-dropdown')" class="dropbtn"> Admin </a>
+          <div id="menu-dropdown" class="dropdown-content">
+            <a ${isActive('/debug.htm')}>Testing / Debug</a>
+            <a ${isActive('/config.htm')}>Configuration</a>
+            <a ${isActive('/info.htm')}>System</a>
+            <a onclick="restart()">Restart Software</a>
+            <a onclick="reboot()">Reboot Raspberry Pi</a>
+            <a onclick="shutdown()">Shutdown Raspberry Pi</a>
+          </div>
+        </div>
+        <a href="/help.htm">Help</a>
+      </div>
+    </div>
+  `;
+  const innerDiv = div.querySelector('div');
+  const body = document.querySelector('body')
+  body.insertBefore(innerDiv, body.childNodes[0])
+}
+initializeNavBar();
