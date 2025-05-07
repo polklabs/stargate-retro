@@ -457,7 +457,7 @@ function resetGate() {
   );
   toRemove.forEach(g => g.remove());
 
-  const keys = document.querySelectorAll('.keyboard img');
+  const keys = document.querySelectorAll('.keyboard div');
   keys.forEach(k => k.classList.remove('disabled'));
 
   state = STATE_IDLE;
