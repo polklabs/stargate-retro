@@ -29,7 +29,7 @@ Copy `/retro` folder into `/home/pi/sg1_v4/web/`
 ```
 sg1_v4/web/
 ├── index.htm
-├── main.css
+├── chevrons/
 ├── etc...
 └── retro/ <--- Copy Folder Here
     ├── css/
@@ -38,9 +38,9 @@ sg1_v4/web/
     └── etc...
 ```
 
-Once installed you can update some of the *.css and *.js files with customizations such as different colors or updated text. See [below](#customizations) for customizations
+Once installed you can update some of the *.css and *.js files with customizations such as different colors or updated text. See [below](#customizations) for customizations. (More to come later)
 
-Navigation header at the top of all pages to integrate with v4 software.
+Navigation header at the top of all pages to integrate with v4 software. As it is not fully integrated with the v4 software you will not be able to get back to my pages (from the original UI) without a direct link.
 
 To access, enter one of the links below:
 - [Dial](http://stargate.local/retro/dial.html) - `/retro/dial.html`
@@ -93,6 +93,11 @@ To access, enter one of the links below:
     - Popups
         - System Access Denied
         - Self Destruct
+- Add loading screen
+    - Like a old DOS computer booting up
+    - Could be used to hide initial API calls while applying customizations
+- Support for other languages?
+    - That will wreak havoc on the page layout
 
 ## Webhooks
 
