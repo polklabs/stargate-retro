@@ -228,7 +228,9 @@ section .row {
   overflow: hidden;
   cursor: pointer;
 }
-section .row.danger .glyph, section .row.danger .glyph > span, section .row.danger .info {
+section .row.danger .glyph,
+section .row.danger .glyph > span,
+section .row.danger .info {
   border-color: var(--color-danger) !important;
 }
 section .row.danger .small-box {
@@ -312,14 +314,14 @@ section .row .col.info .info-body {
 section .row .col.info .info-body .info-a {
   flex: 1;
   font-size: clamp(-100px, 2vmin, 20px);
-  line-height: clamp(-100px, 1.6vmin, 16px);
+  line-height: clamp(-100px, 1.7vmin, 17px);
   margin-top: clamp(-100px, 0.4vmin, 4px);
   margin-left: clamp(-100px, 1vmin, 10px);
 }
 section .row .col.info .info-body .info-b {
   flex: 1;
   font-size: clamp(-100px, 2vmin, 20px);
-  line-height: clamp(-100px, 1.6vmin, 16px);
+  line-height: clamp(-100px, 1.7vmin, 17px);
 }
 section .row .col.info .info-body .info-b > div {
   display: flex;
@@ -347,34 +349,6 @@ section .row::after {
 }
 section .row:hover::after {
   opacity: 1;
-}
-
-#scrollingDiv {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: clamp(-100px, 1vmin, 10px);
-  height: 50px;
-  border: var(--border-thin);
-  color: var(--color-alt);
-  text-align: center;
-  line-height: 50px; /* Center text vertically */
-}
-
-.scrollbar-wrapper {
-  border: var(--border-thin);
-  position: absolute;
-  width: clamp(-100px, 1vmin, 10px);
-  height: calc(100% - clamp(-100px, 4.7vmin, 47px));
-  right: clamp(-100px, 0vmin, 0px);
-  top: clamp(-100px, 4vmin, 40px);
-  font-size: clamp(-100px, 2vmin, 20px);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.scrollbar-wrapper span {
-  margin-left: clamp(-100px, -0.5vmin, -5px);
 }
 
 .table-footer {
@@ -436,13 +410,39 @@ section .row:hover::after {
   color: var(--glyph-color) !important;
 }
 
-marquee {
+.scrolling-section-wrapper {
+  width: clamp(-100px, 87vmin, 870px);
   border: var(--border-thin);
   margin: clamp(-100px, 0.5vmin, 5px) clamp(-100px, 5vmin, 50px);
-  font-size: clamp(-100px, 2vmin, 20px);
-  line-height: clamp(-100px, 1.2vmin, 12px);
-  height: clamp(-100px, 1.8vmin, 18px);
-  display: block;
+  overflow: hidden;
+}
+
+.scrolling-section {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  font-size: 2vmin;
+  animation: move 30s infinite linear;
+}
+
+@keyframes move {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.scrolling-sectionY {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  line-height: clamp(-100px, 1.4vmin, 14px);
+  font-size: 2vmin;
+  animation: moveY 1.5s infinite linear;
+}
+
+@keyframes moveY {
+  to {
+    transform: translateY(-50%);
+  }
 }
 
 /*# sourceMappingURL=address_book.css.map */
