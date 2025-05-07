@@ -2,6 +2,11 @@ const scrollingDiv = document.getElementById('scrollingDiv');
 const tableRowTemplate = document.getElementById('tableRow');
 const tableBody = document.getElementById('tableBody');
 
+addresses = [];
+symbols = [];
+
+fetchData();
+
 function updateIp(ip) {
   const parts = ip.split('.').map(Number);
 
@@ -27,118 +32,151 @@ async function fetchData() {
   try {
     const response = await fetch('/stargate/get/address_book?type=all');
     const data = await response.json();
+    addresses = Object.values(data['address_book']);
 
     const responseSymbols = await fetch('/stargate/get/symbols_all');
-    const symbols = await responseSymbols.json();
+    symbols = await responseSymbols.json();
 
-    Object.values(data['address_book']).forEach(address => {
-      const aTag = document.createElement('a');
-      aTag.setAttribute('href', `dial.html?address=${address.gate_address}`);
-
-      const newRow = tableRowTemplate.cloneNode(true);
-      aTag.appendChild(newRow);
-      newRow.removeAttribute('id');
-      newRow.classList.remove('hidden');
-
-      let keyboardAddress = '';
-      let hasUnknownGlyph = false;
-
-      address['gate_address'].forEach((glyph, i) => {
-        const symbol = symbols.find(x => x['index'] === glyph);
-
-        if (!symbol || symbol['keyboard_mapping'] === false) {
-          keyboardAddress += '?';
-          hasUnknownGlyph = true;
-        } else {
-          keyboardAddress += symbol['keyboard_mapping'];
-        }
-
-        if (i < 7) {
-          newRow.querySelector(`.glyph-name-${i + 1}`).textContent =
-            symbol?.['name'] ?? 'Unknown';
-
-          const imgElement = newRow.querySelector(`.glyph-${i + 1}`);
-          imgElement.src = ''; // Empty it temporarily
-          imgElement.src = '..' + symbol?.['imageSrc']; // Set it again to force a reload
-        }
-      });
-
-      const randomNumber = Math.floor(Math.random() * 5);
-      newRow.querySelector('.small-box').innerHTML = randomText[randomNumber];
-
-      newRow.querySelector(
-        `.info-name`,
-      ).textContent = `${address['name']} # ${keyboardAddress}8`;
-
-      if (
-        address['is_black_hole'] ||
-        hasUnknownGlyph ||
-        address['gate_address'].length > 6
-      ) {
-        newRow.classList.add('danger');
-      }
-
-      if (address['type'] === 'fan') {
-        newRow.classList.add('fan');
-        newRow
-          .querySelector('.info-type')
-          .querySelectorAll('span')[1].textContent = 'Fan';
-      } else {
-        newRow
-          .querySelector('.info-type')
-          .querySelectorAll('span')[1].textContent = 'Standard';
-      }
-
-      if (address['is_gate_online'] === '0') {
-        newRow.classList.add('offline');
-        newRow
-          .querySelector('.status')
-          .querySelectorAll('span')[1].textContent = 'Offline';
-      } else {
-        newRow
-          .querySelector('.status')
-          .querySelectorAll('span')[1].textContent = 'Online';
-      }
-
-      if (address['ip_address']) {
-        newRow
-          .querySelector('.info-coord')
-          .querySelectorAll('span')[1].textContent = updateIp(
-          address['ip_address'],
-        );
-      } else {
-        newRow
-          .querySelector('.info-coord')
-          .querySelectorAll('span')[0].textContent = '';
-        newRow
-          .querySelector('.info-coord')
-          .querySelectorAll('span')[1].textContent = '';
-      }
-
-      newRow
-        .querySelector('.info-const')
-        .querySelectorAll('span')[1].textContent = Math.abs(
-        hash(JSON.stringify(address)),
-      );
-
-      newRow
-        .querySelector('.info-ref')
-        .querySelectorAll('span')[1].textContent = `${Math.floor(
-        Math.random() * 999,
-      )
-        .toString()
-        .padStart(3, '0')}x${Math.floor(Math.random() * 9999)}`;
-
-      newRow.querySelector('.info-a').innerHTML = generatePlanetData();
-
-      tableBody.appendChild(aTag);
-    });
+    parseData();
   } catch (error) {
     console.error('Error fetching data:', error);
   }
 }
 
-fetchData();
+function parseData() {
+  addresses.forEach(address => {
+    const aTag = document.createElement('a');
+    aTag.setAttribute('href', `dial.html?address=${address.gate_address}`);
+    address.htmlData = aTag;
+
+    const newRow = tableRowTemplate.cloneNode(true);
+    aTag.appendChild(newRow);
+    newRow.removeAttribute('id');
+    newRow.classList.remove('hidden');
+
+    let keyboardAddress = '';
+    let hasUnknownGlyph = false;
+
+    address['gate_address'].forEach((glyph, i) => {
+      const symbol = symbols.find(x => x['index'] === glyph);
+
+      if (!symbol || symbol['keyboard_mapping'] === false) {
+        keyboardAddress += '?';
+        hasUnknownGlyph = true;
+      } else {
+        keyboardAddress += symbol['keyboard_mapping'];
+      }
+
+      if (i < 7) {
+        newRow.querySelector(`.glyph-name-${i + 1}`).textContent =
+          symbol?.['name'] ?? 'Unknown';
+
+        const imgElement = newRow.querySelector(`.glyph-${i + 1}`);
+        imgElement.src = ''; // Empty it temporarily
+        imgElement.src = '..' + symbol?.['imageSrc']; // Set it again to force a reload
+      }
+    });
+
+    const randomNumber = Math.floor(Math.random() * 5);
+    newRow.querySelector('.small-box').innerHTML = randomText[randomNumber];
+
+    newRow.querySelector(
+      `.info-name`,
+    ).textContent = `${address['name']} # ${keyboardAddress}8`;
+
+    if (
+      address['is_black_hole'] ||
+      hasUnknownGlyph ||
+      address['gate_address'].length > 6
+    ) {
+      newRow.classList.add('danger');
+    }
+
+    if (address['type'] === 'fan') {
+      newRow.classList.add('fan');
+      newRow
+        .querySelector('.info-type')
+        .querySelectorAll('span')[1].textContent = 'Fan';
+    } else {
+      newRow
+        .querySelector('.info-type')
+        .querySelectorAll('span')[1].textContent = 'Standard';
+    }
+
+    if (address['is_gate_online'] === '0') {
+      newRow.classList.add('offline');
+      newRow.querySelector('.status').querySelectorAll('span')[1].textContent =
+        'Offline';
+    } else {
+      newRow.querySelector('.status').querySelectorAll('span')[1].textContent =
+        'Online';
+    }
+
+    if (address['ip_address']) {
+      newRow
+        .querySelector('.info-coord')
+        .querySelectorAll('span')[1].textContent = updateIp(
+        address['ip_address'],
+      );
+    } else {
+      newRow
+        .querySelector('.info-coord')
+        .querySelectorAll('span')[0].textContent = '';
+      newRow
+        .querySelector('.info-coord')
+        .querySelectorAll('span')[1].textContent = '';
+    }
+
+    newRow
+      .querySelector('.info-const')
+      .querySelectorAll('span')[1].textContent = Math.abs(
+      hash(JSON.stringify(address)),
+    );
+
+    newRow
+      .querySelector('.info-ref')
+      .querySelectorAll('span')[1].textContent = `${Math.floor(
+      Math.random() * 999,
+    )
+      .toString()
+      .padStart(3, '0')}x${Math.floor(Math.random() * 9999)}`;
+
+    newRow.querySelector('.info-a').innerHTML = generatePlanetData();
+
+    tableBody.appendChild(aTag);
+  });
+
+  sortData('name');
+}
+
+function sortData(sortProperty) {
+  addresses.sort((a, b) => a.name.localeCompare(b.name));
+
+  if (sortProperty === 'type') {
+    addresses.sort((a, b) => a.type.localeCompare(b.type));
+  } else if (sortProperty === 'status') {
+    addresses.sort(
+      (a, b) =>
+        a.type.localeCompare(b.type) ||
+        (b.is_gate_online ?? '0').localeCompare(a.is_gate_online ?? '0'),
+    );
+  } else if (sortProperty === 'glyph') {
+    addresses.sort((a, b) =>
+      a.gate_address
+        .map(x => x.toString().padStart(3, '0'))
+        .join('')
+        .localeCompare(
+          b.gate_address.map(x => x.toString().padStart(3, '0')).join(''),
+        ),
+    );
+  }
+
+  addresses.forEach(address => {
+    tableBody.appendChild(address.htmlData);
+  });
+
+  tableBody.scrollTo(0, 0);
+}
 
 const labelOptions = {
   Mission: [
@@ -375,7 +413,7 @@ function generatePlanetData() {
   if (Math.random() < 0.15) {
     // Add Note
     const noteIndex = Math.floor(Math.random() * notes.length);
-    toReturn.push(`${notes[noteIndex]}`);
+    toReturn.push(`Note: ${notes[noteIndex]}`);
   }
 
   return toReturn.join('<br>');
