@@ -2,6 +2,13 @@
 
 HTML Webpages recreated and inspired by computers and UI in the stargate show.
 
+Table of Contents
+1. [How to install](#how-to-install)
+2. [Customization](#customizations)
+3. [Webhooks](#webhooks)
+4. [Credits](#development)
+5. [Development](#development)
+
 ## How to install
 
 Copy `/retro` folder into `/home/pi/sg1_v4/web/`
@@ -17,6 +24,8 @@ sg1_v4/web/
     ├── dial.html
     └── etc...
 ```
+
+Once installed you can update some of the *.css and *.js files with customizations such as different colors or updated text. See [below](#customizations) for customizations
 
 #### Finished Pages
 
