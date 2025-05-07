@@ -59,13 +59,29 @@ body {
   filter: var(--glyph-color-svg);
 }
 
+.address-counts {
+  position: absolute;
+  font-size: 2vmin;
+  line-height: 1.6vmin;
+  right: 1.3vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: end;
+  width: 12vmin;
+  > div {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
 section {
   margin: 0 vmin-clamp(1);
   position: relative;
 
   header {
     display: flex; /* aligns all child elements (flex items) in a row */
-    margin-bottom: vmin-clamp(3);
+    margin-bottom: vmin-clamp(1.5);
     line-height: vmin-clamp(3.5);
     .col {
       width: vmin-clamp(7.52);
@@ -87,8 +103,8 @@ section {
   }
 
   .rows {
-    max-height: vmin-clamp(65);
-    min-height: vmin-clamp(65);
+    max-height: vmin-clamp(66.5);
+    min-height: vmin-clamp(66.5);
     overflow-y: scroll;
     scrollbar-color: var(--color);
     scrollbar-width: auto;
@@ -185,7 +201,7 @@ section {
         border-left: var(--border);
         font-size: vmin-clamp(2.75);
         padding-left: vmin-clamp(0.5);
-        line-height: vmin-clamp(2.1);
+        line-height: vmin-clamp(2.3);
 
         .info-title {
           display: flex;
@@ -203,7 +219,6 @@ section {
             flex: 1;
             font-size: vmin-clamp(2);
             line-height: vmin-clamp(1.7);
-            margin-top: vmin-clamp(0.4);
             margin-left: vmin-clamp(1);
           }
           .info-b {
@@ -288,16 +303,36 @@ section {
 }
 
 @keyframes footer-text-anim {
-    0%   { transform: translateY(0%); }
-    10%  { transform: translateY(-10%); }
-    20%  { transform: translateY(-20%); }
-    30%  { transform: translateY(-30%); }
-    40%  { transform: translateY(-40%); }
-    50%  { transform: translateY(-50%); }
-    60%  { transform: translateY(-60%); }
-    70%  { transform: translateY(-70%); }
-    80%  { transform: translateY(-80%); }
-    100% { transform: translateY(-80%); } /* Hold final position */
+  0% {
+    transform: translateY(0%);
+  }
+  10% {
+    transform: translateY(-10%);
+  }
+  20% {
+    transform: translateY(-20%);
+  }
+  30% {
+    transform: translateY(-30%);
+  }
+  40% {
+    transform: translateY(-40%);
+  }
+  50% {
+    transform: translateY(-50%);
+  }
+  60% {
+    transform: translateY(-60%);
+  }
+  70% {
+    transform: translateY(-70%);
+  }
+  80% {
+    transform: translateY(-80%);
+  }
+  100% {
+    transform: translateY(-80%);
+  } /* Hold final position */
 }
 
 .footer-buttons {
@@ -335,6 +370,7 @@ section {
   width: max-content;
   font-size: vmin-clamp(2);
   animation: move 40s infinite linear;
+  line-height: vmin-clamp(1.5);
 }
 @keyframes move {
   to {

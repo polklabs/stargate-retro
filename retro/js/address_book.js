@@ -1,6 +1,8 @@
 const scrollingDiv = document.getElementById('scrollingDiv');
 const tableRowTemplate = document.getElementById('tableRow');
 const tableBody = document.getElementById('tableBody');
+const standardCounts = document.querySelector('.standard-count');
+const fanCounts = document.querySelector('.fan-count');
 
 addresses = [];
 symbols = [];
@@ -32,6 +34,8 @@ async function fetchData() {
   try {
     const response = await fetch('/stargate/get/address_book?type=all');
     const data = await response.json();
+    standardCounts.textContent = data.summary.standard;
+    fanCounts.textContent = data.summary.fan;
     addresses = Object.values(data['address_book']);
 
     const responseSymbols = await fetch('/stargate/get/symbols_all');

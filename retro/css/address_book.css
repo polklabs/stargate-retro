@@ -59,7 +59,6 @@ a:visited {
 .navigation-menu-wrapper {
   height: 0;
   position: relative;
-  margin: clamp(-100px, 0.5vmin, 5px) auto;
 }
 
 .navigation-menu {
@@ -69,6 +68,7 @@ a:visited {
   align-items: center;
   gap: clamp(-100px, 1vmin, 10px);
   margin-bottom: 0;
+  margin-top: clamp(-100px, 0.5vmin, 5px);
   padding-left: clamp(-100px, 4vmin, 40px);
   opacity: 0.1;
   transition: opacity 0.3s linear;
@@ -185,13 +185,29 @@ body {
   filter: var(--glyph-color-svg);
 }
 
+.address-counts {
+  position: absolute;
+  font-size: 2vmin;
+  line-height: 1.6vmin;
+  right: 1.3vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: end;
+  width: 12vmin;
+}
+.address-counts > div {
+  display: flex;
+  justify-content: space-between;
+}
+
 section {
   margin: 0 clamp(-100px, 1vmin, 10px);
   position: relative;
 }
 section header {
   display: flex; /* aligns all child elements (flex items) in a row */
-  margin-bottom: clamp(-100px, 3vmin, 30px);
+  margin-bottom: clamp(-100px, 1.5vmin, 15px);
   line-height: clamp(-100px, 3.5vmin, 35px);
 }
 section header .col {
@@ -211,8 +227,8 @@ section header .col.col-9 {
   text-align: start;
 }
 section .rows {
-  max-height: clamp(-100px, 65vmin, 650px);
-  min-height: clamp(-100px, 65vmin, 650px);
+  max-height: clamp(-100px, 66.5vmin, 665px);
+  min-height: clamp(-100px, 66.5vmin, 665px);
   overflow-y: scroll;
   scrollbar-color: var(--color);
   scrollbar-width: auto;
@@ -296,7 +312,7 @@ section .row .col.info {
   border-left: var(--border);
   font-size: clamp(-100px, 2.75vmin, 27.5px);
   padding-left: clamp(-100px, 0.5vmin, 5px);
-  line-height: clamp(-100px, 2.1vmin, 21px);
+  line-height: clamp(-100px, 2.3vmin, 23px);
 }
 section .row .col.info .info-title {
   display: flex;
@@ -315,7 +331,6 @@ section .row .col.info .info-body .info-a {
   flex: 1;
   font-size: clamp(-100px, 2vmin, 20px);
   line-height: clamp(-100px, 1.7vmin, 17px);
-  margin-top: clamp(-100px, 0.4vmin, 4px);
   margin-left: clamp(-100px, 1vmin, 10px);
 }
 section .row .col.info .info-body .info-b {
@@ -461,6 +476,7 @@ section .row:hover::after {
   width: max-content;
   font-size: clamp(-100px, 2vmin, 20px);
   animation: move 40s infinite linear;
+  line-height: clamp(-100px, 1.5vmin, 15px);
 }
 
 @keyframes move {
