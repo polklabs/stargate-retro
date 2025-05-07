@@ -215,19 +215,23 @@ body {
     justify-content: start;
     align-content: start;
     margin: auto;
-    img {
+    div {
       width: vmin-clamp(3.9);
-      height: auto;
-      filter: var(--glyph-color-svg);
+      height: vmin-clamp(3.9);
       cursor: pointer;
       border: var(--border-thin);
       border-color: rgba(0, 0, 0, 0);
       border-radius: vmin-clamp(1);
       &:hover {
-        border-color: var(--color-good);
+        border-color: var(--color-dark);
       }
       &.disabled {
         opacity: 0.4;
+      }
+      img {
+        width: vmin-clamp(3.6);
+        height: vmin-clamp(3.6);
+        filter: var(--glyph-color-svg);
       }
     }
   }

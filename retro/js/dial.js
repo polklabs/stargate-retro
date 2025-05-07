@@ -63,6 +63,7 @@ let locked_chevrons = 0;
 
 let symbols = [];
 
+
 // INITIALIZE --------------------------------------------------------------------------
 async function initialize_computer() {
   initialize_text();
@@ -537,24 +538,29 @@ function initialize_text() {
 
 function handleOffline() {
   updateText(infoText, TEXT_OFFLINE);
-  setKeysDisabled([...symbols.map(x => x.index), 0, -1]);
+  // setKeysDisabled([...symbols.map(x => x.index), 0, -1]);
 }
 
 function buildKeyboard() {
   symbols.forEach(symbol => {
     if (symbol.keyboard_mapping) {
+      const keyWrapper = document.createElement('div');
+      keyWrapper.classList.add(`symbol-${symbol.index}`);
       const img = document.createElement('img');
       img.src = '..' + symbol.imageSrc;
       img.onclick = () => dhd_press(`${symbol.index}`, img);
-      img.classList.add(`symbol-${symbol.index}`);
-      keyboard.appendChild(img);
+      keyWrapper.appendChild(img);
+      keyboard.appendChild(keyWrapper);
     }
   });
+
+  const keyWrapper = document.createElement('div');
+  keyWrapper.classList.add(`symbol-0`);
   const img = document.createElement('img');
   img.src = `images/dhd.svg`;
   img.onclick = () => dhd_press(`0`, img);
-  img.classList.add(`symbol-0`);
-  keyboard.appendChild(img);
+  keyWrapper.appendChild(img);
+  keyboard.appendChild(keyWrapper);
 }
 
 // Locking pre-dialed keys from the keyboard

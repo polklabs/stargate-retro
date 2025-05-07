@@ -58,6 +58,7 @@ a:visited {
 .navigation-menu-wrapper {
   height: 0;
   position: relative;
+  margin: 0 auto;
 }
 
 .navigation-menu {
@@ -346,20 +347,24 @@ body {
   align-content: start;
   margin: auto;
 }
-.sidebar .keyboard img {
+.sidebar .keyboard div {
   width: clamp(-100px, 3.9vmin, 39px);
-  height: auto;
-  filter: var(--glyph-color-svg);
+  height: clamp(-100px, 3.9vmin, 39px);
   cursor: pointer;
   border: var(--border-thin);
   border-color: rgba(0, 0, 0, 0);
   border-radius: clamp(-100px, 1vmin, 10px);
 }
-.sidebar .keyboard img:hover {
-  border-color: var(--color-good);
+.sidebar .keyboard div:hover {
+  border-color: var(--color-dark);
 }
-.sidebar .keyboard img.disabled {
+.sidebar .keyboard div.disabled {
   opacity: 0.4;
+}
+.sidebar .keyboard div img {
+  width: clamp(-100px, 3.6vmin, 36px);
+  height: clamp(-100px, 3.6vmin, 36px);
+  filter: var(--glyph-color-svg);
 }
 .sidebar .status {
   color: var(--color-alt);

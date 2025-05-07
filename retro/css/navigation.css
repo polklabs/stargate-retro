@@ -58,6 +58,7 @@ a:visited {
 .navigation-menu-wrapper {
   height: 0;
   position: relative;
+  margin: 0 auto;
 }
 
 .navigation-menu {
