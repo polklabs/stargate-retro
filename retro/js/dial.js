@@ -472,6 +472,7 @@ function updateState() {
     setTimeout(() => {
       updateText(infoText, 'ENGAGED');
       border.classList.add('active');
+      border.classList.remove('idle');
 
       if (gateStatus.black_hole_connected) {
         ring1.setAttribute('fill', 'url(#radialGradientDanger)');
@@ -482,12 +483,15 @@ function updateState() {
   } else if (state === STATE_DIAL_OUT) {
     updateText(infoText, 'DIALING');
     border.classList.remove('active');
+    border.classList.remove('idle');
   } else if (state === STATE_DIAL_IN) {
     updateText(infoText, 'INCOMING');
     border.classList.remove('active');
+    border.classList.remove('idle');
   } else {
     updateText(infoText, 'IDLE');
     border.classList.remove('active');
+    border.classList.add('idle');
   }
 }
 

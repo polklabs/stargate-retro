@@ -160,12 +160,43 @@ body {
 }
 
 .crosshair {
+  display: flex;
+  width: 45.1vmin;
+  align-items: center;
+  justify-content: center;
+}
+.crosshair div {
+  text-align: center;
+  align-content: center;
   position: absolute;
-  top: clamp(-100px, 32.5vmin, 325px);
-  left: clamp(-100px, 47.4vmin, 474px);
   color: var(--glyph-color);
 }
 
+.border.idle .crosshair .blink {
+  width: 16vmin;
+  height: 16vmin;
+  position: absolute;
+  background: radial-gradient(circle, var(--color-danger) 0%, transparent 70%);
+  animation: blink 3s infinite ease;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 .chevron-box {
   border: var(--border-thin);
   width: clamp(-100px, 8.6vmin, 86px);
