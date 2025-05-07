@@ -33,7 +33,9 @@ def proxy_to_api(subpath):
 def serve_file(filename):
     try:
         if filename.endswith(".svg"):
-            return send_from_directory(FILES_DIR, filename, mimetype='image/svg+xml')
+            response = send_from_directory(FILES_DIR, filename, mimetype='image/svg+xml')
+            response.headers['Cache-Control'] = 'public, max-age=604800'  # 7 days
+            return response
         return send_from_directory(FILES_DIR, filename)
     except FileNotFoundError:
         return {"error": "File not found"}, 404
