@@ -58,7 +58,6 @@ a:visited {
 .navigation-menu-wrapper {
   height: 0;
   position: relative;
-  margin: clamp(-100px, 0.5vmin, 5px) auto;
 }
 
 .navigation-menu {
@@ -68,6 +67,7 @@ a:visited {
   align-items: center;
   gap: clamp(-100px, 1vmin, 10px);
   margin-bottom: 0;
+  margin-top: clamp(-100px, 0.5vmin, 5px);
   padding-left: clamp(-100px, 4vmin, 40px);
   opacity: 0.1;
   transition: opacity 0.3s linear;

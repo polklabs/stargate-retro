@@ -3,7 +3,6 @@
 .navigation-menu-wrapper {
   height: 0;
   position: relative;
-  margin: vmin-clamp(0.5) auto;
 }
 
 .navigation-menu {
@@ -13,6 +12,7 @@
   align-items: center;
   gap: vmin-clamp(1);
   margin-bottom: 0;
+  margin-top: vmin-clamp(0.5);
   padding-left: vmin-clamp(4);
   opacity: 0.1;
   transition: opacity 0.3s linear;
