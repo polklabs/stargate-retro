@@ -34,7 +34,7 @@ body {
 
 .crosshair {
   display: flex;
-  width: 45.1vmin;
+  width: vmin-clamp(45.1);
   align-items: center;
   justify-content: center;
   div {
@@ -45,8 +45,8 @@ body {
   }
 }
 .border.idle .crosshair .blink {
-  width: 16vmin;
-  height: 16vmin;
+  width: vmin-clamp(16);
+  height: vmin-clamp(16);
   position: absolute;
   background: radial-gradient(circle, var(--color-danger) 0%, transparent 70%);
   animation: blink 3s infinite ease;
