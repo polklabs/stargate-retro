@@ -421,7 +421,7 @@ section .row:hover::after {
   display: flex;
   flex-wrap: nowrap;
   width: max-content;
-  font-size: 2vmin;
+  font-size: clamp(-100px, 2vmin, 20px);
   animation: move 30s infinite linear;
 }
 
@@ -435,7 +435,7 @@ section .row:hover::after {
   flex-wrap: wrap;
   width: 100%;
   line-height: clamp(-100px, 1.4vmin, 14px);
-  font-size: 2vmin;
+  font-size: clamp(-100px, 2vmin, 20px);
   animation: moveY 1.5s infinite linear;
 }
 

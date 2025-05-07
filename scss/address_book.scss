@@ -314,7 +314,7 @@ section {
   display: flex;
   flex-wrap: nowrap;
   width: max-content;
-  font-size: 2vmin;
+  font-size: vmin-clamp(2);
   animation: move 30s infinite linear;
 }
 @keyframes move {
@@ -327,7 +327,7 @@ section {
   flex-wrap: wrap;
   width: 100%;
   line-height: vmin-clamp(1.4);
-  font-size: 2vmin;
+  font-size: vmin-clamp(2);
   animation: moveY 1.5s infinite linear;
 }
 @keyframes moveY {
