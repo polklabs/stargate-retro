@@ -1,13 +1,26 @@
 # Stargate Retro
 
-HTML Webpages recreated and inspired by computers and UI in the stargate show.
+<img src="screenshots/Screenshot%202025-05-07%20154406.png" alt="drawing" width="400"/>
 
-Table of Contents
+HTML Webpages recreated and inspired by computers and UI in the stargate show. I have taken some liberties and made changes that make sense to me and to better integrate with StargateSoftware_V4. 
+
+Please submit bugs and I will fix them when I have time. New features will be based on what I feel like making but I'm open to suggestions.
+
+| Browser | Compatibility | Emoji |
+| ------- | ------------- | ----- |
+| Firefox | Fully tested  | ⭐ 💯 |
+| Chrome  | Quick test, should work | ✅ |
+| Safari  | Unknown, don't have apple stuff| ❓ |
+| Mobile  | Use at your own risk | ⚠️ |
+| Nintendo DS | Just Why? | 💀 |
+
+### Table of Contents
 1. [How to install](#how-to-install)
 2. [Customization](#customizations)
-3. [Webhooks](#webhooks)
-4. [Credits](#development)
-5. [Development](#development)
+3. [Future Plans](#future-plans)
+4. [Webhooks](#webhooks)
+5. [Credits](#development)
+6. [Development](#development)
 
 ## How to install
 
@@ -27,10 +40,16 @@ sg1_v4/web/
 
 Once installed you can update some of the *.css and *.js files with customizations such as different colors or updated text. See [below](#customizations) for customizations
 
-#### Finished Pages
+Navigation header at the top of all pages to integrate with v4 software.
 
+To access, enter one of the links below:
 - [Dial](http://stargate.local/retro/dial.html) - `/retro/dial.html`
+
+    <img src="screenshots/Screenshot 2025-05-07 154809.png" alt="drawing" width="300"/>
 - [Address Book](http://stargate.local/retro/address_book.html) - `/retro/address_book.html`
+
+    <img src="screenshots/Screenshot 2025-05-07 154444.png" alt="drawing" width="300"/>
+
 
 ## Customizations
 
@@ -61,6 +80,19 @@ Once installed you can update some of the *.css and *.js files with customizatio
 | *.css |  --color-wormhole-3 |<span style="color:cornflowerblue">cornflowerblue</span> | 3 Part gradient for active wormhole |
 | crt.js | CRT_SCREEN_FLICKER | `false` | Add screen flicker effect at random intervals |
 | crt.css | .crt -> textShadow | unset | Uncomment to add awesome subtle crt effect that will melt your computer |
+
+## Future Plans?
+
+- Convert javascript to typescript
+    - Depending on integration with v4 software it may be easier to stick with js
+- New Pages
+    - Dialing from S1
+    - Address Book from S2E15 - The Fifth Race
+    - Base Power Monitor
+    - Malp
+    - Popups
+        - System Access Denied
+        - Self Destruct
 
 ## Webhooks
 
