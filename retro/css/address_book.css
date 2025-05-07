@@ -188,14 +188,14 @@ body {
 
 .address-counts {
   position: absolute;
-  font-size: 2vmin;
-  line-height: 1.6vmin;
-  right: 1.3vmin;
+  font-size: clamp(-100px, 2vmin, 20px);
+  line-height: clamp(-100px, 1.6vmin, 16px);
+  right: clamp(-100px, 1.3vmin, 13px);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   text-align: end;
-  width: 12vmin;
+  width: clamp(-100px, 12vmin, 120px);
 }
 .address-counts > div {
   display: flex;
