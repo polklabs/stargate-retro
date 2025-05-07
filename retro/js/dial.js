@@ -143,35 +143,31 @@ async function watch_dialing_status() {
     gateStatus = await responseStatus.json();
 
     const initialState = state;
+    updateText(gateName, gateStatus.gate_name);
 
     let [new_locked_chevrons, hardBreak] = handleActiveGate();
 
-    if (hardBreak) {
-      fetchingStatus = false;
-      return;
-    }
+    if (!hardBreak) {
+      new_locked_chevrons = handleDialingOut(new_locked_chevrons);
+      new_locked_chevrons = handleDialingIn(new_locked_chevrons);
 
-    new_locked_chevrons = handleDialingOut(new_locked_chevrons);
-    new_locked_chevrons = handleDialingIn(new_locked_chevrons);
-
-    while (locked_chevrons < new_locked_chevrons) {
-      lock(locked_chevrons);
-      locked_chevrons += 1;
-      if (!encoding) {
-        dial();
+      while (locked_chevrons < new_locked_chevrons) {
+        lock(locked_chevrons);
+        locked_chevrons += 1;
+        if (!encoding) {
+          dial();
+        }
       }
-    }
 
-    if (!encoding) {
-      this.firstStatus = false;
-    }
+      if (!encoding) {
+        this.firstStatus = false;
+      }
 
-    trySpinning();
+      trySpinning();
+    }
 
     updateState();
     updateTimer(gateStatus.wormhole_time_till_close);
-
-    updateText(gateName, gateStatus.gate_name);
     updateText(destination, gateStatus.connected_planet);
 
     if (initialState !== state) {
@@ -601,12 +597,6 @@ function startDrawingPath(index) {
   } else {
     // No chevron link path, probably 8th/9th chevron
   }
-}
-
-function pad(n, width, z) {
-  z = z || '0';
-  n = n + '';
-  return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }
 
 function updateText(elem, text) {
