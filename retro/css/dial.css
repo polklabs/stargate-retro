@@ -129,15 +129,6 @@ a:visited {
   display: block;
 }
 
-.reference {
-  background-image: url("../../references/gate-ref.jpg");
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-size: cover;
-  opacity: 0.5;
-}
-
 body {
   background-color: var(--background-color);
   color: var(--color);
