@@ -50,7 +50,7 @@ async function fetchData() {
 function parseData() {
   addresses.forEach(address => {
     const aTag = document.createElement('a');
-    aTag.setAttribute('href', `dial.html?address=${address.gate_address}`);
+    aTag.setAttribute('href', `dial.html?address=${address.gate_address.join('-')}`);
     address.htmlData = aTag;
 
     const newRow = tableRowTemplate.cloneNode(true);

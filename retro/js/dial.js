@@ -111,7 +111,7 @@ async function speedDialStart() {
   });
 
   if (query.address) {
-    speedDialAddress = [...query.address.split(',').map(Number), 1, 0];
+    speedDialAddress = [...query.address.split('-').map(Number), 1, 0];
     window.history.pushState({}, document.title, window.location.pathname);
     await clear_buffer();
     speedDial();
