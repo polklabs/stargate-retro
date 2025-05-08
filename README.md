@@ -83,8 +83,10 @@ To access, enter one of the links below:
 
 ## Future Plans?
 
-- Convert javascript to typescript
-    - Depending on integration with v4 software it may be easier to stick with js
+- Code Updates:
+    - Convert javascript to typescript
+        - Depending on integration with v4 software it may be easier to stick with js
+    - OR Update javascript with jquery
 - New Pages
     - Dialing from S1
     - Address Book from S2E15 - The Fifth Race
@@ -93,6 +95,7 @@ To access, enter one of the links below:
     - Popups
         - System Access Denied
         - Self Destruct
+    - Add IRIS animation and control
 - Add loading screen
     - Like a old DOS computer booting up
     - Could be used to hide initial API calls while applying customizations
