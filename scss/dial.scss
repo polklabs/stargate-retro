@@ -275,6 +275,7 @@ body {
   line-height: vmin-clamp(6.2);
   text-align: center;
   color: white;
+  cursor: pointer !important;
 }
 .destination {
   position: absolute;
@@ -287,6 +288,7 @@ body {
   text-align: center;
   text-overflow: ellipsis;
   overflow: hidden;
+  pointer-events: none;
 }
 .destination-glyphs {
   position: absolute;
@@ -297,6 +299,7 @@ body {
   overflow: hidden;
   display: flex;
   justify-content: center;
+  pointer-events: none;
   img {
     width: vmin-clamp(2.5);
     filter: var(--glyph-color-svg);

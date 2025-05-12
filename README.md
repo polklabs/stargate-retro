@@ -42,7 +42,11 @@ Once installed you can update some of the *.css and *.js files with customizatio
 
 Navigation header at the top of all pages to integrate with v4 software. As it is not fully integrated with the v4 software you will not be able to get back to my pages (from the original UI) without a direct link.
 
-To access, enter one of the links below:
+<img src="screenshots/Screenshot 2025-05-12 102711.png" alt="nav screenshot" width="300">
+
+---
+
+#### To access, enter one of the links below:
 - [Dial](http://stargate.local/retro/dial.html) - `/retro/dial.html`
 
     <img src="screenshots/Screenshot 2025-05-07 154809.png" alt="drawing" width="300"/>

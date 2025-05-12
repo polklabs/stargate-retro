@@ -405,6 +405,7 @@ body {
   line-height: clamp(-100px, 6.2vmin, 62px);
   text-align: center;
   color: white;
+  cursor: pointer !important;
 }
 
 .destination {
@@ -418,6 +419,7 @@ body {
   text-align: center;
   text-overflow: ellipsis;
   overflow: hidden;
+  pointer-events: none;
 }
 
 .destination-glyphs {
@@ -429,6 +431,7 @@ body {
   overflow: hidden;
   display: flex;
   justify-content: center;
+  pointer-events: none;
 }
 .destination-glyphs img {
   width: clamp(-100px, 2.5vmin, 25px);
