@@ -207,8 +207,7 @@ function handleActiveGate(new_locked_chevrons = 0) {
     if (gateStatus.address_buffer_outgoing.length > 0) {
       buffer = gateStatus.address_buffer_outgoing;
       new_locked_chevrons = gateStatus.locked_chevrons_outgoing;
-      const toRemove = $('.destination-glyphs img');
-      toRemove.remove();
+      $('.destination-glyphs img').remove();
       if (state === STATE_DIAL_IN) {
         resetGate();
       }
@@ -429,10 +428,10 @@ function lock(i) {
 
   startDrawingPath(i + 1);
 
-  const chevrons = $(`.chevron-${i + 1},.chevron-state-${i + 1}`);
-  chevrons.addClass('locked');
+  // Lock chevrons
+  $(`.chevron-${i + 1},.chevron-state-${i + 1}`).addClass('locked');
 
-  const b = $(`.b${i + 1}`);
+  const b = $(`.b${i + 1}`).first();
   if (b) {
     const newB = b.clone(true);
     newB.addClass(`clip-${i < 3 ? '2' : '1'}`);
@@ -569,7 +568,7 @@ function setKeyDisabled(glyphIndex, disabled) {
 const pathTime = 800; // ms
 function startDrawingPath(index) {
   const svgBase = $(`.cl${index}`);
-  if (svgBase) {
+  if (svgBase[0]) {
     const svg = svgBase.clone(true);
     const path = svg.find('path')[0];
     const pathLength = path.getTotalLength();
