@@ -19,20 +19,20 @@ const TEXT_ENGAGED = 'ENGAGED';
 
 /* DO NOT EDIT BELOW THIS LINE UNLESS YOU KNOW WHAT YOU'RE DOING!!!! */
 
-const glyph = document.querySelector('.glyph');
-const appendTarget = document.querySelector('.dial-append');
-const timer = document.querySelector('.timer');
-const gateName = document.querySelector('.gate-name');
-const destination = document.querySelector('.destination');
-const destinationGlyphs = document.querySelector('.destination-glyphs');
-const ring1 = document.querySelector('.ring-1 circle');
-const ring3 = document.querySelector('.ring-3');
-const infoText = document.querySelector('.info-box');
-const border = document.querySelector('.border');
-const keyboard = document.querySelector('.keyboard');
-const systemEl = document.querySelector('.system');
-const authCode = document.querySelector('.auth-code');
-const statusEl = document.querySelector('.status');
+const glyph = $('.glyph');
+const appendTarget = $('.dial-append');
+const timer = $('.timer');
+const gateName = $('.gate-name');
+const destination = $('.destination');
+const destinationGlyphs = $('.destination-glyphs');
+const ring1 = $('.ring-1 circle');
+const ring3 = $('.ring-3');
+const infoText = $('.info-box');
+const border = $('.border');
+const keyboard = $('.keyboard');
+const systemEl = $('.system');
+const authCode = $('.auth-code');
+const statusEl = $('.status');
 
 let statusInterval;
 
@@ -62,7 +62,6 @@ let lockedGlyphs = {};
 let locked_chevrons = 0;
 
 let symbols = [];
-
 
 // INITIALIZE --------------------------------------------------------------------------
 async function initialize_computer() {
@@ -208,8 +207,8 @@ function handleActiveGate(new_locked_chevrons = 0) {
     if (gateStatus.address_buffer_outgoing.length > 0) {
       buffer = gateStatus.address_buffer_outgoing;
       new_locked_chevrons = gateStatus.locked_chevrons_outgoing;
-      const toRemove = document.querySelectorAll('.destination-glyphs img');
-      toRemove.forEach(g => g.remove());
+      const toRemove = $('.destination-glyphs img');
+      toRemove.remove();
       if (state === STATE_DIAL_IN) {
         resetGate();
       }
@@ -293,12 +292,12 @@ function trySpinning() {
     lastRingPos = gateStatus.ring_position;
   } else if (lastRingPos !== gateStatus.ring_position) {
     lastRingPos = gateStatus.ring_position;
-    ring3.classList.add('rotating');
-    ring3.classList.remove('slow-rotate');
+    ring3.addClass('rotating');
+    ring3.removeClass('slow-rotate');
     gateMoving = true;
   } else if (gateMoving) {
     gateMoving = false;
-    stopSpinning(ring3);
+    stopSpinning(ring3[0]);
   }
 }
 
@@ -345,7 +344,7 @@ async function dhd_press(symbol, key) {
     return;
   }
 
-  key?.classList.add('disabled');
+  key?.addClass('disabled');
   await fetch('/stargate/do/dhd_press', {
     method: 'POST',
     body: JSON.stringify({symbol}),
@@ -383,11 +382,11 @@ function dial() {
   if (bufferIndex < 9) {
     const [newGlyph, newGlyph2] = displayGlyph();
     if (firstStatus) {
-      newGlyph.classList.add('locked');
-      newGlyph2.classList.add('locked');
+      newGlyph.addClass('locked');
+      newGlyph2.addClass('locked');
     } else {
-      setTimeout(() => newGlyph.classList.add('locked'), 1);
-      setTimeout(() => newGlyph2.classList.add('locked'), 50);
+      setTimeout(() => newGlyph.addClass('locked'), 1);
+      setTimeout(() => newGlyph2.addClass('locked'), 50);
     }
   }
   bufferIndex += 1;
@@ -408,14 +407,13 @@ function displayGlyph() {
   const glyphIndex = buffer[bufferIndex];
   const symbol = symbols.find(x => x['index'] === glyphIndex);
 
-  const newGlyph = glyph.cloneNode(true);
-  newGlyph.classList.remove('hidden');
-  newGlyph.src = '';
-  newGlyph.src = '..' + symbol['imageSrc'];
+  const newGlyph = glyph.clone(true);
+  newGlyph.removeClass('hidden');
+  newGlyph.attr("src",'..' + symbol['imageSrc']);
 
-  newGlyph.classList.add(`g${bufferIndex + 1}`);
-  const newGlyph2 = newGlyph.cloneNode(true);
-  newGlyph2.classList.add('blur');
+  newGlyph.addClass(`g${bufferIndex + 1}`);
+  const newGlyph2 = newGlyph.clone(true);
+  newGlyph2.addClass('blur');
   appendTarget.append(newGlyph2);
   appendTarget.append(newGlyph);
 
@@ -431,34 +429,28 @@ function lock(i) {
 
   startDrawingPath(i + 1);
 
-  const chevrons = document.querySelectorAll(
-    `.chevron-${i + 1},.chevron-state-${i + 1}`,
-  );
-  chevrons.forEach(c => c.classList.add('locked'));
+  const chevrons = $(`.chevron-${i + 1},.chevron-state-${i + 1}`);
+  chevrons.addClass('locked');
 
-  const b = document.querySelector(`.b${i + 1}`);
+  const b = $(`.b${i + 1}`);
   if (b) {
-    const newB = b.cloneNode(true);
-    newB.classList.add(`clip-${i < 3 ? '2' : '1'}`);
+    const newB = b.clone(true);
+    newB.addClass(`clip-${i < 3 ? '2' : '1'}`);
     appendTarget.append(newB);
-    setTimeout(() => newB.classList.add('locked'), 10);
+    setTimeout(() => newB.addClass('locked'), 10);
   }
 }
 
 // Clear all animations and get gate back into initial state
 function resetGate() {
-  const chevrons = document.querySelectorAll(
-    '.gate.chevron.locked,.chevron-states tr.locked',
-  );
-  chevrons.forEach(c => c.classList.remove('locked'));
+  const chevrons = $('.gate.chevron.locked,.chevron-states tr.locked');
+  chevrons.removeClass('locked');
 
-  const toRemove = document.querySelectorAll(
-    '.dial-append > *,.destination-glyphs img',
-  );
-  toRemove.forEach(g => g.remove());
+  const toRemove = $('.dial-append > *,.destination-glyphs img');
+  toRemove.remove();
 
-  const keys = document.querySelectorAll('.keyboard div');
-  keys.forEach(k => k.classList.remove('disabled'));
+  const keys = $('.keyboard div');
+  keys.removeClass('disabled');
 
   state = STATE_IDLE;
   encoding = false;
@@ -472,27 +464,27 @@ function updateState() {
   if (state === STATE_ACTIVE) {
     setTimeout(() => {
       updateText(infoText, 'ENGAGED');
-      border.classList.add('active');
-      border.classList.remove('idle');
+      border.addClass('active');
+      border.removeClass('idle');
 
       if (gateStatus.black_hole_connected) {
-        ring1.setAttribute('fill', 'url(#radialGradientDanger)');
+        ring1.attr('fill', 'url(#radialGradientDanger)');
       } else {
-        ring1.setAttribute('fill', 'url(#radialGradient)');
+        ring1.attr('fill', 'url(#radialGradient)');
       }
     }, 500);
   } else if (state === STATE_DIAL_OUT) {
     updateText(infoText, 'DIALING');
-    border.classList.remove('active');
-    border.classList.remove('idle');
+    border.removeClass('active');
+    border.removeClass('idle');
   } else if (state === STATE_DIAL_IN) {
     updateText(infoText, 'INCOMING');
-    border.classList.remove('active');
-    border.classList.remove('idle');
+    border.removeClass('active');
+    border.removeClass('idle');
   } else {
     updateText(infoText, 'IDLE');
-    border.classList.remove('active');
-    border.classList.add('idle');
+    border.removeClass('active');
+    border.addClass('idle');
   }
 }
 
@@ -500,8 +492,7 @@ function updateDestination(lastXGlyphs) {
   const toAdd = buffer.slice(buffer.length - lastXGlyphs);
   toAdd.forEach(g => {
     const symbol = symbols.find(x => x['index'] === g);
-    const glyph = document.createElement('img');
-    glyph.src = '..' + symbol['imageSrc'];
+    const glyph = $(`<img src="${'..' + symbol['imageSrc']}"/>`);
     destinationGlyphs.append(glyph);
   });
 }
@@ -520,7 +511,7 @@ function updateTimer(secondsLeft) {
 
 function initialize_text() {
   updateText(gateName, DEFAULT_GATE_NAME);
-  updateText(systemEl.children.item(0), 'USER: ' + USER);
+  updateText(systemEl.children().first(), 'USER: ' + USER);
 
   const codeLength = Math.max(AUTHORIZATION_CODE.length, 15);
   for (let i = 0; i < codeLength; i++) {
@@ -531,7 +522,7 @@ function initialize_text() {
         code = Math.floor(Math.random() * 10);
       }
 
-      updateText(authCode.children.item(i), code);
+      updateText(authCode.children().eq(i), code);
     }
   }
 }
@@ -544,23 +535,19 @@ function handleOffline() {
 function buildKeyboard() {
   symbols.forEach(symbol => {
     if (symbol.keyboard_mapping) {
-      const keyWrapper = document.createElement('div');
-      keyWrapper.classList.add(`symbol-${symbol.index}`);
-      const img = document.createElement('img');
-      img.src = '..' + symbol.imageSrc;
-      img.onclick = () => dhd_press(`${symbol.index}`, img);
-      keyWrapper.appendChild(img);
-      keyboard.appendChild(keyWrapper);
+      const keyWrapper = $(`<div class="symbol-${symbol.index}"></div>`);
+      const img = $(`<img src="${'..' + symbol.imageSrc}"/>`);
+      img.on('click', () => dhd_press(`${symbol.index}`, img));
+      keyWrapper.append(img);
+      keyboard.append(keyWrapper);
     }
   });
 
-  const keyWrapper = document.createElement('div');
-  keyWrapper.classList.add(`symbol-0`);
-  const img = document.createElement('img');
-  img.src = `images/dhd.svg`;
-  img.onclick = () => dhd_press(`0`, img);
-  keyWrapper.appendChild(img);
-  keyboard.appendChild(keyWrapper);
+  const keyWrapper = $('<div class="symbol-0"></div>');
+  const img = $('<img src="images/dhd.svg"/>');
+  img.on('click', () => dhd_press(`0`, img));
+  keyWrapper.append(img);
+  keyboard.append(keyWrapper);
 }
 
 // Locking pre-dialed keys from the keyboard
@@ -568,12 +555,12 @@ function setKeysDisabled(keys, disabled = true) {
   keys.forEach(k => setKeyDisabled(k, disabled));
 }
 function setKeyDisabled(glyphIndex, disabled) {
-  const key = document.querySelector(`.keyboard .symbol-${glyphIndex}`);
+  const key = $(`.keyboard .symbol-${glyphIndex}`);
   if (key) {
     if (disabled) {
-      key.classList.add('disabled');
+      key.addClass('disabled');
     } else {
-      key.classList.remove('disabled');
+      key.removeClass('disabled');
     }
   }
 }
@@ -581,13 +568,13 @@ function setKeyDisabled(glyphIndex, disabled) {
 // Animate the power line from the chevron to the glyph box
 const pathTime = 800; // ms
 function startDrawingPath(index) {
-  const svgBase = document.querySelector(`.cl${index}`);
+  const svgBase = $(`.cl${index}`);
   if (svgBase) {
-    const svg = svgBase.cloneNode(true);
-    const path = svg.querySelector('path');
+    const svg = svgBase.clone(true);
+    const path = svg.find('path')[0];
     const pathLength = path.getTotalLength();
 
-    svg.classList.add('locked');
+    svg.addClass('locked');
     path.style.stroke = 'var(--color-danger)';
     path.style.strokeWidth = '6';
     appendTarget.append(svg);
