@@ -1,8 +1,7 @@
-/* USER CUSTOMIZATIONS */
+/* EDIT CUSTOMIZATIONS IN config.js */
+/* DO NOT EDIT BELOW UNLESS YOU KNOW WHAT YOU'RE DOING!!!! */
 
-const CRT_SCREEN_FLICKER = false;
-
-/* DO NOT EDIT BELOW THIS LINE UNLESS YOU KNOW WHAT YOU'RE DOING!!!! */
+import { config } from './config.js';
 
 const elem = document.body;
 
@@ -20,7 +19,7 @@ function toggleFlicker() {
 }
 
 // Run it every random interval
-if(CRT_SCREEN_FLICKER) {
+if(config.CRT_SCREEN_FLICKER) {
     setTimeout(toggleFlicker, 300);
 }
 

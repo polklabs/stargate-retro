@@ -1,23 +1,7 @@
-/* USER CUSTOMIZATIONS */
+/* EDIT CUSTOMIZATIONS IN config.js */
+/* DO NOT EDIT BELOW UNLESS YOU KNOW WHAT YOU'RE DOING!!!! */
 
-// Spinning is so much cooler than not spinning
-const RING_ANIMATION = true;
-
-const AUTHORIZATION_CODE_RANDOMIZE = true;
-const AUTHORIZATION_CODE = '77892757892387';
-
-const USER = 'SGT. W HARRIMAN';
-
-// Used when gate is offline initially
-const DEFAULT_GATE_NAME = 'STARGATE';
-
-const TEXT_OFFLINE = 'OFFLINE';
-const TEXT_IDLE = 'IDLE';
-const TEXT_DIALING = 'DIALING';
-const TEXT_INCOMING = 'INCOMING';
-const TEXT_ENGAGED = 'ENGAGED';
-
-/* DO NOT EDIT BELOW THIS LINE UNLESS YOU KNOW WHAT YOU'RE DOING!!!! */
+import { config } from './config.js';
 
 const glyph = document.querySelector('.glyph');
 const appendTarget = document.querySelector('.dial-append');
@@ -161,7 +145,7 @@ async function watch_dialing_status() {
       }
 
       if (!encoding) {
-        this.firstStatus = false;
+        firstStatus = false;
       }
 
       trySpinning();
@@ -285,7 +269,7 @@ function handleDialingIn(new_locked_chevrons) {
 
 // That's a neat trick
 function trySpinning() {
-  if (!RING_ANIMATION) {
+  if (!config.RING_ANIMATION) {
     return;
   }
 
@@ -471,7 +455,7 @@ function resetGate() {
 function updateState() {
   if (state === STATE_ACTIVE) {
     setTimeout(() => {
-      updateText(infoText, 'ENGAGED');
+      updateText(infoText, config.TEXT_ENGAGED);
       border.classList.add('active');
       border.classList.remove('idle');
 
@@ -482,15 +466,15 @@ function updateState() {
       }
     }, 500);
   } else if (state === STATE_DIAL_OUT) {
-    updateText(infoText, 'DIALING');
+    updateText(infoText, config.TEXT_DIALING);
     border.classList.remove('active');
     border.classList.remove('idle');
   } else if (state === STATE_DIAL_IN) {
-    updateText(infoText, 'INCOMING');
+    updateText(infoText, config.TEXT_INCOMING);
     border.classList.remove('active');
     border.classList.remove('idle');
   } else {
-    updateText(infoText, 'IDLE');
+    updateText(infoText, config.TEXT_IDLE);
     border.classList.remove('active');
     border.classList.add('idle');
   }
@@ -519,15 +503,15 @@ function updateTimer(secondsLeft) {
 }
 
 function initialize_text() {
-  updateText(gateName, DEFAULT_GATE_NAME);
-  updateText(systemEl.children.item(0), 'USER: ' + USER);
+  updateText(gateName, config.DEFAULT_GATE_NAME);
+  updateText(systemEl.children.item(0), 'USER: ' + config.USER);
 
-  const codeLength = Math.max(AUTHORIZATION_CODE.length, 15);
+  const codeLength = Math.max(config.AUTHORIZATION_CODE.length, 15);
   for (let i = 0; i < codeLength; i++) {
     if (i !== 6) {
-      let code = AUTHORIZATION_CODE[i];
+      let code = config.AUTHORIZATION_CODE[i];
 
-      if (AUTHORIZATION_CODE_RANDOMIZE) {
+      if (config.AUTHORIZATION_CODE_RANDOMIZE) {
         code = Math.floor(Math.random() * 10);
       }
 
@@ -537,7 +521,7 @@ function initialize_text() {
 }
 
 function handleOffline() {
-  updateText(infoText, TEXT_OFFLINE);
+  updateText(infoText, config.TEXT_OFFLINE);
   // setKeysDisabled([...symbols.map(x => x.index), 0, -1]);
 }
 

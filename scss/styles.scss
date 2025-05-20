@@ -1,17 +1,4 @@
-@use 'sass:math';
-$max-viewport: 1000;
-
-@function vmin-clamp($vmin) {
-  // $vmin = how many vmin you want (ex: vmin-clamp(5, $max-viewport))
-  // $max-viewport = maximum viewport size in pixels (ex: 1200)
-
-  $vmin-px-at-max: math.div(
-    $vmin * $max-viewport,
-    100
-  ); // calculate how big vmin gets at max viewport
-
-  @return clamp(-100px, #{$vmin}vmin, #{$vmin-px-at-max}px);
-}
+@use 'functions' as *;
 
 :root {
   /*! UPDATE COLORS HERE !!! -------------------------------------------------------------------------------------- */
@@ -76,4 +63,20 @@ a:visited {
   text-decoration: inherit;
   color: inherit;
   cursor: auto;
+}
+
+.color-dark {
+  color: var(--color-dark);
+}
+.color-alt {
+  color: var(--color-alt);
+}
+.color-danger {
+  color: var(--color-danger);
+}
+.color-good {
+  color: var(--color-good);
+}
+.color-glyph {
+  color: var(--glyph-color);
 }

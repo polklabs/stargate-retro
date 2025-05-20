@@ -55,4 +55,24 @@ a:visited {
   cursor: auto;
 }
 
+.color-dark {
+  color: var(--color-dark);
+}
+
+.color-alt {
+  color: var(--color-alt);
+}
+
+.color-danger {
+  color: var(--color-danger);
+}
+
+.color-good {
+  color: var(--color-good);
+}
+
+.color-glyph {
+  color: var(--glyph-color);
+}
+
 /*# sourceMappingURL=styles.css.map */
