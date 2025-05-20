@@ -331,7 +331,7 @@ body {
   width: clamp(-100px, 53.7vmin, 537px);
   height: clamp(-100px, 7.9vmin, 79px);
   text-align: center;
-  font-size: clamp(-100px, 9vmin, 90px);
+  font-size: clamp(-100px, 6vmin, 60px);
   line-height: clamp(-100px, 6vmin, 60px);
   word-spacing: clamp(-100px, 14vmin, 140px);
   letter-spacing: clamp(-100px, 1.5vmin, 15px);

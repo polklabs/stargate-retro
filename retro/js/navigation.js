@@ -54,7 +54,6 @@ async function shutdown() {
 }
 
 function isActive(href) {
-  console.log(window.location.href);
   return `href="${href}"` + (window.location.href.includes(href) ? 'class="active-link"' : '');
 }
 

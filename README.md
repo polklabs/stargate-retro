@@ -48,6 +48,7 @@ Navigation header at the top of all pages to integrate with v4 software. As it i
 
 #### To access, enter one of the links below:
 - [Dial](http://stargate.local/retro/dial.html) - `/retro/dial.html`
+    - On incoming wormholes: GDO window will popup. It will scan then display a recognized code. This can be adjusted or disabled in config.js
 
     <img src="screenshots/Screenshot 2025-05-07 154809.png" alt="drawing" width="300"/>
 - [Address Book](http://stargate.local/retro/address_book.html) - `/retro/address_book.html`
@@ -69,6 +70,11 @@ Navigation header at the top of all pages to integrate with v4 software. As it i
 | config.js | Dial | TEXT_DIALING | `DIALING` | Text to use when gate is dialing out |
 | config.js | Dial | TEXT_INCOMING | `INCOMING` | Text to use when gate is dialing in |
 | config.js | Dial | TEXT_ENGAGED | `ENGAGED` | Text to use when wormhole is active  |
+| config.js | Dial | TEXT_RECOGNIZED | `RECOGNIZED` | Text to use when GDO code is valid  |
+| config.js | Dial | TEXT_ANALYZING | `ANALYZING` | Text to use when GDO code is being checked  |
+| config.js | Dial | GDO_AUTO | `true` | Should the GDO window auto open after establishing an incoming wormhole  |
+| config.js | Dial | GDO_DELAY | `3` | How long after establishing incoming wormhole before GDO window opens  |
+| config.js | Dial | GDO_SIGNALS | *see config* | Names that will appear as GDO code senders  |
 | *.css | All |  --color | <span style="color:#37bfde">#37bfde</span> | Most borders and text | #2B6EC8 |
 | *.css | All | --color-dark | <span style="color:#4a7297">#4a7297</span> | Some smaller borders  | #2B6EC8 |
 | *.css | All |  --color-danger |<span style="color:#c70036">#c70036</span> | Invalid glyphs, dialing lock, and stargate state color | #B2020B |

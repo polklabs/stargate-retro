@@ -1,7 +1,8 @@
 /* EDIT CUSTOMIZATIONS IN config.js */
 /* DO NOT EDIT BELOW UNLESS YOU KNOW WHAT YOU'RE DOING!!!! */
 
-import { config } from './config.js';
+import {config} from './config.js';
+import {gdo, activateGDO} from './gdo.js';
 
 const glyph = document.querySelector('.glyph');
 const appendTarget = document.querySelector('.dial-append');
@@ -16,7 +17,6 @@ const border = document.querySelector('.border');
 const keyboard = document.querySelector('.keyboard');
 const systemEl = document.querySelector('.system');
 const authCode = document.querySelector('.auth-code');
-const statusEl = document.querySelector('.status');
 
 let statusInterval;
 
@@ -46,7 +46,6 @@ let lockedGlyphs = {};
 let locked_chevrons = 0;
 
 let symbols = [];
-
 
 // INITIALIZE --------------------------------------------------------------------------
 async function initialize_computer() {
@@ -186,6 +185,10 @@ function handleActiveGate(new_locked_chevrons = 0) {
       new_locked_chevrons = gateStatus.locked_chevrons_incoming;
       if (state === STATE_DIAL_OUT) {
         resetGate();
+      }
+
+      if (config.GDO_AUTO) {
+        setTimeout(activateGDO, config.GDO_DELAY * 1000);
       }
     }
     // Active Outgoing
@@ -454,17 +457,15 @@ function resetGate() {
 
 function updateState() {
   if (state === STATE_ACTIVE) {
-    setTimeout(() => {
-      updateText(infoText, config.TEXT_ENGAGED);
-      border.classList.add('active');
-      border.classList.remove('idle');
+    updateText(infoText, config.TEXT_ENGAGED);
+    border.classList.add('active');
+    border.classList.remove('idle');
 
-      if (gateStatus.black_hole_connected) {
-        ring1.setAttribute('fill', 'url(#radialGradientDanger)');
-      } else {
-        ring1.setAttribute('fill', 'url(#radialGradient)');
-      }
-    }, 500);
+    if (gateStatus.black_hole_connected) {
+      ring1.setAttribute('fill', 'url(#radialGradientDanger)');
+    } else {
+      ring1.setAttribute('fill', 'url(#radialGradient)');
+    }
   } else if (state === STATE_DIAL_OUT) {
     updateText(infoText, config.TEXT_DIALING);
     border.classList.remove('active');
@@ -477,6 +478,12 @@ function updateState() {
     updateText(infoText, config.TEXT_IDLE);
     border.classList.remove('active');
     border.classList.add('idle');
+  }
+
+  if (gdo.state === 'recognized' || gdo.state === 'complete') {
+    updateText(infoText, config.TEXT_RECOGNIZED);
+  } else if (gdo.state === 'analyzing') {
+    updateText(infoText, config.TEXT_ANALYZING);
   }
 }
 

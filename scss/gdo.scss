@@ -1,0 +1,189 @@
+@use 'functions' as *;
+
+.gdo-wrapper {
+  width: vmin-clamp(56);
+  height: vmin-clamp(16);
+  position: absolute;
+  left: vmin-clamp(20);
+  top: vmin-clamp(24);
+  background-color: var(--background-color);
+  font-size: vmin-clamp(2);
+  line-height: vmin-clamp(1.6);
+  transition: height 1s;
+  cursor: pointer;
+
+  .gdo-signal {
+    border: var(--border-thin);
+    height: vmin-clamp(16);
+  }
+
+  .gdo-top,
+  .gdo-bottom {
+    display: flex;
+    gap: vmin-clamp(0.5);
+    margin: 0 vmin-clamp(0.5);
+    .spacer {
+      flex-grow: 1;
+    }
+  }
+
+  .signal-top,
+  .signal-bottom {
+    height: vmin-clamp(1.5);
+    display: flex;
+    div {
+      border: var(--border-thin);
+    }
+  }
+
+  .signal-top {
+    div:nth-of-type(1) {
+      width: vmin-clamp(8);
+    }
+    div:nth-of-type(2) {
+      width: vmin-clamp(5);
+    }
+    div:nth-of-type(3) {
+      width: vmin-clamp(30);
+    }
+    div:nth-of-type(4) {
+      width: vmin-clamp(13);
+    }
+  }
+  .signal-bottom {
+    div:nth-of-type(1) {
+      width: vmin-clamp(10);
+    }
+    div:nth-of-type(2) {
+      width: vmin-clamp(18);
+    }
+    div:nth-of-type(3) {
+      width: vmin-clamp(7);
+    }
+    div:nth-of-type(4) {
+      width: vmin-clamp(21);
+    }
+  }
+
+  .signal {
+    display: flex;
+    flex-direction: row;
+    margin: 0 vmin-clamp(0.4);
+
+    .signal-center {
+      flex-grow: 1;
+      border: var(--border-thin);
+      margin: vmin-clamp(0.4);
+      max-width: vmin-clamp(52.5);
+      position: relative;
+
+      svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      svg:nth-of-type(1) {
+        path {
+          stroke: var(--color-danger);
+        }
+        clip-path: inset(0 0 0 100%);
+        animation: signalGreenAnimation 6s linear;
+      }
+      svg:nth-of-type(2) {
+        path {
+          stroke: var(--color-good);
+        }
+        animation: signalRedAnimation 6s linear;
+      }
+
+      .wave-edge {
+        position: absolute;
+        width: vmin-clamp(0.5);
+        background-color: var(--glyph-color);
+        height: 100%;
+        opacity: 0.5;
+        animation: signalEdgeAnimation 3s linear;
+        animation-iteration-count: 2;
+      }
+    }
+
+    .signal-left,
+    .signal-right {
+      line-height: vmin-clamp(0.7);
+    }
+  }
+
+  .signal-info {
+    border: var(--border-thin);
+    border-top: unset;
+    height: vmin-clamp(10);
+    color: var(--color-danger);
+    text-align: center;
+    padding-top: vmin-clamp(1.5);
+    line-height: vmin-clamp(3);
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 1s;
+    div:nth-of-type(2) {
+      font-size: vmin-clamp(4);
+    }
+
+    &.gdo-valid {
+      color: var(--color-good);
+    }
+  }
+}
+
+.border.gdo-valid {
+  .gdo-wrapper {
+    height: vmin-clamp(26);
+  }
+  .signal-info {
+    clip-path: inset(0 0 0 0);
+  }
+
+  .info-box {
+    font-size: vmin-clamp(6);
+    color: var(--color-good) !important;
+  }
+
+  .chevron-link.locked {
+    path {
+      stroke: var(--color-good) !important;
+    }
+  }
+  .chevron-box.locked {
+    border-color: var(--color-good);
+  }
+}
+
+@keyframes signalGreenAnimation {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  50% {
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 100%);
+  }
+}
+@keyframes signalRedAnimation {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  50% {
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes signalEdgeAnimation {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: 100%;
+  }
+}
