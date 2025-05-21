@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="author" content="Andrew Polk" />
+    <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico" />
+
+    <title>System Info | Stargate Command</title>
+
+    <link rel="stylesheet" href="css/crt.css" />
+    <link rel="stylesheet" href="css/info.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Genos&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="crt genos-font">
+    <!-- <div class="ref"></div> -->
+
+    <div class="border">
+      <div class="title">
+        <span class="title-main">BASE POWER MONITOR</span>
+        <span class="title-usr">USR 0168403 / AUTH LI</span>
+        <span class="title-config">CONFIG IO VAR - X / SYS</span>
+      </div>
+
+      <div class="title-right">
+        <div class="version">52286/2A</div>
+        <div class="version-title">VERSION</div>
+      </div>
+
+      <div class="main-wrapper">
+        <div class="col-1">
+          <div class="flux">
+            <div class="section-title">FLUX / KA</div>
+            <div>
+              <div>1</div>
+              <div>2</div>
+              <div>3</div>
+            </div>
+          </div>
+          <div class="control">
+            <div class="section-title">CONTROL</div>
+            <div class="buttons">
+              <div>INPUT</div>
+              <div>OUTPUT</div>
+              <div>VAR</div>
+              <div>ANALYZE</div>
+              <div>DISPLAY</div>
+              <div>WAVEFORM</div>
+              <div>SPECTRUM</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="output">
+            <div class="section-title">OUTPUT</div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="waveform">
+            <div class="section-title">WAVEFORM</div>
+          </div>
+          <div class="data">
+            <div class="section-title">DATA</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="crt-distortion scanline-animation"></div>
+    </div>
+    <script type="module" src="js/info.js"></script>
+    <script type="module" src="js/crt.js"></script>
+    <script src="js/navigation.js"></script>
+  </body>
+</html>
