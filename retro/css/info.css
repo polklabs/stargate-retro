@@ -246,9 +246,35 @@ body {
   padding-right: 1.1vmin;
   padding-bottom: 0.7vmin;
   width: fit-content;
+  font-weight: bold;
 }
 .main-wrapper .flux {
   height: 33vmin;
+}
+.main-wrapper .flux .flux-gauges {
+  display: flex;
+  flex-direction: column;
+}
+.main-wrapper .flux .flux-gauges div {
+  height: 10.4vmin;
+  color: var(--glyph-color);
+  position: relative;
+}
+.main-wrapper .flux .flux-gauges div svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.main-wrapper .flux .flux-gauges div .dir {
+  color: var(--color-alt);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 14.8vmin;
+  display: flex;
+  justify-content: space-between;
+  height: 3.2vmin;
+  margin-left: 0.8vmin;
 }
 .main-wrapper .control {
   height: 26vmin;
@@ -259,6 +285,7 @@ body {
 .main-wrapper .control .buttons > div {
   border: var(--border);
   margin: 0.5vmin;
+  margin-left: unset;
   text-align: center;
   line-height: 1.9vmin;
   color: var(--glyph-color);

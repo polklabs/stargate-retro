@@ -102,10 +102,38 @@ body {
     padding-right: 1.1vmin;
     padding-bottom: 0.7vmin;
     width: fit-content;
+    font-weight: bold;
   }
 
   .flux {
     height: 33vmin;
+    .flux-gauges {
+      display: flex;
+      flex-direction: column;
+      div {
+        height: 10.4vmin;
+        color: var(--glyph-color);
+        position: relative;
+
+        svg {
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+
+        .dir {
+          color: var(--color-alt);
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 14.8vmin;
+          display: flex;
+          justify-content: space-between;
+          height: 3.2vmin;
+          margin-left: 0.8vmin;
+        }
+      }
+    }
   }
   .control {
     height: 26vmin;
@@ -115,6 +143,7 @@ body {
     .buttons > div {
       border: var(--border);
       margin: 0.5vmin;
+      margin-left: unset;
       text-align: center;
       line-height: 1.9vmin;
       color: var(--glyph-color);
