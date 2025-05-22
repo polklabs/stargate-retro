@@ -184,6 +184,7 @@ function sortData(sortProperty) {
 
   tableBody.scrollTo(0, 0);
 }
+window.sortData = sortData;
 
 const labelOptions = {
   Mission: [

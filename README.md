@@ -161,3 +161,5 @@ Instead of pixels or percentages, the css is defined in terms of vmin. This allo
 To generate css run: `sass --watch scss:retro/css`
 
 For a basic web server to proxy the stargate software run: `python server.py`
+
+Easiest to develop just using vmin then convert to vmin-clamp() after. Find regex `([-0-9.]+)vmin` and replace `vmin-clamp($1)`

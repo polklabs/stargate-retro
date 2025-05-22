@@ -9,7 +9,7 @@ const config = {
   USER: 'SGT. W HARRIMAN',
 
   // Used when gate is offline initially
-  DEFAULT_GATE_NAME: 'STARGATE',
+  DEFAULT_GATE_NAME: 'Stargate',
 
   TEXT_OFFLINE: 'OFFLINE',
   TEXT_IDLE: 'IDLE',
