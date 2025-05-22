@@ -64,6 +64,7 @@ Navigation header at the top of all pages to integrate with v4 software. As it i
 
 | File | Page | Property | Default | Description | Alt Example |
 | ---- | ---- | -------- | ------- | ----------- | ----------- |
+| config.js | All | FILL_SCREEN | `false` | Will attempt to make the page fill the screen |  |
 | config.js | Dial | RING_ANIMATION | `true` | Should the ring spin when dialing out |
 | config.js | Dial | AUTHORIZATION_CODE_RANDOMIZE | `true` | Generate a random authorization code on page load |
 | config.js | Dial | AUTHORIZATION_CODE | `77892757892387` | Fixed code to use if *AUTHORIZATION_CODE_RANDOMIZE* is `false` |

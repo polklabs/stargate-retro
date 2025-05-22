@@ -1,5 +1,8 @@
 /* USER CUSTOMIZATIONS */
 const config = {
+
+  FILL_SCREEN: false,
+
   // Spinning is so much cooler than not spinning
   RING_ANIMATION: true,
 
