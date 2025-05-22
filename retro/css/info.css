@@ -159,11 +159,12 @@ body {
 
 .ref {
   background-image: url("../../references/power-ref.jpg");
-  width: 99vmin;
-  height: 73vmin;
+  width: clamp(-100px, 99vmin, 990px);
+  height: clamp(-100px, 74vmin, 740px);
   position: absolute;
   background-size: cover;
-  top: 14vmin;
+  top: clamp(-100px, 13vmin, 130px);
+  left: clamp(-100px, 7vmin, 70px);
 }
 
 .navigation-menu-wrapper {
@@ -183,80 +184,80 @@ body {
 .title {
   display: flex;
   flex-direction: column;
-  padding-left: 4vmin;
-  font-size: 2.5vmin;
-  line-height: 2.2vmin;
+  padding-left: clamp(-100px, 4vmin, 40px);
+  font-size: clamp(-100px, 2.5vmin, 25px);
+  line-height: clamp(-100px, 2.2vmin, 22px);
 }
 .title span.title-main {
   color: var(--color-alt);
-  font-size: 3vmin;
+  font-size: clamp(-100px, 3vmin, 30px);
   padding-left: unset;
 }
 .title span {
-  padding-left: 1.6vmin;
+  padding-left: clamp(-100px, 1.6vmin, 16px);
 }
 
 .title-right {
   position: absolute;
-  right: 2vmin;
+  right: clamp(-100px, 2vmin, 20px);
   top: 0;
   text-align: end;
-  line-height: 2vmin;
+  line-height: clamp(-100px, 2vmin, 20px);
 }
 .title-right .version {
-  font-size: 3vmin;
+  font-size: clamp(-100px, 3vmin, 30px);
 }
 .title-right .version-title {
-  font-size: 2vmin;
+  font-size: clamp(-100px, 2vmin, 20px);
   color: var(--glyph-color);
 }
 
 .main-wrapper {
   display: flex;
   flex-direction: row;
-  gap: 2vmin;
-  margin: 1vmin 2vmin 0;
+  gap: clamp(-100px, 2vmin, 20px);
+  margin: clamp(-100px, 1vmin, 10px) clamp(-100px, 2vmin, 20px) 0;
 }
 .main-wrapper > div {
   border-right: var(--border-thin);
   display: flex;
   flex-direction: column;
-  gap: 1vmin;
+  gap: clamp(-100px, 1vmin, 10px);
 }
 .main-wrapper > div > div {
   border-top: var(--border);
 }
 .main-wrapper .col-1 {
-  width: 16.6vmin;
+  width: clamp(-100px, 16.6vmin, 166px);
 }
 .main-wrapper .col-2 {
-  width: 30.5vmin;
-  height: 56.4vmin;
+  width: clamp(-100px, 30.5vmin, 305px);
+  height: clamp(-100px, 56.4vmin, 564px);
 }
 .main-wrapper .col-3 {
-  width: 40.5vmin;
-  height: 56.4vmin;
+  width: clamp(-100px, 40.5vmin, 405px);
+  height: clamp(-100px, 56.4vmin, 564px);
 }
 .main-wrapper .section-title {
   color: var(--color-alt);
   background-color: var(--color);
-  font-size: 2.5vmin;
-  line-height: 1.2vmin;
-  padding-left: 1.1vmin;
-  padding-right: 1.1vmin;
-  padding-bottom: 0.7vmin;
+  font-size: clamp(-100px, 2.5vmin, 25px);
+  line-height: clamp(-100px, 1.2vmin, 12px);
+  padding-left: clamp(-100px, 1.1vmin, 11px);
+  padding-right: clamp(-100px, 1.1vmin, 11px);
+  padding-bottom: clamp(-100px, 0.7vmin, 7px);
   width: fit-content;
   font-weight: bold;
 }
 .main-wrapper .flux {
-  height: 33vmin;
+  height: clamp(-100px, 33vmin, 330px);
 }
 .main-wrapper .flux .flux-gauges {
   display: flex;
   flex-direction: column;
 }
 .main-wrapper .flux .flux-gauges div {
-  height: 10.4vmin;
+  height: clamp(-100px, 10.4vmin, 104px);
   color: var(--glyph-color);
   position: relative;
 }
@@ -264,42 +265,206 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+  transform-origin: clamp(-100px, 8vmin, 80px) clamp(-100px, 8vmin, 80px);
+  transition: transform 0.75s;
 }
 .main-wrapper .flux .flux-gauges div .dir {
   color: var(--color-alt);
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 14.8vmin;
+  width: clamp(-100px, 14.8vmin, 148px);
   display: flex;
   justify-content: space-between;
-  height: 3.2vmin;
-  margin-left: 0.8vmin;
+  height: clamp(-100px, 3.2vmin, 32px);
+  margin-left: clamp(-100px, 0.8vmin, 8px);
 }
 .main-wrapper .control {
-  height: 26vmin;
+  height: clamp(-100px, 26vmin, 260px);
 }
 .main-wrapper .control .section-title {
   width: 100%;
 }
 .main-wrapper .control .buttons > div {
   border: var(--border);
-  margin: 0.5vmin;
+  margin: clamp(-100px, 0.5vmin, 5px);
   margin-left: unset;
   text-align: center;
-  line-height: 1.9vmin;
+  line-height: clamp(-100px, 1.9vmin, 19px);
   color: var(--glyph-color);
-  font-size: 2.2vmin;
+  font-size: clamp(-100px, 2.2vmin, 22px);
   cursor: pointer;
 }
 .main-wrapper .control .buttons > div:hover {
   color: var(--color);
 }
+.main-wrapper .output .output-columns {
+  display: flex;
+  flex-direction: row;
+  color: var(--glyph-color);
+  margin-top: clamp(-100px, 1.5vmin, 15px);
+}
+.main-wrapper .output .output-columns .out-col-nums {
+  font-size: clamp(-100px, 2.5vmin, 25px);
+  width: clamp(-100px, 4vmin, 40px);
+  text-align: center;
+  line-height: clamp(-100px, 4.3vmin, 43px);
+}
+.main-wrapper .output .output-columns .out-col-bar-1,
+.main-wrapper .output .output-columns .out-col-bar-2,
+.main-wrapper .output .output-columns .out-col-bar-3,
+.main-wrapper .output .output-columns .out-col-bar-4 {
+  width: clamp(-100px, 2.5vmin, 25px);
+}
+.main-wrapper .output .output-columns .out-col-bar-1 .bar-border,
+.main-wrapper .output .output-columns .out-col-bar-2 .bar-border,
+.main-wrapper .output .output-columns .out-col-bar-3 .bar-border,
+.main-wrapper .output .output-columns .out-col-bar-4 .bar-border {
+  border: var(--border-thin);
+  height: clamp(-100px, 47vmin, 470px);
+  position: relative;
+}
+.main-wrapper .output .output-columns .out-col-bar-1 .bar-fill,
+.main-wrapper .output .output-columns .out-col-bar-2 .bar-fill,
+.main-wrapper .output .output-columns .out-col-bar-3 .bar-fill,
+.main-wrapper .output .output-columns .out-col-bar-4 .bar-fill {
+  height: 0%;
+  width: 100%;
+  background-color: var(--color-danger);
+  bottom: 0;
+  position: absolute;
+  transition: height 0.75s ease;
+}
+.main-wrapper .output .output-columns .out-col-bar-1 .bar-num,
+.main-wrapper .output .output-columns .out-col-bar-2 .bar-num,
+.main-wrapper .output .output-columns .out-col-bar-3 .bar-num,
+.main-wrapper .output .output-columns .out-col-bar-4 .bar-num {
+  font-size: clamp(-100px, 3vmin, 30px);
+  text-align: center;
+}
+.main-wrapper .output .output-columns .out-col-dash {
+  width: clamp(-100px, 2vmin, 20px);
+  margin: 0 clamp(-100px, 1vmin, 10px);
+}
+.main-wrapper .output .output-columns .out-col-dash div {
+  border-bottom: var(--border);
+  height: clamp(-100px, 3vmin, 30px);
+}
 .main-wrapper .waveform {
-  height: 29vmin;
+  height: clamp(-100px, 29vmin, 290px);
+  position: relative;
+}
+.main-wrapper .waveform .wave-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: clamp(-100px, 1.4vmin, 14px) clamp(-100px, 1vmin, 10px) 0;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+.main-wrapper .waveform .wave-wrapper .wave-row {
+  height: clamp(-100px, 1.75vmin, 17.5px);
+  display: flex;
+  flex-direction: row;
+}
+.main-wrapper .waveform .wave-wrapper .wave-row:not(:nth-child(8)) .wave-col-3 {
+  border-width: clamp(-100px, 0.1vmin, 1px);
+}
+.main-wrapper .waveform .wave-wrapper .wave-row:nth-child(8) .wave-col-2, .main-wrapper .waveform .wave-wrapper .wave-row:nth-child(8) .wave-col-4 {
+  width: 0;
+}
+.main-wrapper .waveform .wave-wrapper .wave-row:nth-child(1) .wave-col-2, .main-wrapper .waveform .wave-wrapper .wave-row:nth-child(1) .wave-col-4 {
+  width: clamp(-100px, 1.5vmin, 15px);
+}
+.main-wrapper .waveform .wave-wrapper .wave-row:nth-child(15) .wave-col-3 {
+  border: unset;
+}
+.main-wrapper .waveform .wave-wrapper .wave-row:first-child .wave-col-1 {
+  width: clamp(-100px, 1.5vmin, 15px);
+}
+.main-wrapper .waveform .wave-wrapper .wave-row:first-child .wave-col-5 {
+  width: clamp(-100px, 1.5vmin, 15px);
+}
+.main-wrapper .waveform .wave-wrapper .wave-row:nth-child(15) .wave-col-1 {
+  border-top: var(--border-thin);
+  border-left: unset;
+  width: clamp(-100px, 1.5vmin, 15px);
+}
+.main-wrapper .waveform .wave-wrapper .wave-row:nth-child(15) .wave-col-5 {
+  border-top: var(--border-thin);
+  border-right: unset;
+  width: clamp(-100px, 1.5vmin, 15px);
+}
+.main-wrapper .waveform .wave-wrapper .wave-col-3 {
+  flex-grow: 1;
+  border-top: var(--border-thin);
+  line-height: clamp(-100px, 1vmin, 10px);
+}
+.main-wrapper .waveform .wave-wrapper .wave-col-2,
+.main-wrapper .waveform .wave-wrapper .wave-col-4 {
+  width: clamp(-100px, 2vmin, 20px);
+}
+.main-wrapper .waveform .wave-wrapper .wave-col-1,
+.main-wrapper .waveform .wave-wrapper .wave-col-5 {
+  width: clamp(-100px, 1vmin, 10px);
+  height: 100%;
+  border-top: var(--border-thin);
+}
+.main-wrapper .waveform .wave-wrapper .wave-col-1 {
+  border-left: var(--border-thin);
+}
+.main-wrapper .waveform .wave-wrapper .wave-col-5 {
+  border-right: var(--border-thin);
+}
+.main-wrapper .waveform .waveform-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: clamp(-100px, 24.9vmin, 249px);
+  width: clamp(-100px, 100vmin, 1000px);
+  animation: waveform-animation 5s linear infinite;
 }
 .main-wrapper .data .section-title {
-  width: 19vmin;
+  width: clamp(-100px, 20.2vmin, 202px);
+}
+.main-wrapper .data .table-wrapper {
+  max-height: clamp(-100px, 24vmin, 240px);
+  overflow: auto;
+}
+.main-wrapper .data table {
+  height: clamp(-100px, 24vmin, 240px);
+  font-size: clamp(-100px, 1.5vmin, 15px);
+  line-height: clamp(-100px, 1vmin, 10px);
+  border-collapse: collapse;
+  display: table;
+  word-break: break-all;
+  color: var(--color-alt);
+}
+.main-wrapper .data table tr {
+  height: clamp(-100px, 1.5vmin, 15px);
+}
+.main-wrapper .data table tr td:first-child {
+  border-right: var(--border-thin);
+}
+.main-wrapper .data table tr:nth-child(odd) {
+  background-color: rgb(from var(--color-dark) r g b/40%);
+}
+.main-wrapper .data table tr td:nth-child(2) {
+  text-align: center;
+}
+.main-wrapper .data table img {
+  width: 2vmin;
+  height: 2vmin;
+  filter: invert(1);
+}
+
+@keyframes waveform-animation {
+  from {
+    transform: translate(0);
+  }
+  to {
+    transform: translate(-50%);
+  }
 }
 
 /*# sourceMappingURL=info.css.map */
