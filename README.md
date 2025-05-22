@@ -113,7 +113,6 @@ Navigation header at the top of all pages to integrate with v4 software. As it i
 - New Pages
     - Dialing from S1
     - Address Book from S2E15 - The Fifth Race
-    - Base Power Monitor
     - Malp
     - Popups
         - System Access Denied
