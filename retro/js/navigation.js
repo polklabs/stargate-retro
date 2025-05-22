@@ -1,3 +1,8 @@
+/* EDIT CUSTOMIZATIONS IN config.js */
+/* DO NOT EDIT BELOW UNLESS YOU KNOW WHAT YOU'RE DOING!!!! */
+
+import {config} from './config.js';
+
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 function openDropdown(elementId) {
@@ -84,4 +89,45 @@ function initializeNavBar() {
   const body = document.querySelector('body')
   body.insertBefore(innerDiv, body.childNodes[0])
 }
+window.restart = restart;
+window.reboot = reboot;
+window.shutdown = shutdown;
+window.openDropdown = openDropdown;
 initializeNavBar();
+
+// FULL SCREEN HACK
+const elem = document.body;
+let fill = localStorage.getItem('fillScreen') === 'true' || config.FILL_SCREEN;
+const border = document.querySelector('.border');
+function fillScreen() {
+  if (fill) {
+    const scaleHeight = (elem.offsetHeight * 0.94) / border.offsetHeight;
+    const scaleWidth = (elem.offsetWidth * 0.97) / border.offsetWidth;
+
+    const scale = +Math.min(scaleHeight, scaleWidth).toFixed(3);
+    border.style.scale = Math.max(1, scale);
+  } else {
+    border.style.scale = 1;
+  }
+}
+
+function toggleFillScreen() {
+  const fillLocal = localStorage.getItem('fillScreen');
+  if (fillLocal === 'true') {
+    localStorage.removeItem('fillScreen');
+    fill = false;
+  } else {
+    localStorage.setItem('fillScreen', 'true');
+    fill = true;
+  }
+  fillScreen();
+}
+
+fillScreen();
+window.addEventListener('resize', fillScreen, true);
+window.toggleFillScreen = toggleFillScreen;
+
+const fullscreenBtn = document.querySelector('.fullscreen');
+if (config.FILL_SCREEN && fullscreenBtn) {
+  fullscreenBtn.style.display = 'none';
+}

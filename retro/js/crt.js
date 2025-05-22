@@ -32,38 +32,3 @@ distortion.addEventListener('animationend', function () {
   void this.offsetWidth; // hack to reflow css animation
   this.classList.add('scanline-animation');
 });
-
-let fill = localStorage.getItem('fillScreen') === 'true' || config.FILL_SCREEN;
-const border = document.querySelector('.border');
-function fillScreen() {
-  if (fill) {
-    const scaleHeight = (elem.offsetHeight * 0.94) / border.offsetHeight;
-    const scaleWidth = (elem.offsetWidth * 0.97) / border.offsetWidth;
-
-    const scale = +Math.min(scaleHeight, scaleWidth).toFixed(3);
-    border.style.scale = Math.max(1, scale);
-  } else {
-    border.style.scale = 1;
-  }
-}
-
-function toggleFillScreen() {
-  const fillLocal = localStorage.getItem('fillScreen');
-  if (fillLocal === 'true') {
-    localStorage.removeItem('fillScreen');
-    fill = false;
-  } else {
-    localStorage.setItem('fillScreen', 'true');
-    fill = true;
-  }
-  fillScreen();
-}
-
-fillScreen();
-window.addEventListener('resize', fillScreen, true);
-window.toggleFillScreen = toggleFillScreen;
-
-const fullscreenBtn = document.querySelector('.fullscreen');
-if (config.FILL_SCREEN && fullscreenBtn) {
-  fullscreenBtn.style.display = 'none';
-}

@@ -25,7 +25,7 @@
   &:hover {
     opacity: 1;
   }
-  
+
   a {
     color: var(--color);
     border: var(--border-thin);
@@ -77,4 +77,15 @@
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {
   display: block;
+}
+
+.fullscreen {
+  position: absolute;
+  bottom: vmin-clamp(1);
+  right: vmin-clamp(1);
+  font-size: vmin-clamp(3) !important;
+  cursor: pointer;
+  &:hover {
+    color: var(--color-alt);
+  }
 }

@@ -360,17 +360,6 @@ body {
   }
 }
 
-.fullscreen {
-  position: absolute;
-  bottom: vmin-clamp(1);
-  right: vmin-clamp(1);
-  font-size: vmin-clamp(3);
-  cursor: pointer;
-  &:hover {
-    color: var(--color-alt)
-  }
-}
-
 .dial-append {
   position: relative;
   top: 0;

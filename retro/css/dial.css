@@ -150,6 +150,17 @@ a:visited {
   display: block;
 }
 
+.fullscreen {
+  position: absolute;
+  bottom: clamp(-100px, 1vmin, 10px);
+  right: clamp(-100px, 1vmin, 10px);
+  font-size: clamp(-100px, 3vmin, 30px) !important;
+  cursor: pointer;
+}
+.fullscreen:hover {
+  color: var(--color-alt);
+}
+
 body {
   background-color: var(--background-color);
   color: var(--color);
@@ -504,17 +515,6 @@ body {
 }
 .chevron-states tr.locked .chevron-state {
   visibility: visible;
-}
-
-.fullscreen {
-  position: absolute;
-  bottom: clamp(-100px, 1vmin, 10px);
-  right: clamp(-100px, 1vmin, 10px);
-  font-size: clamp(-100px, 3vmin, 30px);
-  cursor: pointer;
-}
-.fullscreen:hover {
-  color: var(--color-alt);
 }
 
 .dial-append {
