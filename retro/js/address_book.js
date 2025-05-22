@@ -1,11 +1,14 @@
+/* EDIT CUSTOMIZATIONS IN config.js */
+/* DO NOT EDIT BELOW UNLESS YOU KNOW WHAT YOU'RE DOING!!!! */
+
 const scrollingDiv = document.getElementById('scrollingDiv');
 const tableRowTemplate = document.getElementById('tableRow');
 const tableBody = document.getElementById('tableBody');
 const standardCounts = document.querySelector('.standard-count');
 const fanCounts = document.querySelector('.fan-count');
 
-addresses = [];
-symbols = [];
+let addresses = [];
+let symbols = [];
 
 fetchData();
 
@@ -181,6 +184,7 @@ function sortData(sortProperty) {
 
   tableBody.scrollTo(0, 0);
 }
+window.sortData = sortData;
 
 const labelOptions = {
   Mission: [

@@ -29,6 +29,7 @@
 body {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .genos-font {
@@ -53,6 +54,26 @@ a:visited {
   text-decoration: inherit;
   color: inherit;
   cursor: auto;
+}
+
+.color-dark {
+  color: var(--color-dark);
+}
+
+.color-alt {
+  color: var(--color-alt);
+}
+
+.color-danger {
+  color: var(--color-danger);
+}
+
+.color-good {
+  color: var(--color-good);
+}
+
+.color-glyph {
+  color: var(--glyph-color);
 }
 
 .navigation-menu-wrapper {
@@ -127,6 +148,14 @@ a:visited {
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {
   display: block;
+}
+
+.fullscreen {
+  font-size: 1.6vmin !important;
+  align-items: center;
+  display: flex !important;
+  height: 2.2vmin;
+  user-select: none;
 }
 
 body {
@@ -311,7 +340,7 @@ body {
   width: clamp(-100px, 53.7vmin, 537px);
   height: clamp(-100px, 7.9vmin, 79px);
   text-align: center;
-  font-size: clamp(-100px, 9vmin, 90px);
+  font-size: clamp(-100px, 6vmin, 60px);
   line-height: clamp(-100px, 6vmin, 60px);
   word-spacing: clamp(-100px, 14vmin, 140px);
   letter-spacing: clamp(-100px, 1.5vmin, 15px);

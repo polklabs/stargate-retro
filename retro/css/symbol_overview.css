@@ -1,0 +1,367 @@
+:root {
+  /*! UPDATE COLORS HERE !!! -------------------------------------------------------------------------------------- */
+  --color: #37bfde;
+  --color-dark: #4a7297;
+  --color-danger: #c70036;
+  --color-good: #07ff0b;
+  --color-alt: white;
+  --background-color: #020f25;
+  --glyph-color: #fffea5;
+  /*! Calculate glyph-color-svg here: https://codepen.io/sosuke/pen/Pjoqqp */
+  --glyph-color-svg: invert(100%) sepia(21%) saturate(5367%) hue-rotate(312deg)
+    brightness(111%) contrast(103%);
+  --glyph-color-danger-svg: invert(16%) sepia(84%) saturate(3541%)
+    hue-rotate(331deg) brightness(81%) contrast(117%);
+  --color-wormhole-danger-1: yellow;
+  --color-wormhole-danger-2: orange;
+  --color-wormhole-danger-3: red;
+  --color-wormhole-1: royalblue;
+  --color-wormhole-2: cyan;
+  --color-wormhole-3: cornflowerblue;
+  --border: solid clamp(0px, 0.5vmin, 5px) var(--color);
+  --border-thin: solid clamp(0px, 0.3vmin, 3px) var(--color);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.genos-font {
+  font-family: "Genos", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: clamp(-100px, 3.5vmin, 35px);
+}
+
+.hidden {
+  display: none !important;
+}
+
+a:link {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: auto;
+}
+
+a:visited {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: auto;
+}
+
+.color-dark {
+  color: var(--color-dark);
+}
+
+.color-alt {
+  color: var(--color-alt);
+}
+
+.color-danger {
+  color: var(--color-danger);
+}
+
+.color-good {
+  color: var(--color-good);
+}
+
+.color-glyph {
+  color: var(--glyph-color);
+}
+
+.navigation-menu-wrapper {
+  height: 0;
+  position: relative;
+  margin: 0 auto;
+}
+
+.navigation-menu {
+  margin: auto;
+  width: clamp(-100px, 100vmin, 1000px);
+  display: flex;
+  align-items: center;
+  gap: clamp(-100px, 1vmin, 10px);
+  margin-bottom: 0;
+  margin-top: clamp(-100px, 0.5vmin, 5px);
+  padding-left: clamp(-100px, 4vmin, 40px);
+  opacity: 0.1;
+  transition: opacity 0.3s linear;
+  position: absolute;
+  left: 0;
+  font-size: clamp(-100px, 2vmin, 20px);
+}
+.navigation-menu:hover {
+  opacity: 1;
+}
+.navigation-menu a {
+  color: var(--color);
+  border: var(--border-thin);
+  border-radius: clamp(-100px, 1vmin, 10px);
+  padding: 0 clamp(-100px, 0.6vmin, 6px);
+  cursor: pointer;
+}
+.navigation-menu a:hover {
+  background-color: var(--color-dark);
+}
+.navigation-menu a.active-link {
+  color: var(--glyph-color);
+}
+
+.dropbtn {
+  cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: var(--color-dark);
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--background-color);
+  z-index: 9999;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: var(--color-alt);
+  padding: clamp(-100px, 1vmin, 10px);
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: var(--color-dark);
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+  display: block;
+}
+
+.fullscreen {
+  font-size: 1.6vmin !important;
+  align-items: center;
+  display: flex !important;
+  height: 2.2vmin;
+  user-select: none;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--color);
+  margin: 0;
+  height: 100vh;
+  display: flex;
+}
+
+.ref {
+  background-image: url("../../references/power-ref.jpg");
+  width: clamp(-100px, 99vmin, 990px);
+  height: clamp(-100px, 74vmin, 740px);
+  position: absolute;
+  background-size: cover;
+  top: clamp(-100px, 13vmin, 130px);
+  left: clamp(-100px, 7vmin, 70px);
+}
+
+.navigation-menu-wrapper {
+  width: clamp(-100px, 98vmin, 980px);
+}
+
+.border {
+  border: var(--border);
+  border-radius: clamp(-100px, 3vmin, 30px);
+  width: clamp(-100px, 98vmin, 980px);
+  height: clamp(-100px, 72vmin, 720px);
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  padding-left: clamp(-100px, 4vmin, 40px);
+  font-size: clamp(-100px, 2.5vmin, 25px);
+  line-height: clamp(-100px, 3.2vmin, 32px);
+  height: clamp(-100px, 5.5vmin, 55px);
+}
+.title span.title-main {
+  color: var(--glyph-color);
+  font-size: clamp(-100px, 3vmin, 30px);
+  padding-left: unset;
+  padding-top: clamp(-100px, 1vmin, 10px);
+}
+.title span {
+  padding-left: clamp(-100px, 1.6vmin, 16px);
+}
+
+.title-bar {
+  position: absolute;
+  border: var(--border);
+  top: clamp(-100px, 2.5vmin, 25px);
+  left: clamp(-100px, 26vmin, 260px);
+  height: clamp(-100px, 0.8vmin, 8px);
+  width: clamp(-100px, 43vmin, 430px);
+}
+
+.title-dot {
+  position: absolute;
+  background-color: var(--color-danger);
+  width: clamp(-100px, 2vmin, 20px);
+  height: clamp(-100px, 2vmin, 20px);
+  left: clamp(-100px, 70.8vmin, 708px);
+  top: clamp(-100px, 1.9vmin, 19px);
+  border-radius: clamp(-100px, 2vmin, 20px);
+}
+
+.symbol-wrapper {
+  border: solid clamp(-100px, 0.5vmin, 5px) var(--color-alt);
+  width: clamp(-100px, 94.7vmin, 947px);
+  height: clamp(-100px, 59.5vmin, 595px);
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  padding-left: clamp(-100px, 0.2vmin, 2px);
+  gap: clamp(-100px, 0.2vmin, 2px);
+}
+.symbol-wrapper .symbol-box {
+  width: clamp(-100px, 11.5vmin, 115px);
+  height: clamp(-100px, 11.5vmin, 115px);
+  border: solid clamp(-100px, 0.5vmin, 5px) var(--color-alt);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  cursor: pointer;
+  position: relative;
+}
+.symbol-wrapper .symbol-box .symbol-index {
+  position: absolute;
+  top: clamp(-100px, 0.8vmin, 8px);
+  left: clamp(-100px, 0.3vmin, 3px);
+  line-height: 0;
+  font-size: clamp(-100px, 2.5vmin, 25px);
+}
+.symbol-wrapper .symbol-box:hover {
+  background-color: var(--color-dark);
+}
+.symbol-wrapper .symbol-box:hover .symbol {
+  filter: var(--glyph-color-svg);
+}
+.symbol-wrapper .symbol {
+  width: clamp(-100px, 7vmin, 70px);
+  height: auto;
+  filter: invert(1);
+}
+.symbol-wrapper .symbol-name {
+  font-size: clamp(-100px, 1.4vmin, 14px);
+  font-weight: bolder;
+  color: var(--color-alt);
+}
+.symbol-wrapper .symbol-box.selected {
+  background-color: var(--color-danger);
+}
+.symbol-wrapper .symbol-box.selected .symbol {
+  filter: var(--glyph-color-danger-svg) invert(1);
+}
+.symbol-wrapper .symbol-box.selected .symbol-name {
+  color: var(--color-danger);
+  filter: invert(1);
+}
+
+.footer-boxes {
+  height: clamp(-100px, 1vmin, 10px);
+  padding-left: clamp(-100px, 41vmin, 410px);
+  padding-right: clamp(-100px, 3vmin, 30px);
+  display: flex;
+  flex-direction: row;
+  gap: clamp(-100px, 0.5vmin, 5px);
+}
+.footer-boxes div {
+  width: auto;
+  height: clamp(-100px, 2vmin, 20px);
+  border: var(--border-thin);
+  flex-grow: 1;
+  border-top: unset;
+}
+
+.auth-code-label {
+  position: absolute;
+  bottom: clamp(-100px, 3.2vmin, 32px);
+  left: clamp(-100px, 2.8vmin, 28px);
+  color: var(--glyph-color);
+  font-size: clamp(-100px, 2vmin, 20px);
+}
+
+.auth-code {
+  position: absolute;
+  bottom: clamp(-100px, 0.4vmin, 4px);
+  left: clamp(-100px, -1vmin, -10px);
+  color: var(--color-alt);
+  font-size: clamp(-100px, 2.3vmin, 23px);
+  display: flex;
+}
+.auth-code div {
+  width: clamp(-100px, 2.3vmin, 23px);
+  text-align: center;
+  border-bottom: var(--border-thin);
+  border-right: var(--border-thin);
+  border-color: var(--color-dark);
+}
+.auth-code div:nth-child(1) {
+  padding-left: clamp(-100px, 3.3vmin, 33px);
+  width: clamp(-100px, 6vmin, 60px);
+}
+.auth-code div:nth-child(7) {
+  padding: 0 clamp(-100px, 1vmin, 10px);
+  width: clamp(-100px, 5vmin, 50px);
+}
+.auth-code div:nth-child(15) {
+  padding-right: clamp(-100px, 0.7vmin, 7px);
+  width: clamp(-100px, 3vmin, 30px);
+}
+
+.code {
+  position: absolute;
+  top: clamp(-100px, 0.4vmin, 4px);
+  right: clamp(-100px, -1vmin, -10px);
+  color: var(--color-alt);
+  font-size: clamp(-100px, 2.3vmin, 23px);
+  display: flex;
+}
+.code div {
+  width: clamp(-100px, 3vmin, 30px);
+  height: clamp(-100px, 1.5vmin, 15px);
+  text-align: center;
+  border-top: var(--border-thin);
+  border-left: var(--border-thin);
+  border-color: var(--color-dark);
+}
+
+.user {
+  position: absolute;
+  left: clamp(-100px, 41vmin, 410px);
+  bottom: clamp(-100px, 1.7vmin, 17px);
+  font-size: clamp(-100px, 2vmin, 20px);
+  color: var(--glyph-color);
+}
+.user .username {
+  color: var(--color-alt);
+}
+
+/*# sourceMappingURL=symbol_overview.css.map */

@@ -1,0 +1,178 @@
+.gdo-wrapper {
+  width: clamp(-100px, 56vmin, 560px);
+  height: clamp(-100px, 16vmin, 160px);
+  position: absolute;
+  left: clamp(-100px, 20vmin, 200px);
+  top: clamp(-100px, 24vmin, 240px);
+  background-color: var(--background-color);
+  font-size: clamp(-100px, 2vmin, 20px);
+  line-height: clamp(-100px, 1.6vmin, 16px);
+  transition: height 1s;
+  cursor: pointer;
+}
+.gdo-wrapper .gdo-signal {
+  border: var(--border-thin);
+  height: clamp(-100px, 16vmin, 160px);
+}
+.gdo-wrapper .gdo-top,
+.gdo-wrapper .gdo-bottom {
+  display: flex;
+  gap: clamp(-100px, 0.5vmin, 5px);
+  margin: 0 clamp(-100px, 0.5vmin, 5px);
+}
+.gdo-wrapper .gdo-top .spacer,
+.gdo-wrapper .gdo-bottom .spacer {
+  flex-grow: 1;
+}
+.gdo-wrapper .signal-top,
+.gdo-wrapper .signal-bottom {
+  height: clamp(-100px, 1.5vmin, 15px);
+  display: flex;
+}
+.gdo-wrapper .signal-top div,
+.gdo-wrapper .signal-bottom div {
+  border: var(--border-thin);
+}
+.gdo-wrapper .signal-top div:nth-of-type(1) {
+  width: clamp(-100px, 8vmin, 80px);
+}
+.gdo-wrapper .signal-top div:nth-of-type(2) {
+  width: clamp(-100px, 5vmin, 50px);
+}
+.gdo-wrapper .signal-top div:nth-of-type(3) {
+  width: clamp(-100px, 30vmin, 300px);
+}
+.gdo-wrapper .signal-top div:nth-of-type(4) {
+  width: clamp(-100px, 13vmin, 130px);
+}
+.gdo-wrapper .signal-bottom div:nth-of-type(1) {
+  width: clamp(-100px, 10vmin, 100px);
+}
+.gdo-wrapper .signal-bottom div:nth-of-type(2) {
+  width: clamp(-100px, 18vmin, 180px);
+}
+.gdo-wrapper .signal-bottom div:nth-of-type(3) {
+  width: clamp(-100px, 7vmin, 70px);
+}
+.gdo-wrapper .signal-bottom div:nth-of-type(4) {
+  width: clamp(-100px, 21vmin, 210px);
+}
+.gdo-wrapper .signal {
+  display: flex;
+  flex-direction: row;
+  margin: 0 clamp(-100px, 0.4vmin, 4px);
+}
+.gdo-wrapper .signal .signal-center {
+  flex-grow: 1;
+  border: var(--border-thin);
+  margin: clamp(-100px, 0.4vmin, 4px);
+  max-width: clamp(-100px, 52.5vmin, 525px);
+  position: relative;
+}
+.gdo-wrapper .signal .signal-center svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.gdo-wrapper .signal .signal-center svg:nth-of-type(1) {
+  clip-path: inset(0 0 0 100%);
+  animation: signalGreenAnimation 6s linear;
+}
+.gdo-wrapper .signal .signal-center svg:nth-of-type(1) path {
+  stroke: var(--color-danger);
+}
+.gdo-wrapper .signal .signal-center svg:nth-of-type(2) {
+  animation: signalRedAnimation 6s linear;
+}
+.gdo-wrapper .signal .signal-center svg:nth-of-type(2) path {
+  stroke: var(--color-good);
+}
+.gdo-wrapper .signal .signal-center .wave-edge {
+  position: absolute;
+  width: clamp(-100px, 0.5vmin, 5px);
+  background-color: var(--glyph-color);
+  height: 100%;
+  opacity: 0.5;
+  animation: signalEdgeAnimation 3s linear;
+  animation-iteration-count: 2;
+}
+.gdo-wrapper .signal .signal-center.black-hole svg:nth-of-type(1) {
+  animation: signalGreenAnimation 24s linear;
+}
+.gdo-wrapper .signal .signal-center.black-hole svg:nth-of-type(2) {
+  animation: signalRedAnimation 24s linear;
+}
+.gdo-wrapper .signal .signal-center.black-hole .wave-edge {
+  animation: signalEdgeAnimation 12s linear;
+}
+.gdo-wrapper .signal .signal-left,
+.gdo-wrapper .signal .signal-right {
+  line-height: clamp(-100px, 0.7vmin, 7px);
+}
+.gdo-wrapper .signal-info {
+  border: var(--border-thin);
+  border-top: unset;
+  height: clamp(-100px, 10vmin, 100px);
+  color: var(--color-danger);
+  text-align: center;
+  padding-top: clamp(-100px, 1.5vmin, 15px);
+  line-height: clamp(-100px, 3vmin, 30px);
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1s;
+}
+.gdo-wrapper .signal-info div:nth-of-type(2) {
+  font-size: clamp(-100px, 4vmin, 40px);
+}
+.gdo-wrapper .signal-info.gdo-valid {
+  color: var(--color-good);
+}
+
+.border.gdo-valid .gdo-wrapper {
+  height: clamp(-100px, 26vmin, 260px);
+}
+.border.gdo-valid .signal-info {
+  clip-path: inset(0 0 0 0);
+}
+.border.gdo-valid .info-box {
+  font-size: clamp(-100px, 6vmin, 60px);
+  color: var(--color-good) !important;
+}
+.border.gdo-valid .chevron-link.locked path {
+  stroke: var(--color-good) !important;
+}
+.border.gdo-valid .chevron-box.locked {
+  border-color: var(--color-good);
+}
+
+@keyframes signalGreenAnimation {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  50% {
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 100%);
+  }
+}
+@keyframes signalRedAnimation {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  50% {
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes signalEdgeAnimation {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/*# sourceMappingURL=gdo.css.map */

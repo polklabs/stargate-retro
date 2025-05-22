@@ -1,2 +1,6 @@
 *.css.map
 __pycache__
+
+# STYLING
+functions.css
+styles.css

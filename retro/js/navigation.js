@@ -1,3 +1,8 @@
+/* EDIT CUSTOMIZATIONS IN config.js */
+/* DO NOT EDIT BELOW UNLESS YOU KNOW WHAT YOU'RE DOING!!!! */
+
+import {config} from './config.js';
+
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 function openDropdown(elementId) {
@@ -54,7 +59,6 @@ async function shutdown() {
 }
 
 function isActive(href) {
-  console.log(window.location.href);
   return `href="${href}"` + (window.location.href.includes(href) ? 'class="active-link"' : '');
 }
 
@@ -65,19 +69,24 @@ function initializeNavBar() {
       <div class="navigation-menu">
         <a ${isActive('/retro/dial.html')}>Home</a>
         <a ${isActive('/retro/address_book.html')}>Address Book</a>
-        <a ${isActive('/symbol_overview.htm')}>Symbols</a>
+        <a ${isActive('/retro/symbol_overview.html')}>Symbols</a>
         <div class="dropdown">
           <a onclick="openDropdown('menu-dropdown')" class="dropbtn"> Admin </a>
           <div id="menu-dropdown" class="dropdown-content">
             <a ${isActive('/debug.htm')}>Testing / Debug</a>
             <a ${isActive('/config.htm')}>Configuration</a>
-            <a ${isActive('/info.htm')}>System</a>
+            <a ${isActive('/retro/info.html')}>System</a>
             <a onclick="restart()">Restart Software</a>
             <a onclick="reboot()">Reboot Raspberry Pi</a>
             <a onclick="shutdown()">Shutdown Raspberry Pi</a>
           </div>
         </div>
         <a href="/help.htm">Help</a>
+        <a class="a-fullscreen"><span onclick="toggleFillScreen()"
+          class="material-symbols-outlined fullscreen">
+          fullscreen
+          </span>
+        </a>
       </div>
     </div>
   `;
@@ -85,4 +94,45 @@ function initializeNavBar() {
   const body = document.querySelector('body')
   body.insertBefore(innerDiv, body.childNodes[0])
 }
+window.restart = restart;
+window.reboot = reboot;
+window.shutdown = shutdown;
+window.openDropdown = openDropdown;
 initializeNavBar();
+
+// FULL SCREEN HACK
+const elem = document.body;
+let fill = localStorage.getItem('fillScreen') === 'true' || config.FILL_SCREEN;
+const border = document.querySelector('.border');
+function fillScreen() {
+  if (fill) {
+    const scaleHeight = (elem.offsetHeight * 0.94) / border.offsetHeight;
+    const scaleWidth = (elem.offsetWidth * 0.97) / border.offsetWidth;
+
+    const scale = +Math.min(scaleHeight, scaleWidth).toFixed(3);
+    border.style.scale = Math.max(1, scale);
+  } else {
+    border.style.scale = 1;
+  }
+}
+
+function toggleFillScreen() {
+  const fillLocal = localStorage.getItem('fillScreen');
+  if (fillLocal === 'true') {
+    localStorage.removeItem('fillScreen');
+    fill = false;
+  } else {
+    localStorage.setItem('fillScreen', 'true');
+    fill = true;
+  }
+  fillScreen();
+}
+
+fillScreen();
+window.addEventListener('resize', fillScreen, true);
+window.toggleFillScreen = toggleFillScreen;
+
+const fullscreenBtn = document.querySelector('.a-fullscreen');
+if (config.FILL_SCREEN && fullscreenBtn) {
+  fullscreenBtn.style.display = 'none';
+}

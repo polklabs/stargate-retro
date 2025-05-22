@@ -48,42 +48,65 @@ Navigation header at the top of all pages to integrate with v4 software. As it i
 
 #### To access, enter one of the links below:
 - [Dial](http://stargate.local/retro/dial.html) - `/retro/dial.html`
+    - On incoming wormholes: GDO window will popup. It will scan then display a recognized code. This can be adjusted or disabled in config.js
 
     <img src="screenshots/Screenshot 2025-05-07 154809.png" alt="drawing" width="300"/>
+    <img src="screenshots/Screenshot 2025-05-20 161401.png" alt="drawing" width="300"/>
 - [Address Book](http://stargate.local/retro/address_book.html) - `/retro/address_book.html`
 
     <img src="screenshots/Screenshot 2025-05-07 154444.png" alt="drawing" width="300"/>
+- [Symbol Overview](http://stargate.local/retro/symbol_overview.html) - `/retro/symbol_overview.html`
+
+    <img src="screenshots/Screenshot 2025-05-22 163110.png" alt="drawing" width="300"/>
+- [System Info](http://stargate.local/retro/info.html) - `/retro/info.html`
+
+    <img src="screenshots/Screenshot 2025-05-21 202059.png" alt="drawing" width="300"/>
 
 
 ## Customizations
 
-| File | Property | Default | Description | Alt Example |
-| ---- | -------- | ------- | ----------- | ----------- |
-| dial.js | RING_ANIMATION | `true` | Should the ring spin when dialing out |
-| dial.js | AUTHORIZATION_CODE_RANDOMIZE | `true` | Generate a random authorization code on page load |
-| dial.js | AUTHORIZATION_CODE | `77892757892387` | Fixed code to use if *AUTHORIZATION_CODE_RANDOMIZE* is `false` |
-| dial.js | USER | `SGT. W HARRIMAN` | Use name in bottom right of screen |
-| dial.js | DEFAULT_GATE_NAME | `STARGATE` | Gate name if it cannot be fetched from server |
-| dial.js | TEXT_OFFLINE | `OFFLINE` | Text to use when gate is offline |
-| dial.js | TEXT_IDLE | `IDLE` | Text to use when gate is idle |
-| dial.js | TEXT_DIALING | `DIALING` | Text to use when gate is dialing out |
-| dial.js | TEXT_INCOMING | `INCOMING` | Text to use when gate is dialing in |
-| dial.js | TEXT_ENGAGED | `ENGAGED` | Text to use when wormhole is active  |
-| *.css |  --color | <span style="color:#37bfde">#37bfde</span> | Most borders and text | #2B6EC8 |
-| *.css | --color-dark | <span style="color:#4a7297">#4a7297</span> | Some smaller borders  | #2B6EC8 |
-| *.css |  --color-danger |<span style="color:#c70036">#c70036</span> | Invalid glyphs, dialing lock, and stargate state color | #B2020B |
-| *.css |  --color-good |<span style="color:#07ff0b">#07ff0b</span> | Address book hover color, dialing chevron OK text | #275e9c |
-| *.css |  --color-alt |<span style="color:white">white</span> | Secondary text color |
-| *.css |  --background-color |<span style="color:#020f25">#020f25</span> | Background Color | #000000 | 
-| *.css |  --glyph-color |<span style="color:#fffea5">#fffea5</span> | Glyph color also used for some text - must also generate new [SVG filter](https://codepen.io/sosuke/pen/Pjoqqp) to apply color |
-| *.css |  --color-wormhole-danger-1 |<span style="color:yellow">yellow</span> | 3 Part gradient for active wormhole - when connected to blackhole |
-| *.css |  --color-wormhole-danger-2 |<span style="color:orange">orange</span> | 3 Part gradient for active wormhole - when connected to blackhole |
-| *.css |  --color-wormhole-danger-3 |<span style="color:red">red</span> | 3 Part gradient for active wormhole - when connected to blackhole |
-| *.css |  --color-wormhole-1 |<span style="color:royalblue">royalblue</span> | 3 Part gradient for active wormhole |
-| *.css |  --color-wormhole-2 |<span style="color:cyan">cyan</span> | 3 Part gradient for active wormhole |
-| *.css |  --color-wormhole-3 |<span style="color:cornflowerblue">cornflowerblue</span> | 3 Part gradient for active wormhole |
-| crt.js | CRT_SCREEN_FLICKER | `false` | Add screen flicker effect at random intervals |
-| crt.css | .crt -> textShadow | unset | Uncomment to add awesome subtle crt effect that will melt your computer |
+| File | Page | Property | Default | Description | Alt Example |
+| ---- | ---- | -------- | ------- | ----------- | ----------- |
+| config.js | All | FILL_SCREEN | `false` | Will attempt to make the page fill the screen |  |
+| config.js | Dial | RING_ANIMATION | `true` | Should the ring spin when dialing out |
+| config.js | Dial/Symbols | AUTHORIZATION_CODE_RANDOMIZE | `true` | Generate a random authorization code on page load |
+| config.js | Dial/Symbols | AUTHORIZATION_CODE | `77892757892387` | Fixed code to use if *AUTHORIZATION_CODE_RANDOMIZE* is `false` |
+| config.js | Dial/Symbols/Info | USER | `SGT. W HARRIMAN` | Use name in bottom right of screen |
+| config.js | Dial | DEFAULT_GATE_NAME | `STARGATE` | Gate name if it cannot be fetched from server |
+| config.js | Dial | TEXT_OFFLINE | `OFFLINE` | Text to use when gate is offline |
+| config.js | Dial | TEXT_IDLE | `IDLE` | Text to use when gate is idle |
+| config.js | Dial | TEXT_DIALING | `DIALING` | Text to use when gate is dialing out |
+| config.js | Dial | TEXT_INCOMING | `INCOMING` | Text to use when gate is dialing in |
+| config.js | Dial | TEXT_ENGAGED | `ENGAGED` | Text to use when wormhole is active  |
+| config.js | Dial | TEXT_RECOGNIZED | `RECOGNIZED` | Text to use when GDO code is valid  |
+| config.js | Dial | TEXT_ANALYZING | `ANALYZING` | Text to use when GDO code is being checked  |
+| config.js | Dial | GDO_AUTO | `true` | Should the GDO window auto open after establishing an incoming wormhole  |
+| config.js | Dial | GDO_DELAY | `3` | How long after establishing incoming wormhole before GDO window opens  |
+| config.js | Dial | GDO_SIGNALS | *see config* | Names that will appear as GDO code senders  |
+| config.js | Info | INFO_FLUX | `[-40, 40]` | Gauge needle fluctuation at idle `MAX -90 to 90` |
+| config.js | Info | INFO_FLUX_ACTIVE | `[-90, 90]` | Gauge needle fluctuation for active gate `MAX -90 to 90` |
+| config.js | Info | INFO_FLUX_UPDATES | `[1.5, 0.9]` | How often needle moves at idle vs active gate (seconds)  |
+| config.js | Info | INFO_OUTPUT | `[10, 30]` | Output bar fluctuation at idle `MAX 0 to 100` |
+| config.js | Info | INFO_OUTPUT_ACTIVE | `[25, 100]` | Output bar fluctuation for active gate `MAX 0 to 100` |
+| config.js | Info | INFO_OUTPUT_UPDATES | `[1.8, 0.7]` | How often bars moves at idle vs active gate (seconds)  |
+| config.js | Info | INFO_WAVEFORM | `[0.3, 0.6]` | Waveform amplitude fluctuation at idle `MAX 0 to 1`  |
+| config.js | Info | INFO_WAVEFORM_ACTIVE | `[0.7, 1]` | Waveform amplitude fluctuation for active gate `MAX 0 to 1`  |
+| config.js | Info | INFO_WAVEFORM_UPDATES | `[20, 2.5]` | How often amplitude changes at idle vs active gate (seconds)  |
+| *.css | All |  --color | <span style="color:#37bfde">#37bfde</span> | Most borders and text | #2B6EC8 |
+| *.css | All | --color-dark | <span style="color:#4a7297">#4a7297</span> | Some smaller borders  | #2B6EC8 |
+| *.css | All |  --color-danger |<span style="color:#c70036">#c70036</span> | Invalid glyphs, dialing lock, and stargate state color | #B2020B |
+| *.css | All |  --color-good |<span style="color:#07ff0b">#07ff0b</span> | Address book hover color, dialing chevron OK text | #275e9c |
+| *.css | All |  --color-alt |<span style="color:white">white</span> | Secondary text color |
+| *.css | All |  --background-color |<span style="color:#020f25">#020f25</span> | Background Color | #000000 | 
+| *.css | All |  --glyph-color |<span style="color:#fffea5">#fffea5</span> | Glyph color also used for some text - must also generate new [SVG filter](https://codepen.io/sosuke/pen/Pjoqqp) to apply color |
+| *.css | All |  --color-wormhole-danger-1 |<span style="color:yellow">yellow</span> | 3 Part gradient for active wormhole - when connected to blackhole |
+| *.css | All |  --color-wormhole-danger-2 |<span style="color:orange">orange</span> | 3 Part gradient for active wormhole - when connected to blackhole |
+| *.css | All |  --color-wormhole-danger-3 |<span style="color:red">red</span> | 3 Part gradient for active wormhole - when connected to blackhole |
+| *.css | All |  --color-wormhole-1 |<span style="color:royalblue">royalblue</span> | 3 Part gradient for active wormhole |
+| *.css | All |  --color-wormhole-2 |<span style="color:cyan">cyan</span> | 3 Part gradient for active wormhole |
+| *.css | All |  --color-wormhole-3 |<span style="color:cornflowerblue">cornflowerblue</span> | 3 Part gradient for active wormhole |
+| config.js | All | CRT_SCREEN_FLICKER | `false` | Add screen flicker effect at random intervals |
+| crt.css | All | .crt -> textShadow | unset | Uncomment to add awesome subtle crt effect that will melt your computer |
 
 ## Future Plans?
 
@@ -94,7 +117,6 @@ Navigation header at the top of all pages to integrate with v4 software. As it i
 - New Pages
     - Dialing from S1
     - Address Book from S2E15 - The Fifth Race
-    - Base Power Monitor
     - Malp
     - Popups
         - System Access Denied
@@ -155,3 +177,5 @@ Instead of pixels or percentages, the css is defined in terms of vmin. This allo
 To generate css run: `sass --watch scss:retro/css`
 
 For a basic web server to proxy the stargate software run: `python server.py`
+
+Easiest to develop just using vmin then convert to vmin-clamp() after. Find regex `([-0-9.]+)vmin` and replace `vmin-clamp($1)`

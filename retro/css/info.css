@@ -1,0 +1,606 @@
+:root {
+  /*! UPDATE COLORS HERE !!! -------------------------------------------------------------------------------------- */
+  --color: #37bfde;
+  --color-dark: #4a7297;
+  --color-danger: #c70036;
+  --color-good: #07ff0b;
+  --color-alt: white;
+  --background-color: #020f25;
+  --glyph-color: #fffea5;
+  /*! Calculate glyph-color-svg here: https://codepen.io/sosuke/pen/Pjoqqp */
+  --glyph-color-svg: invert(100%) sepia(21%) saturate(5367%) hue-rotate(312deg)
+    brightness(111%) contrast(103%);
+  --glyph-color-danger-svg: invert(16%) sepia(84%) saturate(3541%)
+    hue-rotate(331deg) brightness(81%) contrast(117%);
+  --color-wormhole-danger-1: yellow;
+  --color-wormhole-danger-2: orange;
+  --color-wormhole-danger-3: red;
+  --color-wormhole-1: royalblue;
+  --color-wormhole-2: cyan;
+  --color-wormhole-3: cornflowerblue;
+  --border: solid clamp(0px, 0.5vmin, 5px) var(--color);
+  --border-thin: solid clamp(0px, 0.3vmin, 3px) var(--color);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.genos-font {
+  font-family: "Genos", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: clamp(-100px, 3.5vmin, 35px);
+}
+
+.hidden {
+  display: none !important;
+}
+
+a:link {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: auto;
+}
+
+a:visited {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: auto;
+}
+
+.color-dark {
+  color: var(--color-dark);
+}
+
+.color-alt {
+  color: var(--color-alt);
+}
+
+.color-danger {
+  color: var(--color-danger);
+}
+
+.color-good {
+  color: var(--color-good);
+}
+
+.color-glyph {
+  color: var(--glyph-color);
+}
+
+.navigation-menu-wrapper {
+  height: 0;
+  position: relative;
+  margin: 0 auto;
+}
+
+.navigation-menu {
+  margin: auto;
+  width: clamp(-100px, 100vmin, 1000px);
+  display: flex;
+  align-items: center;
+  gap: clamp(-100px, 1vmin, 10px);
+  margin-bottom: 0;
+  margin-top: clamp(-100px, 0.5vmin, 5px);
+  padding-left: clamp(-100px, 4vmin, 40px);
+  opacity: 0.1;
+  transition: opacity 0.3s linear;
+  position: absolute;
+  left: 0;
+  font-size: clamp(-100px, 2vmin, 20px);
+}
+.navigation-menu:hover {
+  opacity: 1;
+}
+.navigation-menu a {
+  color: var(--color);
+  border: var(--border-thin);
+  border-radius: clamp(-100px, 1vmin, 10px);
+  padding: 0 clamp(-100px, 0.6vmin, 6px);
+  cursor: pointer;
+}
+.navigation-menu a:hover {
+  background-color: var(--color-dark);
+}
+.navigation-menu a.active-link {
+  color: var(--glyph-color);
+}
+
+.dropbtn {
+  cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: var(--color-dark);
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--background-color);
+  z-index: 9999;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: var(--color-alt);
+  padding: clamp(-100px, 1vmin, 10px);
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: var(--color-dark);
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+  display: block;
+}
+
+.fullscreen {
+  font-size: 1.6vmin !important;
+  align-items: center;
+  display: flex !important;
+  height: 2.2vmin;
+  user-select: none;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--color);
+  margin: 0;
+  height: 100vh;
+  display: flex;
+}
+
+.ref {
+  background-image: url("../../references/power-ref.jpg");
+  width: clamp(-100px, 99vmin, 990px);
+  height: clamp(-100px, 74vmin, 740px);
+  position: absolute;
+  background-size: cover;
+  top: clamp(-100px, 13vmin, 130px);
+  left: clamp(-100px, 7vmin, 70px);
+}
+
+.navigation-menu-wrapper {
+  width: clamp(-100px, 98vmin, 980px);
+}
+
+.border {
+  border: var(--border);
+  border-radius: clamp(-100px, 3vmin, 30px);
+  width: clamp(-100px, 98vmin, 980px);
+  height: clamp(-100px, 72vmin, 720px);
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  padding-left: clamp(-100px, 4vmin, 40px);
+  font-size: clamp(-100px, 2.5vmin, 25px);
+  line-height: clamp(-100px, 2.2vmin, 22px);
+}
+.title span.title-main {
+  color: var(--color-alt);
+  font-size: clamp(-100px, 3vmin, 30px);
+  padding-left: unset;
+}
+.title span {
+  padding-left: clamp(-100px, 1.6vmin, 16px);
+}
+
+.title-right {
+  position: absolute;
+  right: clamp(-100px, 2vmin, 20px);
+  top: 0;
+  text-align: end;
+  line-height: clamp(-100px, 2vmin, 20px);
+}
+.title-right .version {
+  font-size: clamp(-100px, 3vmin, 30px);
+}
+.title-right .version-title {
+  font-size: clamp(-100px, 2vmin, 20px);
+  color: var(--glyph-color);
+}
+
+.main-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: clamp(-100px, 2vmin, 20px);
+  margin: clamp(-100px, 1vmin, 10px) clamp(-100px, 2vmin, 20px) 0;
+}
+.main-wrapper > div {
+  border-right: var(--border-thin);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(-100px, 1vmin, 10px);
+}
+.main-wrapper > div > div {
+  border-top: var(--border);
+}
+.main-wrapper .col-1 {
+  width: clamp(-100px, 17vmin, 170px);
+}
+.main-wrapper .col-2 {
+  width: clamp(-100px, 31vmin, 310px);
+  height: clamp(-100px, 56.4vmin, 564px);
+}
+.main-wrapper .col-3 {
+  width: clamp(-100px, 41vmin, 410px);
+  height: clamp(-100px, 56.4vmin, 564px);
+}
+.main-wrapper .section-title {
+  color: var(--color-alt);
+  background-color: var(--color);
+  font-size: clamp(-100px, 2.5vmin, 25px);
+  line-height: clamp(-100px, 1.2vmin, 12px);
+  padding-left: clamp(-100px, 1.1vmin, 11px);
+  padding-right: clamp(-100px, 1.1vmin, 11px);
+  padding-bottom: clamp(-100px, 0.7vmin, 7px);
+  width: fit-content;
+  font-weight: bold;
+}
+.main-wrapper .flux {
+  height: clamp(-100px, 33vmin, 330px);
+}
+.main-wrapper .flux .flux-gauges {
+  display: flex;
+  flex-direction: column;
+}
+.main-wrapper .flux .flux-gauges div {
+  height: clamp(-100px, 10.4vmin, 104px);
+  color: var(--glyph-color);
+  position: relative;
+}
+.main-wrapper .flux .flux-gauges div svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: clamp(-100px, 8vmin, 80px) clamp(-100px, 8vmin, 80px);
+  transition: transform 0.75s;
+}
+.main-wrapper .flux .flux-gauges div .dir {
+  color: var(--color-alt);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: clamp(-100px, 14.8vmin, 148px);
+  display: flex;
+  justify-content: space-between;
+  height: clamp(-100px, 3.2vmin, 32px);
+  margin-left: clamp(-100px, 0.8vmin, 8px);
+}
+.main-wrapper .control {
+  height: clamp(-100px, 26.9vmin, 269px);
+}
+.main-wrapper .control .section-title {
+  width: 100%;
+}
+.main-wrapper .control .buttons > a {
+  border: var(--border);
+  margin: clamp(-100px, 0.7vmin, 7px);
+  margin-left: unset;
+  text-align: center;
+  line-height: clamp(-100px, 1.9vmin, 19px);
+  color: var(--glyph-color);
+  font-size: clamp(-100px, 2.2vmin, 22px);
+  cursor: pointer;
+  display: block;
+}
+.main-wrapper .control .buttons > a:hover {
+  color: var(--color);
+}
+.main-wrapper .output .output-columns {
+  display: flex;
+  flex-direction: row;
+  color: var(--glyph-color);
+  margin-top: clamp(-100px, 1.5vmin, 15px);
+}
+.main-wrapper .output .output-columns .out-col-nums {
+  font-size: clamp(-100px, 2.5vmin, 25px);
+  width: clamp(-100px, 4vmin, 40px);
+  text-align: center;
+  line-height: clamp(-100px, 4.3vmin, 43px);
+}
+.main-wrapper .output .output-columns .out-col-bar-1,
+.main-wrapper .output .output-columns .out-col-bar-2,
+.main-wrapper .output .output-columns .out-col-bar-3,
+.main-wrapper .output .output-columns .out-col-bar-4 {
+  width: clamp(-100px, 2.5vmin, 25px);
+}
+.main-wrapper .output .output-columns .out-col-bar-1 .bar-border,
+.main-wrapper .output .output-columns .out-col-bar-2 .bar-border,
+.main-wrapper .output .output-columns .out-col-bar-3 .bar-border,
+.main-wrapper .output .output-columns .out-col-bar-4 .bar-border {
+  border: var(--border-thin);
+  height: clamp(-100px, 47vmin, 470px);
+  position: relative;
+}
+.main-wrapper .output .output-columns .out-col-bar-1 .bar-fill,
+.main-wrapper .output .output-columns .out-col-bar-2 .bar-fill,
+.main-wrapper .output .output-columns .out-col-bar-3 .bar-fill,
+.main-wrapper .output .output-columns .out-col-bar-4 .bar-fill {
+  height: 0%;
+  width: 100%;
+  background-color: var(--color-danger);
+  bottom: 0;
+  position: absolute;
+  transition: height 0.75s ease;
+}
+.main-wrapper .output .output-columns .out-col-bar-1 .bar-num,
+.main-wrapper .output .output-columns .out-col-bar-2 .bar-num,
+.main-wrapper .output .output-columns .out-col-bar-3 .bar-num,
+.main-wrapper .output .output-columns .out-col-bar-4 .bar-num {
+  font-size: clamp(-100px, 3vmin, 30px);
+  text-align: center;
+}
+.main-wrapper .output .output-columns .out-col-dash {
+  width: clamp(-100px, 2vmin, 20px);
+  margin: 0 clamp(-100px, 1vmin, 10px);
+}
+.main-wrapper .output .output-columns .out-col-dash div {
+  border-bottom: var(--border);
+  height: clamp(-100px, 3vmin, 30px);
+}
+.main-wrapper .output .output-percent {
+  position: absolute;
+  top: clamp(-100px, 6.7vmin, 67px);
+  left: clamp(-100px, 43vmin, 430px);
+  font-size: clamp(-100px, 4.5vmin, 45px);
+  color: var(--color-alt);
+}
+.main-wrapper .waveform {
+  height: clamp(-100px, 29vmin, 290px);
+  position: relative;
+}
+.main-wrapper .waveform .wave-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: clamp(-100px, 1.4vmin, 14px) clamp(-100px, 1vmin, 10px) 0;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+.main-wrapper .waveform .wave-wrapper .wave-row {
+  height: clamp(-100px, 1.75vmin, 17.5px);
+  display: flex;
+  flex-direction: row;
+}
+.main-wrapper .waveform .wave-wrapper .wave-row:not(:nth-child(8)) .wave-col-3 {
+  border-width: clamp(-100px, 0.1vmin, 1px);
+}
+.main-wrapper .waveform .wave-wrapper .wave-row:nth-child(8) .wave-col-2, .main-wrapper .waveform .wave-wrapper .wave-row:nth-child(8) .wave-col-4 {
+  width: 0;
+}
+.main-wrapper .waveform .wave-wrapper .wave-row:nth-child(1) .wave-col-2, .main-wrapper .waveform .wave-wrapper .wave-row:nth-child(1) .wave-col-4 {
+  width: clamp(-100px, 1.5vmin, 15px);
+}
+.main-wrapper .waveform .wave-wrapper .wave-row:nth-child(15) .wave-col-3 {
+  border: unset;
+}
+.main-wrapper .waveform .wave-wrapper .wave-row:first-child .wave-col-1 {
+  width: clamp(-100px, 1.5vmin, 15px);
+}
+.main-wrapper .waveform .wave-wrapper .wave-row:first-child .wave-col-5 {
+  width: clamp(-100px, 1.5vmin, 15px);
+}
+.main-wrapper .waveform .wave-wrapper .wave-row:nth-child(15) .wave-col-1 {
+  border-top: var(--border-thin);
+  border-left: unset;
+  width: clamp(-100px, 1.5vmin, 15px);
+}
+.main-wrapper .waveform .wave-wrapper .wave-row:nth-child(15) .wave-col-5 {
+  border-top: var(--border-thin);
+  border-right: unset;
+  width: clamp(-100px, 1.5vmin, 15px);
+}
+.main-wrapper .waveform .wave-wrapper .wave-col-3 {
+  flex-grow: 1;
+  border-top: var(--border-thin);
+  line-height: clamp(-100px, 1vmin, 10px);
+}
+.main-wrapper .waveform .wave-wrapper .wave-col-2,
+.main-wrapper .waveform .wave-wrapper .wave-col-4 {
+  width: clamp(-100px, 2vmin, 20px);
+}
+.main-wrapper .waveform .wave-wrapper .wave-col-1,
+.main-wrapper .waveform .wave-wrapper .wave-col-5 {
+  width: clamp(-100px, 1vmin, 10px);
+  height: 100%;
+  border-top: var(--border-thin);
+}
+.main-wrapper .waveform .wave-wrapper .wave-col-1 {
+  border-left: var(--border-thin);
+}
+.main-wrapper .waveform .wave-wrapper .wave-col-5 {
+  border-right: var(--border-thin);
+}
+.main-wrapper .waveform .waveform-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: calc(100% - clamp(-100px, 1.5vmin, 15px));
+  width: clamp(-100px, 100vmin, 1000px);
+  animation: waveform-animation 5s linear infinite;
+}
+.main-wrapper .waveform .waveform-svg svg {
+  transform: scaleY(0.5);
+  transition: transform 0.5s ease;
+}
+.main-wrapper .waveform .waveform-label {
+  display: flex;
+  flex-direction: row;
+  color: var(--color-alt);
+  font-size: clamp(-100px, 2.2vmin, 22px);
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0 clamp(-100px, 3.6vmin, 36px);
+}
+.main-wrapper .data .section-title {
+  width: clamp(-100px, 20.2vmin, 202px);
+}
+.main-wrapper .data .table-wrapper {
+  max-height: clamp(-100px, 24vmin, 240px);
+  overflow: auto;
+}
+.main-wrapper .data table {
+  height: clamp(-100px, 24vmin, 240px);
+  font-size: clamp(-100px, 1.5vmin, 15px);
+  line-height: clamp(-100px, 1vmin, 10px);
+  border-collapse: collapse;
+  display: table;
+  word-break: break-all;
+  color: var(--color-alt);
+}
+.main-wrapper .data table tr {
+  height: clamp(-100px, 1.5vmin, 15px);
+}
+.main-wrapper .data table tr.error {
+  background-color: var(--color-danger) !important;
+}
+.main-wrapper .data table tr td:first-child {
+  border-right: var(--border-thin);
+}
+.main-wrapper .data table tr:nth-child(odd) {
+  background-color: rgb(from var(--color-dark) r g b/40%);
+}
+.main-wrapper .data table tr td:nth-child(2) {
+  text-align: center;
+}
+.main-wrapper .data table img {
+  width: clamp(-100px, 2vmin, 20px);
+  height: clamp(-100px, 2vmin, 20px);
+  filter: invert(1);
+}
+
+.mode {
+  position: absolute;
+  top: clamp(-100px, 61.3vmin, 613px);
+  left: clamp(-100px, 22vmin, 220px);
+  color: var(--glyph-color);
+  font-size: clamp(-100px, 2.6vmin, 26px);
+}
+
+.mode-box {
+  position: absolute;
+  top: clamp(-100px, 63.8vmin, 638px);
+  left: clamp(-100px, 20vmin, 200px);
+  color: var(--glyph-color);
+  width: clamp(-100px, 75vmin, 750px);
+  height: clamp(-100px, 4vmin, 40px);
+  display: flex;
+  gap: clamp(-100px, 0.9vmin, 9px);
+  padding: clamp(-100px, 0.5vmin, 5px);
+  border: var(--border-thin);
+}
+
+.mode-box a {
+  height: clamp(-100px, 2.5vmin, 25px);
+  width: clamp(-100px, 11.8vmin, 118px);
+  border: var(--border);
+  text-align: center;
+  line-height: clamp(-100px, 1.5vmin, 15px);
+  font-size: clamp(-100px, 2.5vmin, 25px);
+  cursor: pointer;
+}
+.mode-box a:hover {
+  color: var(--color);
+}
+.mode-box a:nth-child(1) {
+  border-color: white;
+}
+.mode-box a:nth-child(3) {
+  border-color: red;
+}
+.mode-box a:nth-child(4) {
+  border-color: yellow;
+}
+.mode-box a:nth-child(5) {
+  border-color: green;
+}
+.mode-box a:nth-child(6) {
+  border-color: blue;
+}
+
+.mode-box-2 {
+  border: var(--border-thin);
+  position: absolute;
+  top: clamp(-100px, 67.6vmin, 676px);
+  left: clamp(-100px, 20vmin, 200px);
+  width: clamp(-100px, 75vmin, 750px);
+  height: clamp(-100px, 0.9vmin, 9px);
+}
+
+.funky {
+  position: absolute;
+  bottom: clamp(-100px, 0vmin, 0px);
+  left: clamp(-100px, 21.6vmin, 216px);
+  color: var(--glyph-color);
+  font-size: clamp(-100px, 2.3vmin, 23px);
+}
+
+.blue-box-1,
+.blue-box-2,
+.blue-box-3 {
+  width: clamp(-100px, 1.5vmin, 15px);
+  height: clamp(-100px, 1.5vmin, 15px);
+  background-color: var(--color);
+  position: absolute;
+}
+
+.blue-box-1 {
+  top: clamp(-100px, 8.4vmin, 84px);
+  left: clamp(-100px, 16.9vmin, 169px);
+}
+
+.blue-box-2 {
+  top: clamp(-100px, 8.4vmin, 84px);
+  left: clamp(-100px, 49.8vmin, 498px);
+}
+
+.blue-box-3 {
+  top: clamp(-100px, 38.5vmin, 385px);
+  left: clamp(-100px, 92.8vmin, 928px);
+}
+
+.white-circle {
+  background-color: var(--color-alt);
+  width: clamp(-100px, 1.5vmin, 15px);
+  height: clamp(-100px, 1.5vmin, 15px);
+  position: absolute;
+  right: clamp(-100px, 2.8vmin, 28px);
+  bottom: clamp(-100px, 0.6vmin, 6px);
+  border-radius: clamp(-100px, 1.5vmin, 15px);
+}
+
+@keyframes waveform-animation {
+  from {
+    transform: translate(0);
+  }
+  to {
+    transform: translate(-50%);
+  }
+}
+
+/*# sourceMappingURL=info.css.map */
