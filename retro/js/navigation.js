@@ -64,7 +64,7 @@ function initializeNavBar() {
       <div class="navigation-menu">
         <a ${isActive('/retro/dial.html')}>Home</a>
         <a ${isActive('/retro/address_book.html')}>Address Book</a>
-        <a ${isActive('/symbol_overview.htm')}>Symbols</a>
+        <a ${isActive('/retro/symbol_overview.html')}>Symbols</a>
         <div class="dropdown">
           <a onclick="openDropdown('menu-dropdown')" class="dropbtn"> Admin </a>
           <div id="menu-dropdown" class="dropdown-content">
