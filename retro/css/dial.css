@@ -193,7 +193,7 @@ body {
   border: var(--border-thin);
   width: clamp(-100px, 8.6vmin, 86px);
   height: clamp(-100px, 6vmin, 60px);
-  left: clamp(-100px, 81.4vmin, 814px);
+  left: clamp(-100px, 82.5vmin, 825px);
   position: absolute;
   border-radius: clamp(-100px, 1.5vmin, 15px) 0 0;
   overflow: hidden;
@@ -224,7 +224,7 @@ body {
 .chevron-box-labels {
   position: absolute;
   top: clamp(-100px, 14.2vmin, 142px);
-  right: clamp(-100px, 16.7vmin, 167px);
+  right: clamp(-100px, 15.6vmin, 156px);
   display: flex;
   flex-direction: column;
   color: var(--color-alt);
@@ -540,7 +540,7 @@ img.glyph {
   text-shadow: unset;
   filter: var(--glyph-color-svg);
   top: clamp(-100px, 19vmin, 190px);
-  left: clamp(-100px, 33.1vmin, 331px);
+  left: clamp(-100px, 33.8vmin, 338px);
   height: clamp(-100px, 30vmin, 300px);
   position: absolute;
   transition-property: top, left, height;
@@ -549,7 +549,7 @@ img.glyph {
   animation: revealAnimation 0.8s forwards ease;
 }
 img.glyph.locked {
-  left: clamp(-100px, 82.2vmin, 822px);
+  left: clamp(-100px, 83.5vmin, 835px);
   height: clamp(-100px, 6.6vmin, 66px);
 }
 img.glyph.locked.g1 {
@@ -585,8 +585,10 @@ img.glyph.blur {
 
 div.chevron-link {
   position: absolute;
-  left: clamp(-100px, 0vmin, 0px);
+  left: 0;
+  top: 0;
   height: clamp(-100px, 73vmin, 730px);
+  width: clamp(-100px, 98.3vmin, 983px);
   pointer-events: none;
   text-shadow: unset !important;
   animation: none;
@@ -595,9 +597,10 @@ div.chevron-link {
 img.gate,
 div.gate {
   position: absolute;
-  left: clamp(-100px, 25.6vmin, 256px);
+  left: clamp(-100px, 26.3vmin, 263px);
   top: clamp(-100px, 12.9vmin, 129px);
   height: clamp(-100px, 44.8vmin, 448px);
+  width: clamp(-100px, 45.1vmin, 451px);
 }
 
 @keyframes revealAnimation {
