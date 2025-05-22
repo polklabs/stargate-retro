@@ -51,9 +51,13 @@ Navigation header at the top of all pages to integrate with v4 software. As it i
     - On incoming wormholes: GDO window will popup. It will scan then display a recognized code. This can be adjusted or disabled in config.js
 
     <img src="screenshots/Screenshot 2025-05-07 154809.png" alt="drawing" width="300"/>
+    <img src="screenshots/Screenshot 2025-05-20 161401.png" alt="drawing" width="300"/>
 - [Address Book](http://stargate.local/retro/address_book.html) - `/retro/address_book.html`
 
     <img src="screenshots/Screenshot 2025-05-07 154444.png" alt="drawing" width="300"/>
+- [System Info](http://stargate.local/retro/info.html) - `/retro/info.html`
+
+    <img src="screenshots/Screenshot 2025-05-21 202059.png" alt="drawing" width="300"/>
 
 
 ## Customizations
@@ -75,6 +79,15 @@ Navigation header at the top of all pages to integrate with v4 software. As it i
 | config.js | Dial | GDO_AUTO | `true` | Should the GDO window auto open after establishing an incoming wormhole  |
 | config.js | Dial | GDO_DELAY | `3` | How long after establishing incoming wormhole before GDO window opens  |
 | config.js | Dial | GDO_SIGNALS | *see config* | Names that will appear as GDO code senders  |
+| config.js | Info | INFO_FLUX | `[-40, 40]` | Gauge needle fluctuation at idle `MAX -90 to 90` |
+| config.js | Info | INFO_FLUX_ACTIVE | `[-90, 90]` | Gauge needle fluctuation for active gate `MAX -90 to 90` |
+| config.js | Info | INFO_FLUX_UPDATES | `[1.5, 0.9]` | How often needle moves at idle vs active gate (seconds)  |
+| config.js | Info | INFO_OUTPUT | `[10, 30]` | Output bar fluctuation at idle `MAX 0 to 100` |
+| config.js | Info | INFO_OUTPUT_ACTIVE | `[25, 100]` | Output bar fluctuation for active gate `MAX 0 to 100` |
+| config.js | Info | INFO_OUTPUT_UPDATES | `[1.8, 0.7]` | How often bars moves at idle vs active gate (seconds)  |
+| config.js | Info | INFO_WAVEFORM | `[0.3, 0.6]` | Waveform amplitude fluctuation at idle `MAX 0 to 1`  |
+| config.js | Info | INFO_WAVEFORM_ACTIVE | `[0.7, 1]` | Waveform amplitude fluctuation for active gate `MAX 0 to 1`  |
+| config.js | Info | INFO_WAVEFORM_UPDATES | `[20, 2.5]` | How often amplitude changes at idle vs active gate (seconds)  |
 | *.css | All |  --color | <span style="color:#37bfde">#37bfde</span> | Most borders and text | #2B6EC8 |
 | *.css | All | --color-dark | <span style="color:#4a7297">#4a7297</span> | Some smaller borders  | #2B6EC8 |
 | *.css | All |  --color-danger |<span style="color:#c70036">#c70036</span> | Invalid glyphs, dialing lock, and stargate state color | #B2020B |

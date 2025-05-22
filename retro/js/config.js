@@ -33,6 +33,16 @@ const config = {
     'SG-{1,25}',
   ],
 
+  INFO_FLUX: [-40, 40],
+  INFO_FLUX_ACTIVE: [-90, 90],
+  INFO_FLUX_UPDATES: [1.5, 0.9],
+  INFO_OUTPUT: [10, 30],
+  INFO_OUTPUT_ACTIVE: [25, 100],
+  INFO_OUTPUT_UPDATES: [1.8, 0.7],
+  INFO_WAVEFORM: [0.3, 0.6],
+  INFO_WAVEFORM_ACTIVE: [0.7, 1],
+  INFO_WAVEFORM_UPDATES: [20, 2.5],
+
   CRT_SCREEN_FLICKER: false,
 };
 

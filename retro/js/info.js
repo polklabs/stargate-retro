@@ -20,7 +20,6 @@ const intervals = {
   waveform: null,
 };
 
-let statusInterval;
 let fetchingStatus = false;
 let activeStatus = false;
 
@@ -50,16 +49,24 @@ async function initialize_computer() {
 
   applyInfo();
 
-  updateStatusFrequency('waveform', updateWaveform, 20000);
-  updateStatusFrequency('output', updateOutputBar, 1800);
-  updateStatusFrequency('flux', updateNeedles, 1500);
-  updateStatusFrequency('status', watch_status, 5000);
+  updateStatusFrequency(
+    'waveform',
+    updateWaveform,
+    config.INFO_WAVEFORM_UPDATES[0],
+  );
+  updateStatusFrequency(
+    'output',
+    updateOutputBar,
+    config.INFO_OUTPUT_UPDATES[0],
+  );
+  updateStatusFrequency('flux', updateNeedles, config.INFO_FLUX_UPDATES[0]);
+  updateStatusFrequency('status', watch_status, 5);
 }
 initialize_computer();
 
-function updateStatusFrequency(interval, func, ms) {
+function updateStatusFrequency(interval, func, s) {
   clearInterval(intervals[interval]);
-  intervals[interval] = setInterval(func, ms);
+  intervals[interval] = setInterval(func, s * 1000);
   func();
 }
 
@@ -95,15 +102,39 @@ async function watch_status() {
 
     if (initialState !== activeStatus) {
       if (!activeStatus) {
-        updateStatusFrequency('waveform', updateWaveform, 20000);
-        updateStatusFrequency('output', updateOutputBar, 1800);
-        updateStatusFrequency('flux', updateNeedles, 1500);
-        updateStatusFrequency('status', watch_status, 5000);
+        updateStatusFrequency(
+          'waveform',
+          updateWaveform,
+          config.INFO_WAVEFORM_UPDATES[0],
+        );
+        updateStatusFrequency(
+          'output',
+          updateOutputBar,
+          config.INFO_OUTPUT_UPDATES[0],
+        );
+        updateStatusFrequency(
+          'flux',
+          updateNeedles,
+          config.INFO_FLUX_UPDATES[0],
+        );
+        updateStatusFrequency('status', watch_status, 5);
       } else {
-        updateStatusFrequency('waveform', updateWaveform, 2500);
-        updateStatusFrequency('output', updateOutputBar, 700);
-        updateStatusFrequency('flux', updateNeedles, 900);
-        updateStatusFrequency('status', watch_status, 500);
+        updateStatusFrequency(
+          'waveform',
+          updateWaveform,
+          config.INFO_WAVEFORM_UPDATES[1],
+        );
+        updateStatusFrequency(
+          'output',
+          updateOutputBar,
+          config.INFO_OUTPUT_UPDATES[1],
+        );
+        updateStatusFrequency(
+          'flux',
+          updateNeedles,
+          config.INFO_FLUX_UPDATES[1],
+        );
+        updateStatusFrequency('status', watch_status, 0.5);
       }
     }
   } catch (err) {
@@ -183,9 +214,9 @@ function updateText(elem, text) {
 function updateOutputBar() {
   bars.forEach(element => {
     if (activeStatus) {
-      element.style.height = `${Math.random() * 75 + 25}%`;
+      element.style.height = `${getRandomInt(config.INFO_OUTPUT_ACTIVE)}%`;
     } else {
-      element.style.height = `${Math.random() * 25 + 5}%`;
+      element.style.height = `${getRandomInt(config.INFO_OUTPUT)}%`;
     }
   });
 }
@@ -193,20 +224,20 @@ function updateOutputBar() {
 function updateNeedles() {
   needles.forEach(element => {
     if (activeStatus) {
-      const position = Math.random() * 180 - 90;
-      element.style.transform = `rotate(${position}deg)`;
+      element.style.transform = `rotate(${getRandomInt(
+        config.INFO_FLUX_ACTIVE,
+      )}deg)`;
     } else {
-      const position = Math.random() * 90 - 45;
-      element.style.transform = `rotate(${position}deg)`;
+      element.style.transform = `rotate(${getRandomInt(config.INFO_FLUX)}deg)`;
     }
   });
 }
 
 function updateWaveform() {
   if (activeStatus) {
-    waveformSvg.style.transform = `scaleY(${Math.random() * 0.3 + 0.7})`;
+    waveformSvg.style.transform = `scaleY(${getRandomInt(config.INFO_WAVEFORM_ACTIVE)})`;
   } else {
-    waveformSvg.style.transform = `scaleY(${Math.random() * 0.2 + 0.4})`;
+    waveformSvg.style.transform = `scaleY(${getRandomInt(config.INFO_WAVEFORM)})`;
   }
 }
 
@@ -216,7 +247,7 @@ function generateSinWaveSVG({
   frequency = 2, // Number of full sine waves across the width
   amplitude = 80, // Peak height from center line
   strokeColor = 'var(--color-good)',
-  strokeWidth = 2,
+  strokeWidth = 3,
 } = {}) {
   const midY = viewBoxHeight / 2;
   const step = 1; // Smaller steps = smoother curve
@@ -312,4 +343,8 @@ function getPoints(ticks = 21) {
 
   return points.join('\n');
 }
-getPoints();
+
+function getRandomInt(minMax) {
+  const [min, max] = minMax;
+  return Math.random() * (max - min) + min;
+}
