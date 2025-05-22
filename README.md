@@ -55,6 +55,9 @@ Navigation header at the top of all pages to integrate with v4 software. As it i
 - [Address Book](http://stargate.local/retro/address_book.html) - `/retro/address_book.html`
 
     <img src="screenshots/Screenshot 2025-05-07 154444.png" alt="drawing" width="300"/>
+- [Symbol Overview](http://stargate.local/retro/symbol_overview.html) - `/retro/symbol_overview.html`
+
+    <img src="screenshots/Screenshot 2025-05-22 163110.png" alt="drawing" width="300"/>
 - [System Info](http://stargate.local/retro/info.html) - `/retro/info.html`
 
     <img src="screenshots/Screenshot 2025-05-21 202059.png" alt="drawing" width="300"/>
@@ -66,9 +69,9 @@ Navigation header at the top of all pages to integrate with v4 software. As it i
 | ---- | ---- | -------- | ------- | ----------- | ----------- |
 | config.js | All | FILL_SCREEN | `false` | Will attempt to make the page fill the screen |  |
 | config.js | Dial | RING_ANIMATION | `true` | Should the ring spin when dialing out |
-| config.js | Dial | AUTHORIZATION_CODE_RANDOMIZE | `true` | Generate a random authorization code on page load |
-| config.js | Dial | AUTHORIZATION_CODE | `77892757892387` | Fixed code to use if *AUTHORIZATION_CODE_RANDOMIZE* is `false` |
-| config.js | Dial | USER | `SGT. W HARRIMAN` | Use name in bottom right of screen |
+| config.js | Dial/Symbols | AUTHORIZATION_CODE_RANDOMIZE | `true` | Generate a random authorization code on page load |
+| config.js | Dial/Symbols | AUTHORIZATION_CODE | `77892757892387` | Fixed code to use if *AUTHORIZATION_CODE_RANDOMIZE* is `false` |
+| config.js | Dial/Symbols/Info | USER | `SGT. W HARRIMAN` | Use name in bottom right of screen |
 | config.js | Dial | DEFAULT_GATE_NAME | `STARGATE` | Gate name if it cannot be fetched from server |
 | config.js | Dial | TEXT_OFFLINE | `OFFLINE` | Text to use when gate is offline |
 | config.js | Dial | TEXT_IDLE | `IDLE` | Text to use when gate is idle |
