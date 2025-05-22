@@ -188,7 +188,7 @@ function handleActiveGate(new_locked_chevrons = 0) {
       }
 
       if (config.GDO_AUTO) {
-        setTimeout(activateGDO, config.GDO_DELAY * 1000);
+        setTimeout(() => activateGDO(gateStatus.black_hole_connected), config.GDO_DELAY * 1000);
       }
     }
     // Active Outgoing

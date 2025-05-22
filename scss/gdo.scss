@@ -106,6 +106,18 @@
         animation: signalEdgeAnimation 3s linear;
         animation-iteration-count: 2;
       }
+
+      &.black-hole {
+        svg:nth-of-type(1) {
+          animation: signalGreenAnimation 24s linear;
+        }
+        svg:nth-of-type(2) {
+          animation: signalRedAnimation 24s linear;
+        }
+        .wave-edge {
+          animation: signalEdgeAnimation 12s linear;
+        }
+      }
     }
 
     .signal-left,

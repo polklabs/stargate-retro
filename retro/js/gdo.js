@@ -9,7 +9,7 @@ const border = document.querySelector('.border');
 let gdoBox;
 let canceled = false;
 
-function activateGDO() {
+function activateGDO(blackHole=false) {
   canceled = false;
   gdoBox = document.createElement('div');
 
@@ -49,7 +49,7 @@ function activateGDO() {
           -<br>
           -<br>
         </div>
-        <div class="signal-center">
+        <div class="signal-center ${blackHole ? 'black-hole' : ''}">
           ${waveform}${waveform}
           <div class="wave-edge"></div>
         </div>
@@ -94,8 +94,8 @@ function activateGDO() {
   border.appendChild(gdoBox);
 
   gdo.state = 'analyzing';
-  setTimeout(gdoRecognized, 3000);
-  setTimeout(gdoComplete, 6000);
+  setTimeout(gdoRecognized, blackHole ? 12000 : 3000);
+  setTimeout(gdoComplete, blackHole ? 24000 : 6000);
 }
 
 function generateWaveformSVG({

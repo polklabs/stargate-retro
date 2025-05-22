@@ -96,6 +96,15 @@
   animation: signalEdgeAnimation 3s linear;
   animation-iteration-count: 2;
 }
+.gdo-wrapper .signal .signal-center.black-hole svg:nth-of-type(1) {
+  animation: signalGreenAnimation 24s linear;
+}
+.gdo-wrapper .signal .signal-center.black-hole svg:nth-of-type(2) {
+  animation: signalRedAnimation 24s linear;
+}
+.gdo-wrapper .signal .signal-center.black-hole .wave-edge {
+  animation: signalEdgeAnimation 12s linear;
+}
 .gdo-wrapper .signal .signal-left,
 .gdo-wrapper .signal .signal-right {
   line-height: clamp(-100px, 0.7vmin, 7px);
