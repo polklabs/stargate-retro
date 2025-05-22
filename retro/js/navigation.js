@@ -82,6 +82,11 @@ function initializeNavBar() {
           </div>
         </div>
         <a href="/help.htm">Help</a>
+        <a class="a-fullscreen"><span onclick="toggleFillScreen()"
+          class="material-symbols-outlined fullscreen">
+          fullscreen
+          </span>
+        </a>
       </div>
     </div>
   `;
@@ -127,7 +132,7 @@ fillScreen();
 window.addEventListener('resize', fillScreen, true);
 window.toggleFillScreen = toggleFillScreen;
 
-const fullscreenBtn = document.querySelector('.fullscreen');
+const fullscreenBtn = document.querySelector('.a-fullscreen');
 if (config.FILL_SCREEN && fullscreenBtn) {
   fullscreenBtn.style.display = 'none';
 }

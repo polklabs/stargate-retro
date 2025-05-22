@@ -152,14 +152,11 @@ a:visited {
 }
 
 .fullscreen {
-  position: absolute;
-  bottom: clamp(-100px, 1vmin, 10px);
-  right: clamp(-100px, 1vmin, 10px);
-  font-size: clamp(-100px, 3vmin, 30px) !important;
-  cursor: pointer;
-}
-.fullscreen:hover {
-  color: var(--color-alt);
+  font-size: 1.6vmin !important;
+  align-items: center;
+  display: flex !important;
+  height: 2.2vmin;
+  user-select: none;
 }
 
 body {

@@ -80,12 +80,9 @@
 }
 
 .fullscreen {
-  position: absolute;
-  bottom: vmin-clamp(1);
-  right: vmin-clamp(1);
-  font-size: vmin-clamp(3) !important;
-  cursor: pointer;
-  &:hover {
-    color: var(--color-alt);
-  }
+  font-size: 1.6vmin !important;
+  align-items: center;
+  display: flex !important;
+  height: 2.2vmin;
+  user-select: none;
 }
