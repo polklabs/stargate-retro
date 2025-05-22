@@ -20,7 +20,7 @@ const config = {
   TEXT_ANALYZING: 'ANALYZING',
 
   GDO_AUTO: true,
-  GDO_DELAY: 3, // Seconds
+  GDO_DELAY: 5, // Seconds
   GDO_SIGNALS: [
     "TOK'RA",
     'SG-1',
