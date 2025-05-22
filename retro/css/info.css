@@ -228,14 +228,14 @@ body {
   border-top: var(--border);
 }
 .main-wrapper .col-1 {
-  width: clamp(-100px, 16.6vmin, 166px);
+  width: clamp(-100px, 17vmin, 170px);
 }
 .main-wrapper .col-2 {
-  width: clamp(-100px, 30.5vmin, 305px);
+  width: clamp(-100px, 31vmin, 310px);
   height: clamp(-100px, 56.4vmin, 564px);
 }
 .main-wrapper .col-3 {
-  width: clamp(-100px, 40.5vmin, 405px);
+  width: clamp(-100px, 41vmin, 410px);
   height: clamp(-100px, 56.4vmin, 564px);
 }
 .main-wrapper .section-title {
@@ -280,14 +280,14 @@ body {
   margin-left: clamp(-100px, 0.8vmin, 8px);
 }
 .main-wrapper .control {
-  height: clamp(-100px, 26vmin, 260px);
+  height: clamp(-100px, 26.9vmin, 269px);
 }
 .main-wrapper .control .section-title {
   width: 100%;
 }
 .main-wrapper .control .buttons > div {
   border: var(--border);
-  margin: clamp(-100px, 0.5vmin, 5px);
+  margin: clamp(-100px, 0.7vmin, 7px);
   margin-left: unset;
   text-align: center;
   line-height: clamp(-100px, 1.9vmin, 19px);
@@ -349,6 +349,13 @@ body {
 .main-wrapper .output .output-columns .out-col-dash div {
   border-bottom: var(--border);
   height: clamp(-100px, 3vmin, 30px);
+}
+.main-wrapper .output .output-percent {
+  position: absolute;
+  top: 6.7vmin;
+  left: 43vmin;
+  font-size: 4.5vmin;
+  color: var(--color-alt);
 }
 .main-wrapper .waveform {
   height: clamp(-100px, 29vmin, 290px);
@@ -420,9 +427,25 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  height: clamp(-100px, 24.9vmin, 249px);
+  height: calc(100% - clamp(-100px, 1.5vmin, 15px));
   width: clamp(-100px, 100vmin, 1000px);
   animation: waveform-animation 5s linear infinite;
+}
+.main-wrapper .waveform .waveform-svg svg {
+  transform: scaleY(0.5);
+  transition: transform 0.5s ease;
+}
+.main-wrapper .waveform .waveform-label {
+  display: flex;
+  flex-direction: row;
+  color: var(--color-alt);
+  font-size: 2.2vmin;
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0 3.6vmin;
 }
 .main-wrapper .data .section-title {
   width: clamp(-100px, 20.2vmin, 202px);
@@ -443,6 +466,9 @@ body {
 .main-wrapper .data table tr {
   height: clamp(-100px, 1.5vmin, 15px);
 }
+.main-wrapper .data table tr.error {
+  background-color: var(--color-danger) !important;
+}
 .main-wrapper .data table tr td:first-child {
   border-right: var(--border-thin);
 }
@@ -456,6 +482,87 @@ body {
   width: 2vmin;
   height: 2vmin;
   filter: invert(1);
+}
+
+.mode {
+  position: absolute;
+  top: 61.3vmin;
+  left: 22vmin;
+  color: var(--glyph-color);
+  font-size: 2.6vmin;
+}
+
+.mode-box {
+  position: absolute;
+  top: 63.8vmin;
+  left: 20vmin;
+  color: var(--glyph-color);
+  width: 75vmin;
+  height: 4vmin;
+  display: flex;
+  gap: 0.9vmin;
+  padding: 0.5vmin;
+  border: var(--border-thin);
+}
+
+.mode-box div {
+  height: 2.5vmin;
+  width: 11.8vmin;
+  border: var(--border);
+  text-align: center;
+  line-height: 1.5vmin;
+  font-size: 3vmin;
+}
+
+.mode-box-2 {
+  border: var(--border-thin);
+  position: absolute;
+  top: 67.6vmin;
+  left: 20vmin;
+  width: 75vmin;
+  height: 0.9vmin;
+}
+
+.funky {
+  position: absolute;
+  bottom: 0vmin;
+  left: 21.6vmin;
+  color: var(--glyph-color);
+  font-size: 2.3vmin;
+}
+
+.blue-box-1,
+.blue-box-2,
+.blue-box-3 {
+  width: 1.5vmin;
+  height: 1.5vmin;
+  background-color: var(--color);
+  position: absolute;
+}
+
+.blue-box-1 {
+  top: 8.4vmin;
+  left: 16.9vmin;
+}
+
+.blue-box-2 {
+  top: 8.4vmin;
+  left: 49.8vmin;
+}
+
+.blue-box-3 {
+  top: 38.5vmin;
+  left: 92.8vmin;
+}
+
+.white-circle {
+  background-color: var(--color-alt);
+  width: 1.5vmin;
+  height: 1.5vmin;
+  position: absolute;
+  right: 2.8vmin;
+  bottom: 0.6vmin;
+  border-radius: 1.5vmin;
 }
 
 @keyframes waveform-animation {

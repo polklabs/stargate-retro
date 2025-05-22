@@ -55,10 +55,20 @@ function applyInfo() {
       switch (id) {
         case 'subspace_public_key':
           updateText(td, info[id] ? info[id] : 'n/a');
+          if (!info[id]) {
+            td.parentElement.classList.add('error');
+          } else {
+            td.parentElement.classList.remove('error');
+          }
           break;
         case 'subspace_available':
         case 'internet_available':
           updateText(td, info[id] ? 'Connected' : 'Offline');
+          if (!info[id]) {
+            td.parentElement.classList.add('error');
+          } else {
+            td.parentElement.classList.remove('error');
+          }
           break;
         case 'stats_established_standard_count':
         case 'stats_established_fan_count':
@@ -79,6 +89,14 @@ function applyInfo() {
             td.append(glyph);
           });
           td.innerHTML += '<br>' + info[id];
+          break;
+        case 'software_update_status':
+          if (info[id] !== 'up-to-date') {
+            td.parentElement.classList.add('error');
+          } else {
+            td.parentElement.classList.remove('error');
+          }
+          updateText(td, info[id]);
           break;
         default:
           updateText(td, info[id]);

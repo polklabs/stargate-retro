@@ -83,14 +83,14 @@ body {
   }
 
   .col-1 {
-    width: vmin-clamp(16.6);
+    width: vmin-clamp(17);
   }
   .col-2 {
-    width: vmin-clamp(30.5);
+    width: vmin-clamp(31);
     height: vmin-clamp(56.4);
   }
   .col-3 {
-    width: vmin-clamp(40.5);
+    width: vmin-clamp(41);
     height: vmin-clamp(56.4);
   }
 
@@ -139,13 +139,13 @@ body {
     }
   }
   .control {
-    height: vmin-clamp(26);
+    height: vmin-clamp(26.9);
     .section-title {
       width: 100%;
     }
     .buttons > div {
       border: var(--border);
-      margin: vmin-clamp(0.5);
+      margin: vmin-clamp(0.7);
       margin-left: unset;
       text-align: center;
       line-height: vmin-clamp(1.9);
@@ -199,6 +199,13 @@ body {
         height: vmin-clamp(3);
       }
     }
+  }
+  .output .output-percent {
+    position: absolute;
+    top: 6.7vmin;
+    left: 43vmin;
+    font-size: 4.5vmin;
+    color: var(--color-alt);
   }
   .waveform {
     height: vmin-clamp(29);
@@ -278,9 +285,26 @@ body {
       position: absolute;
       top: 0;
       left: 0;
-      height: vmin-clamp(24.9);
+      height: calc(100% - vmin-clamp(1.5));
       width: vmin-clamp(100);
       animation: waveform-animation 5s linear infinite;
+      svg {
+        transform: scaleY(0.5);
+        transition: transform 0.5s ease;
+      }
+    }
+
+    .waveform-label {
+      display: flex;
+      flex-direction: row;
+      color: var(--color-alt);
+      font-size: 2.2vmin;
+      justify-content: space-between;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 0 3.6vmin;
     }
   }
   .data {
@@ -303,6 +327,9 @@ body {
       color: var(--color-alt);
       tr {
         height: vmin-clamp(1.5);
+        &.error {
+          background-color: var(--color-danger) !important;
+        }
       }
       tr td:first-child {
         border-right: var(--border-thin);
@@ -323,6 +350,80 @@ body {
       }
     }
   }
+}
+
+.mode {
+  position: absolute;
+  top: 61.3vmin;
+  left: 22vmin;
+  color: var(--glyph-color);
+  font-size: 2.6vmin;
+}
+.mode-box {
+  position: absolute;
+  top: 63.8vmin;
+  left: 20vmin;
+  color: var(--glyph-color);
+  width: 75vmin;
+  height: 4vmin;
+  display: flex;
+  gap: 0.9vmin;
+  padding: 0.5vmin;
+  border: var(--border-thin);
+}
+.mode-box div {
+  height: 2.5vmin;
+  width: 11.8vmin;
+  border: var(--border);
+  text-align: center;
+  line-height: 1.5vmin;
+  font-size: 3vmin;
+}
+.mode-box-2 {
+  border: var(--border-thin);
+  position: absolute;
+  top: 67.6vmin;
+  left: 20vmin;
+  width: 75vmin;
+  height: 0.9vmin;
+}
+
+.funky {
+  position: absolute;
+  bottom: 0vmin;
+  left: 21.6vmin;
+  color: var(--glyph-color);
+  font-size: 2.3vmin;
+}
+
+.blue-box-1,
+.blue-box-2,
+.blue-box-3 {
+  width: 1.5vmin;
+  height: 1.5vmin;
+  background-color: var(--color);
+  position: absolute;
+}
+.blue-box-1 {
+  top: 8.4vmin;
+  left: 16.9vmin;
+}
+.blue-box-2 {
+  top: 8.4vmin;
+  left: 49.8vmin;
+}
+.blue-box-3 {
+  top: 38.5vmin;
+  left: 92.8vmin;
+}
+.white-circle {
+  background-color: var(--color-alt);
+  width: 1.5vmin;
+  height: 1.5vmin;
+  position: absolute;
+  right: 2.8vmin;
+  bottom: 0.6vmin;
+  border-radius: 1.5vmin;
 }
 
 @keyframes waveform-animation {
