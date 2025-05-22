@@ -6,11 +6,23 @@ const version = document.querySelector('.version');
 const user = document.querySelector('.title-usr');
 const waveform = document.querySelector('.waveform-svg');
 const bars = document.querySelectorAll('.bar-fill');
+let waveformSvg;
 
 let needles = [];
 
 let info;
 let symbols = [];
+
+const intervals = {
+  status: null,
+  flux: null,
+  output: null,
+  waveform: null,
+};
+
+let statusInterval;
+let fetchingStatus = false;
+let activeStatus = false;
 
 // INITIALIZE --------------------------------------------------------------------------
 async function initialize_computer() {
@@ -19,6 +31,7 @@ async function initialize_computer() {
   generateGauges(3);
 
   waveform.innerHTML = generateSinWaveSVG();
+  waveformSvg = waveform.querySelector('svg');
 
   const responseSymbols = await fetch('/stargate/get/symbols_all');
   if (!responseSymbols.ok) {
@@ -37,12 +50,68 @@ async function initialize_computer() {
 
   applyInfo();
 
-  updateOutputBar();
-  setInterval(updateOutputBar, 1500);
-  updateNeedles();
-  setInterval(updateNeedles, 1500);
+  updateStatusFrequency('waveform', updateWaveform, 20000);
+  updateStatusFrequency('output', updateOutputBar, 1800);
+  updateStatusFrequency('flux', updateNeedles, 1500);
+  updateStatusFrequency('status', watch_status, 5000);
 }
 initialize_computer();
+
+function updateStatusFrequency(interval, func, ms) {
+  clearInterval(intervals[interval]);
+  intervals[interval] = setInterval(func, ms);
+  func();
+}
+
+// STATUS UPDATES --------------------------------------------------------------------------
+async function watch_status() {
+  if (fetchingStatus) {
+    // Skip update until previous request finishes.
+    return;
+  }
+
+  try {
+    fetchingStatus = true;
+    const responseStatus = await fetch('/stargate/get/dialing_status');
+    if (!responseStatus.ok) {
+      handleOffline();
+      fetchingStatus = false;
+      return;
+    }
+    const gateStatus = await responseStatus.json();
+
+    const initialState = activeStatus;
+    if (
+      gateStatus.address_buffer_outgoing.length > 0 ||
+      gateStatus.address_buffer_incoming.length > 0 ||
+      gateStatus.locked_chevrons_outgoing > 0 ||
+      gateStatus.locked_chevrons_incoming > 0 ||
+      gateStatus.wormhole_active
+    ) {
+      activeStatus = true;
+    } else {
+      activeStatus = false;
+    }
+
+    if (initialState !== activeStatus) {
+      if (!activeStatus) {
+        updateStatusFrequency('waveform', updateWaveform, 20000);
+        updateStatusFrequency('output', updateOutputBar, 1800);
+        updateStatusFrequency('flux', updateNeedles, 1500);
+        updateStatusFrequency('status', watch_status, 5000);
+      } else {
+        updateStatusFrequency('waveform', updateWaveform, 2500);
+        updateStatusFrequency('output', updateOutputBar, 700);
+        updateStatusFrequency('flux', updateNeedles, 900);
+        updateStatusFrequency('status', watch_status, 500);
+      }
+    }
+  } catch (err) {
+    console.error(err);
+    handleOffline();
+  }
+  fetchingStatus = false;
+}
 
 function applyInfo() {
   updateText(version, info.software_version);
@@ -113,15 +182,32 @@ function updateText(elem, text) {
 
 function updateOutputBar() {
   bars.forEach(element => {
-    element.style.height = `${Math.random() * 25 + 5}%`;
+    if (activeStatus) {
+      element.style.height = `${Math.random() * 75 + 25}%`;
+    } else {
+      element.style.height = `${Math.random() * 25 + 5}%`;
+    }
   });
 }
 
 function updateNeedles() {
   needles.forEach(element => {
-    const position = Math.random() * 90 - 45;
-    element.style.transform = `rotate(${position}deg)`;
+    if (activeStatus) {
+      const position = Math.random() * 180 - 90;
+      element.style.transform = `rotate(${position}deg)`;
+    } else {
+      const position = Math.random() * 90 - 45;
+      element.style.transform = `rotate(${position}deg)`;
+    }
   });
+}
+
+function updateWaveform() {
+  if (activeStatus) {
+    waveformSvg.style.transform = `scaleY(${Math.random() * 0.3 + 0.7})`;
+  } else {
+    waveformSvg.style.transform = `scaleY(${Math.random() * 0.2 + 0.4})`;
+  }
 }
 
 function generateSinWaveSVG({

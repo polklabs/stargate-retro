@@ -285,7 +285,7 @@ body {
 .main-wrapper .control .section-title {
   width: 100%;
 }
-.main-wrapper .control .buttons > div {
+.main-wrapper .control .buttons > a {
   border: var(--border);
   margin: clamp(-100px, 0.7vmin, 7px);
   margin-left: unset;
@@ -294,8 +294,9 @@ body {
   color: var(--glyph-color);
   font-size: clamp(-100px, 2.2vmin, 22px);
   cursor: pointer;
+  display: block;
 }
-.main-wrapper .control .buttons > div:hover {
+.main-wrapper .control .buttons > a:hover {
   color: var(--color);
 }
 .main-wrapper .output .output-columns {
@@ -352,9 +353,9 @@ body {
 }
 .main-wrapper .output .output-percent {
   position: absolute;
-  top: 6.7vmin;
-  left: 43vmin;
-  font-size: 4.5vmin;
+  top: clamp(-100px, 6.7vmin, 67px);
+  left: clamp(-100px, 43vmin, 430px);
+  font-size: clamp(-100px, 4.5vmin, 45px);
   color: var(--color-alt);
 }
 .main-wrapper .waveform {
@@ -439,13 +440,13 @@ body {
   display: flex;
   flex-direction: row;
   color: var(--color-alt);
-  font-size: 2.2vmin;
+  font-size: clamp(-100px, 2.2vmin, 22px);
   justify-content: space-between;
   width: 100%;
   position: absolute;
   bottom: 0;
   left: 0;
-  padding: 0 3.6vmin;
+  padding: 0 clamp(-100px, 3.6vmin, 36px);
 }
 .main-wrapper .data .section-title {
   width: clamp(-100px, 20.2vmin, 202px);
@@ -479,90 +480,109 @@ body {
   text-align: center;
 }
 .main-wrapper .data table img {
-  width: 2vmin;
-  height: 2vmin;
+  width: clamp(-100px, 2vmin, 20px);
+  height: clamp(-100px, 2vmin, 20px);
   filter: invert(1);
 }
 
 .mode {
   position: absolute;
-  top: 61.3vmin;
-  left: 22vmin;
+  top: clamp(-100px, 61.3vmin, 613px);
+  left: clamp(-100px, 22vmin, 220px);
   color: var(--glyph-color);
-  font-size: 2.6vmin;
+  font-size: clamp(-100px, 2.6vmin, 26px);
 }
 
 .mode-box {
   position: absolute;
-  top: 63.8vmin;
-  left: 20vmin;
+  top: clamp(-100px, 63.8vmin, 638px);
+  left: clamp(-100px, 20vmin, 200px);
   color: var(--glyph-color);
-  width: 75vmin;
-  height: 4vmin;
+  width: clamp(-100px, 75vmin, 750px);
+  height: clamp(-100px, 4vmin, 40px);
   display: flex;
-  gap: 0.9vmin;
-  padding: 0.5vmin;
+  gap: clamp(-100px, 0.9vmin, 9px);
+  padding: clamp(-100px, 0.5vmin, 5px);
   border: var(--border-thin);
 }
 
-.mode-box div {
-  height: 2.5vmin;
-  width: 11.8vmin;
+.mode-box a {
+  height: clamp(-100px, 2.5vmin, 25px);
+  width: clamp(-100px, 11.8vmin, 118px);
   border: var(--border);
   text-align: center;
-  line-height: 1.5vmin;
-  font-size: 3vmin;
+  line-height: clamp(-100px, 1.5vmin, 15px);
+  font-size: clamp(-100px, 2.5vmin, 25px);
+  cursor: pointer;
+}
+.mode-box a:hover {
+  color: var(--color);
+}
+.mode-box a:nth-child(1) {
+  border-color: white;
+}
+.mode-box a:nth-child(3) {
+  border-color: red;
+}
+.mode-box a:nth-child(4) {
+  border-color: yellow;
+}
+.mode-box a:nth-child(5) {
+  border-color: green;
+}
+.mode-box a:nth-child(6) {
+  border-color: blue;
 }
 
 .mode-box-2 {
   border: var(--border-thin);
   position: absolute;
-  top: 67.6vmin;
-  left: 20vmin;
-  width: 75vmin;
-  height: 0.9vmin;
+  top: clamp(-100px, 67.6vmin, 676px);
+  left: clamp(-100px, 20vmin, 200px);
+  width: clamp(-100px, 75vmin, 750px);
+  height: clamp(-100px, 0.9vmin, 9px);
 }
 
 .funky {
   position: absolute;
-  bottom: 0vmin;
-  left: 21.6vmin;
+  bottom: clamp(-100px, 0vmin, 0px);
+  left: clamp(-100px, 21.6vmin, 216px);
   color: var(--glyph-color);
-  font-size: 2.3vmin;
+  font-size: clamp(-100px, 2.3vmin, 23px);
 }
 
 .blue-box-1,
 .blue-box-2,
 .blue-box-3 {
-  width: 1.5vmin;
-  height: 1.5vmin;
+  width: clamp(-100px, 1.5vmin, 15px);
+  height: clamp(-100px, 1.5vmin, 15px);
   background-color: var(--color);
   position: absolute;
 }
 
 .blue-box-1 {
-  top: 8.4vmin;
-  left: 16.9vmin;
+  top: clamp(-100px, 8.4vmin, 84px);
+  left: clamp(-100px, 16.9vmin, 169px);
 }
 
 .blue-box-2 {
-  top: 8.4vmin;
-  left: 49.8vmin;
+  top: clamp(-100px, 8.4vmin, 84px);
+  left: clamp(-100px, 49.8vmin, 498px);
 }
 
 .blue-box-3 {
-  top: 38.5vmin;
-  left: 92.8vmin;
+  top: clamp(-100px, 38.5vmin, 385px);
+  left: clamp(-100px, 92.8vmin, 928px);
 }
 
 .white-circle {
   background-color: var(--color-alt);
-  width: 1.5vmin;
-  height: 1.5vmin;
+  width: clamp(-100px, 1.5vmin, 15px);
+  height: clamp(-100px, 1.5vmin, 15px);
   position: absolute;
-  right: 2.8vmin;
-  bottom: 0.6vmin;
-  border-radius: 1.5vmin;
+  right: clamp(-100px, 2.8vmin, 28px);
+  bottom: clamp(-100px, 0.6vmin, 6px);
+  border-radius: clamp(-100px, 1.5vmin, 15px);
 }
 
 @keyframes waveform-animation {

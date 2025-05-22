@@ -143,7 +143,7 @@ body {
     .section-title {
       width: 100%;
     }
-    .buttons > div {
+    .buttons > a {
       border: var(--border);
       margin: vmin-clamp(0.7);
       margin-left: unset;
@@ -152,6 +152,7 @@ body {
       color: var(--glyph-color);
       font-size: vmin-clamp(2.2);
       cursor: pointer;
+      display: block;
       &:hover {
         color: var(--color);
       }
@@ -202,9 +203,9 @@ body {
   }
   .output .output-percent {
     position: absolute;
-    top: 6.7vmin;
-    left: 43vmin;
-    font-size: 4.5vmin;
+    top: vmin-clamp(6.7);
+    left: vmin-clamp(43);
+    font-size: vmin-clamp(4.5);
     color: var(--color-alt);
   }
   .waveform {
@@ -298,13 +299,13 @@ body {
       display: flex;
       flex-direction: row;
       color: var(--color-alt);
-      font-size: 2.2vmin;
+      font-size: vmin-clamp(2.2);
       justify-content: space-between;
       width: 100%;
       position: absolute;
       bottom: 0;
       left: 0;
-      padding: 0 3.6vmin;
+      padding: 0 vmin-clamp(3.6);
     }
   }
   .data {
@@ -344,8 +345,8 @@ body {
       }
 
       img {
-        width: 2vmin;
-        height: 2vmin;
+        width: vmin-clamp(2);
+        height: vmin-clamp(2);
         filter: invert(1);
       }
     }
@@ -354,76 +355,96 @@ body {
 
 .mode {
   position: absolute;
-  top: 61.3vmin;
-  left: 22vmin;
+  top: vmin-clamp(61.3);
+  left: vmin-clamp(22);
   color: var(--glyph-color);
-  font-size: 2.6vmin;
+  font-size: vmin-clamp(2.6);
 }
 .mode-box {
   position: absolute;
-  top: 63.8vmin;
-  left: 20vmin;
+  top: vmin-clamp(63.8);
+  left: vmin-clamp(20);
   color: var(--glyph-color);
-  width: 75vmin;
-  height: 4vmin;
+  width: vmin-clamp(75);
+  height: vmin-clamp(4);
   display: flex;
-  gap: 0.9vmin;
-  padding: 0.5vmin;
+  gap: vmin-clamp(0.9);
+  padding: vmin-clamp(0.5);
   border: var(--border-thin);
 }
-.mode-box div {
-  height: 2.5vmin;
-  width: 11.8vmin;
+.mode-box a {
+  height: vmin-clamp(2.5);
+  width: vmin-clamp(11.8);
   border: var(--border);
   text-align: center;
-  line-height: 1.5vmin;
-  font-size: 3vmin;
+  line-height: vmin-clamp(1.5);
+  font-size: vmin-clamp(2.5);
+  cursor: pointer;
+  &:hover {
+    color: var(--color);
+  }
+
+  &:nth-child(1) {
+    border-color: white;
+  }
+  &:nth-child(3) {
+    border-color: red;
+  }
+  &:nth-child(4) {
+    border-color: yellow;
+  }
+  &:nth-child(5) {
+    border-color: green;
+  }
+  &:nth-child(6) {
+    border-color: blue;
+  }
 }
 .mode-box-2 {
   border: var(--border-thin);
   position: absolute;
-  top: 67.6vmin;
-  left: 20vmin;
-  width: 75vmin;
-  height: 0.9vmin;
+  top: vmin-clamp(67.6);
+  left: vmin-clamp(20);
+  width: vmin-clamp(75);
+  height: vmin-clamp(0.9);
 }
 
 .funky {
   position: absolute;
-  bottom: 0vmin;
-  left: 21.6vmin;
+  bottom: vmin-clamp(0);
+  left: vmin-clamp(21.6);
   color: var(--glyph-color);
-  font-size: 2.3vmin;
+  font-size: vmin-clamp(2.3);
 }
 
 .blue-box-1,
 .blue-box-2,
 .blue-box-3 {
-  width: 1.5vmin;
-  height: 1.5vmin;
+  width: vmin-clamp(1.5);
+  height: vmin-clamp(1.5);
   background-color: var(--color);
   position: absolute;
 }
 .blue-box-1 {
-  top: 8.4vmin;
-  left: 16.9vmin;
+  top: vmin-clamp(8.4);
+  left: vmin-clamp(16.9);
 }
 .blue-box-2 {
-  top: 8.4vmin;
-  left: 49.8vmin;
+  top: vmin-clamp(8.4);
+  left: vmin-clamp(49.8);
 }
 .blue-box-3 {
-  top: 38.5vmin;
-  left: 92.8vmin;
+  top: vmin-clamp(38.5);
+  left: vmin-clamp(92.8);
 }
 .white-circle {
   background-color: var(--color-alt);
-  width: 1.5vmin;
-  height: 1.5vmin;
+  width: vmin-clamp(1.5);
+  height: vmin-clamp(1.5);
   position: absolute;
-  right: 2.8vmin;
-  bottom: 0.6vmin;
-  border-radius: 1.5vmin;
+  right: vmin-clamp(2.8);
+  bottom: vmin-clamp(0.6);
+  border-radius: vmin-clamp(1.5);
 }
 
 @keyframes waveform-animation {
