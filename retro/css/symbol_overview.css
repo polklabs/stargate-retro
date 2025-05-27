@@ -260,13 +260,19 @@ body {
 .symbol-wrapper .symbol-box:hover {
   background-color: var(--color-dark);
 }
-.symbol-wrapper .symbol-box:hover .symbol {
-  filter: var(--glyph-color-svg);
+.symbol-wrapper .symbol-box:hover .symbol path:not(.fil1) {
+  fill: var(--glyph-color);
 }
 .symbol-wrapper .symbol {
   width: clamp(-100px, 7vmin, 70px);
-  height: auto;
-  filter: invert(1);
+  height: clamp(-100px, 7vmin, 70px);
+}
+.symbol-wrapper .symbol svg {
+  width: 100%;
+  height: 100%;
+}
+.symbol-wrapper .symbol path:not(.fil1) {
+  fill: var(--color-alt);
 }
 .symbol-wrapper .symbol-name {
   font-size: clamp(-100px, 1.4vmin, 14px);
@@ -276,8 +282,11 @@ body {
 .symbol-wrapper .symbol-box.selected {
   background-color: var(--color-danger);
 }
-.symbol-wrapper .symbol-box.selected .symbol {
-  filter: var(--glyph-color-danger-svg) invert(1);
+.symbol-wrapper .symbol-box.selected .symbol path:not(.fil1) {
+  fill: var(--color-danger);
+}
+.symbol-wrapper .symbol-box.selected .symbol svg {
+  filter: invert(1);
 }
 .symbol-wrapper .symbol-box.selected .symbol-name {
   color: var(--color-danger);

@@ -24,11 +24,22 @@ if (config.CRT_SCREEN_FLICKER) {
 }
 
 const distortion = document.querySelector('.crt-distortion');
-let $rand = 0;
-distortion.addEventListener('animationend', function () {
-  this.classList.remove('scanline-animation');
-  $rand = Math.floor(Math.random() * 6) + 4;
-  this.style.animationDuration = $rand + 's';
-  void this.offsetWidth; // hack to reflow css animation
-  this.classList.add('scanline-animation');
-});
+if (config.CRT_SCAN_LINE) {
+  let $rand = 0;
+  distortion.addEventListener('animationend', function () {
+    this.classList.remove('scanline-animation');
+    $rand = Math.floor(Math.random() * 6) + 4;
+    this.style.animationDuration = $rand + 's';
+    void this.offsetWidth; // hack to reflow css animation
+    this.classList.add('scanline-animation');
+  });
+} else {
+  distortion.remove();
+}
+
+
+if (config.CRT_PIXEL) {
+  elem.classList.add('crt');
+} else {
+  elem.classList.remove('crt');
+}

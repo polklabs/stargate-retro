@@ -105,15 +105,23 @@ body {
     &:hover {
       background-color: var(--color-dark);
       .symbol {
-        filter: var(--glyph-color-svg);
+        path:not(.fil1) {
+          fill: var(--glyph-color);
+        }
       }
     }
   }
 
   .symbol {
     width: vmin-clamp(7);
-    height: auto;
-    filter: invert(1);
+    height: vmin-clamp(7);
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+    path:not(.fil1) {
+      fill: var(--color-alt);
+    }
   }
 
   .symbol-name {
@@ -125,7 +133,12 @@ body {
   .symbol-box.selected {
     background-color: var(--color-danger);
     .symbol {
-      filter: var(--glyph-color-danger-svg) invert(1);
+      path:not(.fil1) {
+        fill: var(--color-danger);
+      }
+      svg {
+        filter: invert(1);
+      }
     }
     .symbol-name {
       color: var(--color-danger);

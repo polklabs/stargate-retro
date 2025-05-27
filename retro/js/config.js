@@ -47,6 +47,8 @@ const config = {
   INFO_WAVEFORM_UPDATES: [20, 2.5],
 
   CRT_SCREEN_FLICKER: false,
+  CRT_SCAN_LINE: false,
+  CRT_PIXEL: false,
 };
 
 export {config};

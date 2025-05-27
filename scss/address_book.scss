@@ -57,7 +57,13 @@ body {
   position: relative;
   float: left;
   max-width: vmin-clamp(6);
-  filter: var(--glyph-color-svg);
+  > svg {
+    width: 100%;
+    height: 100%;
+    path:not(.fil1) {
+      fill: var(--glyph-color);
+    }
+  }
 }
 
 .address-counts {
@@ -131,7 +137,9 @@ section {
         background-color: var(--color-danger) !important;
       }
       .address-book-glyph {
-        filter: var(--glyph-color-danger-svg) !important;
+        path:not(.fil1) {
+          fill: var(--color-danger) !important;
+        }
       }
     }
 
@@ -180,7 +188,7 @@ section {
         color: var(--glyph-color);
         display: flex;
         flex-direction: column;
-        > img {
+        > div {
           margin: auto;
           text-shadow: unset;
           height: vmin-clamp(6);

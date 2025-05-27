@@ -1,6 +1,8 @@
 /* EDIT CUSTOMIZATIONS IN config.js */
 /* DO NOT EDIT BELOW UNLESS YOU KNOW WHAT YOU'RE DOING!!!! */
 
+import {loadSymbols} from './helpers.js';
+
 const scrollingDiv = document.getElementById('scrollingDiv');
 const tableRowTemplate = document.getElementById('tableRow');
 const tableBody = document.getElementById('tableBody');
@@ -41,8 +43,8 @@ async function fetchData() {
     fanCounts.textContent = data.summary.fan;
     addresses = Object.values(data['address_book']);
 
-    const responseSymbols = await fetch('/stargate/get/symbols_all');
-    symbols = await responseSymbols.json();
+    symbols = await loadSymbols();
+    console.log(symbols)
 
     parseData();
   } catch (error) {
@@ -51,9 +53,15 @@ async function fetchData() {
 }
 
 function parseData() {
+  const imgElement = tableRowTemplate.querySelector(`.glyph-7`);
+  imgElement.innerHTML = symbols[0].imageData;
+
   addresses.forEach(address => {
     const aTag = document.createElement('a');
-    aTag.setAttribute('href', `dial.html?address=${address.gate_address.join('-')}`);
+    aTag.setAttribute(
+      'href',
+      `dial.html?address=${address.gate_address.join('-')}`,
+    );
     address.htmlData = aTag;
 
     const newRow = tableRowTemplate.cloneNode(true);
@@ -79,8 +87,7 @@ function parseData() {
           symbol?.['name'] ?? 'Unknown';
 
         const imgElement = newRow.querySelector(`.glyph-${i + 1}`);
-        imgElement.src = ''; // Empty it temporarily
-        imgElement.src = '..' + symbol?.['imageSrc']; // Set it again to force a reload
+        imgElement.innerHTML = symbol?.imageData ?? '';
       }
     });
 

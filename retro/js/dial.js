@@ -3,8 +3,8 @@
 
 import {config} from './config.js';
 import {gdo, activateGDO} from './gdo.js';
+import { loadSymbols } from './helpers.js';
 
-const glyph = document.querySelector('.glyph');
 const appendTarget = document.querySelector('.dial-append');
 const timer = document.querySelector('.timer');
 const gateName = document.querySelector('.gate-name');
@@ -51,12 +51,8 @@ let symbols = [];
 async function initialize_computer() {
   initialize_text();
 
-  const responseSymbols = await fetch('/stargate/get/symbols_all');
-  if (!responseSymbols.ok) {
-    handleOffline();
-    return;
-  }
-  symbols = await responseSymbols.json();
+  symbols = await loadSymbols();
+  console.log(symbols);
 
   buildKeyboard();
   updateStatusFrequency(5000);
@@ -195,7 +191,7 @@ function handleActiveGate(new_locked_chevrons = 0) {
     if (gateStatus.address_buffer_outgoing.length > 0) {
       buffer = gateStatus.address_buffer_outgoing;
       new_locked_chevrons = gateStatus.locked_chevrons_outgoing;
-      const toRemove = document.querySelectorAll('.destination-glyphs img');
+      const toRemove = document.querySelectorAll('.destination-glyphs > div');
       toRemove.forEach(g => g.remove());
       if (state === STATE_DIAL_IN) {
         resetGate();
@@ -395,12 +391,11 @@ function displayGlyph() {
   const glyphIndex = buffer[bufferIndex];
   const symbol = symbols.find(x => x['index'] === glyphIndex);
 
-  const newGlyph = glyph.cloneNode(true);
-  newGlyph.classList.remove('hidden');
-  newGlyph.src = '';
-  newGlyph.src = '..' + symbol['imageSrc'];
-
+  const newGlyph = document.createElement('div');
+  newGlyph.classList.add('glyph');
   newGlyph.classList.add(`g${bufferIndex + 1}`);
+  newGlyph.innerHTML = symbol.imageData;
+
   const newGlyph2 = newGlyph.cloneNode(true);
   newGlyph2.classList.add('blur');
   appendTarget.append(newGlyph2);
@@ -491,8 +486,8 @@ function updateDestination(lastXGlyphs) {
   const toAdd = buffer.slice(buffer.length - lastXGlyphs);
   toAdd.forEach(g => {
     const symbol = symbols.find(x => x['index'] === g);
-    const glyph = document.createElement('img');
-    glyph.src = '..' + symbol['imageSrc'];
+    const glyph = document.createElement('div');
+    glyph.innerHTML = symbol.imageData;
     destinationGlyphs.append(glyph);
   });
 }
@@ -529,7 +524,6 @@ function initialize_text() {
 
 function handleOffline() {
   updateText(infoText, config.TEXT_OFFLINE);
-  // setKeysDisabled([...symbols.map(x => x.index), 0, -1]);
 }
 
 function buildKeyboard() {
@@ -537,21 +531,11 @@ function buildKeyboard() {
     if (symbol.keyboard_mapping) {
       const keyWrapper = document.createElement('div');
       keyWrapper.classList.add(`symbol-${symbol.index}`);
-      const img = document.createElement('img');
-      img.src = '..' + symbol.imageSrc;
-      img.onclick = () => dhd_press(`${symbol.index}`, img);
-      keyWrapper.appendChild(img);
+      keyWrapper.innerHTML = symbol.imageData;
+      keyWrapper.onclick = () => dhd_press(`${symbol.index}`, keyWrapper);
       keyboard.appendChild(keyWrapper);
     }
   });
-
-  const keyWrapper = document.createElement('div');
-  keyWrapper.classList.add(`symbol-0`);
-  const img = document.createElement('img');
-  img.src = `images/dhd.svg`;
-  img.onclick = () => dhd_press(`0`, img);
-  keyWrapper.appendChild(img);
-  keyboard.appendChild(keyWrapper);
 }
 
 // Locking pre-dialed keys from the keyboard

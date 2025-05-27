@@ -381,10 +381,18 @@ body {
 .sidebar .keyboard div.disabled {
   opacity: 0.4;
 }
-.sidebar .keyboard div img {
+.sidebar .keyboard div svg {
   width: clamp(-100px, 3.6vmin, 36px);
   height: clamp(-100px, 3.6vmin, 36px);
-  filter: var(--glyph-color-svg);
+}
+.sidebar .keyboard div svg path:not(.fil1) {
+  fill: var(--glyph-color);
+}
+.sidebar .keyboard div svg ellipse:nth-of-type(1) {
+  stroke: var(--glyph-color);
+}
+.sidebar .keyboard div svg ellipse:nth-of-type(2) {
+  fill: var(--glyph-color);
 }
 .sidebar .status {
   color: var(--color-alt);
@@ -462,9 +470,12 @@ body {
   justify-content: center;
   pointer-events: none;
 }
-.destination-glyphs img {
+.destination-glyphs svg {
   width: clamp(-100px, 2.5vmin, 25px);
-  filter: var(--glyph-color-svg);
+  height: clamp(-100px, 2.5vmin, 25px);
+}
+.destination-glyphs svg path:not(.fil1) {
+  fill: var(--glyph-color);
 }
 
 .chevron-states {
@@ -520,6 +531,10 @@ body {
   left: 0;
 }
 
+body.crt div.shield {
+  filter: brightness(2) contrast(0.5);
+}
+
 div.shield {
   position: absolute;
   top: clamp(-100px, 1.5vmin, 15px);
@@ -529,7 +544,6 @@ div.shield {
   background-image: url("../images/shield.gif");
   background-size: contain;
   background-blend-mode: overlay;
-  filter: brightness(2) contrast(0.5);
   border: var(--border);
   border-right: unset;
   border-radius: clamp(-100px, 2vmin, 20px) 0 0 clamp(-100px, 1vmin, 10px);
@@ -565,9 +579,8 @@ div:not(.active) .ring-1 circle {
   fill: none !important;
 }
 
-img.glyph {
+div.glyph {
   text-shadow: unset;
-  filter: var(--glyph-color-svg);
   top: clamp(-100px, 19vmin, 190px);
   left: clamp(-100px, 33.8vmin, 338px);
   height: clamp(-100px, 30vmin, 300px);
@@ -577,39 +590,46 @@ img.glyph {
   transition-timing-function: ease;
   animation: revealAnimation 0.8s forwards ease;
 }
-img.glyph.locked {
+div.glyph.locked {
   left: clamp(-100px, 83.5vmin, 835px);
   height: clamp(-100px, 6.6vmin, 66px);
 }
-img.glyph.locked.g1 {
+div.glyph.locked.g1 {
   top: clamp(-100px, 10.7vmin, 107px);
 }
-img.glyph.locked.g2 {
+div.glyph.locked.g2 {
   top: clamp(-100px, 18.7vmin, 187px);
 }
-img.glyph.locked.g3 {
+div.glyph.locked.g3 {
   top: clamp(-100px, 26.7vmin, 267px);
 }
-img.glyph.locked.g4 {
+div.glyph.locked.g4 {
   top: clamp(-100px, 34.7vmin, 347px);
 }
-img.glyph.locked.g5 {
+div.glyph.locked.g5 {
   top: clamp(-100px, 42.7vmin, 427px);
 }
-img.glyph.locked.g6 {
+div.glyph.locked.g6 {
   top: clamp(-100px, 50.7vmin, 507px);
 }
-img.glyph.locked.g7 {
+div.glyph.locked.g7 {
   top: clamp(-100px, 58.7vmin, 587px);
 }
-img.glyph.locked.g8 {
+div.glyph.locked.g8 {
   top: clamp(-100px, 80vmin, 800px);
 }
-img.glyph.locked.g9 {
+div.glyph.locked.g9 {
   top: clamp(-100px, 80vmin, 800px);
 }
-img.glyph.blur {
-  filter: blur(clamp(-100px, 1vmin, 10px)) var(--glyph-color-svg);
+div.glyph.blur {
+  filter: blur(clamp(-100px, 1vmin, 10px));
+}
+div.glyph > svg {
+  width: 100%;
+  height: 100%;
+}
+div.glyph path:not(.fil1) {
+  fill: var(--glyph-color);
 }
 
 div.chevron-link {

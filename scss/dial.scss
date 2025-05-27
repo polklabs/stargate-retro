@@ -220,10 +220,18 @@ body {
       &.disabled {
         opacity: 0.4;
       }
-      img {
+      svg {
         width: vmin-clamp(3.6);
         height: vmin-clamp(3.6);
-        filter: var(--glyph-color-svg);
+        path:not(.fil1) {
+          fill: var(--glyph-color);
+        }
+        ellipse:nth-of-type(1) {
+          stroke: var(--glyph-color);
+        }
+        ellipse:nth-of-type(2) {
+          fill: var(--glyph-color);
+        }
       }
     }
   }
@@ -301,9 +309,12 @@ body {
   display: flex;
   justify-content: center;
   pointer-events: none;
-  img {
+  svg {
     width: vmin-clamp(2.5);
-    filter: var(--glyph-color-svg);
+    height: vmin-clamp(2.5);
+    path:not(.fil1) {
+      fill: var(--glyph-color);
+    }
   }
 }
 
@@ -368,6 +379,11 @@ body {
 
 // IMAGES--------------------------------------------------------------------------------
 
+body.crt {
+  div.shield {
+    filter: brightness(2) contrast(0.5);
+  }
+}
 div.shield {
   position: absolute;
   top: vmin-clamp(1.5);
@@ -377,7 +393,6 @@ div.shield {
   background-image: url('../images/shield.gif');
   background-size: contain;
   background-blend-mode: overlay;
-  filter: brightness(2) contrast(0.5);
   border: var(--border);
   border-right: unset;
   border-radius: vmin-clamp(2) 0 0 vmin-clamp(1);
@@ -414,9 +429,8 @@ div:not(.active) {
   }
 }
 
-img.glyph {
+div.glyph {
   text-shadow: unset;
-  filter: var(--glyph-color-svg);
   top: vmin-clamp(19);
   left: vmin-clamp(33.8);
   height: vmin-clamp(30);
@@ -458,7 +472,14 @@ img.glyph {
     }
   }
   &.blur {
-    filter: blur(vmin-clamp(1)) var(--glyph-color-svg);
+    filter: blur(vmin-clamp(1));
+  }
+  > svg {
+    width: 100%;
+    height: 100%;
+  }
+  path:not(.fil1) {
+    fill: var(--glyph-color);
   }
 }
 
