@@ -1,9 +1,9 @@
 /* EDIT CUSTOMIZATIONS IN config.js */
 /* DO NOT EDIT BELOW UNLESS YOU KNOW WHAT YOU'RE DOING!!!! */
 
-import {config} from './config.js';
+import {config, isConfigAny} from './config.js';
 import {gdo, activateGDO} from './gdo.js';
-import { loadSymbols } from './helpers.js';
+import {loadSymbols} from './helpers.js';
 
 const appendTarget = document.querySelector('.dial-append');
 const timer = document.querySelector('.timer');
@@ -52,7 +52,6 @@ async function initialize_computer() {
   initialize_text();
 
   symbols = await loadSymbols();
-  console.log(symbols);
 
   buildKeyboard();
   updateStatusFrequency(5000);
@@ -184,14 +183,17 @@ function handleActiveGate(new_locked_chevrons = 0) {
       }
 
       if (config.GDO_AUTO) {
-        setTimeout(() => activateGDO(gateStatus.black_hole_connected), config.GDO_DELAY * 1000);
+        setTimeout(
+          () => activateGDO(gateStatus.black_hole_connected),
+          config.GDO_DELAY * 1000,
+        );
       }
     }
     // Active Outgoing
     if (gateStatus.address_buffer_outgoing.length > 0) {
       buffer = gateStatus.address_buffer_outgoing;
       new_locked_chevrons = gateStatus.locked_chevrons_outgoing;
-      const toRemove = document.querySelectorAll('.destination-glyphs > div');
+      const toRemove = document.querySelectorAll('.destination-glyphs div');
       toRemove.forEach(g => g.remove());
       if (state === STATE_DIAL_IN) {
         resetGate();
@@ -397,7 +399,9 @@ function displayGlyph() {
   newGlyph.innerHTML = symbol.imageData;
 
   const newGlyph2 = newGlyph.cloneNode(true);
-  newGlyph2.classList.add('blur');
+  if (!isConfigAny('POTATO_MODE', 'true', true)) {
+    newGlyph2.classList.add('blur');
+  }
   appendTarget.append(newGlyph2);
   appendTarget.append(newGlyph);
 
@@ -435,7 +439,7 @@ function resetGate() {
   chevrons.forEach(c => c.classList.remove('locked'));
 
   const toRemove = document.querySelectorAll(
-    '.dial-append > *,.destination-glyphs img',
+    '.dial-append > *,.destination-glyphs div',
   );
   toRemove.forEach(g => g.remove());
 

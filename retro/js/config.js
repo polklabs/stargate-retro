@@ -1,5 +1,7 @@
 /* USER CUSTOMIZATIONS */
 const config = {
+  // Does your computer have less processing power than a microwave?
+  POTATO_MODE: false,
 
   FILL_SCREEN: false,
 
@@ -47,8 +49,32 @@ const config = {
   INFO_WAVEFORM_UPDATES: [20, 2.5],
 
   CRT_SCREEN_FLICKER: false,
-  CRT_SCAN_LINE: false,
-  CRT_PIXEL: false,
+  CRT_SCAN_LINE: true,
+  CRT_PIXEL: true,
 };
 
-export {config};
+/* DO NOT EDIT BELOW UNLESS YOU KNOW WHAT YOU'RE DOING!!!! */
+
+function getConfig(id) {
+  const local = localStorage.getItem(id);
+  if (local !== null) {
+    return local;
+  } else {
+    return config[id];
+  }
+}
+
+function setConfig(id, value) {
+  localStorage.setItem(id, value);
+}
+
+function clearConfig(id) {
+  localStorage.removeItem(id);
+}
+
+function isConfigAny(id, ...options) {
+  const conf = getConfig(id);
+  return options.some(o => conf === o);
+}
+
+export {config, getConfig, setConfig, clearConfig, isConfigAny};

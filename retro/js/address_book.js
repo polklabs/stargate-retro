@@ -3,7 +3,6 @@
 
 import {loadSymbols} from './helpers.js';
 
-const scrollingDiv = document.getElementById('scrollingDiv');
 const tableRowTemplate = document.getElementById('tableRow');
 const tableBody = document.getElementById('tableBody');
 const standardCounts = document.querySelector('.standard-count');
@@ -44,7 +43,6 @@ async function fetchData() {
     addresses = Object.values(data['address_book']);
 
     symbols = await loadSymbols();
-    console.log(symbols)
 
     parseData();
   } catch (error) {
