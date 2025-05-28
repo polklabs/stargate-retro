@@ -157,7 +157,7 @@ function togglePotatoMode() {
   } else {
     setConfig('POTATO_MODE', 'true');
   }
-  location.reload();
+  location.reload(true);
 }
 
 window.togglePotatoMode = togglePotatoMode;
