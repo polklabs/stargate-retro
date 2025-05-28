@@ -1,7 +1,13 @@
 /* EDIT CUSTOMIZATIONS IN config.js */
 /* DO NOT EDIT BELOW UNLESS YOU KNOW WHAT YOU'RE DOING!!!! */
 
-import {config} from './config.js';
+import {
+  clearConfig,
+  config,
+  getConfig,
+  setConfig,
+  isConfigAny,
+} from './config.js';
 
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
@@ -59,7 +65,10 @@ async function shutdown() {
 }
 
 function isActive(href) {
-  return `href="${href}"` + (window.location.href.includes(href) ? 'class="active-link"' : '');
+  return (
+    `href="${href}"` +
+    (window.location.href.includes(href) ? 'class="active-link"' : '')
+  );
 }
 
 function initializeNavBar() {
@@ -82,7 +91,10 @@ function initializeNavBar() {
           </div>
         </div>
         <a href="/help.htm">Help</a>
-        <a class="a-fullscreen"><span onclick="toggleFillScreen()"
+        <a class="a-potato" onclick="togglePotatoMode()">
+          Potato Mode
+        </a>
+        <a class="a-fullscreen" onclick="toggleFillScreen()"><span
           class="material-symbols-outlined fullscreen">
           fullscreen
           </span>
@@ -91,8 +103,8 @@ function initializeNavBar() {
     </div>
   `;
   const innerDiv = div.querySelector('div');
-  const body = document.querySelector('body')
-  body.insertBefore(innerDiv, body.childNodes[0])
+  const body = document.querySelector('body');
+  body.insertBefore(innerDiv, body.childNodes[0]);
 }
 window.restart = restart;
 window.reboot = reboot;
@@ -102,7 +114,7 @@ initializeNavBar();
 
 // FULL SCREEN HACK
 const elem = document.body;
-let fill = localStorage.getItem('fillScreen') === 'true' || config.FILL_SCREEN;
+let fill = isConfigAny('FILL_SCREEN', 'true', true);
 const border = document.querySelector('.border');
 function fillScreen() {
   if (fill) {
@@ -117,12 +129,12 @@ function fillScreen() {
 }
 
 function toggleFillScreen() {
-  const fillLocal = localStorage.getItem('fillScreen');
+  const fillLocal = getConfig('FILL_SCREEN');
   if (fillLocal === 'true') {
-    localStorage.removeItem('fillScreen');
+    clearConfig('FILL_SCREEN');
     fill = false;
   } else {
-    localStorage.setItem('fillScreen', 'true');
+    setConfig('FILL_SCREEN', 'true');
     fill = true;
   }
   fillScreen();
@@ -135,4 +147,26 @@ window.toggleFillScreen = toggleFillScreen;
 const fullscreenBtn = document.querySelector('.a-fullscreen');
 if (config.FILL_SCREEN && fullscreenBtn) {
   fullscreenBtn.style.display = 'none';
+}
+
+// Potato Mode
+function togglePotatoMode() {
+  const potatoLocal = getConfig('POTATO_MODE');
+  if (potatoLocal === 'true') {
+    clearConfig('POTATO_MODE');
+  } else {
+    setConfig('POTATO_MODE', 'true');
+  }
+  location.reload(true);
+}
+
+window.togglePotatoMode = togglePotatoMode;
+
+const potatoBtn = document.querySelector('.a-potato');
+if (potatoBtn) {
+  if (config.POTATO_MODE) {
+    potatoBtn.style.display = 'none';
+  } else if (isConfigAny('POTATO_MODE', 'true', true)) {
+    potatoBtn.textContent = 'Fancy Mode';
+  }
 }

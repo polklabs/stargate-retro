@@ -1,6 +1,7 @@
 /* EDIT CUSTOMIZATIONS IN config.js */
 /* DO NOT EDIT BELOW UNLESS YOU KNOW WHAT YOU'RE DOING!!!! */
 import {config} from './config.js';
+import { loadSymbols } from './helpers.js';
 
 const symbolWrapper = document.querySelector('.symbol-wrapper');
 const authCode = document.querySelector('.auth-code');
@@ -14,14 +15,8 @@ const selectedSymbols = {};
 async function initialize_computer() {
   initialize_text();
 
-  const responseSymbols = await fetch('/stargate/get/symbols_all');
-  if (!responseSymbols.ok) {
-    handleOffline();
-    return;
-  }
-  symbols = await responseSymbols.json();
+  symbols = await loadSymbols(false);
 
-  // applyInfo();
   generateSymbols();
 }
 initialize_computer();
@@ -48,9 +43,9 @@ function generateSymbols() {
     const el = document.createElement('div');
     el.classList.add('symbol-box');
     el.classList.add(`symbol-${symbol.index}`);
-    const img = document.createElement('img');
+    const img = document.createElement('div');
     img.classList.add('symbol');
-    img.src = '..' + symbol.imageSrc;
+    img.innerHTML = symbol.imageData;
 
     const name = document.createElement('span');
     name.classList.add('symbol-name');

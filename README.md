@@ -67,6 +67,7 @@ Navigation header at the top of all pages to integrate with v4 software. As it i
 
 | File | Page | Property | Default | Description | Alt Example |
 | ---- | ---- | -------- | ------- | ----------- | ----------- |
+| config.js | All | POTATO_MODE | `false` | Disables options to make the page more performant on low end systems like a raspberry pi 3B+. Effects `CRT_SCREEN_FLICKER`, `CRT_SCAN_LINE`, `CRT_PIXEL` and more |  |
 | config.js | All | FILL_SCREEN | `false` | Will attempt to make the page fill the screen |  |
 | config.js | Dial | RING_ANIMATION | `true` | Should the ring spin when dialing out |
 | config.js | Dial/Symbols | AUTHORIZATION_CODE_RANDOMIZE | `true` | Generate a random authorization code on page load |
@@ -106,6 +107,8 @@ Navigation header at the top of all pages to integrate with v4 software. As it i
 | *.css | All |  --color-wormhole-2 |<span style="color:cyan">cyan</span> | 3 Part gradient for active wormhole |
 | *.css | All |  --color-wormhole-3 |<span style="color:cornflowerblue">cornflowerblue</span> | 3 Part gradient for active wormhole |
 | config.js | All | CRT_SCREEN_FLICKER | `false` | Add screen flicker effect at random intervals |
+| config.js | All | CRT_SCAN_LINE | `true` | Add screen tear like scan line animation |
+| config.js | All | CRT_PIXEL | `true` | Add screen door effect to make page look more like a crt monitor |
 | crt.css | All | .crt -> textShadow | unset | Uncomment to add awesome subtle crt effect that will melt your computer |
 
 ## Future Plans?

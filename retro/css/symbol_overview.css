@@ -7,11 +7,6 @@
   --color-alt: white;
   --background-color: #020f25;
   --glyph-color: #fffea5;
-  /*! Calculate glyph-color-svg here: https://codepen.io/sosuke/pen/Pjoqqp */
-  --glyph-color-svg: invert(100%) sepia(21%) saturate(5367%) hue-rotate(312deg)
-    brightness(111%) contrast(103%);
-  --glyph-color-danger-svg: invert(16%) sepia(84%) saturate(3541%)
-    hue-rotate(331deg) brightness(81%) contrast(117%);
   --color-wormhole-danger-1: yellow;
   --color-wormhole-danger-2: orange;
   --color-wormhole-danger-3: red;
@@ -150,11 +145,11 @@ a:visited {
   display: block;
 }
 
-.fullscreen {
-  font-size: 1.6vmin !important;
+.fullscreen, .sentiment_very_dissatisfied {
+  font-size: clamp(-100px, 1.8vmin, 18px) !important;
   align-items: center;
   display: flex !important;
-  height: 2.2vmin;
+  height: clamp(-100px, 2.4vmin, 24px);
   user-select: none;
 }
 
@@ -260,13 +255,19 @@ body {
 .symbol-wrapper .symbol-box:hover {
   background-color: var(--color-dark);
 }
-.symbol-wrapper .symbol-box:hover .symbol {
-  filter: var(--glyph-color-svg);
+.symbol-wrapper .symbol-box:hover .symbol path:not(.fil1) {
+  fill: var(--glyph-color);
 }
 .symbol-wrapper .symbol {
   width: clamp(-100px, 7vmin, 70px);
-  height: auto;
-  filter: invert(1);
+  height: clamp(-100px, 7vmin, 70px);
+}
+.symbol-wrapper .symbol svg {
+  width: 100%;
+  height: 100%;
+}
+.symbol-wrapper .symbol path:not(.fil1) {
+  fill: var(--color-alt);
 }
 .symbol-wrapper .symbol-name {
   font-size: clamp(-100px, 1.4vmin, 14px);
@@ -276,8 +277,11 @@ body {
 .symbol-wrapper .symbol-box.selected {
   background-color: var(--color-danger);
 }
-.symbol-wrapper .symbol-box.selected .symbol {
-  filter: var(--glyph-color-danger-svg) invert(1);
+.symbol-wrapper .symbol-box.selected .symbol path:not(.fil1) {
+  fill: var(--color-danger);
+}
+.symbol-wrapper .symbol-box.selected .symbol svg {
+  filter: invert(1);
 }
 .symbol-wrapper .symbol-box.selected .symbol-name {
   color: var(--color-danger);
