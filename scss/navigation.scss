@@ -79,10 +79,10 @@
   display: block;
 }
 
-.fullscreen {
-  font-size: 1.6vmin !important;
+.fullscreen,.sentiment_very_dissatisfied {
+  font-size: vmin-clamp(1.8) !important;
   align-items: center;
   display: flex !important;
-  height: 2.2vmin;
+  height: vmin-clamp(2.4);
   user-select: none;
 }
