@@ -1,5 +1,6 @@
 *.css.map
 __pycache__
+node_modules/
 
 # STYLING
 functions.css

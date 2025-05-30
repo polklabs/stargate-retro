@@ -1,0 +1,24 @@
+{
+  "name": "stargate-retro",
+  "version": "1.0.0",
+  "description": "<img src=\"screenshots/Screenshot%202025-05-07%20154406.png\" alt=\"drawing\" width=\"400\"/>",
+  "main": ".prettierrc.js",
+  "scripts": {
+    "watch": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polklabs/stargate-retro.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/polklabs/stargate-retro/issues"
+  },
+  "homepage": "https://github.com/polklabs/stargate-retro#readme",
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
