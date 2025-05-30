@@ -356,7 +356,7 @@ function dial() {
   }
 
   if (bufferIndex >= locked_chevrons) {
-    if (buffer.length > bufferIndex) {
+    if (buffer.length > bufferIndex && gateStatus.address_buffer_incoming.length <= 0) {
       displayGlyph();
     }
     encoding = false;
@@ -365,7 +365,7 @@ function dial() {
 
   encoding = true;
 
-  if (bufferIndex < 9) {
+  if (bufferIndex < 9 && gateStatus.address_buffer_incoming.length <= 0) {
     const [newGlyph, newGlyph2] = displayGlyph();
     if (firstStatus) {
       newGlyph.classList.add('locked');
@@ -427,6 +427,9 @@ function lock(i) {
     const newB = b.cloneNode(true);
     newB.classList.add(`clip-${i < 3 ? '2' : '1'}`);
     appendTarget.append(newB);
+    if(gateStatus.address_buffer_incoming.length > 0) {
+      newB.classList.add('incoming');
+    }
     setTimeout(() => newB.classList.add('locked'), 10);
   }
 }

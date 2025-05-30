@@ -166,6 +166,9 @@
   }
   .chevron-box.locked {
     border-color: var(--color-good);
+    &.incoming {
+      background-color: var(--color-good) !important;
+    }
   }
 }
 

@@ -559,11 +559,17 @@ div.clip-1 {
   clip-path: inset(0 100% 0 0); /* Hidden initially (right side at 100%) */
   transition: clip-path 0.8s linear;
 }
+div.clip-1.incoming {
+  background-color: var(--color-danger);
+}
 
 div.clip-2 {
   border-color: var(--color-danger);
   clip-path: inset(0 0 0 100%); /* Hidden initially (right side at 100%) */
   transition: clip-path 0.8s linear;
+}
+div.clip-2.incoming {
+  background-color: var(--color-danger);
 }
 
 div.locked {
@@ -703,6 +709,37 @@ div.gate {
 
 .slow-rotate {
   transition: transform 0.4s ease-out;
+}
+
+.border.gdo-valid .chevron.locked .cls-1,
+.border.gdo-valid .chevron.locked .cls-2 {
+  stroke: var(--color-good);
+}
+
+.chevron .cls-1 {
+  fill: var(--background-color);
+}
+.chevron .cls-1,
+.chevron .cls-2 {
+  stroke: var(--color-alt);
+  stroke-width: 1px;
+  fill-rule: evenodd;
+}
+.chevron .cls-2 {
+  fill: none;
+}
+
+.chevron.locked.chevron-1 .cls-1,
+.chevron.locked.chevron-1 .cls-2, .chevron.locked.chevron-2 .cls-1,
+.chevron.locked.chevron-2 .cls-2, .chevron.locked.chevron-3 .cls-1,
+.chevron.locked.chevron-3 .cls-2, .chevron.locked.chevron-4 .cls-1,
+.chevron.locked.chevron-4 .cls-2, .chevron.locked.chevron-5 .cls-1,
+.chevron.locked.chevron-5 .cls-2, .chevron.locked.chevron-6 .cls-1,
+.chevron.locked.chevron-6 .cls-2, .chevron.locked.chevron-7 .cls-1,
+.chevron.locked.chevron-7 .cls-2, .chevron.locked.chevron-8 .cls-1,
+.chevron.locked.chevron-8 .cls-2, .chevron.locked.chevron-9 .cls-1,
+.chevron.locked.chevron-9 .cls-2 {
+  stroke: var(--color-danger);
 }
 
 /*# sourceMappingURL=dial.css.map */
