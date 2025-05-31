@@ -411,11 +411,18 @@ div.clip-1 {
   border-color: var(--color-danger);
   clip-path: inset(0 100% 0 0); /* Hidden initially (right side at 100%) */
   transition: clip-path 0.8s linear;
+  &.incoming {
+    background-color: var(--color-danger);
+  }
 }
 div.clip-2 {
   border-color: var(--color-danger);
   clip-path: inset(0 0 0 100%); /* Hidden initially (right side at 100%) */
   transition: clip-path 0.8s linear;
+
+  &.incoming {
+    background-color: var(--color-danger);
+  }
 }
 div.locked {
   clip-path: inset(0 0 0 0);
@@ -560,4 +567,34 @@ div.gate {
 }
 .slow-rotate {
   transition: transform 0.4s ease-out;
+}
+
+// CHEVRONS
+.border.gdo-valid .chevron {
+  &.locked {
+    .cls-1,
+    .cls-2 {
+      stroke: var(--color-good);
+    }
+  }
+}
+.chevron {
+  .cls-1 {
+    fill: var(--background-color);
+  }
+  .cls-1,
+  .cls-2 {
+    stroke: var(--color-alt);
+    stroke-width: 1px;
+    fill-rule: evenodd;
+  }
+  .cls-2 {
+    fill: none;
+  }
+}
+.chevron.locked {
+  .cls-1,
+  .cls-2 {
+    stroke: var(--color-danger);
+  }
 }

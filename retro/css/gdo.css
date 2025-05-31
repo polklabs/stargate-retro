@@ -143,6 +143,9 @@
 .border.gdo-valid .chevron-box.locked {
   border-color: var(--color-good);
 }
+.border.gdo-valid .chevron-box.locked.incoming {
+  background-color: var(--color-good) !important;
+}
 
 @keyframes signalGreenAnimation {
   0% {
