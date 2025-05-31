@@ -593,18 +593,8 @@ div.gate {
   }
 }
 .chevron.locked {
-  &.chevron-1,
-  &.chevron-2,
-  &.chevron-3,
-  &.chevron-4,
-  &.chevron-5,
-  &.chevron-6,
-  &.chevron-7,
-  &.chevron-8,
-  &.chevron-9 {
-    .cls-1,
-    .cls-2 {
-      stroke: var(--color-danger);
-    }
+  .cls-1,
+  .cls-2 {
+    stroke: var(--color-danger);
   }
 }
