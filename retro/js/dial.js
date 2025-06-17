@@ -2,7 +2,7 @@
 /* DO NOT EDIT BELOW UNLESS YOU KNOW WHAT YOU'RE DOING!!!! */
 
 import {config, isConfigAny} from './config.js';
-import {gdo, activateGDO} from './gdo.js';
+import {gdo, activateGDO, resetGDO} from './gdo.js';
 import {loadSymbols} from './helpers.js';
 
 const appendTarget = document.querySelector('.dial-append');
@@ -184,7 +184,7 @@ function handleActiveGate(new_locked_chevrons = 0) {
 
       if (config.GDO_AUTO) {
         setTimeout(
-          () => activateGDO(gateStatus.black_hole_connected),
+          () => activateGDO(gateStatus.connected_planet, gateStatus.black_hole_connected),
           config.GDO_DELAY * 1000,
         );
       }
@@ -218,6 +218,7 @@ function handleDialingOut(new_locked_chevrons) {
     gateStatus.address_buffer_outgoing.length > 0
   ) {
     resetGate();
+    resetGDO();
     state = STATE_DIAL_OUT;
   }
 
@@ -250,6 +251,7 @@ function handleDialingIn(new_locked_chevrons) {
     gateStatus.address_buffer_incoming.length > 0
   ) {
     resetGate();
+    resetGDO();
     state = STATE_DIAL_IN;
   }
 

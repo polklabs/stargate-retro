@@ -9,7 +9,7 @@ const border = document.querySelector('.border');
 let gdoBox;
 let canceled = false;
 
-function activateGDO(blackHole=false) {
+function activateGDO(planet= '', blackHole=false) {
   canceled = false;
   gdoBox = document.createElement('div');
 
@@ -87,6 +87,7 @@ function activateGDO(blackHole=false) {
     <div class="signal-info">
       <div>SIGNAL DECRYPTED CODE ${code}</div>
       <div>RECOGNIZED: ${name}</div>
+      <div>${planet}</div>
     </div>
   `;
 
@@ -185,7 +186,7 @@ function gdoComplete() {
 function resetGDO() {
   canceled = true;
   gdo.state = 'idle';
-  gdoBox.remove();
+  gdoBox?.remove();
   border.classList.remove('gdo-valid');
 }
 

@@ -116,7 +116,7 @@
   color: var(--color-danger);
   text-align: center;
   padding-top: clamp(-100px, 1.5vmin, 15px);
-  line-height: clamp(-100px, 3vmin, 30px);
+  line-height: clamp(-100px, 2.6vmin, 26px);
   clip-path: inset(0 0 100% 0);
   transition: clip-path 1s;
 }
