@@ -17,6 +17,7 @@ const border = document.querySelector('.border');
 const keyboard = document.querySelector('.keyboard');
 const systemEl = document.querySelector('.system');
 const authCode = document.querySelector('.auth-code');
+const revertDialingPage = document.querySelector('.revert-dialing-page');
 
 let statusInterval;
 
@@ -56,6 +57,7 @@ const use9ChevronPage = isConfigAny(
 // INITIALIZE --------------------------------------------------------------------------
 async function initialize_computer() {
   initialize_text();
+  check_chevron_count();
 
   symbols = await loadSymbols();
 
@@ -543,6 +545,14 @@ function initialize_text() {
 
       updateText(authCode.children.item(i), code);
     }
+  }
+}
+
+function check_chevron_count() {
+  const use9ChevronPage = isConfigAny('CHEVRON_9_DIALING', 'true', true);
+
+  if (!use9ChevronPage && revertDialingPage) {
+    revertDialingPage.classList.remove('hidden');
   }
 }
 

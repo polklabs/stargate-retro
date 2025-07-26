@@ -660,6 +660,15 @@ div.gate {
   width: clamp(-100px, 45.1vmin, 451px);
 }
 
+.revert-dialing-page {
+  right: 5.3vmin;
+  top: 49.6vmin;
+  position: absolute;
+  font-size: 2.2vmin;
+  color: var(--color-alt) !important;
+  cursor: pointer !important;
+}
+
 @keyframes revealAnimation {
   from {
     transform: scale(0.1);
