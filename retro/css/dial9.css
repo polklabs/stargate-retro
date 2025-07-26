@@ -480,8 +480,8 @@ body {
 }
 
 .chevron-states {
-  font-size: clamp(-100px, 2vmin, 20px);
-  line-height: clamp(-100px, 1.6vmin, 16px);
+  font-size: clamp(-100px, 1.5vmin, 15px);
+  line-height: clamp(-100px, 1.35vmin, 13.5px);
   border-collapse: collapse;
   table-layout: fixed;
   width: clamp(-100px, 18vmin, 180px);
@@ -511,7 +511,7 @@ body {
   visibility: hidden;
 }
 .chevron-states tr {
-  height: clamp(-100px, 2.1vmin, 21px);
+  height: clamp(-100px, 1.5vmin, 15px);
 }
 .chevron-states td {
   padding-left: clamp(-100px, 1.6vmin, 16px);
@@ -658,15 +658,6 @@ div.gate {
   top: clamp(-100px, 12.9vmin, 129px);
   height: clamp(-100px, 44.8vmin, 448px);
   width: clamp(-100px, 45.1vmin, 451px);
-}
-
-.revert-dialing-page {
-  right: 5.3vmin;
-  top: 49.6vmin;
-  position: absolute;
-  font-size: 2.2vmin;
-  color: var(--color-alt) !important;
-  cursor: pointer !important;
 }
 
 @keyframes revealAnimation {

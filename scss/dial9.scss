@@ -311,8 +311,8 @@ body {
 }
 
 .chevron-states {
-  font-size: vmin-clamp(2);
-  line-height: vmin-clamp(1.6);
+  font-size: vmin-clamp(1.5);
+  line-height: vmin-clamp(1.35);
   border-collapse: collapse;
   table-layout: fixed;
   width: vmin-clamp(18);
@@ -344,7 +344,7 @@ body {
   }
 
   tr {
-    height: vmin-clamp(2.1);
+    height: vmin-clamp(1.5);
   }
   td {
     padding-left: vmin-clamp(1.6);
@@ -478,15 +478,6 @@ div.gate {
   top: vmin-clamp(12.9);
   height: vmin-clamp(44.8);
   width: vmin-clamp(45.1);
-}
-
-.revert-dialing-page {
-  right: 5.3vmin;
-  top: 49.6vmin;
-  position: absolute;
-  font-size: 2.2vmin;
-  color: var(--color-alt) !important;
-  cursor: pointer !important;
 }
 
 @keyframes revealAnimation {
