@@ -55,15 +55,20 @@ function parseData() {
   const imgElement = tableRowTemplate.querySelector(`.glyph-7`);
   imgElement.innerHTML = symbols[0].imageData;
 
-  const use9ChevronPage = isConfigAny(
+  const autoUse9ChevronPage = isConfigAny(
     'CHEVRON_9_DIALING_AUTO_SWITCH',
+    'true',
+    true,
+  );
+  const use9ChevronPage = isConfigAny(
+    'CHEVRON_9_DIALING',
     'true',
     true,
   );
 
   addresses.forEach(address => {
     const aTag = document.createElement('a');
-    if (use9ChevronPage && address.gate_address.length > 6) {
+    if (use9ChevronPage || (autoUse9ChevronPage && address.gate_address.length > 6)) {
       aTag.setAttribute(
         'href',
         `dial9.html?address=${address.gate_address.join('-')}`,
