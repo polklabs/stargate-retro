@@ -2,6 +2,10 @@
 @use 'functions' as *;
 @use 'navigation';
 
+@function chevron-box-top($index) {
+  @return vmin-clamp(11 + ($index - 1) * 8);
+}
+
 body {
   background-color: var(--background-color);
   color: var(--color);
@@ -71,26 +75,10 @@ body {
   overflow: hidden;
   text-shadow: unset !important;
 
-  &.b1 {
-    top: vmin-clamp(11);
-  }
-  &.b2 {
-    top: vmin-clamp(19);
-  }
-  &.b3 {
-    top: vmin-clamp(27);
-  }
-  &.b4 {
-    top: vmin-clamp(35);
-  }
-  &.b5 {
-    top: vmin-clamp(43);
-  }
-  &.b6 {
-    top: vmin-clamp(51);
-  }
-  &.b7 {
-    top: vmin-clamp(59);
+  @for $i from 1 through 7 {
+    &.b#{$i} {
+      top: chevron-box-top($i);
+    }
   }
 }
 
@@ -449,6 +437,7 @@ div.glyph {
   &.locked {
     left: vmin-clamp(83.5);
     height: vmin-clamp(6.6);
+    width: vmin-clamp(6.6);
 
     &.g1 {
       top: vmin-clamp(10.7);
