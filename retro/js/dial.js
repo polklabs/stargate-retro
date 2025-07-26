@@ -47,6 +47,12 @@ let locked_chevrons = 0;
 
 let symbols = [];
 
+const use9ChevronPage = isConfigAny(
+  'CHEVRON_9_DIALING_AUTO_SWITCH',
+  'true',
+  true,
+);
+
 // INITIALIZE --------------------------------------------------------------------------
 async function initialize_computer() {
   initialize_text();
@@ -222,6 +228,14 @@ function handleDialingOut(new_locked_chevrons) {
     state = STATE_DIAL_OUT;
   }
 
+  if (
+    use9ChevronPage &&
+    gateStatus.address_buffer_outgoing.length > 7 &&
+    window.location.pathname.endsWith('/retro/dial.html')
+  ) {
+    window.location.href = '/retro/dial9.html';
+  }
+
   // Dialing Out
   if (state === STATE_DIAL_OUT) {
     let bufferChange =
@@ -358,7 +372,10 @@ function dial() {
   }
 
   if (bufferIndex >= locked_chevrons) {
-    if (buffer.length > bufferIndex && gateStatus.address_buffer_incoming.length <= 0) {
+    if (
+      buffer.length > bufferIndex &&
+      gateStatus.address_buffer_incoming.length <= 0
+    ) {
       displayGlyph();
     }
     encoding = false;
@@ -429,7 +446,7 @@ function lock(i) {
     const newB = b.cloneNode(true);
     newB.classList.add(`clip-${i < 3 ? '2' : '1'}`);
     appendTarget.append(newB);
-    if(gateStatus.address_buffer_incoming.length > 0) {
+    if (gateStatus.address_buffer_incoming.length > 0) {
       newB.classList.add('incoming');
     }
     setTimeout(() => newB.classList.add('locked'), 10);

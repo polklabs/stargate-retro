@@ -594,6 +594,7 @@ div.glyph {
 div.glyph.locked {
   left: clamp(-100px, 83.5vmin, 835px);
   height: clamp(-100px, 6.6vmin, 66px);
+  width: clamp(-100px, 6.6vmin, 66px);
 }
 div.glyph.locked.g1 {
   top: clamp(-100px, 10.7vmin, 107px);

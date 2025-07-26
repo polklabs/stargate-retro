@@ -15,6 +15,8 @@ const config = {
 
   // Used when gate is offline initially
   DEFAULT_GATE_NAME: 'Stargate',
+  CHEVRON_9_DIALING: false,
+  CHEVRON_9_DIALING_AUTO_SWITCH: true,
 
   TEXT_OFFLINE: 'OFFLINE',
   TEXT_IDLE: 'IDLE',

@@ -52,6 +52,10 @@ Navigation header at the top of all pages to integrate with v4 software. As it i
 
     <img src="screenshots/Screenshot 2025-05-07 154809.png" alt="drawing" width="300"/>
     <img src="screenshots/Screenshot 2025-05-20 161401.png" alt="drawing" width="300"/>
+
+- [Dial 9 chevrons](http://stargate.local/retro/dial9.html) - `/retro/dial9.html`
+    - A variant of the dialing page that has boxes for 9 chevrons
+
 - [Address Book](http://stargate.local/retro/address_book.html) - `/retro/address_book.html`
 
     <img src="screenshots/Screenshot 2025-05-07 154444.png" alt="drawing" width="300"/>
@@ -69,6 +73,8 @@ Navigation header at the top of all pages to integrate with v4 software. As it i
 | ---- | ---- | -------- | ------- | ----------- | ----------- |
 | config.js | All | POTATO_MODE | `false` | Disables options to make the page more performant on low end systems like a raspberry pi 3B+. Effects `CRT_SCREEN_FLICKER`, `CRT_SCAN_LINE`, `CRT_PIXEL` and more |  |
 | config.js | All | FILL_SCREEN | `false` | Will attempt to make the page fill the screen |  |
+| config.js | All | CHEVRON_9_DIALING | `false` | Should links to dial page default to 9 chevron variant |  |
+| config.js | All | CHEVRON_9_DIALING_AUTO_SWITCH | `true` | Should longer addresses auto switch to use new 9 chevron page |  |
 | config.js | Dial | RING_ANIMATION | `true` | Should the ring spin when dialing out |
 | config.js | Dial/Symbols | AUTHORIZATION_CODE_RANDOMIZE | `true` | Generate a random authorization code on page load |
 | config.js | Dial/Symbols | AUTHORIZATION_CODE | `77892757892387` | Fixed code to use if *AUTHORIZATION_CODE_RANDOMIZE* is `false` |

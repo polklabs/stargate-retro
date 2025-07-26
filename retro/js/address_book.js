@@ -2,6 +2,7 @@
 /* DO NOT EDIT BELOW UNLESS YOU KNOW WHAT YOU'RE DOING!!!! */
 
 import {loadSymbols} from './helpers.js';
+import {isConfigAny} from './config.js';
 
 const tableRowTemplate = document.getElementById('tableRow');
 const tableBody = document.getElementById('tableBody');
@@ -54,12 +55,30 @@ function parseData() {
   const imgElement = tableRowTemplate.querySelector(`.glyph-7`);
   imgElement.innerHTML = symbols[0].imageData;
 
+  const autoUse9ChevronPage = isConfigAny(
+    'CHEVRON_9_DIALING_AUTO_SWITCH',
+    'true',
+    true,
+  );
+  const use9ChevronPage = isConfigAny(
+    'CHEVRON_9_DIALING',
+    'true',
+    true,
+  );
+
   addresses.forEach(address => {
     const aTag = document.createElement('a');
-    aTag.setAttribute(
-      'href',
-      `dial.html?address=${address.gate_address.join('-')}`,
-    );
+    if (use9ChevronPage || (autoUse9ChevronPage && address.gate_address.length > 6)) {
+      aTag.setAttribute(
+        'href',
+        `dial9.html?address=${address.gate_address.join('-')}`,
+      );
+    } else {
+      aTag.setAttribute(
+        'href',
+        `dial.html?address=${address.gate_address.join('-')}`,
+      );
+    }
     address.htmlData = aTag;
 
     const newRow = tableRowTemplate.cloneNode(true);

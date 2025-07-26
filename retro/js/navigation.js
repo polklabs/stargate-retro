@@ -72,11 +72,12 @@ function isActive(href) {
 }
 
 function initializeNavBar() {
+  const dial9Chevron = isConfigAny('CHEVRON_9_DIALING', 'true', true);
   const div = document.createElement('div');
   div.innerHTML = `
   <div class="navigation-menu-wrapper">
       <div class="navigation-menu">
-        <a ${isActive('/retro/dial.html')}>Home</a>
+        <a ${isActive(dial9Chevron ? '/retro/dial9.html' : '/retro/dial.html')}>Home</a>
         <a ${isActive('/retro/address_book.html')}>Address Book</a>
         <a ${isActive('/retro/symbol_overview.html')}>Symbols</a>
         <div class="dropdown">
