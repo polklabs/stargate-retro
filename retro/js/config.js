@@ -50,6 +50,9 @@ const config = {
   INFO_WAVEFORM_ACTIVE: [0.7, 1],
   INFO_WAVEFORM_UPDATES: [20, 2.5],
 
+  // STARTUP animation length in seconds, 0 to disable
+  STARTUP_LENGTH: 12,
+
   CRT_SCREEN_FLICKER: false,
   CRT_SCAN_LINE: true,
   CRT_PIXEL: true,

@@ -1,0 +1,29 @@
+@use 'functions' as *;
+
+html:has(.startup-pending) {
+  background-color: black;
+}
+body.startup-pending {
+  display: none;
+}
+
+.startup-wrapper {
+  background-color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  color: var(--color-alt);
+  padding: vmin-clamp(2);
+  font-size: vmin-clamp(2);
+  z-index: 9999;
+}
+
+.border:has(.startup-wrapper) {
+  border-color: black;
+}
+body:has(.startup-wrapper) {
+  background-color: black;
+}
