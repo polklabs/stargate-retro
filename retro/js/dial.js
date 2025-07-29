@@ -3,6 +3,7 @@
 
 import {config, isConfigAny} from './config.js';
 import {gdo, activateGDO, resetGDO} from './gdo.js';
+import {activateTimer} from './timer.js';
 import {loadSymbols} from './helpers.js';
 
 const appendTarget = document.querySelector('.dial-append');
@@ -58,6 +59,7 @@ const use9ChevronPage = isConfigAny(
 // INITIALIZE --------------------------------------------------------------------------
 async function initialize_computer() {
   initialize_text();
+  initialize_events();
 
   symbols = await loadSymbols();
 
@@ -66,6 +68,10 @@ async function initialize_computer() {
   speedDialStart();
 }
 initialize_computer();
+
+function initialize_events() {
+  timer.onclick = () => activateTimer(gateStatus.wormhole_time_till_close);
+}
 
 function updateStatusFrequency(ms) {
   clearInterval(statusInterval);
@@ -534,30 +540,30 @@ function updateTimer(secondsLeft) {
   if (secondsLeft <= 0) {
     clearInterval(timerInterval);
     timerInterval = undefined;
-    updateTimerText(0, 0, 0);
+    updateTimerText(0, 0);
   } else if (timerInterval === undefined) {
     const msLeft = secondsLeft * 1000;
     const start = Date.now();
 
     timerInterval = setInterval(() => {
       const delta = Date.now() - start; // milliseconds elapsed since start
-      const timeLeft = msLeft - delta;
+      let timeLeft = msLeft - delta;
 
       if (timeLeft <= 0) {
         timeLeft = 0;
         clearInterval(timerInterval);
         timerInterval = undefined;
-        updateTimerText(0, 0, 0);
+        updateTimerText(0, 0);
       } else {
         const mins = Math.max(0, Math.floor(timeLeft / 60000));
         const secs = Math.max(0, Math.floor(timeLeft / 1000) % 60);
-        updateTimerText(mins, secs, 0);
+        updateTimerText(mins, secs);
       }
     }, 333); // update about 3x a second
   }
 }
 
-function updateTimerText(minutes, seconds, milliseconds) {
+function updateTimerText(minutes, seconds) {
   updateText(timer, `${minutes}:${seconds.toString().padStart(2, '0')}`);
 }
 
