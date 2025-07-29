@@ -47,6 +47,8 @@ let locked_chevrons = 0;
 
 let symbols = [];
 
+let timerInterval;
+
 const use9ChevronPage = isConfigAny(
   'CHEVRON_9_DIALING_AUTO_SWITCH',
   'true',
@@ -190,7 +192,11 @@ function handleActiveGate(new_locked_chevrons = 0) {
 
       if (config.GDO_AUTO) {
         setTimeout(
-          () => activateGDO(gateStatus.connected_planet, gateStatus.black_hole_connected),
+          () =>
+            activateGDO(
+              gateStatus.connected_planet,
+              gateStatus.black_hole_connected,
+            ),
           config.GDO_DELAY * 1000,
         );
       }
@@ -525,9 +531,34 @@ function updateTimer(secondsLeft) {
       (gateStatus.wormhole_max_time - gateStatus.wormhole_time_till_close);
   }
 
-  const mins = Math.max(0, Math.floor(secondsLeft / 60));
-  const secs = Math.max(0, secondsLeft % 60);
-  updateText(timer, `${mins}:${secs.toString().padStart(2, '0')}`);
+  if (secondsLeft <= 0) {
+    clearInterval(timerInterval);
+    timerInterval = undefined;
+    updateTimerText(0, 0, 0);
+  } else if (timerInterval === undefined) {
+    const msLeft = secondsLeft * 1000;
+    const start = Date.now();
+
+    timerInterval = setInterval(() => {
+      const delta = Date.now() - start; // milliseconds elapsed since start
+      const timeLeft = msLeft - delta;
+
+      if (timeLeft <= 0) {
+        timeLeft = 0;
+        clearInterval(timerInterval);
+        timerInterval = undefined;
+        updateTimerText(0, 0, 0);
+      } else {
+        const mins = Math.max(0, Math.floor(timeLeft / 60000));
+        const secs = Math.max(0, Math.floor(timeLeft / 1000) % 60);
+        updateTimerText(mins, secs, 0);
+      }
+    }, 333); // update about 3x a second
+  }
+}
+
+function updateTimerText(minutes, seconds, milliseconds) {
+  updateText(timer, `${minutes}:${seconds.toString().padStart(2, '0')}`);
 }
 
 function initialize_text() {
