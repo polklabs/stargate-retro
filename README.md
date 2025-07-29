@@ -49,6 +49,7 @@ Navigation header at the top of all pages to integrate with v4 software. As it i
 #### To access, enter one of the links below:
 - [Dial](http://stargate.local/retro/dial.html) - `/retro/dial.html`
     - On incoming wormholes: GDO window will popup. It will scan then display a recognized code. This can be adjusted or disabled in config.js
+    - Click the countdown in bottom left to open a special popup
 
     <img src="screenshots/Screenshot 2025-05-07 154809.png" alt="drawing" width="300"/>
     <img src="screenshots/Screenshot 2025-05-20 161401.png" alt="drawing" width="300"/>
@@ -134,6 +135,7 @@ Navigation header at the top of all pages to integrate with v4 software. As it i
     - Add IRIS animation and control
 - Support for other languages?
     - That will wreak havoc on the page layout
+- Audio Clip triggers
 
 ## Webhooks
 
