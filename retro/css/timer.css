@@ -74,13 +74,13 @@
 }
 .timer-wrapper .time .timer-center div {
   color: var(--glyph-color);
-  font-size: 8.5vmin;
+  font-size: clamp(-100px, 8.5vmin, 85px);
   border: var(--border-thin);
-  margin: 0.6vmin;
+  margin: clamp(-100px, 0.6vmin, 6px);
   text-align: center;
-  line-height: 6.6vmin;
-  padding: 0.8vmin;
-  width: 10vmin;
+  line-height: clamp(-100px, 6.6vmin, 66px);
+  padding: clamp(-100px, 0.8vmin, 8px);
+  width: clamp(-100px, 10vmin, 100px);
 }
 .timer-wrapper .time .timer-left,
 .timer-wrapper .time .timer-right {

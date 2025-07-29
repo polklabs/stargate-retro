@@ -83,13 +83,13 @@
 
       div {
         color: var(--glyph-color);
-        font-size: 8.5vmin;
+        font-size: vmin-clamp(8.5);
         border: var(--border-thin);
-        margin: 0.6vmin;
+        margin: vmin-clamp(0.6);
         text-align: center;
-        line-height: 6.6vmin;
-        padding: 0.8vmin;
-        width: 10vmin;
+        line-height: vmin-clamp(6.6);
+        padding: vmin-clamp(0.8);
+        width: vmin-clamp(10);
       }
     }
 
