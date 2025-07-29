@@ -3,7 +3,7 @@
 
 import {config, isConfigAny} from './config.js';
 import {gdo, activateGDO, resetGDO} from './gdo.js';
-import {activateTimer} from './timer.js';
+import {activateTimer, removeTimer} from './timer.js';
 import {loadSymbols} from './helpers.js';
 
 const appendTarget = document.querySelector('.dial-append');
@@ -479,6 +479,8 @@ function resetGate() {
 
   const keys = document.querySelectorAll('.keyboard div');
   keys.forEach(k => k.classList.remove('disabled'));
+
+  removeTimer();
 
   state = STATE_IDLE;
   encoding = false;
