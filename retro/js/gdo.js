@@ -1,3 +1,6 @@
+/* EDIT CUSTOMIZATIONS IN config.js */
+/* DO NOT EDIT BELOW UNLESS YOU KNOW WHAT YOU'RE DOING!!!! */
+
 import {config} from './config.js';
 
 const gdo = {

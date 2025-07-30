@@ -1,0 +1,90 @@
+@font-face {
+  font-family: "7SegmentDigitalDisplay";
+  src: URL("../fonts/7SEGMENTALDIGITALDISPLAY.ttf") format("truetype");
+}
+.timer-wrapper {
+  width: clamp(-100px, 41vmin, 410px);
+  height: clamp(-100px, 16vmin, 160px);
+  position: absolute;
+  left: clamp(-100px, 28vmin, 280px);
+  top: clamp(-100px, 24vmin, 240px);
+  background-color: var(--background-color);
+  font-size: clamp(-100px, 2vmin, 20px);
+  line-height: clamp(-100px, 1.6vmin, 16px);
+  cursor: pointer;
+  border: var(--border-thin);
+}
+.timer-wrapper .timer-top {
+  display: flex;
+  gap: clamp(-100px, 0.5vmin, 5px);
+  margin: 0 clamp(-100px, 0.5vmin, 5px);
+}
+.timer-wrapper .timer-top span:nth-child(2) {
+  color: var(--glyph-color);
+}
+.timer-wrapper .timer-upper,
+.timer-wrapper .timer-bottom {
+  height: clamp(-100px, 1.5vmin, 15px);
+  display: flex;
+}
+.timer-wrapper .timer-upper div,
+.timer-wrapper .timer-bottom div {
+  border: var(--border-thin);
+}
+.timer-wrapper .timer-upper div:nth-of-type(1) {
+  width: clamp(-100px, 8vmin, 80px);
+}
+.timer-wrapper .timer-upper div:nth-of-type(2) {
+  width: clamp(-100px, 5vmin, 50px);
+}
+.timer-wrapper .timer-upper div:nth-of-type(3) {
+  width: clamp(-100px, 30vmin, 300px);
+}
+.timer-wrapper .timer-upper div:nth-of-type(4) {
+  width: clamp(-100px, 13vmin, 130px);
+}
+.timer-wrapper .timer-bottom div:nth-of-type(1) {
+  width: clamp(-100px, 10vmin, 100px);
+}
+.timer-wrapper .timer-bottom div:nth-of-type(2) {
+  width: clamp(-100px, 18vmin, 180px);
+}
+.timer-wrapper .timer-bottom div:nth-of-type(3) {
+  width: clamp(-100px, 7vmin, 70px);
+}
+.timer-wrapper .timer-bottom div:nth-of-type(4) {
+  width: clamp(-100px, 21vmin, 210px);
+}
+.timer-wrapper .time {
+  display: flex;
+  flex-direction: row;
+  margin: 0 clamp(-100px, 0.4vmin, 4px);
+  font-family: "7SegmentDigitalDisplay";
+}
+.timer-wrapper .time .timer-center {
+  flex-grow: 1;
+  border: var(--border-thin);
+  margin: clamp(-100px, 0.4vmin, 4px);
+  max-width: clamp(-100px, 37vmin, 370px);
+  position: relative;
+  height: clamp(-100px, 10.2vmin, 102px);
+  flex-wrap: nowrap;
+  display: flex;
+  justify-content: space-around;
+}
+.timer-wrapper .time .timer-center div {
+  color: var(--glyph-color);
+  font-size: clamp(-100px, 8.5vmin, 85px);
+  border: var(--border-thin);
+  margin: clamp(-100px, 0.6vmin, 6px);
+  text-align: center;
+  line-height: clamp(-100px, 6.6vmin, 66px);
+  padding: clamp(-100px, 0.8vmin, 8px);
+  width: clamp(-100px, 10vmin, 100px);
+}
+.timer-wrapper .time .timer-left,
+.timer-wrapper .time .timer-right {
+  line-height: clamp(-100px, 0.8vmin, 8px);
+}
+
+/*# sourceMappingURL=timer.css.map */

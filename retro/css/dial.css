@@ -408,6 +408,7 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   animation: pulsingText 3s linear infinite;
+  cursor: pointer;
 }
 
 .gate-name {

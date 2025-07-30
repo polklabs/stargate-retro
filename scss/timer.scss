@@ -1,0 +1,102 @@
+@use 'functions' as *;
+
+// https://www.dafont.com/7-segmental-digital-display.font?text=37+13+23
+@font-face {
+  font-family: '7SegmentDigitalDisplay';
+  src: URL('../fonts/7SEGMENTALDIGITALDISPLAY.ttf') format('truetype');
+}
+
+.timer-wrapper {
+  width: vmin-clamp(41);
+  height: vmin-clamp(16);
+  position: absolute;
+  left: vmin-clamp(28);
+  top: vmin-clamp(24);
+  background-color: var(--background-color);
+  font-size: vmin-clamp(2);
+  line-height: vmin-clamp(1.6);
+  cursor: pointer;
+  border: var(--border-thin);
+
+  .timer-top {
+    display: flex;
+    gap: vmin-clamp(0.5);
+    margin: 0 vmin-clamp(0.5);
+    span:nth-child(2) {
+      color: var(--glyph-color);
+    }
+  }
+
+  .timer-upper,
+  .timer-bottom {
+    height: vmin-clamp(1.5);
+    display: flex;
+    div {
+      border: var(--border-thin);
+    }
+  }
+
+  .timer-upper {
+    div:nth-of-type(1) {
+      width: vmin-clamp(8);
+    }
+    div:nth-of-type(2) {
+      width: vmin-clamp(5);
+    }
+    div:nth-of-type(3) {
+      width: vmin-clamp(30);
+    }
+    div:nth-of-type(4) {
+      width: vmin-clamp(13);
+    }
+  }
+  .timer-bottom {
+    div:nth-of-type(1) {
+      width: vmin-clamp(10);
+    }
+    div:nth-of-type(2) {
+      width: vmin-clamp(18);
+    }
+    div:nth-of-type(3) {
+      width: vmin-clamp(7);
+    }
+    div:nth-of-type(4) {
+      width: vmin-clamp(21);
+    }
+  }
+
+  .time {
+    display: flex;
+    flex-direction: row;
+    margin: 0 vmin-clamp(0.4);
+    font-family: '7SegmentDigitalDisplay';
+
+    .timer-center {
+      flex-grow: 1;
+      border: var(--border-thin);
+      margin: vmin-clamp(0.4);
+      max-width: vmin-clamp(37);
+      position: relative;
+      height: vmin-clamp(10.2);
+      flex-wrap: nowrap;
+      display: flex;
+      justify-content: space-around;
+
+      div {
+        color: var(--glyph-color);
+        font-size: vmin-clamp(8.5);
+        border: var(--border-thin);
+        margin: vmin-clamp(0.6);
+        text-align: center;
+        line-height: vmin-clamp(6.6);
+        padding: vmin-clamp(0.8);
+        width: vmin-clamp(10);
+      }
+    }
+
+    .timer-left,
+    .timer-right {
+      line-height: vmin-clamp(0.8);
+    }
+  }
+}
