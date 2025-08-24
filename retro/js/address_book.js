@@ -52,8 +52,12 @@ async function fetchData() {
 }
 
 function parseData() {
-  const imgElement = tableRowTemplate.querySelector(`.glyph-7`);
-  imgElement.innerHTML = symbols[0].imageData;
+  const imgElement7 = tableRowTemplate.querySelector(`.glyph-7`);
+  const imgElement8 = tableRowTemplate.querySelector(`.glyph-8`);
+  const imgElement9 = tableRowTemplate.querySelector(`.glyph-9`);
+  imgElement7.innerHTML = symbols[0].imageData;
+  imgElement8.innerHTML = symbols[0].imageData;
+  imgElement9.innerHTML = symbols[0].imageData;
 
   const autoUse9ChevronPage = isConfigAny(
     'CHEVRON_9_DIALING_AUTO_SWITCH',
@@ -116,8 +120,8 @@ function parseData() {
 
     if (
       address['is_black_hole'] ||
-      hasUnknownGlyph ||
-      address['gate_address'].length > 6
+      hasUnknownGlyph // ||
+      // address['gate_address'].length > 6
     ) {
       newRow.classList.add('danger');
     }

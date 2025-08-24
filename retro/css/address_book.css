@@ -317,8 +317,8 @@ section .row .col.glyph {
   flex: 0;
   min-width: clamp(-100px, 7vmin, 70px);
   max-width: clamp(-100px, 7vmin, 70px);
-  font-size: clamp(-100px, 1.8vmin, 18px);
-  white-space: nowrap;
+  font-size: clamp(-100px, 1.3vmin, 13px);
+  white-space: pre-wrap;
   color: var(--glyph-color);
   display: flex;
   flex-direction: column;
@@ -333,7 +333,15 @@ section .row .col.glyph > span {
   border-top: var(--border);
   text-overflow: ellipsis;
   overflow: hidden;
-  line-height: clamp(-100px, 2.3vmin, 23px);
+  line-height: clamp(-100px, 1vmin, 10px);
+  height: clamp(-100px, 2.5vmin, 25px);
+  align-content: center;
+}
+section .row .col.glyph:has(.glyph-9) {
+  display: none;
+}
+section .row .col.glyph:has(.glyph-8) {
+  display: none;
 }
 section .row .col.info {
   flex: 1;
@@ -396,19 +404,22 @@ section .row::after {
 section .row:hover::after {
   opacity: 1;
 }
+section .row.glyph-7-addr .col.glyph {
+  min-width: clamp(-100px, 6.13vmin, 61.3px);
+  max-width: clamp(-100px, 6.13vmin, 61.3px);
+}
+section .row.glyph-7-addr .col.glyph:has(.glyph-8) {
+  display: flex;
+}
 section .row.glyph-8-addr .col.glyph {
-  min-width: clamp(-100px, 6vmin, 60px);
-  max-width: clamp(-100px, 6vmin, 60px);
+  min-width: clamp(-100px, 5.45vmin, 54.5px);
+  max-width: clamp(-100px, 5.45vmin, 54.5px);
 }
-section .row.glyph-8-addr .col.glyph:not(:has(.glyph-8)) {
-  display: none;
+section .row.glyph-8-addr .col.glyph:has(.glyph-8) {
+  display: flex;
 }
-section .row.glyph-9-addr .col.glyph {
-  min-width: clamp(-100px, 5.5vmin, 55px);
-  max-width: clamp(-100px, 5.5vmin, 55px);
-}
-section .row.glyph-9-addr .col.glyph:not(:has(.glyph-9)) {
-  display: none;
+section .row.glyph-8-addr .col.glyph:has(.glyph-9) {
+  display: flex;
 }
 
 .table-footer {
