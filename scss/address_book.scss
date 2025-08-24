@@ -267,6 +267,30 @@ section {
       opacity: 1;
     }
   }
+
+  .row.glyph-8-addr {
+    .col {
+      &.glyph {
+        min-width: vmin-clamp(6);
+        max-width: vmin-clamp(6);
+        &:not(:has(.glyph-8)) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .row.glyph-9-addr {
+    .col {
+      &.glyph {
+        min-width: vmin-clamp(5.5);
+        max-width: vmin-clamp(5.5);
+        &:not(:has(.glyph-9)) {
+          display: none;
+        }
+      }
+    }
+  }
 }
 
 .table-footer {

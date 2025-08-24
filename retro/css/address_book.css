@@ -396,6 +396,20 @@ section .row::after {
 section .row:hover::after {
   opacity: 1;
 }
+section .row.glyph-8-addr .col.glyph {
+  min-width: clamp(-100px, 6vmin, 60px);
+  max-width: clamp(-100px, 6vmin, 60px);
+}
+section .row.glyph-8-addr .col.glyph:not(:has(.glyph-8)) {
+  display: none;
+}
+section .row.glyph-9-addr .col.glyph {
+  min-width: clamp(-100px, 5.5vmin, 55px);
+  max-width: clamp(-100px, 5.5vmin, 55px);
+}
+section .row.glyph-9-addr .col.glyph:not(:has(.glyph-9)) {
+  display: none;
+}
 
 .table-footer {
   border: var(--border);
