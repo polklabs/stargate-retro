@@ -84,6 +84,7 @@ function initializeNavBar() {
           <a onclick="openDropdown('menu-dropdown')" class="dropbtn"> Admin </a>
           <div id="menu-dropdown" class="dropdown-content">
             <a ${isActive('/debug.htm')}>Testing / Debug</a>
+            <a ${isActive('/sound_board.htm')}>Sound Board</a>
             <a ${isActive('/config.htm')}>Configuration</a>
             <a ${isActive('/retro/info.html')}>System</a>
             <a onclick="restart()">Restart Software</a>

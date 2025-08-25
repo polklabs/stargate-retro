@@ -9,13 +9,13 @@ const username = document.querySelector('.username');
 
 let symbols = [];
 
-const selectedSymbols = {};
+const selectedSymbols = [];
 
 // INITIALIZE --------------------------------------------------------------------------
 async function initialize_computer() {
   initialize_text();
 
-  symbols = await loadSymbols(false);
+  symbols = await loadSymbols(true);
 
   generateSymbols();
 }
@@ -68,16 +68,19 @@ function generateSymbols() {
     el.appendChild(name);
     el.appendChild(key);
 
-    el.addEventListener('click', () => toggleSymbol(el));
+    el.addEventListener('click', () => toggleSymbol(el, symbol));
     symbolWrapper.appendChild(el);
   });
 }
 
-function toggleSymbol(symbol) {
-  if (symbol.classList.contains('selected')) {
-    symbol.classList.remove('selected');
+function toggleSymbol(el, symbol) {
+  if (el.classList.contains('selected')) {
+    el.classList.remove('selected');
+    const i = selectedSymbols.indexOf(symbol);
+    selectedSymbols.splice(i, 1);
   } else {
-    symbol.classList.add('selected');
+    el.classList.add('selected');
+    selectedSymbols.push(symbol)
   }
 }
 

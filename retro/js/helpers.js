@@ -14,6 +14,7 @@ async function loadSymbols(includeDhd = true) {
         index: 0,
         imageSrc: 'images/dhd.svg',
         keyboard_mapping: '\r',
+        name: 'Dial',
       });
     } else {
       // Skip

@@ -118,9 +118,23 @@ body {
     svg {
       width: 100%;
       height: 100%;
+      
+      // Dial symbol
+      ellipse:nth-of-type(1) {
+        stroke: var(--color-alt);
+      }
+      ellipse:nth-of-type(2) {
+        fill: var(--color-alt);
+      }
     }
     path:not(.fil1) {
       fill: var(--color-alt);
+    }
+  }
+
+  .symbol-0 {
+    .symbol-index {
+      display: none;
     }
   }
 
@@ -218,8 +232,8 @@ body {
 
 .user {
   position: absolute;
-  left: vmin-clamp(41);
-  bottom: vmin-clamp(1.7);
+  left: vmin-clamp(73);
+  top: vmin-clamp(1.7);
   font-size: vmin-clamp(2);
   color: var(--glyph-color);
   .username {
