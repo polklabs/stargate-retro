@@ -113,7 +113,7 @@ Navigation header at the top of all pages to integrate with v4 software. As it i
 | *.css | All |  --color-wormhole-1 |<span style="color:royalblue">royalblue</span> | 3 Part gradient for active wormhole |
 | *.css | All |  --color-wormhole-2 |<span style="color:cyan">cyan</span> | 3 Part gradient for active wormhole |
 | *.css | All |  --color-wormhole-3 |<span style="color:cornflowerblue">cornflowerblue</span> | 3 Part gradient for active wormhole |
-| config.js | All | STARTUP_LENGTH | 12 | Duration of the startup boot animation. Set to 0 to disable |
+| config.js | All | STARTUP_LENGTH | 6 | Duration of the startup boot animation. Set to 0 to disable |
 | config.js | All | CRT_SCREEN_FLICKER | `false` | Add screen flicker effect at random intervals |
 | config.js | All | CRT_SCAN_LINE | `true` | Add screen tear like scan line animation |
 | config.js | All | CRT_PIXEL | `true` | Add screen door effect to make page look more like a crt monitor |

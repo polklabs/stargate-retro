@@ -183,8 +183,8 @@ section {
         flex: 0;
         min-width: vmin-clamp(7);
         max-width: vmin-clamp(7);
-        font-size: vmin-clamp(1.8);
-        white-space: nowrap;
+        font-size: vmin-clamp(1.3);
+        white-space: pre-wrap;
         color: var(--glyph-color);
         display: flex;
         flex-direction: column;
@@ -198,7 +198,16 @@ section {
           border-top: var(--border);
           text-overflow: ellipsis;
           overflow: hidden;
-          line-height: vmin-clamp(2.3);
+          line-height: vmin-clamp(1);
+          height: vmin-clamp(2.5);
+          align-content: center;
+        }
+
+        &:has(.glyph-9) {
+          display: none;
+        }
+        &:has(.glyph-8) {
+          display: none;
         }
       }
 
@@ -265,6 +274,33 @@ section {
     }
     &:hover::after {
       opacity: 1;
+    }
+  }
+
+  .row.glyph-7-addr {
+    .col {
+      &.glyph {
+        min-width: vmin-clamp(6.13);
+        max-width: vmin-clamp(6.13);
+        &:has(.glyph-8) {
+          display: flex;
+        }
+      }
+    }
+  }
+
+  .row.glyph-8-addr {
+    .col {
+      &.glyph {
+        min-width: vmin-clamp(5.45);
+        max-width: vmin-clamp(5.45);
+        &:has(.glyph-8) {
+          display: flex;
+        }
+        &:has(.glyph-9) {
+          display: flex;
+        }
+      }
     }
   }
 }

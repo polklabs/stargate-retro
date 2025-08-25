@@ -266,8 +266,17 @@ body {
   width: 100%;
   height: 100%;
 }
+.symbol-wrapper .symbol svg ellipse:nth-of-type(1) {
+  stroke: var(--color-alt);
+}
+.symbol-wrapper .symbol svg ellipse:nth-of-type(2) {
+  fill: var(--color-alt);
+}
 .symbol-wrapper .symbol path:not(.fil1) {
   fill: var(--color-alt);
+}
+.symbol-wrapper .symbol-0 .symbol-index {
+  display: none;
 }
 .symbol-wrapper .symbol-name {
   font-size: clamp(-100px, 1.4vmin, 14px);
@@ -359,8 +368,8 @@ body {
 
 .user {
   position: absolute;
-  left: clamp(-100px, 41vmin, 410px);
-  bottom: clamp(-100px, 1.7vmin, 17px);
+  left: clamp(-100px, 73vmin, 730px);
+  top: clamp(-100px, 1.7vmin, 17px);
   font-size: clamp(-100px, 2vmin, 20px);
   color: var(--glyph-color);
 }

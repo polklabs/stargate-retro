@@ -52,23 +52,26 @@ async function fetchData() {
 }
 
 function parseData() {
-  const imgElement = tableRowTemplate.querySelector(`.glyph-7`);
-  imgElement.innerHTML = symbols[0].imageData;
+  const imgElement7 = tableRowTemplate.querySelector(`.glyph-7`);
+  const imgElement8 = tableRowTemplate.querySelector(`.glyph-8`);
+  const imgElement9 = tableRowTemplate.querySelector(`.glyph-9`);
+  imgElement7.innerHTML = symbols[0].imageData;
+  imgElement8.innerHTML = symbols[0].imageData;
+  imgElement9.innerHTML = symbols[0].imageData;
 
   const autoUse9ChevronPage = isConfigAny(
     'CHEVRON_9_DIALING_AUTO_SWITCH',
     'true',
     true,
   );
-  const use9ChevronPage = isConfigAny(
-    'CHEVRON_9_DIALING',
-    'true',
-    true,
-  );
+  const use9ChevronPage = isConfigAny('CHEVRON_9_DIALING', 'true', true);
 
   addresses.forEach(address => {
     const aTag = document.createElement('a');
-    if (use9ChevronPage || (autoUse9ChevronPage && address.gate_address.length > 6)) {
+    if (
+      use9ChevronPage ||
+      (autoUse9ChevronPage && address.gate_address.length > 6)
+    ) {
       aTag.setAttribute(
         'href',
         `dial9.html?address=${address.gate_address.join('-')}`,
@@ -99,14 +102,14 @@ function parseData() {
         keyboardAddress += symbol['keyboard_mapping'];
       }
 
-      if (i < 7) {
-        newRow.querySelector(`.glyph-name-${i + 1}`).textContent =
-          symbol?.['name'] ?? 'Unknown';
+      const cell = newRow.querySelector(`.glyph-name-${i + 1}`);
+      cell.textContent = symbol?.['name'] ?? 'Unknown';
 
-        const imgElement = newRow.querySelector(`.glyph-${i + 1}`);
-        imgElement.innerHTML = symbol?.imageData ?? '';
-      }
+      const imgElement = newRow.querySelector(`.glyph-${i + 1}`);
+      imgElement.innerHTML = symbol?.imageData ?? '';
     });
+
+    newRow.classList.add(`glyph-${address['gate_address'].length}-addr`);
 
     const randomNumber = Math.floor(Math.random() * 5);
     newRow.querySelector('.small-box').innerHTML = randomText[randomNumber];
@@ -117,8 +120,8 @@ function parseData() {
 
     if (
       address['is_black_hole'] ||
-      hasUnknownGlyph ||
-      address['gate_address'].length > 6
+      hasUnknownGlyph // ||
+      // address['gate_address'].length > 6
     ) {
       newRow.classList.add('danger');
     }
