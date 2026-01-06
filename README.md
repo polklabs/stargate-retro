@@ -88,7 +88,8 @@ Navigation header at the top of all pages to integrate with v4 software. As it i
 | config.js | Dial | TEXT_ENGAGED | `ENGAGED` | Text to use when wormhole is active  |
 | config.js | Dial | TEXT_RECOGNIZED | `RECOGNIZED` | Text to use when GDO code is valid  |
 | config.js | Dial | TEXT_ANALYZING | `ANALYZING` | Text to use when GDO code is being checked  |
-| config.js | Dial | GDO_AUTO | `true` | Should the GDO window auto open after establishing an incoming wormhole  |
+| config.js | Dial | GDO_IN_CHANCE | `100` | % chance the GDO window auto opens after establishing an incoming wormhole  |
+| config.js | Dial | GDO_OUT_CHANCE | `0` | % chance the GDO window auto opens after establishing an outgoing wormhole  |
 | config.js | Dial | GDO_DELAY | `3` | How long after establishing incoming wormhole before GDO window opens  |
 | config.js | Dial | GDO_SIGNALS | *see config* | Names that will appear as GDO code senders  |
 | config.js | Info | INFO_FLUX | `[-40, 40]` | Gauge needle fluctuation at idle `MAX -90 to 90` |

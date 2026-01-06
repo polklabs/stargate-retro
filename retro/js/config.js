@@ -26,7 +26,8 @@ const config = {
   TEXT_RECOGNIZED: 'RECOGNIZED',
   TEXT_ANALYZING: 'ANALYZING',
 
-  GDO_AUTO: true,
+  GDO_IN_CHANCE: 100, // Incoming wormhole
+  GDO_OUT_CHANCE: 0, // Outgoing wormhole
   GDO_DELAY: 5, // Seconds
   GDO_SIGNALS: [
     "TOK'RA",
