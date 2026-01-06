@@ -196,7 +196,9 @@ function handleActiveGate(new_locked_chevrons = 0) {
         resetGate();
       }
 
-      if (config.GDO_AUTO) {
+      // Get random 1 -> 100, GDO=0 then off, GDO=100 then always on.
+      const chance = Math.floor(Math.random()*100+1)
+      if (chance <= config.GDO_IN_CHANCE) {
         setTimeout(
           () =>
             activateGDO(
@@ -215,6 +217,19 @@ function handleActiveGate(new_locked_chevrons = 0) {
       toRemove.forEach(g => g.remove());
       if (state === STATE_DIAL_IN) {
         resetGate();
+      }
+
+      // Get random 1 -> 100, GDO=0 then off, GDO=100 then always on.
+      const chance = Math.floor(Math.random()*100+1)
+      if (chance <= config.GDO_OUT_CHANCE) {
+        setTimeout(
+          () =>
+            activateGDO(
+              gateStatus.connected_planet,
+              gateStatus.black_hole_connected,
+            ),
+          config.GDO_DELAY * 1000,
+        );
       }
     }
 
