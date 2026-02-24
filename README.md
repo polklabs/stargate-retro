@@ -6,6 +6,8 @@ HTML Webpages recreated and inspired by computers and UI in the stargate show. I
 
 Please submit bugs and I will fix them when I have time. New features will be based on what I feel like making but I'm open to suggestions.
 
+<a href="https://www.buymeacoffee.com/Polklabs" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 | Browser | Compatibility | Emoji |
 | ------- | ------------- | ----- |
 | Firefox | Fully tested  | ⭐ 💯 |
