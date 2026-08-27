@@ -9,6 +9,7 @@ import {loadSymbols} from './helpers.js';
 const appendTarget = document.querySelector('.dial-append');
 const timer = document.querySelector('.timer');
 const gateName = document.querySelector('.gate-name');
+const shield = document.querySelector('.shield');
 const destination = document.querySelector('.destination');
 const destinationGlyphs = document.querySelector('.destination-glyphs');
 const ring1 = document.querySelector('.ring-1 circle');
@@ -34,6 +35,7 @@ let state = STATE_IDLE;
 let gateStatus = {};
 let firstStatus = true;
 let fetchingStatus = false;
+let emergencyDisconnectInProgress = false;
 
 let buffer = [];
 let bufferIndex = 0;
@@ -71,6 +73,7 @@ initialize_computer();
 
 function initialize_events() {
   timer.onclick = () => activateTimer(gateStatus.wormhole_time_till_close);
+  shield.onclick = emergencyDisconnectBlackHole;
 }
 
 function updateStatusFrequency(ms) {
@@ -388,6 +391,28 @@ async function clear_buffer() {
     mode: 'no-cors',
   });
   setTimeout(() => watch_dialing_status(), 300);
+}
+
+async function emergencyDisconnectBlackHole() {
+  if (
+    emergencyDisconnectInProgress ||
+    state !== STATE_ACTIVE ||
+    !gateStatus.wormhole_active ||
+    !gateStatus.black_hole_connected
+  ) {
+    return;
+  }
+
+  emergencyDisconnectInProgress = true;
+  try {
+    await fetch('/stargate/do/wormhole_off', {
+      method: 'POST',
+      mode: 'no-cors',
+    });
+    setTimeout(() => watch_dialing_status(), 300);
+  } finally {
+    emergencyDisconnectInProgress = false;
+  }
 }
 
 function dial() {
